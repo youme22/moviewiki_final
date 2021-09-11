@@ -1,5 +1,8 @@
 package com.moviewiki.api.user.controller;
 
+import com.moviewiki.api.following.domain.Following;
+import com.moviewiki.api.following.service.FollowingService;
+import com.moviewiki.api.news.domain.News;
 import com.moviewiki.api.user.domain.User;
 import com.moviewiki.api.user.service.UserManagementService;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -23,23 +27,16 @@ public class MypageProcessController {
     private static final Logger log = LoggerFactory.getLogger(UserManagementController.class);
 
     @Autowired
+    FollowingService followingService;
+
+    @Autowired
     UserManagementService userManagementService;
 
-    // follow 페이지 call
-    @GetMapping("/member/followList/{userId}")
-    public String followPage(@PathVariable String userId, Model model) {
-//        List<Following> follwingUsers = userManagementService.getFollowingUser
 
-        User user = userManagementService.getUser(userId);
-        model.addAttribute("user", user);
-        return "/member/my_following";
-    }
 
     // 취향분석 페이지 form call
     @RequestMapping("/member/pref/{userId}")
     public String prefPage(@PathVariable String userId, Model model) {
-//        User user = userManagementService.getUser(userId);
-//        model.addAttribute("user", user);
         return "/member/pref";
     }
 
@@ -54,6 +51,28 @@ public class MypageProcessController {
     public String wantToSeePage(@PathVariable String userId, Model model) {
         return "/member/want_to_see";
     }
+
+    // 팔로잉 리스트 출력, form call
+    @RequestMapping("/member/following/{userId}")
+    public String followingPage(@PathVariable String userId, Model model) {
+        User fromUser = userManagementService.getUser(userId);
+        List<Following> followeeList = followingService.followeeList(fromUser);
+        log.info("followeeList======" + followeeList);
+        model.addAttribute("followeeList", followeeList);
+        return "/member/followee";
+    }
+
+    // 팔로워 리스트 출력, form call
+    @RequestMapping("/member/follower/{userId}")
+    public String followerPage(@PathVariable String userId, Model model) {
+        User toUser = userManagementService.getUser(userId);
+        List<Following> followerList = followingService.followerList(toUser);
+        log.info("followerList======" + followerList);
+        model.addAttribute("followerList", followerList);
+        return "/member/follower";
+    }
+
+
 
     // check_pw form call
 //    @GetMapping("/member/check_pw")

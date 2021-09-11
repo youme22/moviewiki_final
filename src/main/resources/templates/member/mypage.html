@@ -53,11 +53,12 @@
                     리뷰
                 </div>
                 <div>
+                    <a th:href="@{'/member/follower/' + ${user.userId}}">
                     팔로워수<br>
                     팔로워
                 </div>
                 <div>
-                    <a th:href="@{'/member/followList/' + ${user.userId}}">
+                    <a th:href="@{'/member/following/' + ${user.userId}}">
                         팔로잉수<br>
                         팔로잉
                     </a>
