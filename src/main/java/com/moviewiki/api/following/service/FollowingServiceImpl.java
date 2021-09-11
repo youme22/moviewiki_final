@@ -1,11 +1,9 @@
 package com.moviewiki.api.following.service;
 
 import com.moviewiki.api.following.domain.Following;
-import com.moviewiki.api.following.domain.FollowingPK;
 import com.moviewiki.api.following.repository.FollowingRepository;
 import com.moviewiki.api.user.domain.User;
 import com.moviewiki.api.user.repository.UserRepository;
-import com.moviewiki.api.user.service.UserManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +20,7 @@ public class FollowingServiceImpl implements FollowingService {
     @Transactional
     @Override
     public void unfollowUser(String fromUserId, String toUserId) {
-        followingRepository.deleteByFromUserAndToUser(fromUserId, toUserId);
+//        followingRepository.deleteByFromUserAndToUser(fromUserId, toUserId);
     }
 
 //    @Override
@@ -52,4 +50,3 @@ public class FollowingServiceImpl implements FollowingService {
                 .build());
     }
 }
-

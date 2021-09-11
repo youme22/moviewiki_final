@@ -11,14 +11,14 @@ import java.util.List;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, String> {
 
-    void addReview(Review review);
-    List<Movie> findHighRatedMovieByUserId(String userId);
-    List<User> findHighRatingUserByMovieList(List<Movie> movieList);
-    List<Movie> findHighRatedMovieByUserList(List<User> userList);
-    String findGenreIdByReviewIdAndMovieId(String reviewId, String movieId);
-    String findNationIdByReviewIdAndMovieId(String reviewId, String movieId);
-    String findDirectorIdByReviewIdAndMovieId(String reviewId, String movieId);
-    String findActorIdByReviewIdAndMovieId(String reviewId, String movieId);
-    void updateReview(Review review);
-    void deleteReview(String reviewId);
+//    void addReview(Review review);
+//    List<Movie> findHighRatedMovieByUserId(String userId);
+//    List<User> findHighRatingUserByMovieList(List<Movie> movieList);
+//    List<Movie> findHighRatedMovieByUserList(List<User> userList);
+//    String findGenreIdByReviewIdAndMovieId(String reviewId, String movieId);
+//    String findNationIdByReviewIdAndMovieId(String reviewId, String movieId);
+//    String findDirectorIdByReviewIdAndMovieId(String reviewId, String movieId);
+//    String findActorIdByReviewIdAndMovieId(String reviewId, String movieId);
+//    void updateReview(Review review);
+//    void deleteReview(String reviewId);
 }
