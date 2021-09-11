@@ -8,5 +8,6 @@ public class MoviewikiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MoviewikiApplication.class, args);
-	}
+  }
+
 }

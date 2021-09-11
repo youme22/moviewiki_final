@@ -18,7 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name="Users")
+@Table(name="USERS")
 public class User {
 
     @Id

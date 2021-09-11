@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @SequenceGenerator(
 		name = "DIRECTOR_SEQ_GENERATOR",
@@ -23,6 +23,6 @@ public class Director {
 			, generator = "DIRECTOR_SEQ_GENERATOR")
 	private @Column(name = "DIRECTOR_ID") Long directorId;
 
-	private @Column(name = "director_name") String directorName;
-	private @Column(name = "director_profile") String directorProfile;
+	private @Column(name = "DIRECTOR_NAME") String directorName;
+	private @Column(name = "DIRECTOR_PROFILE") String directorProfile;
 }

@@ -1,21 +1,21 @@
 package com.moviewiki.api.nation.domain;
 
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name="nations")
+@Table(name="NATIONS")
 public class Nation {
 
-
 	@Id
-	private @Column(name = "nation_id") String nationId;
+	private @Column(name = "NATION_ID") String nationId;
 
-	private @Column(name = "nation_name") String nationName;
+	private @Column(name = "NATION_NAME") String nationName;
+
 }

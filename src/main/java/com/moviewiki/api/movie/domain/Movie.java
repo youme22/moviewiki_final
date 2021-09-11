@@ -1,48 +1,48 @@
 package com.moviewiki.api.movie.domain;
 
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 
+
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @SequenceGenerator(
         name = "MOVIE_SEQ_GENERATOR",
         sequenceName = "MOVIE_SEQ",
         initialValue = 1,
         allocationSize = 1)
-@Table(name="movies")
+@Table(name="MOVIES")
 public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE
                     , generator = "MOVIE_SEQ_GENERATOR")
-    @Column(name = "movie_id")
+    @Column(name = "MOVIE_ID")
     private Long movieId;
 
-    @Column(name = "film_rating")
+    @Column(name = "FILM_RATING")
     private String filmRating;
-    @Column(name = "movie_name")
+    @Column(name = "MOVIE_NAME")
     private String movieName;
-    @Column(name = "movie_og_name")
+    @Column(name = "MOVIE_OG_NAME")
     private String movieOgName;
-    @Column(name = "movie_profile")
+    @Column(name = "MOVIE_PROFILE")
     private String movieProfile;
-    @Column(name = "release_date", columnDefinition = "DATE")
+    @Column(name = "RELEASE_DATE", columnDefinition = "DATE")
     private Date releaseDate;
     private int runningTime;
     @Column(columnDefinition = "LONG")
     private String summary;
-    @Column(name = "avg_rating")
+    @Column(name = "AVG_RATING")
     private double avgRating;
-    @Column(name = "review_count")
+    @Column(name = "REVIEW_COUNT")
     private int reviewCount;
-    @Column(name = "wts_count")
+    @Column(name = "WTS_COUNT")
     private int wtsCount;
 
     public Movie(String filmRating, String movieName, String movieOgName, String movieProfile, Date releaseDate, int runningTime, String summary, double avgRating, int reviewCount, int wtsCount) {
@@ -58,3 +58,4 @@ public class Movie {
         this.wtsCount = wtsCount;
     }
 }
+

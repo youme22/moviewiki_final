@@ -19,17 +19,17 @@ import com.moviewiki.api.user.domain.User;
 @Data
 @NoArgsConstructor
 @IdClass(FollowingPK.class)
-@Table(name="following")
+@Table(name="FOLLOWINGS")
 public class Following {
 
     @Id
     @ManyToOne
-    @JoinColumn(name="fromUser")
+    @JoinColumn(name="FROMUSER")
     private User fromUser;
 
     @Id
     @ManyToOne
-    @JoinColumn(name="toUser")
+    @JoinColumn(name="TOUSER")
     private User toUser;
 
     @Builder
