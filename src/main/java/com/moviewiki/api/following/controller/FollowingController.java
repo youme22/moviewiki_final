@@ -40,13 +40,5 @@ public class FollowingController {
         followingService.unfollowUser(fromUserId, toUserId);
     }
 
-    // follow 페이지 call
-    @GetMapping("/member/followList/{userId}")
-    public String followPage(@PathVariable String userId, Model model) {
-//        List<Following> follwingUsers = userManagementService.getFollowingUser
 
-        User user = userManagementService.getUser(userId);
-        model.addAttribute("user", user);
-        return "/member/my_following";
-    }
 }

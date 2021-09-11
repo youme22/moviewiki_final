@@ -57,28 +57,34 @@
                     팔로워
                 </div>
                 <div>
-                    팔로잉수<br>
                     <a th:href="@{'/member/followList/' + ${user.userId}}">
+                        팔로잉수<br>
                         팔로잉
                     </a>
                 </div>
             </div>
             <div class="mypage-bottom">
                 <div>
-                    <p>
-                        <span
-                            th:text="${user.userId}">
-                        </span>
-                        님의 취향분석
-                    </p>
+                    <a th:href="@{'/member/pref/' + ${user.userId}}">
+                        <div>
+                            <span
+                                th:text="${user.userId}">
+                            </span>
+                            님의 취향분석
+                        </div>
+                    </a>
                 </div>
                 <div>
-                    <div class="watched-wanna watched">
-                        시청한 영화
-                    </div>
-                    <div class="watched-wanna wanna">
-                        관심 영화
-                    </div>
+                    <a th:href="@{'/member/reviews/' + ${user.userId}}">
+                        <div class="watched-wanna watched">
+                            시청한 영화
+                        </div>
+                    </a>
+                    <a th:href="@{'/member/want_to_see/' + ${user.userId}}">
+                        <div class="watched-wanna wanna">
+                            관심 영화
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
