@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 메뉴</title>
+    <style>
+      .admin_header {
+        width:100%;
+        height:45px;
+        border: 1px solid black;
+      }
+      .admin_header>div {
+        float:left;
+        margin: 10px 50px 0 50px;
+      }
+      .logo {
+        width:100px;
+      }
+    </style>
+</head>
+<body>
+  <div class="admin_header">
+    <div class="logo">
+      <button>로고 이미지</button>
+    </div>
+    <div class="news">
+      <button>뉴스 게시판 관리</button>
+    </div>
+    <div class="register_news">
+      <button>영화 등록</button>
+    </div>
+    <div>
+      <div sec:authorize="isAuthenticated()">
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">
+          <button>로그아웃</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,34 +1,53 @@
 package com.moviewiki.api.user.domain;
 
-import lombok.AllArgsConstructor;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@SequenceGenerator(
-        name = "USER_SEQ_GENERATOR",
-        sequenceName = "USER_SEQ",
-        initialValue = 1,
-        allocationSize = 1)
-@Table(name="users")
+@Table(name="Users")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-                    generator = "USER_SEQ_GENERATOR")
-    private @Column(name = "user_id") String userId;
 
-    private @Column(name = "user_pw") String userPw;
-    private @Column(name = "user_name") String userName;
-    private @Column(name = "user_birth") Date userBirth;
-    private @Column(name = "user_gender") int userGender;
-    private @Column(name = "user_mail") String userMail;
-    private @Column(name = "user_cellnum") String userCellNum;
-    private @Column(name = "user_mbti") String userMbti;
-    private @Column(name = "user_admin") int userAdmin;
+    @Id
+    @Column(name = "USER_ID")
+    private String userId;
+
+    @Column(name = "USER_PW")
+    private String userPw;
+
+    @Column(name = "USER_NAME")
+    private String userName;
+
+    @Column(name = "USER_BIRTH")
+    @DateTimeFormat(pattern = "yyMMdd")
+    private Date userBirth;
+
+    @Column(name = "USER_GENDER", columnDefinition = "number")
+    private int userGender;
+
+    @Column(name = "USER_MAIL")
+    private String userMail;
+
+    @Column(name = "USER_CELLNUM")
+    private String userCellNum;
+
+    @Column(name = "USER_MBTI")
+    private String userMbti;
+
+    @Column(name = "USER_ADMIN", columnDefinition = "char(1)")
+    private boolean userAdmin;
+
 }

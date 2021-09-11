@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <style>
+        /*중복 X*/
+        .duplicate_msg1 {
+            color: green;
+            display: none;
+        }
+        /*중복 O*/
+        .duplicate_msg2, .confirmPw_msg {
+            color : red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+  <h1> 회원가입 </h1>
+  <hr>
+  <form id="joinForm" th:object="${user}" th:action="@{/createUser}" th:method="post" name="joinForm">
+      <div>
+          <div>아이디*</div>
+          <span>
+              <input id="userId" type="text" th:field="*{userId}">
+          </span>
+          <input type="button" id="btn_duplicate_check" value="중복확인" required>
+          <span class="duplicate_msg1">사용 가능한 아이디입니다.</span>
+          <span class="duplicate_msg2">아이디가 이미 존재합니다.</span>
+      </div>
+      <div>
+          비밀번호*<input type="password" th:field="*{userPw}" required>
+      </div>
+      <div>
+          비밀번호확인*<input type="password" id="confirmPw" required><span class="confirmPw_msg">비밀번호가 다릅니다.</span>
+      </div>
+      <div>
+        <label>이름*</label><input type="text" th:field="*{userName}" required>
+      </div>
+      <div>
+          <label>이메일*</label><input type="email" th:field="*{userMail}" required>
+      </div>
+      <div>
+          <label>휴대폰*</label><input type="text" th:field="*{userCellNum}" placeholder="(-생략)" required>
+      </div>
+      <div>
+          <label>성별*</label>
+          <input type="radio" th:field="*{userGender}" th:value="1" th:checked="checked">남자
+          <input type="radio" th:field="*{userGender}" th:value="2" >여자
+      </div>
+      <div>
+          <label>생년월일*</label>
+          <input type="text" th:field="*{userBirth}" placeholder="yyMMdd(-뺀 주민번호 앞 숫자 6자리)" required>
+      </div>
+      <div>
+          <label>MBTI</label><input type="text" th:field="*{userMbti}">
+      </div>
+      <div>
+          <input type="submit" value="가입하기">
+      </div>
+    </form>
+</body>
+</html>

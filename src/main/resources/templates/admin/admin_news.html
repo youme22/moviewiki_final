@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 뉴스게시판</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        .btn_registerNews {
+            width:716px;
+            text-align: right;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        .title {
+            width: 400px;
+        }
+        .createDate {
+            width: 150px;
+        }
+        th {
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <div th:insert="admin/admin_header" id="header"></div>
+
+    <h1>관리자 뉴스게시판</h1>
+    <div class="btn_registerNews">
+        <button type="button" onclick="location.href='/createNews'">뉴스 등록</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th class="title">제목</th>
+                <th class="createDate">작성일</th>
+                <th>수정</th>
+                <th>삭제</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="article : ${newsList}">
+                <td th:text="${article.getNewsId}"></td>
+                <td>
+                    <a th:href="@{'/readNews/' + ${article.newsId}}">
+                        <span th:text="${article.newsTitle}"></span>
+                    </a>
+                </td>
+                <td>
+                    <span th:text="${#temporals.format(article.newsDate, 'yyyy-MM-dd')}"></span>
+                </td>
+
+                <td>
+                    <a th:href="@{'/updateNews/' + ${article.newsId}}">
+                        <button>수정</button>
+                    </a>
+                </td>
+                <td>
+                    <form th:action="@{'/deleteNews/' + ${article.newsId}}" method="post">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <input type="submit" value="삭제">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
