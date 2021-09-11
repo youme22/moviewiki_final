@@ -1,33 +1,28 @@
 package com.moviewiki.api.director.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+
+@Entity
 @Data
 @NoArgsConstructor
-@Entity
-@Table(name = "DIRECTORS")
+@SequenceGenerator(
+		name = "DIRECTOR_SEQ_GENERATOR",
+		sequenceName = "DIRECTOR_SEQ",
+		initialValue = 1,
+		allocationSize = 1)
+@Table(name="DIRECTORS")
 public class Director {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name= "DIRECTOR_ID")
-    private String directorId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE
+			, generator = "DIRECTOR_SEQ_GENERATOR")
+	private @Column(name = "DIRECTOR_ID") Long directorId;
 
-    private String directorName;
-    private String directorProfile;
-
-    public String getDirectorId() { return directorId; }
-
-    public void setDirectorId(String directorId) { this.directorId = directorId; }
-
-    public String getDirectorName() { return directorName; }
-
-    public void setDirectorName(String directorName) { this.directorName = directorName; }
-
-    public String getDirectorProfile() { return directorProfile; }
-
-    public void setDirectorProfile(String directorProfile) { this.directorProfile = directorProfile; }
+	private @Column(name = "DIRECTOR_NAME") String directorName;
+	private @Column(name = "DIRECTOR_PROFILE") String directorProfile;
 }

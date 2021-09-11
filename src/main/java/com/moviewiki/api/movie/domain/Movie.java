@@ -1,76 +1,61 @@
 package com.moviewiki.api.movie.domain;
 
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 
+
+@Entity
 @Data
 @NoArgsConstructor
-@Entity
-@Table(name = "MOVIES")
+@SequenceGenerator(
+        name = "MOVIE_SEQ_GENERATOR",
+        sequenceName = "MOVIE_SEQ",
+        initialValue = 1,
+        allocationSize = 1)
+@Table(name="MOVIES")
 public class Movie {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name= "MOVIE_ID")
-    private String movieId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE
+                    , generator = "MOVIE_SEQ_GENERATOR")
+    @Column(name = "MOVIE_ID")
+    private Long movieId;
 
-    private String movieName;
-    private String movieOgName;
-    private String movieProfile;
-    private Date releaseDate;
+    @Column(name = "FILM_RATING")
     private String filmRating;
-    private int runningtime;
+    @Column(name = "MOVIE_NAME")
+    private String movieName;
+    @Column(name = "MOVIE_OG_NAME")
+    private String movieOgName;
+    @Column(name = "MOVIE_PROFILE")
+    private String movieProfile;
+    @Column(name = "RELEASE_DATE", columnDefinition = "DATE")
+    private Date releaseDate;
+    private int runningTime;
+    @Column(columnDefinition = "LONG")
     private String summary;
+    @Column(name = "AVG_RATING")
+    private double avgRating;
+    @Column(name = "REVIEW_COUNT")
+    private int reviewCount;
+    @Column(name = "WTS_COUNT")
+    private int wtsCount;
 
-    public String getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(String movieId) {
-        this.movieId = movieId;
-    }
-
-    public String getMovieName() {
-        return movieName;
-    }
-
-    public void setMovieName(String movieName) {
+    public Movie(String filmRating, String movieName, String movieOgName, String movieProfile, Date releaseDate, int runningTime, String summary, double avgRating, int reviewCount, int wtsCount) {
+        this.filmRating = filmRating;
         this.movieName = movieName;
-    }
-
-    public String getMovieOgName() {
-        return movieOgName;
-    }
-
-    public void setMovieOgName(String movieOgName) {
         this.movieOgName = movieOgName;
-    }
-
-    public String getMovieProfile() {
-        return movieProfile;
-    }
-
-    public void setMovieProfile(String movieProfile) {
         this.movieProfile = movieProfile;
+        this.releaseDate = releaseDate;
+        this.runningTime = runningTime;
+        this.summary = summary;
+        this.avgRating = avgRating;
+        this.reviewCount = reviewCount;
+        this.wtsCount = wtsCount;
     }
-
-    public Date getReleaseDate() { return releaseDate; }
-
-    public void setReleaseDate(Date releaseDate) { this.releaseDate = releaseDate; }
-
-    public String getFilmRating() { return filmRating; }
-
-    public void setFilmRating(String filmRating) { this.filmRating = filmRating; }
-
-    public int getRunningtime() { return runningtime; }
-
-    public void setRunningtime(int runningtime) { this.runningtime = runningtime; }
-
-    public String getSummary() { return summary; }
-
-    public void setSummary(String summary) { this.summary = summary; }
-
 }
+

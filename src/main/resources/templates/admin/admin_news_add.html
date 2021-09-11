@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>뉴스 등록</title>
+</head>
+<body>
+    <h1>관리자 뉴스 등록</h1>
+    <div sec:authorize="isAuthenticated()">
+        <p>작성자: <span th:text="${#authentication.getPrincipal().getUsername()}"></span></p>
+    </div>
+    <hr>
+    <form th:object="${news}" th:action="@{/createNews}" th:method="post">
+        <div>
+            <div>
+                제목<input type="text" th:field="*{newsTitle}">
+            </div>
+            <div>
+                <textarea th:field="*{newsContent}"></textarea>
+            </div>
+            <div>
+                첨부파일:<input type="file" name="newsFile">
+
+
+            </div>
+            <input type="submit" value="등록">
+        </div>
+    </form>
+</body>
+</html>

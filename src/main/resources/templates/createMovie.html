@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>movieForm</title>
+    </head>
+    <body>
+        <form action="/movie/create" method="post">
+            영화 이름 : <input type="text" id="movieName" name="movieName"><br>
+            영화 원제 : <input type="text" id="movieOgName" name="movieOgName"><br>
+            감독 이름 : <input type="text" id="directorName" name="directorName"> <input type="button" value="중복"><br>
+            배우 이름 : <input type="text" id="actorName" name="actorName"> <input type="button" value="중복"><br>
+            국가 : <select id="nationName" name="nationName">
+                <option value="">선택</option>
+                <option value="KR">한국</option>
+                <option value="JP">일본</option>
+                <option value="US">미국</option>
+                <option value="HK">홍콩</option>
+                <option value="UK">영국</option>
+                <option value="FR">프랑스</option>
+                <option value="ET">기타</option>
+            </select><br>
+            영화 포스터 : <input type="file" id="movieProfile" name="movieProfile"> <br>
+            상영 시간(분) : <input type="text" id="runningTime" name="runningTime"><br>
+            개봉일 : <input type="date" id="releaseDate" name="releaseDate"><br>
+            등급 : <select id="filmRating" name="filmRating">
+                <option value="">선택</option>
+                <option value="전체 관람가">전체 관람가</option>
+                <option value="12세 관람가">12세 관람가</option>
+                <option value="15세 관람가">15세 관람가</option>
+                <option value="청소년 관람불가">청소년 관람불가</option>
+            </select><br>
+            장르 : <select id="genreId" name="genreId">
+                <option value="">선택</option>
+                <option value="DR">드라마</option>
+                <option value="FN">판타지</option>
+                <option value="WE">서부</option>
+                <option value="HR">공포</option>
+                <option value="RM">로맨스</option>
+                <option value="AD">모험</option>
+                <option value="TH">스릴러</option>
+                <option value="NO">느와르</option>
+                <option value="CT">컬트</option>
+                <option value="DC">다큐멘터리</option>
+                <option value="CO">코미디</option>
+                <option value="FM">가족</option>
+                <option value="MY">미스터리</option>
+                <option value="WR">전쟁</option>
+                <option value="AM">애니메이션</option>
+                <option value="CM">범죄</option>
+                <option value="MU">뮤지컬</option>
+                <option value="SF">SF</option>
+                <option value="AC">액션</option>
+                <option value="MA">무협</option>
+                <option value="ER">에로</option>
+                <option value="SS">서스펜스</option>
+                <option value="NR">서사</option>
+                <option value="BC">블랙코미디</option>
+                <option value="EX">실험</option>
+                <option value="MC">영화카툰</option>
+                <option value="MM">영화음악</option>
+                <option value="MP">영화패러디포스터</option>
+            </select><br>
+            줄거리 : <br>
+            <textarea id="summary" name="summary"></textarea><br>
+            <input type="submit" value="등록">
+        </form>
+    </body>
+</html>

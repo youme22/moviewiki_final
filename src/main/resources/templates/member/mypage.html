@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>마이페이지</title>
+    <style>
+        .wrapper {
+            width:600px;
+        }
+        .mypage-top {
+            border: black 1px solid;
+            width: 600px;
+            height: 100px;
+        }
+        .mypage-top > div {
+            float: left;
+            margin: 30px;
+        }
+        .mypage-bottom {
+            width: 600px;
+            height: 450px;
+            border: black 1px solid;
+        }
+        img {
+            float: left;
+        }
+        .watched-wanna {
+            border: black 1px solid;
+            height:300px;
+            width:250px;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <div th:insert="main_header" id="header"></div>
+
+    <h1>마이페이지</h1>
+    <div class="wrapper">
+        <div>
+            <div class="setting">
+                <a th:href="@{/member/modify_info}">
+                    <button>설정</button>
+                </a>
+            </div>
+
+            <div class="mypage-top">
+                <img th:src="@{/img/grade1.png}">
+                <div>
+                    리뷰수<br>
+                    리뷰
+                </div>
+                <div>
+                    팔로워수<br>
+                    팔로워
+                </div>
+                <div>
+                    팔로잉수<br>
+                    <a th:href="@{'/member/followList/' + ${user.userId}}">
+                        팔로잉
+                    </a>
+                </div>
+            </div>
+            <div class="mypage-bottom">
+                <div>
+                    <p>
+                        <span
+                            th:text="${user.userId}">
+                        </span>
+                        님의 취향분석
+                    </p>
+                </div>
+                <div>
+                    <div class="watched-wanna watched">
+                        시청한 영화
+                    </div>
+                    <div class="watched-wanna wanna">
+                        관심 영화
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

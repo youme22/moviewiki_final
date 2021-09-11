@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>news</title>
+    <style>
+        .wrapper {
+            width:1000px;
+        }
+        .box {
+            width: 290px;
+            height:300px;
+            border: 1px solid black;
+            float: left;
+            margin: 20px;
+        }
+        .picture {
+            width: 255px;
+            height:200px;
+            border: 1px solid black;
+            text-align: center;
+            margin: 10px auto;
+        }
+        .newsTitle {
+            width: 255px;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <div th:insert="main_header" id="header"></div>
+
+    <h1>뉴스게시판</h1>
+    <div class="wrapper">
+        <div th:each="news : ${newsList}">
+            <div class="box">
+                <a th:href="@{'/readNews/' + ${news.newsId}}">
+                    <div class="picture">
+                        <img th:src="@{'/img/' + ${news.newsFile}}" width="auto" height="auto">
+                    </div>
+                    <div class="newsTitle">
+                        <p th:text="${news.newsTitle}"></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

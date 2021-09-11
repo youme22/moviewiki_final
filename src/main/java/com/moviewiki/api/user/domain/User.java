@@ -1,81 +1,53 @@
 package com.moviewiki.api.user.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
 @Data
 @NoArgsConstructor
-@Entity
-@Table(name = "USERS")
+@Table(name="USERS")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name= "USER_ID")
+    @Column(name = "USER_ID")
     private String userId;
 
+    @Column(name = "USER_PW")
     private String userPw;
+
+    @Column(name = "USER_NAME")
     private String userName;
+
+    @Column(name = "USER_BIRTH")
+    @DateTimeFormat(pattern = "yyMMdd")
     private Date userBirth;
+
+    @Column(name = "USER_GENDER", columnDefinition = "number")
     private int userGender;
+
+    @Column(name = "USER_MAIL")
     private String userMail;
-    private String userCellnum;
+
+    @Column(name = "USER_CELLNUM")
+    private String userCellNum;
+
+    @Column(name = "USER_MBTI")
     private String userMbti;
-    private char user_Admin;
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUserPw() {
-        return userPw;
-    }
-
-    public void setUserPw(String userPw) {
-        this.userPw = userPw;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public Date getUserBirth() {
-        return userBirth;
-    }
-
-    public void setUserBirth(Date userBirth) {
-        this.userBirth = userBirth;
-    }
-
-    public int getUserGender() { return userGender; }
-
-    public void setUserGender(int userGender) { this.userGender = userGender; }
-
-    public String getUserMail() { return userMail; }
-
-    public void setUserMail(String userMail) { this.userMail = userMail; }
-
-    public String getUserCellnum() { return userCellnum; }
-
-    public void setUserCellnum(String userCellnum) { this.userCellnum = userCellnum; }
-
-    public String getUserMbti() { return userMbti; }
-
-    public void setUserMbti(String userMbti) { this.userMbti = userMbti; }
-
-    public char getUser_Admin() { return user_Admin; }
-
-    public void setUser_Admin(char user_Admin) { this.user_Admin = user_Admin; }
+    @Column(name = "USER_ADMIN", columnDefinition = "char(1)")
+    private boolean userAdmin;
 
 }

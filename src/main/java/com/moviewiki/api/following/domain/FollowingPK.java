@@ -1,14 +1,16 @@
 package com.moviewiki.api.following.domain;
 
-import com.moviewiki.api.user.domain.User;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import lombok.NoArgsConstructor;
 import java.io.Serializable;
+import lombok.Data;
+import com.moviewiki.api.user.domain.User;
 
 @Data
 @NoArgsConstructor
 public class FollowingPK implements Serializable {
-    private User follower;
-    private User followee;
+
+    private User fromUser;
+    private User toUser;
+
 }

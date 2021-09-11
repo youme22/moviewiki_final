@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>news detail</title>
+  <style>
+    .newsList {
+      width:1000px;
+      text-align: right;
+    }
+    .title_date {
+      border:1px solid black;
+      height: 50px;
+      width:1000px;
+    }
+    .newsTitle {
+      float:left;
+      margin-left: 20px;
+    }
+    .newsDate {
+      float:right;
+      margin-right: 20px;
+    }
+    .newsContent {
+      margin-top: 20px;
+      border:1px solid black;
+      width:1000px;
+      height:500px;
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <div th:insert="main_header" id="header"></div>
+
+  <div class="newsList">
+    <a th:href="@{'/news'}">
+      <input type="button" value="목록">
+    </a>
+  </div>
+  <div class="title_date">
+    <div class="newsTitle">
+      <p th:text="${news.newsTitle}"></p>
+    </div>
+    <div class = "newsDate">
+      <p th:text="${#temporals.format(news.newsDate, 'yyyy-MM-dd HH:mm')}"></p>
+    </div>
+  </div>
+  <div class="newsContent">
+    <p th:text="${news.newsContent}"></p>
+    <img th:src="@{'/img/' + ${news.newsFile}}">
+  </div>
+</body>
+</html>
