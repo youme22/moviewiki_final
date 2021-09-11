@@ -17,11 +17,13 @@ public class ActorController {
     @Autowired
     private ActorServiceImpl actorServiceImpl;
 
+
     /* 배우 등록 페이지 이동*/
     @GetMapping("/movie/create/actor")
     public String ActorForm(){
         return "createActor";
     }
+
 
     /* 배우 정보 저장 */
     @PostMapping("/movie/create/actor")
@@ -30,11 +32,11 @@ public class ActorController {
         return "redirect:/";
     }
 
-    /* 배우 목록 조회 페이지 이동 */
     @GetMapping("/movie/read/actor")
     public String readActor(){
         return "readActor";
     }
+
 
     /* 특정 이름의 배우 목록 조회 */
     @PostMapping("/movie/read/actor")

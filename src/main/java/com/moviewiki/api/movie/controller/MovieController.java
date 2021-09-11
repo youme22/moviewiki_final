@@ -22,6 +22,7 @@ public class MovieController {
     @Autowired
     private MovieServiceImpl movieServiceImpl;
 
+
     /* 영화 등록 페이지 이동 */
     @GetMapping("/movie/create")
     public String movieForm(){
@@ -34,17 +35,19 @@ public class MovieController {
         Movie movie = new Movie(form.getFilmRating(), form.getMovieName(), form.getMovieOgName(), form.getMovieProfile(), Date.valueOf(form.getReleaseDate())
                                 , parseInt(form.getRunningTime()), form.getSummary(), 0, 0, 0);
 
+
         movieServiceImpl.save(movie);
         return "redirect:/";
     }
 
-    /* 영화 목록 조회 */
+
     @GetMapping("/movie/read/{movieId}")
     @ResponseBody
     public Optional<Movie> readMovie(@PathVariable(name = "movieId") Long movieId){
         Optional<Movie> movie = movieServiceImpl.findById(movieId);
         return movie;
     }
+
 
     /* 모든 영화 조회 */
     @GetMapping("/movie/read")

@@ -2,6 +2,7 @@ package com.moviewiki.api.actor.service;
 
 import com.moviewiki.api.actor.domain.Actor;
 import com.moviewiki.api.movie.domain.Movie;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,4 +22,5 @@ public interface ActorService {
 
     // 모든 영화
     public List<Actor> findAll();
+
 }

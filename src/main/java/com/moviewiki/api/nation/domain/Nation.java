@@ -13,8 +13,9 @@ import javax.persistence.*;
 @Table(name="nations")
 public class Nation {
 
-    @Id
-    private @Column(name = "nation_id") String nationId;
 
-    private @Column(name = "nation_name") String nationName;
+	@Id
+	private @Column(name = "nation_id") String nationId;
+
+	private @Column(name = "nation_name") String nationName;
 }

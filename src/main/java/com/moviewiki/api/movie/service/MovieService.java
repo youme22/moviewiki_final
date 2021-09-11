@@ -1,6 +1,5 @@
 package com.moviewiki.api.movie.service;
 
-
 import com.moviewiki.api.movie.domain.Movie;
 
 import java.util.List;
@@ -19,5 +18,6 @@ public interface MovieService {
 
     // 영화 삭제 => 없는 기능
 //    public void deleteById(String movieId);
+
 
 }

@@ -26,4 +26,5 @@ public class MovieForm {
     private String filmRating;
     private String genreId;
     private String summary;
+
 }
