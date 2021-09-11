@@ -12,9 +12,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name="genres")
 public class Genre {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private @Column(name = "genre_id") String genreId;
+    @Id
+    private @Column(name = "genre_id") String genreId;
 
-	private @Column(name = "genre_name") String genreName;
+    private @Column(name = "genre_name") String genreName;
 }

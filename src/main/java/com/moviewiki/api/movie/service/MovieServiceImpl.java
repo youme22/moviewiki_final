@@ -28,4 +28,5 @@ public class MovieServiceImpl implements MovieService{
     public List<Movie> findAll() {
         return movieRepository.findAll();
     }
+
 }

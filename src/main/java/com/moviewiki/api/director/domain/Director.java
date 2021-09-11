@@ -1,4 +1,3 @@
-
 package com.moviewiki.api.director.domain;
 
 import lombok.AllArgsConstructor;

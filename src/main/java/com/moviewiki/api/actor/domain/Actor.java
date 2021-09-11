@@ -26,5 +26,5 @@ public class Actor {
 
 	private @Column(name = "actor_name")String actorName;
 	private @Column(name = "actor_profile") String actorProfile;
-	//ddddddfefeafegawfeefwefefdfe
+
 }

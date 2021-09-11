@@ -23,27 +23,24 @@ public class MovieController {
     private MovieServiceImpl movieServiceImpl;
 
 
+    /* 영화 등록 페이지 이동 */
     @GetMapping("/movie/create")
     public String movieForm(){
         return "createMovie";
     }
 
+    /* 영화 정보 저장 */
     @PostMapping("/movie/create")
     public String createMovie(MovieForm form){
         Movie movie = new Movie(form.getFilmRating(), form.getMovieName(), form.getMovieOgName(), form.getMovieProfile(), Date.valueOf(form.getReleaseDate())
-                , parseInt(form.getRunningTime()), form.getSummary(), 0, 0, 0);
+                                , parseInt(form.getRunningTime()), form.getSummary(), 0, 0, 0);
+
 
         movieServiceImpl.save(movie);
         return "redirect:/";
     }
 
-    /*@GetMapping("/movie/read")
-    public String readAllMovie(Model model){
-        List<Movie> movieList = movieServiceImpl.findAll();
-        model.addAttribute("movies", movieList);
-        return "readMovie.html";
-    }
-*/
+
     @GetMapping("/movie/read/{movieId}")
     @ResponseBody
     public Optional<Movie> readMovie(@PathVariable(name = "movieId") Long movieId){
@@ -51,6 +48,8 @@ public class MovieController {
         return movie;
     }
 
+
+    /* 모든 영화 조회 */
     @GetMapping("/movie/read")
     @ResponseBody
     public List<Movie> readAllMovie(){

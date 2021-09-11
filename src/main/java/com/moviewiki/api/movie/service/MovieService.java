@@ -19,4 +19,5 @@ public interface MovieService {
     // 영화 삭제 => 없는 기능
 //    public void deleteById(String movieId);
 
+
 }

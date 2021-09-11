@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Table(name="nations")
 public class Nation {
 
+
 	@Id
 	private @Column(name = "nation_id") String nationId;
 

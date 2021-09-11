@@ -2,6 +2,7 @@ package com.moviewiki.api.actor.service;
 
 import com.moviewiki.api.actor.domain.Actor;
 import com.moviewiki.api.actor.repository.ActorRepository;
+import com.moviewiki.api.movie.domain.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
