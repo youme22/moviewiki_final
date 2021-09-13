@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PrefDirectorRepository extends JpaRepository<PrefDirector, PrefDirectorPK> {
     PrefDirector findPrefDirectorByUserIdAndDirectorId(String userId, String DirectorId);
-    void updatePrefDirector(PrefDirector prefDirector);
+    void savePrefDirector(PrefDirector prefDirector);
 }

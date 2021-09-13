@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PrefActorRepository extends JpaRepository<PrefActor, PrefActorPK> {
     PrefActor findPrefActorByUserIdAndActorId(String userId, String ActorId);
-    void updatePrefActor(PrefActor prefActor);
+    void savePrefActor(PrefActor prefActor);
 }

@@ -29,23 +29,4 @@ public class PrefActor {
     private int actorReviewCount;
     private Date actorReviewDate;
 
-    public User getUser() { return user; }
-
-    public void setUser(User user) { this.user = user; }
-
-    public Actor getActor() { return actor; }
-
-    public void setActor(Actor actor) { this.actor = actor; }
-
-    public double getActorPoint() { return actorPoint; }
-
-    public void setActorPoint(double actorPoint) { this.actorPoint = actorPoint; }
-
-    public int getActorReviewCount() { return actorReviewCount; }
-
-    public void setActorReviewCount(int actorReviewCount) { this.actorReviewCount = actorReviewCount; }
-
-    public Date getActorReviewDate() { return actorReviewDate; }
-
-    public void setActorReviewDate(Date actorReviewDate) { this.actorReviewDate = actorReviewDate; }
 }
