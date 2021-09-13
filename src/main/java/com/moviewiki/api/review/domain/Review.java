@@ -30,42 +30,4 @@ public class Review {
     private Date reviewDate;
     private int ratingPoint;
     private String comment;
-
-    public String getReviewId() {
-        return reviewId;
-    }
-
-    public void setReviewId(String reviewId) {
-        this.reviewId = reviewId;
-    }
-
-    public Movie getMovie() { return movie; }
-
-    public void setMovie(Movie movie) { this.movie = movie; }
-
-    public User getUser() { return user; }
-
-    public void setUser(User user) { this.user = user; }
-
-    public Date getReviewDate() {
-        return reviewDate;
-    }
-
-    public void setReviewDate(Date reviewDate) {
-        this.reviewDate = reviewDate;
-    }
-
-    public int getRatingPoint() {
-        return ratingPoint;
-    }
-
-    public void setRatingPoint(int ratingPoint) {
-        this.ratingPoint = ratingPoint;
-    }
-
-    public String getComment() { return comment; }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
 }

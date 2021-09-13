@@ -29,43 +29,4 @@ public class PrefGenre {
     private int genreReviewCount;
     private Date genreReviewDate;
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
-    public double getGenrePoint() {
-        return genrePoint;
-    }
-
-    public void setGenrePoint(double genrePoint) {
-        this.genrePoint = genrePoint;
-    }
-
-    public int getGenreReviewCount() {
-        return genreReviewCount;
-    }
-
-    public void setGenreReviewCount(int genreReviewCount) {
-        this.genreReviewCount = genreReviewCount;
-    }
-
-    public Date getGenreReviewDate() {
-        return genreReviewDate;
-    }
-
-    public void setGenreReviewDate(Date genreReviewDate) {
-        this.genreReviewDate = genreReviewDate;
-    }
 }
