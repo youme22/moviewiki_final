@@ -19,6 +19,6 @@ public interface ReviewRepository extends JpaRepository<Review, String> {
     String findNationIdByReviewIdAndMovieId(String reviewId, String movieId);
     String findDirectorIdByReviewIdAndMovieId(String reviewId, String movieId);
     String findActorIdByReviewIdAndMovieId(String reviewId, String movieId);
-    void updateReview(Review review);
-    void deleteReview(String reviewId);
+    void saveReview(Review review);
+    void deleteByReviewId(String reviewId);
 }

@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface PrefGenreRepository extends JpaRepository<PrefGenre, PrefGenrePK> {
 
     PrefGenre findPrefGenreByUserIdAndGenreId(String userId, String GenreId);
-    void updatePrefGenre(PrefGenre prefGenre);
+    void savePrefGenre(PrefGenre prefGenre);
 
 }
