@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DirectorFilmographyRepository extends JpaRepository<DirectorFilmography, Director> {
+public interface DirectorFilmographyRepository extends JpaRepository<DirectorFilmography, Long> {
     public List<DirectorFilmography> findDirectorFilmographyByDirector(Director director);
 }
