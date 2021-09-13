@@ -8,10 +8,21 @@
 <body>
     <!-- HEADER -->
     <div th:insert="main_header" id="header"></div>
+    <a th:href="'/member/follower/' + ${userId}">
+        <button>팔로워 목록</button>
+    </a>
+    <a th:href="'/member/following/' + ${userId}">
+        <button>팔로잉 목록</button>
+    </a>
+
     <h1>팔로잉 페이지</h1>
     <table>
       <tr th:each="followee : ${followeeList}">
-        <td th:text="${followee.toUser.userId}"></td>
+
+        <td>
+            <a th:text="${followee.toUser.userId}" th:href="'/member/mypage/' + ${followee.toUser.userId}"></a>
+        </td>
+
         <td>
           <button>팔로우</button>
         </td>

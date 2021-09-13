@@ -26,7 +26,8 @@ public class UserManagementController {
 
     // 메인페이지 call
     @GetMapping("/")
-    public String mainPage() {
+    public String mainPage(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User user) {
+        model.addAttribute("userId", user.getUsername());
         return "/main";
     }
 
@@ -84,9 +85,9 @@ public class UserManagementController {
     }
 
     // mypage form call
-    @GetMapping("/member/mypage")
-    public String mypageMain(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User user) {
-        model.addAttribute("user", userManagementService.getUser(user.getUsername()));
+    @GetMapping("/member/mypage/{userId}")
+    public String mypageMain(@PathVariable String userId, Model model) {
+        model.addAttribute("user", userManagementService.getUser(userId));
         return "/member/mypage";
     }
 
