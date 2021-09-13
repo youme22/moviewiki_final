@@ -6,6 +6,8 @@
     <title>시청한 영화 페이지</title>
 </head>
 <body>
-    <h1>시청한 영화 페이지</h1>
+    <!-- HEADER -->
+    <div th:insert="main_header" id="header"></div>
+    <h1><span th:text="${userId}"></span>의 시청한 영화 페이지</h1>
 </body>
 </html>

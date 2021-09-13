@@ -15,7 +15,7 @@
         <button>팔로잉 목록</button>
     </a>
 
-    <h1>팔로잉 페이지</h1>
+    <h1><span th:text="${userId}"></span>의 팔로잉 페이지</h1>
     <table>
       <tr th:each="followee : ${followeeList}">
 

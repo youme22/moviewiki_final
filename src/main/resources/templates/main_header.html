@@ -7,9 +7,7 @@
 </head>
 <body>
     <h1>
-        <a th:href="@{/}">
-            로고
-        </a>
+        로고
     </h1>
     <div>
         <span>
@@ -34,7 +32,7 @@
 <!--        (밑에꺼 완성될때 지우기 - 로그인 유저 확인 테스트용)-->
         <span sec:authentication="name"></span>님
         <span>
-            <a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{'/member/mypage/' + ${userId}}">
+            <a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{'/member/mypage/' + ${currentUserId}}">
               <button>마이페이지</button>
             </a>
             <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/admin_news}">어드민 메인</a>

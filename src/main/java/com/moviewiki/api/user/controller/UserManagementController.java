@@ -24,10 +24,16 @@ public class UserManagementController {
     @Autowired
     private UserManagementService userManagementService;
 
-    // 메인페이지 call
+    // 초기 메인페이지 call
     @GetMapping("/")
-    public String mainPage(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User user) {
-        model.addAttribute("userId", user.getUsername());
+    public String initMainPage() {
+        return "/main";
+    }
+
+    // 로그인 후 메인페이지
+    @GetMapping("/main")
+    public String MainPage(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        model.addAttribute("currentUserId", currentUser.getUsername());
         return "/main";
     }
 
@@ -44,19 +50,19 @@ public class UserManagementController {
 
     // 로그인 성공시 이동할 페이지
     @RequestMapping("/loginSuccess")
-    public String loginSuccess(@AuthenticationPrincipal org.springframework.security.core.userdetails.User user, Map<String, Object> model,
+    public String loginSuccess(@AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser, Map<String, Object> model,
                                SecurityContextHolderAwareRequestWrapper requestWrapper) {
-        log.info("user = " + user);
+        log.info("currentUser = " + currentUser);
         String nextPage = null;
-        if (user == null) {
+        if (currentUser == null) {
             model.put("message", "유효하지 않은 데이터");
             nextPage = "redirect:/denied";
         } else {
             if (requestWrapper.isUserInRole("ADMIN")) {
                 nextPage = "redirect:/admin/admin_news";
             } else {
-                model.put("currentMemberId", user.getUsername());
-                nextPage = "redirect:/";
+                model.put("currentUserId", currentUser.getUsername());
+                nextPage = "redirect:/main";
             }
         }
         return nextPage;
@@ -84,11 +90,12 @@ public class UserManagementController {
         return "redirect:/login";
     }
 
-    // mypage form call
+    // 마이페이지 form call
     @GetMapping("/member/mypage/{userId}")
-    public String mypageMain(@PathVariable String userId, Model model) {
+    public String mypageMain(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("user", userManagementService.getUser(userId));
-        return "/member/mypage";
+        return "member/mypage";
     }
 
     // 회원 탈퇴
