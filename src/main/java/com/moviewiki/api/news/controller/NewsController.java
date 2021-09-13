@@ -3,7 +3,6 @@ package com.moviewiki.api.news.controller;
 import com.moviewiki.api.news.domain.News;
 import com.moviewiki.api.news.service.NewsService;
 import com.moviewiki.api.user.controller.UserManagementController;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
