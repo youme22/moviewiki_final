@@ -1,15 +1,14 @@
 package com.moviewiki.api.following.service;
 
 import com.moviewiki.api.following.domain.Following;
-import com.moviewiki.api.following.domain.FollowingPK;
 import com.moviewiki.api.following.repository.FollowingRepository;
 import com.moviewiki.api.user.domain.User;
 import com.moviewiki.api.user.repository.UserRepository;
-import com.moviewiki.api.user.service.UserManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class FollowingServiceImpl implements FollowingService {
@@ -19,37 +18,30 @@ public class FollowingServiceImpl implements FollowingService {
     @Autowired
     UserRepository userRepository;
 
-    @Transactional
-    @Override
-    public void unfollowUser(String fromUserId, String toUserId) {
-        followingRepository.deleteByFromUserAndToUser(fromUserId, toUserId);
-    }
-
+//    // 팔로우
+//    @Transactional
 //    @Override
-//    public Following getFollowUser(String fromUserId, String toUserId) {
-////        User fromUser = userRepository.findByUserId(fromUserId);
-////        User toUser = userRepository.findByUserId(toUserId);
-//
-//        Following following = followingRepository.findByFromUserAndToUser(fromUserId, toUserId);
-//
-//        return following;
+//    public Following save(String fromUserId, String toUserId) {
+//        User fromUser = userRepository.findByUserId(fromUserId);
+//        User toUser = userRepository.findByUserId(toUserId);
+//        return followingRepository.save(Following.builder()
+//            .fromUser(fromUser)
+//            .toUser(toUser)
+//            .build());
 //    }
 
-    /* 팔로우 정보를 저장 후 저장된 정보 반환
-            fromUserId : 로그인 사용자의 userId
-            toUserId : 팔로우할 프로필의 userId
-        */
-
-    @Transactional
+    // 팔로잉 리스트 출력
     @Override
-    public Following followUser(String fromUserId, String toUserId) {
-        User fromUser = userRepository.findByUserId(fromUserId);
-        User toUser = userRepository.findByUserId(toUserId);
-
-        return followingRepository.save(Following.builder()
-                .fromUser(fromUser)
-                .toUser(toUser)
-                .build());
+    public List<Following> followeeList(User fromUserId) {
+        List<Following> followeeList = followingRepository.findToUserByFromUser(fromUserId);
+        return followeeList;
     }
-}
 
+    // 팔로워 리스트 출력
+    @Override
+    public List<Following> followerList(User toUserId) {
+        List<Following> followerList = followingRepository.findFromUserByToUser(toUserId);
+        return followerList;
+    }
+
+}

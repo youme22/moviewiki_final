@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LikeRepository extends JpaRepository<Like, LikePK> {
 
-    void saveLike(Like like);
-    void deleteLike(Like like);
-
+    // void saveLike(Like like);
+    // void deleteLike(Like like);
 }

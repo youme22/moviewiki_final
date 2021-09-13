@@ -13,6 +13,7 @@ import java.util.List;
 public class RecommendServiceImpl implements RecommendService {
 
     private ReviewRepository reviewRepository;
+
     private FollowingRepository followingRepository;
 
 

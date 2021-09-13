@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- HEADER -->
+    <div th:insert="main_header" id="header"></div>
+    <h1>팔로워 페이지</h1>
+    <table>
+      <tr th:each="follower : ${followerList}">
+        <td th:text="${follower.fromUser.userId}"></td>
+        <td>
+          <button>팔로우</button>
+        </td>
+      </tr>
+    </table>
+</body>
+</html>
