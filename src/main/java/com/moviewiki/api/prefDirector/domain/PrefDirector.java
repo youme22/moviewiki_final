@@ -29,23 +29,4 @@ public class PrefDirector {
     private int directorReviewCount;
     private Date directorReviewDate;
 
-    public User getUser() { return user; }
-
-    public void setUser(User user) { this.user = user; }
-
-    public Director getDirector() { return director; }
-
-    public void setDirector(Director director) { this.director = director; }
-
-    public double getDirectorPoint() { return directorPoint; }
-
-    public void setDirectorPoint(double directorPoint) { this.directorPoint = directorPoint; }
-
-    public int getDirectorReviewCount() { return directorReviewCount; }
-
-    public void setDirectorReviewCount(int directorReviewCount) { this.directorReviewCount = directorReviewCount; }
-
-    public Date getDirectorReviewDate() { return directorReviewDate; }
-
-    public void setDirectorReviewDate(Date directorReviewDate) { this.directorReviewDate = directorReviewDate; }
 }
