@@ -26,7 +26,7 @@ public class UserManagementController {
 
     // 초기 메인페이지 call
     @GetMapping("/")
-    public String initMainPage() {
+    public String initMainPage(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
         return "/main";
     }
 
@@ -108,7 +108,7 @@ public class UserManagementController {
     // 회원정보 수정 -> DB 저장
     @PostMapping("/updateUser/{userId}")
     public String updateUser(User user) {
-        log.info("userId = "+ user.getUserId());
+        log.info("userId = " + user.getUserId());
         user.setUserPw(passwordEncoder.encode(user.getUserPw()));
         userManagementService.updateUser(user);
         return "redirect:/member/mypage";
