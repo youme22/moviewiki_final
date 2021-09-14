@@ -6,13 +6,22 @@ import com.moviewiki.api.prefActor.repository.PrefActorRepository;
 import com.moviewiki.api.review.domain.Review;
 import com.moviewiki.api.review.repository.ReviewRepository;
 import com.moviewiki.api.user.domain.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+@Service
 public class PrefActorServiceImpl implements PrefActorService {
 
     private ReviewRepository reviewRepository;
     private PrefActorRepository prefActorRepository;
+
+    @Autowired
+    public PrefActorServiceImpl(ReviewRepository reviewRepository, PrefActorRepository prefActorRepository) {
+        this.reviewRepository = reviewRepository;
+        this.prefActorRepository = prefActorRepository;
+    }
 
     @Override
     public void updatePrefActor(Review review) {

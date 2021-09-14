@@ -6,13 +6,22 @@ import com.moviewiki.api.prefNation.repository.PrefNationRepository;
 import com.moviewiki.api.review.domain.Review;
 import com.moviewiki.api.review.repository.ReviewRepository;
 import com.moviewiki.api.user.domain.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+@Service
 public class PrefNationServiceImpl implements PrefNationService {
 
     private ReviewRepository reviewRepository;
     private PrefNationRepository prefNationRepository;
+
+    @Autowired
+    public PrefNationServiceImpl(ReviewRepository reviewRepository, PrefNationRepository prefNationRepository) {
+        this.reviewRepository = reviewRepository;
+        this.prefNationRepository = prefNationRepository;
+    }
 
     @Override
     public void updatePrefNation(Review review) {

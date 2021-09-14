@@ -6,13 +6,22 @@ import com.moviewiki.api.prefDirector.repository.PrefDirectorRepository;
 import com.moviewiki.api.review.domain.Review;
 import com.moviewiki.api.review.repository.ReviewRepository;
 import com.moviewiki.api.user.domain.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+@Service
 public class PrefDirectorServiceImpl implements PrefDirectorService {
 
     private ReviewRepository reviewRepository;
     private PrefDirectorRepository prefDirectorRepository;
+
+    @Autowired
+    public PrefDirectorServiceImpl(ReviewRepository reviewRepository, PrefDirectorRepository prefDirectorRepository) {
+        this.reviewRepository = reviewRepository;
+        this.prefDirectorRepository = prefDirectorRepository;
+    }
 
     @Override
     public void updatePrefDirector(Review review) {

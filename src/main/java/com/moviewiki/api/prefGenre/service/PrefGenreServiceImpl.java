@@ -6,13 +6,22 @@ import com.moviewiki.api.prefGenre.repository.PrefGenreRepository;
 import com.moviewiki.api.review.domain.Review;
 import com.moviewiki.api.review.repository.ReviewRepository;
 import com.moviewiki.api.user.domain.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+@Service
 public class PrefGenreServiceImpl implements PrefGenreService {
 
     private PrefGenreRepository prefGenreRepository;
     private ReviewRepository reviewRepository;
+
+    @Autowired
+    public PrefGenreServiceImpl(PrefGenreRepository prefGenreRepository, ReviewRepository reviewRepository) {
+        this.prefGenreRepository = prefGenreRepository;
+        this.reviewRepository = reviewRepository;
+    }
 
     @Override
     public void updatePrefGenre(Review review) {
