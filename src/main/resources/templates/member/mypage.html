@@ -74,18 +74,19 @@
                         팔로잉
                     </a>
                 </div>
-<!--                <div class="btn_follow" th:if="${user.userId} == ${currentUserId}">-->
-<!--                </div>-->
-                <div class="btn_follow" th:if="${user.userId} != ${currentUserId}">
-                    <div th:if="${isFollowing} == true">
-                        <button>팔로우</button>
-                    </div>
-                    <div th:unless="${isFollowing} == false">
-                        <button>언팔로우</button>
-                    </div>
+                <div class="btn_follow" th:switch="${user.userId}">
+                    <span th:case="${currentUserId}"></span>
+                    <span th:case="*">
+                        <span th:switch="${isFollowing}">
+                            <span th:case="true">
+                                <button>언팔로우</button>
+                            </span>
+                            <span th:case="false">
+                                <button>팔로우</button>
+                            </span>
+                        </span>
+                    </span>
                 </div>
-
-
             </div>
 
 
