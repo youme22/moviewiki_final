@@ -1,6 +1,7 @@
 package com.moviewiki.api.prefDirector.service;
 
 import com.moviewiki.api.director.domain.Director;
+import com.moviewiki.api.directorFilmography.repository.DirectorFilmographyRepository;
 import com.moviewiki.api.prefDirector.domain.PrefDirector;
 import com.moviewiki.api.prefDirector.repository.PrefDirectorRepository;
 import com.moviewiki.api.review.domain.Review;
@@ -10,27 +11,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class PrefDirectorServiceImpl implements PrefDirectorService {
 
     private ReviewRepository reviewRepository;
     private PrefDirectorRepository prefDirectorRepository;
+    private DirectorFilmographyRepository directorFilmographyRepository;
 
     @Autowired
-    public PrefDirectorServiceImpl(ReviewRepository reviewRepository, PrefDirectorRepository prefDirectorRepository) {
+    public PrefDirectorServiceImpl(ReviewRepository reviewRepository, PrefDirectorRepository prefDirectorRepository, DirectorFilmographyRepository directorFilmographyRepository) {
+
         this.reviewRepository = reviewRepository;
         this.prefDirectorRepository = prefDirectorRepository;
+        this.directorFilmographyRepository = directorFilmographyRepository;
+
     }
 
     @Override
     public void updatePrefDirector(Review review) {
 
         User user = review.getUser();
-        Director director = reviewRepository.findDirectorByReview(review); // 감독이 누군지
         Date directorReviewDate = null; // updatePrefDirector메소드가 호출되는 날짜
-        int directorReviewCount = 0; //리뷰테이블과 연출작 테이블을 조인한 테이블에 이 유저와 이 감독으로 찾아서 갯수 새기
-        double directorPoint = 0; // 리뷰테이블과 연출작 테이블을 조인한 테이블에서 이 유저와 이 감독으로 찾아서 평점(-3)을 다 더함 리뷰카운트로 나눔
+        Director director = directorFilmographyRepository.findDirectorByReview(review);
+        List<Review> directorReviewList = reviewRepository.findDirectorReviewListByUserIdAndDirectorId(user.getUserId(), director.getDirectorId());
+        int directorReviewCount = directorReviewList.size(); // 메소드 아무거나 고름 -> 리뷰 카운트 메소드로 변경 예정
+        double directorPoint = directorReviewList.hashCode(); // 메소드 아무거나 고름 -> 선호도 계산 메소드로 변경 예정, 평점(-3)의 총합을 directorReviewCount로 나눈 값
         PrefDirector prefDirector = new PrefDirector(user, director, directorPoint, directorReviewCount, directorReviewDate); // PrefDirector 생성
         prefDirectorRepository.savePrefDirector(prefDirector); //PrefDirector 테이블에 저장
 

@@ -1,5 +1,6 @@
 package com.moviewiki.api.prefNation.Service;
 
+import com.moviewiki.api.movieNation.repository.MovieNationRepository;
 import com.moviewiki.api.nation.domain.Nation;
 import com.moviewiki.api.prefNation.domain.PrefNation;
 import com.moviewiki.api.prefNation.repository.PrefNationRepository;
@@ -10,26 +11,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class PrefNationServiceImpl implements PrefNationService {
 
     private ReviewRepository reviewRepository;
     private PrefNationRepository prefNationRepository;
+    private MovieNationRepository movieNationRepository;
 
     @Autowired
-    public PrefNationServiceImpl(ReviewRepository reviewRepository, PrefNationRepository prefNationRepository) {
+    public PrefNationServiceImpl(ReviewRepository reviewRepository, PrefNationRepository prefNationRepository, MovieNationRepository movieNationRepository) {
+
         this.reviewRepository = reviewRepository;
         this.prefNationRepository = prefNationRepository;
+        this.movieNationRepository = movieNationRepository;
+
     }
 
     @Override
     public void updatePrefNation(Review review) {
+
         User user = review.getUser();
-        Nation nation = reviewRepository.findNationByReview(review); // 어떤 국가인지
         Date nationReviewDate = null; // updatePrefNation메소드가 호출되는 날짜
-        int nationReviewCount = 0; //리뷰테이블과 영화국가 테이블을 조인한 테이블에 이 유저와 이 국가로 찾아서 갯수 새기
-        double nationPoint = 0; // 리뷰테이블과 영화국가 테이블을 조인한 테이블에서 이 유저와 이 국가로 찾아서 평점(-3)을 다 더함 리뷰카운트로 나눔
+        Nation nation = movieNationRepository.findNationByReview(review);
+        List<Review> nationReviewList = reviewRepository.findNationReviewListByUserIdAndNationId(user.getUserId(), nation.getNationId());
+        int nationReviewCount = nationReviewList.size(); // 메소드 아무거나 고름 -> 리뷰 카운트 메소드로 변경 예정
+        double nationPoint = nationReviewList.hashCode(); // 메소드 아무거나 고름 -> 선호도 계산 메소드로 변경 예정, 평점(-3)의 총합을 nationReviewCount로 나눈 값
         PrefNation prefNation = new PrefNation(user, nation, nationPoint, nationReviewCount, nationReviewDate); // PrefNation 생성
         prefNationRepository.savePrefNation(prefNation); //PrefNation 테이블에 저장
 
