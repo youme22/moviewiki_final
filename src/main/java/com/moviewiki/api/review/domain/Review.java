@@ -17,7 +17,7 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name= "REVIEW_ID")
-    private String reviewId;
+    private Long reviewId;
 
     @ManyToOne
     @JoinColumn(name ="MOVIE_ID")
