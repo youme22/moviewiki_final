@@ -2,6 +2,7 @@ package com.moviewiki.api.review.domain;
 
 import com.moviewiki.api.movie.domain.Movie;
 import com.moviewiki.api.user.domain.User;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "REVIEWS")
 public class Review {

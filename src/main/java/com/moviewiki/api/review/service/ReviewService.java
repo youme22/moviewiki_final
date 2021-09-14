@@ -7,7 +7,7 @@ public interface ReviewService {
 
     void doReview(Review review);
     void modifyReview(Review review);
-    void deleteReview(Long reviewId);
+    void deleteReview(Review review);
     void likeReview(Like like);
     void unlikeReview(Like like);
 }
