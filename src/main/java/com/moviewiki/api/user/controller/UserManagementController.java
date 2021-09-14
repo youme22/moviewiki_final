@@ -116,8 +116,9 @@ public class UserManagementController {
 
     // 회원정보 수정 form call
     @GetMapping("/member/modify_info")
-    public String modifyInfoPage(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User user) {
-        model.addAttribute("user", userManagementService.getUser(user.getUsername()));
+    public String modifyInfoPage(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        model.addAttribute("currentUserId", currentUser.getUsername());
+        model.addAttribute("currentUser", userManagementService.getUser(currentUser.getUsername()));
         return "/member/modify_info";
     }
 
