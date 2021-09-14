@@ -26,7 +26,7 @@ public class UserManagementController {
 
     // 초기 메인페이지 call
     @GetMapping("/")
-    public String initMainPage(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+    public String initMainPage() {
         return "/main";
     }
 

@@ -24,22 +24,22 @@ public class NewsController {
     @Autowired
     private NewsService newsService;
 
-    // 뉴스게시판 페이지 이동
-    @RequestMapping("/news")
-    public String newsPage(Model model) {
+    // 비로그인 뉴스게시판 페이지 이동
+    @RequestMapping("/anonymousNews")
+    public String initNewsPage(Model model) {
         List<News> newsList = newsService.getNewsList();
         model.addAttribute("newsList", newsList);
         return "news";
     }
 
-//    // 로그인 뉴스게시판 페이지 이동
-//    @RequestMapping("/news")
-//    public String newsPage(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
-//        List<News> newsList = newsService.getNewsList();
-//        model.addAttribute("currentUserId", currentUser.getUsername());
-//        model.addAttribute("newsList", newsList);
-//        return "news";
-//    }
+    // 로그인 뉴스게시판 페이지 이동
+    @RequestMapping("/news")
+    public String newsPage(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        List<News> newsList = newsService.getNewsList();
+        model.addAttribute("currentUserId", currentUser.getUsername());
+        model.addAttribute("newsList", newsList);
+        return "news";
+    }
 
     // 뉴스 등록 form call
     @GetMapping("/createNews")
