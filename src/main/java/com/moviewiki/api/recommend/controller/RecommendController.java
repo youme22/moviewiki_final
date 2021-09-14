@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class RecommendContorller {
+public class RecommendController {
 
     private RecommendService recommendService;
 
     @Autowired
-    public RecommendContorller(RecommendService recommendService) {
+    public RecommendController(RecommendService recommendService) {
 
         this.recommendService = recommendService;
 
