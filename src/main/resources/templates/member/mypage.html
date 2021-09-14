@@ -74,7 +74,7 @@
                         팔로잉
                     </a>
                 </div>
-                <div class="btn_follow">
+                <div class="btn_follow" th:if="${user.userId} != ${currentUserId}">
                     <button>팔로우</button>
                 </div>
             </div>
