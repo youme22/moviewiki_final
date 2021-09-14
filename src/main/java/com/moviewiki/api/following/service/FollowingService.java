@@ -13,5 +13,8 @@ public interface FollowingService {
     // 팔로워 리스트 출력
     List<Following> followerList(User toUserId);
 
+    // 팔로우 상태 확인
+    Boolean isFollowing(User fromUserId, User toUserId);
+
 //    Following save(String fromUserId, String toUserId);
 }

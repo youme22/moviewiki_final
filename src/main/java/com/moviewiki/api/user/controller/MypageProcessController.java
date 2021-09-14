@@ -35,6 +35,11 @@ public class MypageProcessController {
     // 마이페이지 form call
     @GetMapping("/member/mypage/{userId}")
     public String mypageMain(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        User fromUser = userManagementService.getUser(currentUser.getUsername());
+        User toUser = userManagementService.getUser(userId);
+        boolean a = followingService.isFollowing(fromUser, toUser);
+        log.info("a=============" + a);
+        model.addAttribute("isFollowing", followingService.isFollowing(fromUser, toUser));
         model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("user", userManagementService.getUser(userId));
         return "member/mypage";
@@ -62,26 +67,6 @@ public class MypageProcessController {
         return "/member/want_to_see";
     }
 
-    // 팔로잉 리스트 출력, form call
-    @RequestMapping("/member/followeeList/{userId}")
-    public String followingPage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
-        User fromUser = userManagementService.getUser(userId);
-        List<Following> followeeList = followingService.followeeList(fromUser);
-        log.info("followeeList======" + followeeList);
-        model.addAttribute("currentUserId", currentUser.getUsername());
-        model.addAttribute("followeeList", followeeList);
-        return "/member/followee";
-    }
 
-    // 팔로워 리스트 출력, form call
-    @RequestMapping("/member/followerList/{userId}")
-    public String followerPage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
-        User toUser = userManagementService.getUser(userId);
-        List<Following> followerList = followingService.followerList(toUser);
-        log.info("followerList======" + followerList);
-        model.addAttribute("currentUserId", currentUser.getUsername());
-        model.addAttribute("followerList", followerList);
-        return "/member/follower";
-    }
 
 }

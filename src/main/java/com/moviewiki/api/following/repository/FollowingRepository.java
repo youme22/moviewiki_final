@@ -20,4 +20,7 @@ public interface FollowingRepository extends JpaRepository<Following, FollowingP
 
     // 팔로이 수
     int countByToUser_UserId(User toUserId);
+
+    // 팔로워되어있는지 확인
+    boolean existsByFromUserAndAndToUser(User fromUserId, User toUserId);
 }

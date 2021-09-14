@@ -32,4 +32,9 @@ public class FollowingServiceImpl implements FollowingService {
         return followerList;
     }
 
+    // 팔로우 상태 확인
+    @Override
+    public Boolean isFollowing(User fromUserId, User toUserId) {
+        return followingRepository.existsByFromUserAndAndToUser(fromUserId, toUserId);
+    }
 }

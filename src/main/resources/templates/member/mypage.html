@@ -48,7 +48,7 @@
             <div class="mypage-top">
 <!--                리뷰수에 따라 등급 바뀌게-->
                 <div class="grade">
-                    <p><img th:src="@{/img/grade1.png}"></p>
+                    <p><img th:src="@{/img/grade2.png}"></p>
                     <strong th:text="${user.userId}"/>
                 </div>
 
@@ -74,9 +74,18 @@
                         팔로잉
                     </a>
                 </div>
+<!--                <div class="btn_follow" th:if="${user.userId} == ${currentUserId}">-->
+<!--                </div>-->
                 <div class="btn_follow" th:if="${user.userId} != ${currentUserId}">
-                    <button>팔로우</button>
+                    <div th:if="${isFollowing} == true">
+                        <button>팔로우</button>
+                    </div>
+                    <div th:unless="${isFollowing} == false">
+                        <button>언팔로우</button>
+                    </div>
                 </div>
+
+
             </div>
 
 
