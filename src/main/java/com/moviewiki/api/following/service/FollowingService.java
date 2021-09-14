@@ -13,6 +13,5 @@ public interface FollowingService {
     // 팔로워 리스트 출력
     List<Following> followerList(User toUserId);
 
-
 //    Following save(String fromUserId, String toUserId);
 }

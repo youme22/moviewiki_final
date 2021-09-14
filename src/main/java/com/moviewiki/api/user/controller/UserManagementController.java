@@ -90,14 +90,6 @@ public class UserManagementController {
         return "redirect:/login";
     }
 
-    // 마이페이지 form call
-    @GetMapping("/member/mypage/{userId}")
-    public String mypageMain(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
-        model.addAttribute("currentUserId", currentUser.getUsername());
-        model.addAttribute("user", userManagementService.getUser(userId));
-        return "member/mypage";
-    }
-
     // 회원 탈퇴
     @RequestMapping("/deleteUser/{userId}")
     public String deleteUser(@PathVariable String userId) {

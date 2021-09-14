@@ -11,11 +11,16 @@
         .mypage-top {
             border: black 1px solid;
             width: 600px;
-            height: 100px;
+            height: 141px;
         }
         .mypage-top > div {
             float: left;
-            margin: 30px;
+        }
+        .reviews-follow {
+            margin: 16px 60px 0;
+        }
+        .btn_follow {
+            margin: 25px 210px;
         }
         .mypage-bottom {
             width: 600px;
@@ -40,36 +45,49 @@
     <h1>마이페이지</h1>
     <div class="wrapper">
         <div>
-
-
             <div class="mypage-top">
 <!--                리뷰수에 따라 등급 바뀌게-->
-                 <img th:src="@{/img/grade1.png}">
+                <div class="grade">
+                    <p><img th:src="@{/img/grade1.png}"></p>
+                    <strong th:text="${user.userId}"/>
+                </div>
 
-                <div>
-                    리뷰수<br>
-                    리뷰
+                <div class="reviews-follow">
+                    <a th:href="@{'/member/reviews/' + ${user.userId}}">
+                        리뷰수<br>
+                        리뷰
+                    </a>
                 </div>
-                <div>
+                <div class="reviews-follow">
                     <a th:href="@{'/member/followerList/' + ${user.userId}}">
-                    팔로워수<br>
-                    팔로워
+<!--                        <span th:text="${countByFollower}"/>-->
+                        팔로워 수
+                        <br>
+                        팔로워
+                    </a>
                 </div>
-                <div>
+                <div class="reviews-follow">
                     <a th:href="@{'/member/followeeList/' + ${user.userId}}">
-                        팔로잉수<br>
+<!--                        <span th:text="${countByFollowee}"/>-->
+                        팔로잉 수
+                        <br>
                         팔로잉
                     </a>
                 </div>
+                <div class="btn_follow">
+                    <button>팔로우</button>
+                </div>
             </div>
+
+
+
+
+
             <div class="mypage-bottom">
                 <div>
                     <a th:href="@{'/member/pref/' + ${user.userId}}">
                         <div>
-                            <span
-                                th:text="${user.userId}">
-                            </span>
-                            님의 취향분석
+                            <span th:text="${user.userId}"/>님의 취향분석
                         </div>
                     </a>
                 </div>

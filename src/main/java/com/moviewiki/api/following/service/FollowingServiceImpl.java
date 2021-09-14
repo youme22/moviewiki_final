@@ -7,7 +7,6 @@ import com.moviewiki.api.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -18,17 +17,6 @@ public class FollowingServiceImpl implements FollowingService {
     @Autowired
     UserRepository userRepository;
 
-//    // 팔로우
-//    @Transactional
-//    @Override
-//    public Following save(String fromUserId, String toUserId) {
-//        User fromUser = userRepository.findByUserId(fromUserId);
-//        User toUser = userRepository.findByUserId(toUserId);
-//        return followingRepository.save(Following.builder()
-//            .fromUser(fromUser)
-//            .toUser(toUser)
-//            .build());
-//    }
 
     // 팔로잉 리스트 출력
     @Override

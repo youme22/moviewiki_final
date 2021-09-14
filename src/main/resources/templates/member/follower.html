@@ -23,10 +23,10 @@
                 <a th:text="${follower.fromUser.userId}" th:href="'/member/mypage/' + ${follower.fromUser.userId}"></a>
             </td>
             <td>
-<!--                <form th:object="${following}" th:action="@{'/following/' + ${userId}}" th:method="post">-->
+<!--                <form th:action="@{'/member/following/' + ${follower.fromUser.userId}}" th:method="post">-->
+<!--                    <input type="hidden" name="_method" value=""/>-->
+<!--                    <input type="hidden" name="toUserId" th:value="${follower.fromUser.userId}"/>-->
 <!--                    <div>-->
-<!--                        <input type="hidden" th:field="*{follower.fromUser.userId}">-->
-<!--                        <input type="hidden" th:field="*{toUserId}">-->
 <!--                        <input type="submit" value="팔로우">-->
 <!--                    </div>-->
 <!--                </form>-->

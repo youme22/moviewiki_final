@@ -32,6 +32,13 @@ public class MypageProcessController {
     @Autowired
     UserManagementService userManagementService;
 
+    // 마이페이지 form call
+    @GetMapping("/member/mypage/{userId}")
+    public String mypageMain(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        model.addAttribute("currentUserId", currentUser.getUsername());
+        model.addAttribute("user", userManagementService.getUser(userId));
+        return "member/mypage";
+    }
 
 
     // 취향분석 페이지 form call
@@ -76,27 +83,5 @@ public class MypageProcessController {
         model.addAttribute("followerList", followerList);
         return "/member/follower";
     }
-
-
-
-    // check_pw form call
-//    @GetMapping("/member/check_pw")
-//    public String checkPwPage(Model model) {
-//        return "/member/check_pw";
-//    }
-
-    // DB에 아이디와 패스워드가 일치하는 게 있는지 확인
-//    @PostMapping("/member/check_pw")
-//    public String checkPw(Model model, @AuthenticationPrincipal User user, String userPw) {
-//        log.info("userPw===" + userPw);
-//        String userId = user.getUsername();
-//        com.moviewiki.api.user.domain.User currentUser = userManagementService.checkPw(userId, userPw);
-//        log.info("currentUser" + currentUser);
-//        if(currentUser == null) {
-//            return "redirect:/member/check_pw";
-//        }
-//        return "/member/modify_info";
-//    }
-
 
 }
