@@ -11,4 +11,5 @@ public interface PrefDirectorRepository extends JpaRepository<PrefDirector, Pref
 
      PrefDirector findPrefDirectorByUserAndDirectorId(User user, Long DirectorId);
      void savePrefDirector(PrefDirector prefDirector);
+
 }

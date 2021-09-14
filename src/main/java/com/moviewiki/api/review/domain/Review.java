@@ -32,4 +32,5 @@ public class Review {
     private Date reviewDate;
     private int ratingPoint;
     private String comment;
+
 }

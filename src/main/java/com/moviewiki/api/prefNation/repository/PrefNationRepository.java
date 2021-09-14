@@ -11,4 +11,5 @@ public interface PrefNationRepository extends JpaRepository<PrefNation, PrefNati
 
      PrefNation findPrefNationByUserAndNationId(User user, String NationId);
      void savePrefNation(PrefNation prefNation);
+
 }

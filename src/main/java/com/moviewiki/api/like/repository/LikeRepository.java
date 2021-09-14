@@ -10,4 +10,5 @@ public interface LikeRepository extends JpaRepository<Like, LikePK> {
 
      void saveLike(Like like);
      void deleteLike(Like like);
+
 }

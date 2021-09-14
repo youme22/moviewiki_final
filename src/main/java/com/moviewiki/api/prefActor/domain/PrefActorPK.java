@@ -10,6 +10,8 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class PrefActorPK implements Serializable {
+
     private User user;
     private Actor actor;
+
 }

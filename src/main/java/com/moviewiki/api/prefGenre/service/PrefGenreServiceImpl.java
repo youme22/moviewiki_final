@@ -16,6 +16,7 @@ public class PrefGenreServiceImpl implements PrefGenreService {
 
     @Override
     public void updatePrefGenre(Review review) {
+
         User user = review.getUser();
         Genre genre = reviewRepository.findGenreByReview(review); // 어떤 장르인지
         Date genreReviewDate = null; // updatePrefGenre메소드가 호출되는 날짜
@@ -25,4 +26,5 @@ public class PrefGenreServiceImpl implements PrefGenreService {
         prefGenreRepository.savePrefGenre(prefGenre); //PrefGenre 테이블에 저장
 
     }
+
 }

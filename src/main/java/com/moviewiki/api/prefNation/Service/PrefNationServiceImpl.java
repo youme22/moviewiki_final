@@ -25,4 +25,5 @@ public class PrefNationServiceImpl implements PrefNationService {
         prefNationRepository.savePrefNation(prefNation); //PrefNation 테이블에 저장
 
     }
+
 }

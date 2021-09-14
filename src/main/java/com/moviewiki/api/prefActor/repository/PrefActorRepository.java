@@ -11,4 +11,5 @@ public interface PrefActorRepository extends JpaRepository<PrefActor, PrefActorP
     
      PrefActor findPrefActorByUserAndActorId(User user, Long ActorId);
      void savePrefActor(PrefActor prefActor);
+
 }

@@ -11,6 +11,9 @@ public class RecommendContorller {
 
     @Autowired
     public RecommendContorller(RecommendService recommendService) {
+
         this.recommendService = recommendService;
+
     }
+
 }

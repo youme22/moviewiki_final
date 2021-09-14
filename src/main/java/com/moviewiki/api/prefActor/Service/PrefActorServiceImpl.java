@@ -16,6 +16,7 @@ public class PrefActorServiceImpl implements PrefActorService {
 
     @Override
     public void updatePrefActor(Review review) {
+
         User user = review.getUser();
         Actor actor = reviewRepository.findActorByReview(review); // 배우가 누군지
         Date actorReviewDate = null; // updatePrefActor메소드가 호출되는 날짜
@@ -25,4 +26,5 @@ public class PrefActorServiceImpl implements PrefActorService {
         prefActorRepository.savePrefActor(prefActor); //PrefActor 테이블에 저장
 
     }
+
 }

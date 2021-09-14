@@ -10,11 +10,13 @@ import com.moviewiki.api.user.domain.User;
 import java.util.Date;
 
 public class PrefDirectorServiceImpl implements PrefDirectorService {
+
     private ReviewRepository reviewRepository;
     private PrefDirectorRepository prefDirectorRepository;
 
     @Override
     public void updatePrefDirector(Review review) {
+
         User user = review.getUser();
         Director director = reviewRepository.findDirectorByReview(review); // 감독이 누군지
         Date directorReviewDate = null; // updatePrefDirector메소드가 호출되는 날짜
@@ -24,4 +26,5 @@ public class PrefDirectorServiceImpl implements PrefDirectorService {
         prefDirectorRepository.savePrefDirector(prefDirector); //PrefDirector 테이블에 저장
 
     }
+
 }

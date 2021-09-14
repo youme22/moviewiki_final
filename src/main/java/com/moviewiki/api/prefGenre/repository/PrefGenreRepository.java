@@ -11,4 +11,5 @@ public interface PrefGenreRepository extends JpaRepository<PrefGenre, PrefGenreP
 
      PrefGenre findPrefGenreByUserAndGenreId(User user, String GenreId);
      void savePrefGenre(PrefGenre prefGenre);
+
 }

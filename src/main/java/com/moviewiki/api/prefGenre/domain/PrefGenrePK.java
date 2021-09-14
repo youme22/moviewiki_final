@@ -10,6 +10,8 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class PrefGenrePK implements Serializable {
+
     private User user;
     private Genre genre;
+
 }

@@ -10,6 +10,8 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class PrefDirectorPK implements Serializable {
+
     private User user;
     private Director director;
+
 }
