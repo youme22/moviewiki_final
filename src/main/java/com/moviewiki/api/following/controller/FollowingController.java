@@ -33,8 +33,8 @@ public class FollowingController {
         return  새로 생성된 follow 객체 리턴
      */
 //    @PostMapping("/following/{toUserId}")
-//    public Following followUser(@PathVariable String toUserId, Authentication authentication) {
-//        return followingService.save(authentication.getName(), toUserId);
+//    public Following followUser(@PathVariable String toUserId, Authentication auth) {
+//        return followingService.save(auth.getName(), toUserId);
 //    }
 
     /* unfollow 기능

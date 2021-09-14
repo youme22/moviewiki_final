@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -90,8 +91,8 @@ public class NewsController {
         return "redirect:/admin/admin_news";
     }
 
-    // 로그인 뉴스 상세 보기
-    @RequestMapping("/readNews/{newsId}")
+    // 비로그인 뉴스 상세 보기
+    @RequestMapping("/anonymousReadNews/{newsId}")
     public String initReadNews(@PathVariable Long newsId, Model model) {
         log.info("newsid = "+ newsId);
         News news = newsService.getNews(newsId);
@@ -100,12 +101,12 @@ public class NewsController {
     }
 
     // 로그인 뉴스 상세 보기
-//    @RequestMapping("/readNews/{newsId}")
-//    public String ReadNews(@PathVariable Long newsId, Model model, @AuthenticationPrincipal User currentUser) {
-//        log.info("newsid = "+ newsId);
-//        News news = newsService.getNews(newsId);
-//        model.addAttribute("news", news);
-//        model.addAttribute("currentUserId", currentUser.getUsername());
-//        return "/news_detail";
-//    }
+    @RequestMapping("/readNews/{newsId}")
+    public String readNews(@PathVariable Long newsId, Model model, @AuthenticationPrincipal User currentUser) {
+        log.info("newsid = "+ newsId);
+        News news = newsService.getNews(newsId);
+        model.addAttribute("news", news);
+        model.addAttribute("currentUserId", currentUser.getUsername());
+        return "/news_detail";
+    }
 }

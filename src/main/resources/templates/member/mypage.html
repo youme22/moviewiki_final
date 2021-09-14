@@ -40,11 +40,7 @@
     <h1>마이페이지</h1>
     <div class="wrapper">
         <div>
-            <div class="setting">
-                <a th:href="@{/member/modify_info}">
-                    <button>설정</button>
-                </a>
-            </div>
+
 
             <div class="mypage-top">
 <!--                리뷰수에 따라 등급 바뀌게-->
@@ -55,12 +51,12 @@
                     리뷰
                 </div>
                 <div>
-                    <a th:href="@{'/member/follower/' + ${user.userId}}">
+                    <a th:href="@{'/member/followerList/' + ${user.userId}}">
                     팔로워수<br>
                     팔로워
                 </div>
                 <div>
-                    <a th:href="@{'/member/following/' + ${user.userId}}">
+                    <a th:href="@{'/member/followeeList/' + ${user.userId}}">
                         팔로잉수<br>
                         팔로잉
                     </a>

@@ -47,7 +47,12 @@
         <span>
             <a sec:authorize="isAuthenticated()" th:href="@{/logout}">
                 <button>로그아웃</button>
-            </a><br>
+            </a>
+        </span>
+        <span class="setting">
+            <a sec:authorize="isAuthenticated()" th:href="@{/member/modify_info}">
+                <button>설정</button>
+            </a>
         </span>
     </div>
     <div>

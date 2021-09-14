@@ -8,10 +8,11 @@
 <body>
     <!-- HEADER -->
     <div th:insert="main_header" id="header"></div>
-    <a th:href="'/member/follower/' + ${userId}">
+
+    <a th:href="'/member/followerList/' + ${userId}">
         <button>팔로워 목록</button>
     </a>
-    <a th:href="'/member/following/' + ${userId}">
+    <a th:href="'/member/followeeList/' + ${userId}">
         <button>팔로잉 목록</button>
     </a>
 
@@ -22,7 +23,14 @@
                 <a th:text="${follower.fromUser.userId}" th:href="'/member/mypage/' + ${follower.fromUser.userId}"></a>
             </td>
             <td>
-                <button>팔로우</button>
+<!--                <form th:object="${following}" th:action="@{'/following/' + ${userId}}" th:method="post">-->
+<!--                    <div>-->
+<!--                        <input type="hidden" th:field="*{follower.fromUser.userId}">-->
+<!--                        <input type="hidden" th:field="*{toUserId}">-->
+<!--                        <input type="submit" value="팔로우">-->
+<!--                    </div>-->
+<!--                </form>-->
+
             </td>
         </tr>
     </table>

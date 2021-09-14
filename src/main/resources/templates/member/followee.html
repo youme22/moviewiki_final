@@ -8,10 +8,10 @@
 <body>
     <!-- HEADER -->
     <div th:insert="main_header" id="header"></div>
-    <a th:href="'/member/follower/' + ${userId}">
+    <a th:href="'/member/followerList/' + ${userId}">
         <button>팔로워 목록</button>
     </a>
-    <a th:href="'/member/following/' + ${userId}">
+    <a th:href="'/member/followeeList/' + ${userId}">
         <button>팔로잉 목록</button>
     </a>
 

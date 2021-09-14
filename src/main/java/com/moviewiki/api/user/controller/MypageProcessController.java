@@ -56,7 +56,7 @@ public class MypageProcessController {
     }
 
     // 팔로잉 리스트 출력, form call
-    @RequestMapping("/member/following/{userId}")
+    @RequestMapping("/member/followeeList/{userId}")
     public String followingPage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
         User fromUser = userManagementService.getUser(userId);
         List<Following> followeeList = followingService.followeeList(fromUser);
@@ -67,7 +67,7 @@ public class MypageProcessController {
     }
 
     // 팔로워 리스트 출력, form call
-    @RequestMapping("/member/follower/{userId}")
+    @RequestMapping("/member/followerList/{userId}")
     public String followerPage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
         User toUser = userManagementService.getUser(userId);
         List<Following> followerList = followingService.followerList(toUser);
