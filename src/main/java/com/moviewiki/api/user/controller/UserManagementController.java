@@ -121,6 +121,4 @@ public class UserManagementController {
         return "/member/modify_info";
     }
 
-
-
 }
