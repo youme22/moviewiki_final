@@ -37,7 +37,8 @@ public class RecommendServiceImpl implements RecommendService {
     @Override
     public List<Movie> recommendByFollowing(String userId) {
 
-        List<User> followeeList = followingRepository.findFolloweeByFollowerId(userId);
+//        List<User> followeeList = followingRepository.findFolloweeByFollowerId(userId);
+        List<User> followeeList = null; // 오류 안나게 임시 null
         List<Movie> highRatedMovieList = reviewRepository.findHighRatedMovieByUserList(followeeList);
         List<Movie> movieListByFollowingRecommending = highRatedMovieList;//를 어케어케 해서
         return movieListByFollowingRecommending;
