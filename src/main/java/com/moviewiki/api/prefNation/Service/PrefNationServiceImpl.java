@@ -34,7 +34,7 @@ public class PrefNationServiceImpl implements PrefNationService {
 
         User user = review.getUser();
         Date nationReviewDate = null; // updatePrefNation메소드가 호출되는 날짜
-        Nation nation = movieNationRepository.findNationByReview(review);
+        Nation nation = movieNationRepository.findNationByMovie(review.getMovie());
         List<Review> nationReviewList = reviewRepository.findNationReviewListByUserIdAndNationId(user.getUserId(), nation.getNationId());
         int nationReviewCount = nationReviewList.size(); // 메소드 아무거나 고름 -> 리뷰 카운트 메소드로 변경 예정
         double nationPoint = nationReviewList.hashCode(); // 메소드 아무거나 고름 -> 선호도 계산 메소드로 변경 예정, 평점(-3)의 총합을 nationReviewCount로 나눈 값

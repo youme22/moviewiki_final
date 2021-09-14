@@ -34,7 +34,7 @@ public class PrefActorServiceImpl implements PrefActorService {
 
         User user = review.getUser();
         Date actorReviewDate = null; // updatePrefActor메소드가 호출되는 날짜
-        Actor actor = actorFilmographyRepository.findActorByReview(review);
+        Actor actor = actorFilmographyRepository.findActorByMovie(review.getMovie());
         List<Review> actorReviewList = reviewRepository.findActorReviewListByUserIdAndActorId(user.getUserId(), actor.getActorId());
         int actorReviewCount = actorReviewList.size(); // 메소드 아무거나 고름 -> 리뷰 카운트 메소드로 변경 예정
         double actorPoint = actorReviewList.hashCode(); // 메소드 아무거나 고름 -> 선호도 계산 메소드로 변경 예정, 평점(-3)의 총합을 actorReviewCount로 나눈 값

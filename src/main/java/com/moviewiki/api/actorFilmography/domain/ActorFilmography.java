@@ -1,6 +1,7 @@
 package com.moviewiki.api.actorFilmography.domain;
 
 import com.moviewiki.api.actor.domain.Actor;
+import com.moviewiki.api.like.domain.LikePK;
 import com.moviewiki.api.movie.domain.Movie;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,23 +14,16 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@SequenceGenerator(
-		name = "AF_SEQ_GENERATOR",
-		sequenceName = "AF_SEQ",
-		initialValue = 1,
-		allocationSize = 1)
 @Table(name = "ACTOR_FILMOGRAPHY")
-public class ActorFilmography implements Serializable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,
-					generator = "AF_SEQ_GENERATOR")
-	@Column(name = "ID")
-	private Long id;
+@IdClass(ActorFilmographyPK.class)
+public class ActorFilmography {
 
+	@Id
 	@ManyToOne(targetEntity = Actor.class)
 	@JoinColumn(name = "ACTOR_ID")
 	private Actor actor;
 
+	@Id
 	@ManyToOne(targetEntity = Movie.class)
 	@JoinColumn(name = "MOVIE_ID")
 	private Movie movie;
