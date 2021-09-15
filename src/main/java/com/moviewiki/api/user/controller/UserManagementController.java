@@ -24,9 +24,16 @@ public class UserManagementController {
     @Autowired
     private UserManagementService userManagementService;
 
-    // 메인페이지 call
+    // 초기 메인페이지 call
     @GetMapping("/")
-    public String mainPage() {
+    public String initMainPage() {
+        return "/main";
+    }
+
+    // 로그인 후 메인페이지
+    @GetMapping("/main")
+    public String MainPage(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        model.addAttribute("currentUserId", currentUser.getUsername());
         return "/main";
     }
 
@@ -43,19 +50,19 @@ public class UserManagementController {
 
     // 로그인 성공시 이동할 페이지
     @RequestMapping("/loginSuccess")
-    public String loginSuccess(@AuthenticationPrincipal org.springframework.security.core.userdetails.User user, Map<String, Object> model,
+    public String loginSuccess(@AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser, Map<String, Object> model,
                                SecurityContextHolderAwareRequestWrapper requestWrapper) {
-        log.info("user = " + user);
+        log.info("currentUser = " + currentUser);
         String nextPage = null;
-        if (user == null) {
+        if (currentUser == null) {
             model.put("message", "유효하지 않은 데이터");
             nextPage = "redirect:/denied";
         } else {
             if (requestWrapper.isUserInRole("ADMIN")) {
                 nextPage = "redirect:/admin/admin_news";
             } else {
-                model.put("currentMemberId", user.getUsername());
-                nextPage = "redirect:/";
+                model.put("currentUserId", currentUser.getUsername());
+                nextPage = "redirect:/main";
             }
         }
         return nextPage;
@@ -83,13 +90,6 @@ public class UserManagementController {
         return "redirect:/login";
     }
 
-    // mypage form call
-    @GetMapping("/member/mypage")
-    public String mypageMain(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User user) {
-        model.addAttribute("user", userManagementService.getUser(user.getUsername()));
-        return "/member/mypage";
-    }
-
     // 회원 탈퇴
     @RequestMapping("/deleteUser/{userId}")
     public String deleteUser(@PathVariable String userId) {
@@ -100,7 +100,7 @@ public class UserManagementController {
     // 회원정보 수정 -> DB 저장
     @PostMapping("/updateUser/{userId}")
     public String updateUser(User user) {
-        log.info("userId = "+ user.getUserId());
+        log.info("userId = " + user.getUserId());
         user.setUserPw(passwordEncoder.encode(user.getUserPw()));
         userManagementService.updateUser(user);
         return "redirect:/member/mypage";
@@ -108,11 +108,10 @@ public class UserManagementController {
 
     // 회원정보 수정 form call
     @GetMapping("/member/modify_info")
-    public String modifyInfoPage(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User user) {
-        model.addAttribute("user", userManagementService.getUser(user.getUsername()));
+    public String modifyInfoPage(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        model.addAttribute("currentUserId", currentUser.getUsername());
+        model.addAttribute("currentUser", userManagementService.getUser(currentUser.getUsername()));
         return "/member/modify_info";
     }
-
-
 
 }

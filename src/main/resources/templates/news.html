@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>news</title>
@@ -35,7 +36,15 @@
     <div class="wrapper">
         <div th:each="news : ${newsList}">
             <div class="box">
-                <a th:href="@{'/readNews/' + ${news.newsId}}">
+                <a sec:authorize="isAnonymous()" th:href="@{'/anonymousReadNews/' + ${news.newsId}}" >
+                    <div class="picture">
+                        <img th:src="@{'/img/' + ${news.newsFile}}" width="auto" height="auto">
+                    </div>
+                    <div class="newsTitle">
+                        <p th:text="${news.newsTitle}"></p>
+                    </div>
+                </a>
+                <a sec:authorize="isAuthenticated()" th:href="@{'/readNews/' + ${news.newsId}}">
                     <div class="picture">
                         <img th:src="@{'/img/' + ${news.newsFile}}" width="auto" height="auto">
                     </div>

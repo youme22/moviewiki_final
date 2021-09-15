@@ -3,10 +3,14 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>메인 헤더</title>
 </head>
 <body>
-    <h1>로고</h1>
+    <span>
+        <a sec:authorize="isAnonymous()" th:href="@{/}">
+            <h1>로고</h1>
+        </a>
+    </span>
     <div>
         <span>
             <a sec:authorize="isAnonymous()" th:href="@{/login}">
@@ -21,24 +25,34 @@
     </div>
     <div>
         <span>
-            <a sec:authorize="isAnonymous()" th:href="@{/news}">
+            <a sec:authorize="isAnonymous()" th:href="@{/anonymousNews}">
                 <button>뉴스게시판</button>
             </a>
         </span>
     </div>
+    <span>
+        <a sec:authorize="isAuthenticated()" th:href="@{/main}">
+            <h1>로고</h1>
+        </a>
+    </span>
     <div sec:authorize="isAuthenticated()">
 <!--        (밑에꺼 완성될때 지우기 - 로그인 유저 확인 테스트용)-->
         <span sec:authentication="name"></span>님
         <span>
-            <a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/member/mypage}">
+            <a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{'/member/mypage/' + ${currentUserId}}">
               <button>마이페이지</button>
             </a>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/admin_news}">어드민</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/admin_news}">어드민 메인</a>
         </span>
         <span>
             <a sec:authorize="isAuthenticated()" th:href="@{/logout}">
                 <button>로그아웃</button>
-            </a><br>
+            </a>
+        </span>
+        <span class="setting">
+            <a sec:authorize="isAuthenticated()" th:href="@{/member/modify_info}">
+                <button>설정</button>
+            </a>
         </span>
     </div>
     <div>

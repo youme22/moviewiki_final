@@ -7,6 +7,9 @@ import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +25,19 @@ public class NewsController {
     @Autowired
     private NewsService newsService;
 
-    // 뉴스게시판 페이지 이동
-    @RequestMapping("/news")
-    public String newsPage(Model model) {
+    // 비로그인 뉴스게시판 페이지 이동
+    @RequestMapping("/anonymousNews")
+    public String initNewsPage(Model model) {
         List<News> newsList = newsService.getNewsList();
+        model.addAttribute("newsList", newsList);
+        return "news";
+    }
+
+    // 로그인 뉴스게시판 페이지 이동
+    @RequestMapping("/news")
+    public String newsPage(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        List<News> newsList = newsService.getNewsList();
+        model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("newsList", newsList);
         return "news";
     }
@@ -79,12 +91,22 @@ public class NewsController {
         return "redirect:/admin/admin_news";
     }
 
-    // 뉴스 상세 보기
-    @RequestMapping("/readNews/{newsId}")
-    public String readNews(@PathVariable Long newsId, Model model) {
+    // 비로그인 뉴스 상세 보기
+    @RequestMapping("/anonymousReadNews/{newsId}")
+    public String initReadNews(@PathVariable Long newsId, Model model) {
         log.info("newsid = "+ newsId);
         News news = newsService.getNews(newsId);
         model.addAttribute("news", news);
+        return "/news_detail";
+    }
+
+    // 로그인 뉴스 상세 보기
+    @RequestMapping("/readNews/{newsId}")
+    public String readNews(@PathVariable Long newsId, Model model, @AuthenticationPrincipal User currentUser) {
+        log.info("newsid = "+ newsId);
+        News news = newsService.getNews(newsId);
+        model.addAttribute("news", news);
+        model.addAttribute("currentUserId", currentUser.getUsername());
         return "/news_detail";
     }
 }
