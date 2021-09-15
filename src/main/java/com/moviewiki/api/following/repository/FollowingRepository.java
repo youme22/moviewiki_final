@@ -26,9 +26,6 @@ public interface FollowingRepository extends JpaRepository<Following, FollowingP
     // 팔로잉 수
     int countFolloweeByFollower(User follower);
 
-    // 언팔로우
-    void deleteByFollowerAndFollowee(User follower, User followee);
-
   // List<User> findFolloweeByFollower(User follower);
 
 }

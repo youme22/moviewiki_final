@@ -1,6 +1,5 @@
 package com.moviewiki.api.following.controller;
 
-import com.moviewiki.api.following.domain.Following;
 import com.moviewiki.api.following.service.FollowingService;
 import com.moviewiki.api.user.controller.UserManagementController;
 import com.moviewiki.api.user.domain.User;
@@ -14,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 public class FollowingController {
