@@ -22,12 +22,12 @@ public class Following {
 
     @Id
     @ManyToOne
-    @JoinColumn(name="FOLLOWER")
+    @JoinColumn(name="FOLLOWER_ID")
     private User follower;
 
     @Id
     @ManyToOne
-    @JoinColumn(name="FOLLOWEE")
+    @JoinColumn(name="FOLLOWEE_ID")
     private User followee;
 
 }
