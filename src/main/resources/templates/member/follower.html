@@ -23,21 +23,21 @@
                 <a th:text="${followers.follower.userId}" th:href="'/member/mypage/' + ${followers.follower.userId}"></a>
             </td>
             <td>
-                <div class="btn_follow" th:switch="${followers.follower.userId}">
-                    <span th:case="${currentUserId}">
-                        나
-                    </span>
-                    <span th:case="*">
-                        <span th:switch="${isFollowing}">
-                            <span th:case="true">
-                                <button>언팔로우</button>
-                            </span>
-                            <span th:case="false">
-                                 <button type="submit">팔로우</button>
-                            </span>
-                        </span>
-                    </span>
-                </div>
+<!--                <div class="btn_follow" th:switch="${followers.follower.userId}">-->
+<!--                    <span th:case="${currentUserId}">-->
+<!--                        나-->
+<!--                    </span>-->
+<!--                    <span th:case="*">-->
+<!--                        <span th:switch="${isFollowing}">-->
+<!--                            <span th:case="true">-->
+<!--                                <button>언팔로우</button>-->
+<!--                            </span>-->
+<!--                            <span th:case="false">-->
+<!--                                 <button type="submit">팔로우</button>-->
+<!--                            </span>-->
+<!--                        </span>-->
+<!--                    </span>-->
+<!--                </div>-->
             </td>
         </tr>
     </table>

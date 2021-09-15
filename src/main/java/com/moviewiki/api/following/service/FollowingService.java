@@ -14,7 +14,7 @@ public interface FollowingService {
     List<Following> followerList(User followee);
 
     // 팔로우 상태 확인
-    Boolean isFollowing(User follower, User followee);
+    boolean isFollowing(User follower, User followee);
 
     // 팔로워 수
     int countFollower(User followee);
@@ -23,6 +23,6 @@ public interface FollowingService {
     int countFollowee(User follower);
 
     // 팔로우
-    Following followUser(String followerId, String followeeId);
+    Following followUser(User follower, User followee);
 
 }

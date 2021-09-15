@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.jws.soap.SOAPBinding;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -38,12 +39,6 @@ public class FollowingServiceImpl implements FollowingService {
         return followerList;
     }
 
-    // 팔로우 상태 확인
-    @Override
-    public Boolean isFollowing(User follower, User followee) {
-        return followingRepository.existsByFollowerAndFollowee(follower, followee);
-    }
-
     // 팔로워 수
     @Override
     public int countFollower(User followee) {
@@ -56,12 +51,18 @@ public class FollowingServiceImpl implements FollowingService {
         return followingRepository.countFolloweeByFollower(follower);
     }
 
+
+    // 팔로우 상태 확인
+    @Override
+    public boolean isFollowing(User follower, User followee) {
+        return followingRepository.existsByFollowerAndFollowee(follower, followee);
+    }
+
+
     // 팔로우
     @Override
     @Transactional
-    public Following followUser(String followerId, String followeeId) {
-        User follower = userManagementService.getUser(followerId);
-        User followee = userManagementService.getUser(followeeId);
+    public Following followUser(User follower, User followee) {
         log.info("follower =========== " + follower);
         log.info("followee =========== " + followee);
         return followingRepository.save(Following.builder()

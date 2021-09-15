@@ -28,11 +28,17 @@ public class FollowingController {
     // 팔로잉 리스트 출력, form call
     @RequestMapping("/member/followeeList/{userId}")
     public String followeePage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
-        User follower = userManagementService.getUser(userId);
-        User followee = userManagementService.getUser(currentUser.getUsername());
-        List<Following> followeeList = followingService.followeeList(follower);
+        User pageUser = userManagementService.getUser(userId);
+        User loginUser = userManagementService.getUser(currentUser.getUsername());
+        List<Following> followeeList = followingService.followeeList(pageUser);
 
-        model.addAttribute("isFollowing", followingService.isFollowing(follower, followee));
+
+
+
+
+
+        model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));
+
 
         model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("followeeList", followeeList);
@@ -45,6 +51,7 @@ public class FollowingController {
         User follower = userManagementService.getUser(currentUser.getUsername());
         User followee = userManagementService.getUser(userId);
         List<Following> followerList = followingService.followerList(followee);
+
 
         model.addAttribute("isFollowing", followingService.isFollowing(follower, followee));
         model.addAttribute("currentUserId", currentUser.getUsername());
@@ -60,11 +67,13 @@ public class FollowingController {
         return  새로 생성된 follow 객체 리턴
      */
     @PostMapping("/follow/{userId}")
-    public Following followUser(@PathVariable String userId, @AuthenticationPrincipal org.springframework.security.core.userdetails.User user) {
-        String followerId = user.getUsername();
-        log.info("fromUserId ======" + followerId);
-        log.info("userId ======" + userId);
-        return followingService.followUser(followerId, userId);
+    public Following followUser(@PathVariable String userId, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+
+        User fromUser = userManagementService.getUser(currentUser.getUsername());
+        User toUser = userManagementService.getUser(userId);
+        log.info("fromUser ======" + fromUser);
+        log.info("userId ======" + toUser);
+        return followingService.followUser(fromUser, toUser);
     }
 
 
