@@ -1,7 +1,6 @@
 package com.moviewiki.api.following.controller;
 
 import com.moviewiki.api.following.domain.Following;
-import com.moviewiki.api.following.repository.FollowingRepository;
 import com.moviewiki.api.following.service.FollowingService;
 import com.moviewiki.api.user.controller.UserManagementController;
 import com.moviewiki.api.user.domain.User;
@@ -10,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,10 +29,9 @@ public class FollowingController {
 
     // 팔로잉 리스트 출력, form call
     @RequestMapping("/member/followeeList/{userId}")
-    public String followingPage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+    public String followeePage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
         User fromUser = userManagementService.getUser(userId);
         List<Following> followeeList = followingService.followeeList(fromUser);
-        log.info("followeeList======" + followeeList);
         model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("followeeList", followeeList);
         return "/member/followee";
@@ -43,7 +42,6 @@ public class FollowingController {
     public String followerPage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
         User toUser = userManagementService.getUser(userId);
         List<Following> followerList = followingService.followerList(toUser);
-        log.info("followerList======" + followerList);
         model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("followerList", followerList);
         return "/member/follower";
@@ -56,16 +54,13 @@ public class FollowingController {
         toUserId : 팔로우 당하는 유저의 id
         return  새로 생성된 follow 객체 리턴
      */
-//    @RequestMapping("/follow")
-//    public String follow(HttpServletRequest request, Model model) throws Exception {
-//        String currentUserId = request.getParameter("currentUserId");
-//        String pageId = request.getParameter("pageId");
-//
-//        followingService.save(currentUserId, pageId);
-//
-//        String url = "redirect:/member/following" + pageId;
-//        return url;
-//    }
+    @PostMapping("/follow/{userId}")
+    public Following followUser(@PathVariable String userId, @AuthenticationPrincipal org.springframework.security.core.userdetails.User user) {
+        String fromUserId = user.getUsername();
+        log.info("fromUserId ======" + fromUserId);
+        log.info("userId ======" + userId);
+        return followingService.followUser(fromUserId, userId);
+    }
 
 
     /* unfollow 기능

@@ -35,4 +35,5 @@ public class Following {
         this.fromUser = fromUser;
         this.toUser = toUser;
     }
+
 }

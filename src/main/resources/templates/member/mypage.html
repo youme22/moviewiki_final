@@ -37,6 +37,7 @@
             float: left;
         }
     </style>
+
 </head>
 <body>
     <!-- HEADER -->
@@ -79,10 +80,17 @@
                     <span th:case="*">
                         <span th:switch="${isFollowing}">
                             <span th:case="true">
-                                <button>언팔로우</button>
+<!--                                <form th:action="@{/unfollow}" name="unfollow" method="post"> &lt;!&ndash; 언팔로우 버튼 &ndash;&gt;-->
+<!--                                    <input type="hidden" name="fromUserId" th:value="${currentUserId}"> &lt;!&ndash; 현재로그인id &ndash;&gt;-->
+<!--                                    <input type="hidden" name="toUserId" th:value="${user.userId}"> &lt;!&ndash; 현재페이지id &ndash;&gt;-->
+                                    <button>언팔로우</button>
+<!--                                </form>-->
                             </span>
                             <span th:case="false">
-                                <button>팔로우</button>
+<!--                                <form th:action="@{'/follow/' + ${user.userId}}" method="post">-->
+<!--                                     <input type="hidden" name="_method" value="put"/>-->
+                                     <button type="submit">팔로우</button>
+<!--                                </form>-->
                             </span>
                         </span>
                     </span>
@@ -116,5 +124,6 @@
             </div>
         </div>
     </div>
+    <script src="/js/profile.js"></script>
 </body>
 </html>

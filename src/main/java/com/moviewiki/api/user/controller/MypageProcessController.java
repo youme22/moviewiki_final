@@ -37,8 +37,6 @@ public class MypageProcessController {
     public String mypageMain(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
         User fromUser = userManagementService.getUser(currentUser.getUsername());
         User toUser = userManagementService.getUser(userId);
-        boolean a = followingService.isFollowing(fromUser, toUser);
-        log.info("a=============" + a);
         model.addAttribute("isFollowing", followingService.isFollowing(fromUser, toUser));
         model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("user", userManagementService.getUser(userId));
