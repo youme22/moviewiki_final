@@ -24,6 +24,12 @@ public class MovieServiceImpl implements MovieService{
         return movieRepository.findById(movieId);
     }
 
+    /* 확인을 위한 임시용 => 사용X, 위에꺼 사용하세요*/
+    @Override
+    public Movie findByMovieId(Long movieId) {
+        return movieRepository.findByMovieId(movieId);
+    }
+
     @Override
     public List<Movie> findAll() {
         return movieRepository.findAll();

@@ -1,5 +1,6 @@
 package com.moviewiki.api.prefGenre.service;
 
+
 import com.moviewiki.api.genre.domain.Genre;
 import com.moviewiki.api.movieGenre.repository.MovieGenreRepository;
 import com.moviewiki.api.prefGenre.domain.PrefGenre;
@@ -13,12 +14,20 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 @Service
 public class PrefGenreServiceImpl implements PrefGenreService {
+
 
     private PrefGenreRepository prefGenreRepository;
     private ReviewRepository reviewRepository;
     private MovieGenreRepository movieGenreRepository;
+  
+    private final EntityManager em;
+
+    public PrefGenreServiceImpl(EntityManager em){
+        this.em = em;
 
     @Autowired
     public PrefGenreServiceImpl(PrefGenreRepository prefGenreRepository, ReviewRepository reviewRepository, MovieGenreRepository movieGenreRepository) {
@@ -42,6 +51,13 @@ public class PrefGenreServiceImpl implements PrefGenreService {
         PrefGenre prefGenre = new PrefGenre(user, genre, genrePoint, genreReviewCount, genreReviewDate); // PrefGenre 생성
 //        prefGenreRepository.savePrefGenre(prefGenre); //PrefGenre 테이블에 저장
 
+    }
+
+    @Override
+    public List<PrefGenre> findAll(){
+        List<PrefGenre> prefGenreList =
+                em.createQuery("select pg from PrefGenre pg",PrefGenre.class).getResultList();
+        return prefGenreList;
     }
 
 }

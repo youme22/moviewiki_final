@@ -32,66 +32,39 @@ public class MypageProcessController {
     @Autowired
     UserManagementService userManagementService;
 
+    // 마이페이지 form call
+    @GetMapping("/member/mypage/{userId}")
+    public String mypageMain(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        User fromUser = userManagementService.getUser(currentUser.getUsername());
+        User toUser = userManagementService.getUser(userId);
+        model.addAttribute("isFollowing", followingService.isFollowing(fromUser, toUser));
+        model.addAttribute("currentUserId", currentUser.getUsername());
+        model.addAttribute("user", userManagementService.getUser(userId));
+        return "member/mypage";
+    }
 
 
     // 취향분석 페이지 form call
     @RequestMapping("/member/pref/{userId}")
-    public String prefPage(@PathVariable String userId, Model model) {
+    public String prefPage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        model.addAttribute("currentUserId", currentUser.getUsername());
         return "/member/pref";
     }
 
     // 시청한 영화 페이지 form call
     @RequestMapping("/member/reviews/{userId}")
-    public String reviewsPage(@PathVariable String userId, Model model) {
+    public String reviewsPage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        model.addAttribute("currentUserId", currentUser.getUsername());
         return "/member/reviews";
     }
 
     // 관심 영화 페이지 form call
     @RequestMapping("/member/want_to_see/{userId}")
-    public String wantToSeePage(@PathVariable String userId, Model model) {
+    public String wantToSeePage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        model.addAttribute("currentUserId", currentUser.getUsername());
         return "/member/want_to_see";
     }
 
-    // 팔로잉 리스트 출력, form call
-    @RequestMapping("/member/following/{userId}")
-    public String followingPage(@PathVariable String userId, Model model) {
-        User fromUser = userManagementService.getUser(userId);
-        List<Following> followeeList = followingService.followeeList(fromUser);
-        log.info("followeeList======" + followeeList);
-        model.addAttribute("followeeList", followeeList);
-        return "/member/followee";
-    }
-
-    // 팔로워 리스트 출력, form call
-    @RequestMapping("/member/follower/{userId}")
-    public String followerPage(@PathVariable String userId, Model model) {
-        User toUser = userManagementService.getUser(userId);
-        List<Following> followerList = followingService.followerList(toUser);
-        log.info("followerList======" + followerList);
-        model.addAttribute("followerList", followerList);
-        return "/member/follower";
-    }
-
-
-
-    // check_pw form call
-//    @GetMapping("/member/check_pw")
-//    public String checkPwPage(Model model) {
-//        return "/member/check_pw";
-//    }
-
-    // DB에 아이디와 패스워드가 일치하는 게 있는지 확인
-//    @PostMapping("/member/check_pw")
-//    public String checkPw(Model model, @AuthenticationPrincipal User user, String userPw) {
-//        log.info("userPw===" + userPw);
-//        String userId = user.getUsername();
-//        com.moviewiki.api.user.domain.User currentUser = userManagementService.checkPw(userId, userPw);
-//        log.info("currentUser" + currentUser);
-//        if(currentUser == null) {
-//            return "redirect:/member/check_pw";
-//        }
-//        return "/member/modify_info";
-//    }
 
 
 }

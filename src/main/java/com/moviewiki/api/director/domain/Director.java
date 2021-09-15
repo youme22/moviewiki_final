@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @SequenceGenerator(
 		name = "DIRECTOR_SEQ_GENERATOR",
 		sequenceName = "DIRECTOR_SEQ",

@@ -27,8 +27,6 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        System.out.println("configure(AuthenticationManagerBuilder auth)");
-        System.out.println("userDetailsService: " + userDetailsService);
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
@@ -58,6 +56,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
                .and()
                    .exceptionHandling()
                        .accessDeniedPage("/denied");
+        http.csrf().disable();  // csrf 미적용
     }
 
 }

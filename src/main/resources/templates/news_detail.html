@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
   <title>news detail</title>
@@ -33,10 +34,18 @@
   <!-- HEADER -->
   <div th:insert="main_header" id="header"></div>
 
+  <h1>뉴스 상세보기</h1>
   <div class="newsList">
-    <a th:href="@{'/news'}">
-      <input type="button" value="목록">
-    </a>
+      <span>
+          <a sec:authorize="isAnonymous()" th:href="@{/anonymousNews}">
+              <button>목록</button>
+          </a>
+      </span>
+      <span>
+          <a sec:authorize="isAuthenticated()" th:href="@{/news}">
+              <button>목록</button>
+          </a>
+      </span>
   </div>
   <div class="title_date">
     <div class="newsTitle">

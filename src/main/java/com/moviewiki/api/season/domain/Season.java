@@ -12,16 +12,16 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @IdClass(SeasonPK.class)
-@Table(name="seasons")
+@Table(name="SEASONS")
 public class Season {
 
     @Id
     @ManyToOne
-    @JoinColumn(name="movie_id")
+    @JoinColumn(name="MOVIE_ID")
     private Movie movie;
 
     @Id
-    private @Column(name = "season_name") String seasonName;
+    private @Column(name = "SEASON_NAME") String seasonName;
 
-    private @Column(name = "season_point") int seasonPoint;
+    private @Column(name = "SEASON_POINT") int seasonPoint;
 }

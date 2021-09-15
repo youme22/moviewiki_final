@@ -1,6 +1,5 @@
 package com.moviewiki.api.actor.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @SequenceGenerator(
 		name = "ACTOR_SEQ_GENERATOR",
 		sequenceName = "ACTOR_SEQ",
