@@ -5,11 +5,9 @@ import com.moviewiki.api.following.service.FollowingService;
 import com.moviewiki.api.user.controller.UserManagementController;
 import com.moviewiki.api.user.domain.User;
 import com.moviewiki.api.user.service.UserManagementService;
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,8 +28,12 @@ public class FollowingController {
     // 팔로잉 리스트 출력, form call
     @RequestMapping("/member/followeeList/{userId}")
     public String followeePage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
-        User fromUser = userManagementService.getUser(userId);
-        List<Following> followeeList = followingService.followeeList(fromUser);
+        User follower = userManagementService.getUser(userId);
+        User followee = userManagementService.getUser(currentUser.getUsername());
+        List<Following> followeeList = followingService.followeeList(follower);
+
+        model.addAttribute("isFollowing", followingService.isFollowing(follower, followee));
+
         model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("followeeList", followeeList);
         return "/member/followee";
@@ -40,8 +42,11 @@ public class FollowingController {
     // 팔로워 리스트 출력, form call
     @RequestMapping("/member/followerList/{userId}")
     public String followerPage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
-        User toUser = userManagementService.getUser(userId);
-        List<Following> followerList = followingService.followerList(toUser);
+        User follower = userManagementService.getUser(currentUser.getUsername());
+        User followee = userManagementService.getUser(userId);
+        List<Following> followerList = followingService.followerList(followee);
+
+        model.addAttribute("isFollowing", followingService.isFollowing(follower, followee));
         model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("followerList", followerList);
         return "/member/follower";
@@ -56,10 +61,10 @@ public class FollowingController {
      */
     @PostMapping("/follow/{userId}")
     public Following followUser(@PathVariable String userId, @AuthenticationPrincipal org.springframework.security.core.userdetails.User user) {
-        String fromUserId = user.getUsername();
-        log.info("fromUserId ======" + fromUserId);
+        String followerId = user.getUsername();
+        log.info("fromUserId ======" + followerId);
         log.info("userId ======" + userId);
-        return followingService.followUser(fromUserId, userId);
+        return followingService.followUser(followerId, userId);
     }
 
 

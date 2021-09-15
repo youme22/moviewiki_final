@@ -22,18 +22,18 @@ public class Following {
 
     @Id
     @ManyToOne
-    @JoinColumn(name="FROMUSER")
-    private User fromUser;
+    @JoinColumn(name="FOLLOWER")
+    private User follower;
 
     @Id
     @ManyToOne
-    @JoinColumn(name="TOUSER")
-    private User toUser;
+    @JoinColumn(name="FOLLOWEE")
+    private User followee;
 
     @Builder
-    public Following(User fromUser, User toUser) {
-        this.fromUser = fromUser;
-        this.toUser = toUser;
+    public Following(User follower, User followee) {
+        this.follower = follower;
+        this.followee = followee;
     }
 
 }

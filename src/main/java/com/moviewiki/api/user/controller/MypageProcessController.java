@@ -35,11 +35,11 @@ public class MypageProcessController {
     // 마이페이지 form call
     @GetMapping("/member/mypage/{userId}")
     public String mypageMain(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
-        User fromUser = userManagementService.getUser(currentUser.getUsername());
-        User toUser = userManagementService.getUser(userId);
-        model.addAttribute("countFollower", followingService.countFollower(toUser));
-        model.addAttribute("countFollowee", followingService.countFollowee(fromUser));
-        model.addAttribute("isFollowing", followingService.isFollowing(fromUser, toUser));
+        User follower = userManagementService.getUser(currentUser.getUsername());
+        User followee = userManagementService.getUser(userId);
+        model.addAttribute("countFollower", followingService.countFollower(followee));
+        model.addAttribute("countFollowee", followingService.countFollowee(followee));
+        model.addAttribute("isFollowing", followingService.isFollowing(follower, followee));
         model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("user", userManagementService.getUser(userId));
         return "member/mypage";

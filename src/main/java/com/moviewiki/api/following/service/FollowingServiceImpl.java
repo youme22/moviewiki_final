@@ -26,47 +26,47 @@ public class FollowingServiceImpl implements FollowingService {
 
     // 팔로잉 리스트 출력
     @Override
-    public List<Following> followeeList(User fromUserId) {
-        List<Following> followeeList = followingRepository.findToUserByFromUser(fromUserId);
+    public List<Following> followeeList(User follower) {
+        List<Following> followeeList = followingRepository.findFolloweeByFollower(follower);
         return followeeList;
     }
 
     // 팔로워 리스트 출력
     @Override
-    public List<Following> followerList(User toUserId) {
-        List<Following> followerList = followingRepository.findFromUserByToUser(toUserId);
+    public List<Following> followerList(User followee) {
+        List<Following> followerList = followingRepository.findFollowerByFollowee(followee);
         return followerList;
     }
 
     // 팔로우 상태 확인
     @Override
-    public Boolean isFollowing(User fromUserId, User toUserId) {
-        return followingRepository.existsByFromUserAndAndToUser(fromUserId, toUserId);
+    public Boolean isFollowing(User follower, User followee) {
+        return followingRepository.existsByFollowerAndFollowee(follower, followee);
     }
 
     // 팔로워 수
     @Override
-    public int countFollower(User toUserId) {
-        return followingRepository.countFromUserByToUser(toUserId);
+    public int countFollower(User followee) {
+        return followingRepository.countFollowerByFollowee(followee);
     }
 
     // 팔로잉 수
     @Override
-    public int countFollowee(User fromUserId) {
-        return followingRepository.countToUserByFromUser(fromUserId);
+    public int countFollowee(User follower) {
+        return followingRepository.countFolloweeByFollower(follower);
     }
 
     // 팔로우
     @Override
     @Transactional
-    public Following followUser(String fromUserId, String toUserId) {
-        User fromUser = userManagementService.getUser(fromUserId);
-        User toUser = userManagementService.getUser(toUserId);
-        log.info("fromUser =========== " + fromUser);
-        log.info("toUser =========== " + toUser);
+    public Following followUser(String followerId, String followeeId) {
+        User follower = userManagementService.getUser(followerId);
+        User followee = userManagementService.getUser(followeeId);
+        log.info("follower =========== " + follower);
+        log.info("followee =========== " + followee);
         return followingRepository.save(Following.builder()
-            .fromUser(fromUser)
-            .toUser(toUser)
+            .follower(follower)
+            .followee(followee)
             .build());
     }
 }
