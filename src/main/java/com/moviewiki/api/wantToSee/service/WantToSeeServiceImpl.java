@@ -18,11 +18,13 @@ public class WantToSeeServiceImpl implements WantToSeeService{
         wantToSeeRepository.save(wantToSee);
     }
 
+    /* 미완성!!! */
     @Override
     public List<WantToSee> findByUser(String userId) {
         return wantToSeeRepository.findByUser(userId);
     }
 
+    /* 미완성!!! */
     @Override
     public void deleteByUserAndMovie(String userId, Long movieId) {
         wantToSeeRepository.deleteByUserAndMovie(userId, movieId);
