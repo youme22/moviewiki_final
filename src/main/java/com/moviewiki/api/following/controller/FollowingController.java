@@ -44,13 +44,7 @@ public class FollowingController {
         return "/member/follower";
     }
 
-
-
-    /* follow 기능
-        fromUserId를 가진 user가 toUserId를 가진 user를 팔로우 정보를 추가
-        toUserId : 팔로우 당하는 유저의 id
-        return  새로 생성된 follow 객체 리턴
-     */
+    // 팔로우 기능
     @PostMapping("/follow")
     public String followUser(HttpServletRequest request) {
         String followerId = request.getParameter("followerId");
@@ -61,25 +55,22 @@ public class FollowingController {
 
         followingService.followUser(follower, followee);
 
-        String url = "/redirect:/member/mypage";
-        return url;
+        return "redirect:/member/mypage/" + followeeId;
     }
 
 
-    /* unfollow 기능
-        fromuserId를 가진 user가 toUserId를 가진 user를 팔로우 정보를 삭제
-        @toUserId : 언팔로우 당하는 유저의 id
-     */
+    // 언팔로우 기능
     @RequestMapping("/unfollow")
-    public String unfollowUser(@PathVariable String userId, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+    public String unfollowUser(HttpServletRequest request) {
+        String followerId = request.getParameter("followerId");
+        String followeeId = request.getParameter("followeeId");
 
-        User follower = userManagementService.getUser(currentUser.getUsername());
-        User followee = userManagementService.getUser(userId);
-        log.info("fromUser ======" + follower);
-        log.info("userId ======" + followee);
-//        followingService.followUser(follower, followee);
+        User follower = userManagementService.getUser(followerId);
+        User followee = userManagementService.getUser(followeeId);
 
-        String url = "/redirect:/member/mypage/" + userId;
-        return url;
+        followingService.unfollowUser(follower, followee);
+
+        return "redirect:/member/mypage/" + followeeId;
     }
+
 }

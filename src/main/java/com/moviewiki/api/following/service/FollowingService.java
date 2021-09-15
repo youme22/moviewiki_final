@@ -25,4 +25,6 @@ public interface FollowingService {
     // 팔로우
     void followUser(User follower, User followee);
 
+    // 언팔로우
+    void unfollowUser(User follower, User followee);
 }

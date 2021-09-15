@@ -1,6 +1,7 @@
 package com.moviewiki.api.following.service;
 
 import com.moviewiki.api.following.domain.Following;
+import com.moviewiki.api.following.domain.FollowingPK;
 import com.moviewiki.api.following.repository.FollowingRepository;
 import com.moviewiki.api.user.controller.UserManagementController;
 import com.moviewiki.api.user.domain.User;
@@ -74,5 +75,14 @@ public class FollowingServiceImpl implements FollowingService {
         following.setFollowee(followee);
 
         em.persist(following);
+    }
+
+    //언팔로우
+    @Override
+    @Transactional
+    public void unfollowUser(User follower, User followee) {
+        FollowingPK followingPK = new FollowingPK(follower, followee);
+        Following following = em.find(Following.class, followingPK);
+        em.remove(following);
     }
 }
