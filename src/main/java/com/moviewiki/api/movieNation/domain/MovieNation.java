@@ -14,15 +14,15 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "MOVIE_NATION")
-public class MovieNation implements Serializable {
-		@Id
-		@GeneratedValue(strategy = GenerationType.SEQUENCE)
-		private Long id;
+@IdClass(MovieNationPK.class)
+public class MovieNation {
 
+		@Id
 		@ManyToOne(targetEntity = Nation.class)
 		@JoinColumn(name = "NATION_ID")
 		private Nation nation;
 
+		@Id
 		@ManyToOne(targetEntity = Movie.class)
 		@JoinColumn(name = "MOVIE_ID")
 		private Movie movie;

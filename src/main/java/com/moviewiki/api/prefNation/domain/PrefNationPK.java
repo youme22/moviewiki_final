@@ -10,6 +10,8 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class PrefNationPK implements Serializable {
+
     private User user;
     private Nation nation;
+
 }

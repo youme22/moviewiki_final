@@ -10,9 +10,9 @@ import java.util.List;
 @Repository
 public interface PrefGenreRepository extends JpaRepository<PrefGenre, PrefGenrePK> {
 
-    // PrefGenre findPrefGenreByUserIdAndGenreId(String userId, String GenreId);
-    // void savePrefGenre(PrefGenre prefGenre);
 
+//     void savePrefGenre(PrefGenre prefGenre);
     public List<PrefGenre> findAll();
+
 
 }

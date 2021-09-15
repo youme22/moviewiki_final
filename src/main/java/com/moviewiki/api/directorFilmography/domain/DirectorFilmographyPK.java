@@ -1,7 +1,7 @@
-package com.moviewiki.api.prefDirector.domain;
+package com.moviewiki.api.directorFilmography.domain;
 
 import com.moviewiki.api.director.domain.Director;
-import com.moviewiki.api.user.domain.User;
+import com.moviewiki.api.movie.domain.Movie;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,9 +9,9 @@ import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
-public class PrefDirectorPK implements Serializable {
+public class DirectorFilmographyPK implements Serializable {
 
-    private User user;
     private Director director;
+    private Movie movie;
 
 }

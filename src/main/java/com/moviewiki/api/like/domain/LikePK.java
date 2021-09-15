@@ -10,7 +10,9 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class LikePK implements Serializable {
+
     private Review review;
     private User user;
+
 }
 
