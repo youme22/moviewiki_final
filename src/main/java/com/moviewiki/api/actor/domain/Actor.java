@@ -1,6 +1,5 @@
 package com.moviewiki.api.actor.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
