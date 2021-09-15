@@ -58,6 +58,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
                .and()
                    .exceptionHandling()
                        .accessDeniedPage("/denied");
+        http.csrf().disable();  // csrf 미적용
     }
 
 }
