@@ -13,16 +13,16 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @IdClass(WantToSeePK.class)
-@Table(name="want_to_see")
+@Table(name="WANT_TO_SEE")
 public class  WantToSee {
 
     @Id
-    @ManyToOne
-    @JoinColumn(name="user_id")
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="USER_ID")
     private User user;
 
     @Id
-    @ManyToOne
-    @JoinColumn(name="movie_id")
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="MOVIE_ID")
     private Movie movie;
 }

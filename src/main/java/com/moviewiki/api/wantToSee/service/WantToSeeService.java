@@ -1,14 +1,13 @@
-package com.moviewiki.api.wantToSee.repository;
+package com.moviewiki.api.wantToSee.service;
 
 import com.moviewiki.api.wantToSee.domain.WantToSee;
-import com.moviewiki.api.wantToSee.domain.WantToSeePK;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface WantToSeeRepository extends JpaRepository<WantToSee, WantToSeePK> {
+public interface WantToSeeService {
+
+    /* 보고싶은 영화 추가 */
+    public void save(WantToSee wantToSee);
 
     /* 특정 사용자의 보고 싶은 영화 조회 -> 사용자 아이디로 기준 */
     public List<WantToSee> findByUser(String userId);
