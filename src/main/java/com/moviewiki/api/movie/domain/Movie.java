@@ -1,6 +1,7 @@
 package com.moviewiki.api.movie.domain;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.Date;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @SequenceGenerator(
         name = "MOVIE_SEQ_GENERATOR",
         sequenceName = "MOVIE_SEQ",

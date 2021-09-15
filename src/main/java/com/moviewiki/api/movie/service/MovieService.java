@@ -12,12 +12,10 @@ public interface MovieService {
 
     // 특정 영화 찾기
     public Optional<Movie> findById(Long movieId);
+    /* 사용금지(임시용) -> 위에꺼 사용*/
+    public Movie findByMovieId(Long movieId);
+
 
     // 모든 영화
     public List<Movie> findAll();
-
-    // 영화 삭제 => 없는 기능
-//    public void deleteById(String movieId);
-
-
 }

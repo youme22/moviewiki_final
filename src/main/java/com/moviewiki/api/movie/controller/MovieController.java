@@ -1,10 +1,12 @@
 package com.moviewiki.api.movie.controller;
 
+import com.moviewiki.api.actor.domain.Actor;
 import com.moviewiki.api.movie.domain.Movie;
 import com.moviewiki.api.movie.domain.MovieForm;
 import com.moviewiki.api.movie.service.MovieServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,25 +24,29 @@ public class MovieController {
     @Autowired
     private MovieServiceImpl movieServiceImpl;
 
+    /* 영화 메인 페이지 이동 (임시) */
+    @GetMapping("/movie")
+    public String Main(){
+        return "admin/admin_movie";
+    }
 
     /* 영화 등록 페이지 이동 */
     @GetMapping("/movie/create")
     public String movieForm(){
-        return "createMovie";
+        return "admin/admin_movie_add";
     }
 
     /* 영화 정보 저장 */
     @PostMapping("/movie/create")
     public String createMovie(MovieForm form){
-        Movie movie = new Movie(form.getFilmRating(), form.getMovieName(), form.getMovieOgName(), form.getMovieProfile(), Date.valueOf(form.getReleaseDate())
+       Movie movie = new Movie(form.getFilmRating(), form.getMovieName(), form.getMovieOgName(), form.getMovieProfile(), Date.valueOf(form.getReleaseDate())
                                 , parseInt(form.getRunningTime()), form.getSummary(), 0, 0, 0);
 
-
         movieServiceImpl.save(movie);
-        return "redirect:/";
+        return "admin/admin_movie";
     }
 
-
+    /* 특정 영화 조회 */
     @GetMapping("/movie/read/{movieId}")
     @ResponseBody
     public Optional<Movie> readMovie(@PathVariable(name = "movieId") Long movieId){
@@ -52,9 +58,8 @@ public class MovieController {
     /* 모든 영화 조회 */
     @GetMapping("/movie/read")
     @ResponseBody
-    public List<Movie> readAllMovie(){
+    public List<Movie> readAllMovie(Actor actor){
         List<Movie> movieList = movieServiceImpl.findAll();
         return movieList;
     }
-
 }
