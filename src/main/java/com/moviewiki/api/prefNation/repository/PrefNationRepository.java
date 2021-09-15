@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PrefNationRepository extends JpaRepository<PrefNation, PrefNationPK> {
 
-     void savePrefNation(PrefNation prefNation);
+//     void savePrefNation(PrefNation prefNation);
 
 }

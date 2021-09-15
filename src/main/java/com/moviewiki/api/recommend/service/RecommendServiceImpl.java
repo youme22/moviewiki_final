@@ -24,22 +24,34 @@ public class RecommendServiceImpl implements RecommendService {
     }
 
     @Override
-    public List<Movie> recommendByReview(String userId) {
+    public List<Movie> recommendByReview(User user) {
 
-        List<Movie> highRatedMovieList1 = reviewRepository.findHighRatedMovieByUserId(userId);
-        List<User> highRatingUserList = reviewRepository.findHighRatingUserByMovieList(highRatedMovieList1);
-        List<Movie> highRatedMovieList2 = reviewRepository.findHighRatedMovieByUserList(highRatingUserList);
+        //4점 이상 준 영화 List에 담기(5점 우선)
+        List<Movie> highRatedMovieList1 = reviewRepository.findHighRatedMovieByUser(user);
+
+        // highRatedMovieList1의 영화 각각에 대해 5점 준 유저 List에 담기
+        Movie highRatedMovie = null; // 일단 임시로 null;
+        List<User> highRatingUserList = reviewRepository.findHighRatingUserByMovie(highRatedMovie);
+
+        // highRatingUserList의 유저 각각에 대해 5점 준 영화 List에 담기
+        User highRatingUser = null; // 일단 임시로 null;
+        List<Movie> highRatedMovieList2 = reviewRepository.findHighRatedMovieByUser(highRatingUser);
+
         List<Movie> movieListByReviewRecommending = highRatedMovieList2;//를 어케어케 해서
         return movieListByReviewRecommending;
 
     }
 
     @Override
-    public List<Movie> recommendByFollowing(String userId) {
+    public List<Movie> recommendByFollowing(User user) {
 
-//        List<User> followeeList = followingRepository.findFolloweeByFollowerId(userId);
-        List<User> followeeList = null; // 오류 안나게 임시 null
-        List<Movie> highRatedMovieList = reviewRepository.findHighRatedMovieByUserList(followeeList);
+        // 팔로이 중 10명 List에 담기
+//      List<User> followeeList = followingRepository.findFolloweeByFollower(user);
+
+        //followeeList의 유저 각각에 대해 5점 준 영화 List에 담기
+        User followee = null; // 오류 안나게 임시로 null
+        List<Movie> highRatedMovieList = reviewRepository.findHighRatedMovieByUser(followee);
+
         List<Movie> movieListByFollowingRecommending = highRatedMovieList;//를 어케어케 해서
         return movieListByFollowingRecommending;
 

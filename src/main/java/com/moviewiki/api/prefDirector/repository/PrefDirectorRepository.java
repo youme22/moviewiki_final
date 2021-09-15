@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PrefDirectorRepository extends JpaRepository<PrefDirector, PrefDirectorPK> {
 
-     void savePrefDirector(PrefDirector prefDirector);
+//     void savePrefDirector(PrefDirector prefDirector);
 
 }

@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PrefActorRepository extends JpaRepository<PrefActor, PrefActorPK> {
 
-     void savePrefActor(PrefActor prefActor);
-
+//     void savePrefActor(PrefActor prefActor);
+//
 }

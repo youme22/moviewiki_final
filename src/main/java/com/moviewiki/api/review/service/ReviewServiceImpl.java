@@ -36,7 +36,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void doReview(Review review) {
 
-        reviewRepository.saveReview(review); // 리뷰 등록
+//        reviewRepository.saveReview(review); // 리뷰 등록
         prefGenreService.updatePrefGenre(review); // 장르 선호도 업데이트
         prefNationService.updatePrefNation(review); // 국가 선호도 업데이트
         prefDirectorService.updatePrefDirector(review); // 감독 선호도 업데이트
@@ -49,7 +49,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void modifyReview(Review review) {
 
-        reviewRepository.saveReview(review); // 리뷰 수정
+//        reviewRepository.saveReview(review); // 리뷰 수정
         prefGenreService.updatePrefGenre(review); // 장르 선호도 업데이트
         prefNationService.updatePrefNation(review); // 국가 선호도 업데이트
         prefDirectorService.updatePrefDirector(review); // 감독 선호도 업데이트
@@ -60,7 +60,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void deleteReview(Review review) {
 
-        reviewRepository.deleteByReviewId(review); // 리뷰 삭제
+//        reviewRepository.deleteReview(review); // 리뷰 삭제
         prefGenreService.updatePrefGenre(review); // 장르 선호도 업데이트
         prefNationService.updatePrefNation(review); // 국가 선호도 업데이트
         prefDirectorService.updatePrefDirector(review); // 감독 선호도 업데이트
@@ -71,14 +71,14 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void likeReview(Like like) {
 
-        likeRepository.saveLike(like);
+//        likeRepository.saveLike(like);
 
     }
 
     @Override
     public void unlikeReview(Like like) {
 
-        likeRepository.deleteLike(like);
+//        likeRepository.deleteLike(like);
 
     }
 

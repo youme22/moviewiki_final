@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PrefGenreRepository extends JpaRepository<PrefGenre, PrefGenrePK> {
 
-     void savePrefGenre(PrefGenre prefGenre);
+//     void savePrefGenre(PrefGenre prefGenre);
 
 }

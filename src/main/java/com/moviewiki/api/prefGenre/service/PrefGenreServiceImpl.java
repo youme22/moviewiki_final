@@ -35,11 +35,12 @@ public class PrefGenreServiceImpl implements PrefGenreService {
         User user = review.getUser();
         Date genreReviewDate = null; // updatePrefGenre메소드가 호출되는 날짜
         Genre genre = movieGenreRepository.findGenreByMovie(review.getMovie());
-        List<Review> genreReviewList = reviewRepository.findGenreReviewListByUserIdAndGenreId(user.getUserId(), genre.getGenreId());
+//        List<Review> genreReviewList = reviewRepository.findGenreReviewListByUserIdAndGenreId(user.getUserId(), genre.getGenreId());
+        List<Review> genreReviewList = reviewRepository.findDirectorReviewListByUser(user); //임시코드 삭제예정
         int genreReviewCount = genreReviewList.size(); // 메소드 아무거나 고름 -> 리뷰 카운트 메소드로 변경 예정
         double genrePoint = genreReviewList.hashCode(); // 메소드 아무거나 고름 -> 선호도 계산 메소드로 변경 예정, 평점(-3)의 총합을 genreReviewCount로 나눈 값
         PrefGenre prefGenre = new PrefGenre(user, genre, genrePoint, genreReviewCount, genreReviewDate); // PrefGenre 생성
-        prefGenreRepository.savePrefGenre(prefGenre); //PrefGenre 테이블에 저장
+//        prefGenreRepository.savePrefGenre(prefGenre); //PrefGenre 테이블에 저장
 
     }
 
