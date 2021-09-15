@@ -1,5 +1,6 @@
 package com.moviewiki.api.prefGenre.service;
 
+import com.moviewiki.api.prefGenre.domain.PrefGenre;
 import com.moviewiki.api.review.domain.Review;
 import org.springframework.stereotype.Service;
 
