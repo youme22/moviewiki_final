@@ -16,25 +16,46 @@
         .mypage-top > div {
             float: left;
         }
+        .grade {
+            margin-left: 93px;
+            text-align: center;
+        }
+        .setting {
+            float: right;
+        }
         .reviews-follow {
-            margin: 16px 60px 0;
+            float: left;
+            margin: 39px 0px 0;
+            text-align: center;
+            width: 100px;
+            height: 66px;
+        }
+        .reviews-follow:first-child {
+            margin-left: 59px;
         }
         .btn_follow {
-            margin: 25px 210px;
+            margin: 10px 178px;
         }
         .mypage-bottom {
             width: 600px;
-            height: 450px;
+            height: 406px;
             border: black 1px solid;
         }
         img {
             float: left;
         }
+        .analysis {
+            width: 100%;
+            margin: 23px;
+        }
         .watched-wanna {
             border: black 1px solid;
-            height:300px;
-            width:250px;
+            height: 300px;
+            width: 250px;
+            text-align: center;
+            line-height: 2;
             float: left;
+            margin: 0 24px;
         }
     </style>
 
@@ -60,24 +81,25 @@
                     <p><img th:src="@{/img/grade2.png}"></p>
                     <strong th:text="${user.userId}"/>
                 </div>
-
-                <div class="reviews-follow">
-                    <a th:href="@{'/member/reviews/' + ${user.userId}}">
-                        리뷰수<br>
-                        리뷰
-                    </a>
-                </div>
-                <div class="reviews-follow">
-                    <a th:href="@{'/member/followerList/' + ${user.userId}}">
-                        <p th:text="${countFollower}"/>
-                        팔로워
-                    </a>
-                </div>
-                <div class="reviews-follow">
-                    <a th:href="@{'/member/followeeList/' + ${user.userId}}">
-                        <p th:text="${countFollowee}"/>
-                        팔로잉
-                    </a>
+                <div class="reviews-follow-wrapper">
+                    <div class="reviews-follow">
+                        <a th:href="@{'/member/reviews/' + ${user.userId}}">
+                            리뷰<br>
+                            리뷰수
+                        </a>
+                    </div>
+                    <div class="reviews-follow">
+                        <a th:href="@{'/member/followerList/' + ${user.userId}}">
+                            팔로워
+                            <p th:text="${countFollower}"/>
+                        </a>
+                    </div>
+                    <div class="reviews-follow">
+                        <a th:href="@{'/member/followeeList/' + ${user.userId}}">
+                            팔로잉
+                            <p th:text="${countFollowee}"/>
+                        </a>
+                    </div>
                 </div>
                 <div class="btn_follow" th:switch="${user.userId}">
                     <span th:case="${currentUserId}"></span>
@@ -106,7 +128,7 @@
 
 
             <div class="mypage-bottom">
-                <div>
+                <div class="analysis">
                     <a th:href="@{'/member/pref/' + ${user.userId}}">
                         <div>
                             <span th:text="${user.userId}"/>님의 취향분석
