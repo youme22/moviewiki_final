@@ -46,6 +46,14 @@
     <h1>마이페이지</h1>
     <div class="wrapper">
         <div>
+            <div class="setting" th:switch="${user.userId}">
+                <span th:case="${currentUserId}">
+                    <a sec:authorize="isAuthenticated()" th:href="@{/member/modify_info}">
+                        <button>설정</button>
+                    </a>
+                </span>
+            </div>
+
             <div class="mypage-top">
 <!--                리뷰수에 따라 등급 바뀌게-->
                 <div class="grade">
