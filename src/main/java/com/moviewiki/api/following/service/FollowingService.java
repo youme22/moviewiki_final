@@ -16,6 +16,13 @@ public interface FollowingService {
     // 팔로우 상태 확인
     Boolean isFollowing(User fromUserId, User toUserId);
 
+    // 팔로워 수
+    int countFollower(User toUserId);
+
+    // 팔로잉 수
+    int countFollowee(User fromUserId);
+
     // 팔로우
     Following followUser(String fromUserId, String toUserId);
+
 }

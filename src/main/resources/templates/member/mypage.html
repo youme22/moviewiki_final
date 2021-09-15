@@ -11,7 +11,7 @@
         .mypage-top {
             border: black 1px solid;
             width: 600px;
-            height: 141px;
+            height: 159px;
         }
         .mypage-top > div {
             float: left;
@@ -69,17 +69,13 @@
                 </div>
                 <div class="reviews-follow">
                     <a th:href="@{'/member/followerList/' + ${user.userId}}">
-<!--                        <span th:text="${countByFollower}"/>-->
-                        팔로워 수
-                        <br>
+                        <p th:text="${countFollower}"/>
                         팔로워
                     </a>
                 </div>
                 <div class="reviews-follow">
                     <a th:href="@{'/member/followeeList/' + ${user.userId}}">
-<!--                        <span th:text="${countByFollowee}"/>-->
-                        팔로잉 수
-                        <br>
+                        <p th:text="${countFollowee}"/>
                         팔로잉
                     </a>
                 </div>
@@ -120,18 +116,19 @@
                 <div>
                     <a th:href="@{'/member/reviews/' + ${user.userId}}">
                         <div class="watched-wanna watched">
-                            시청한 영화
+                            시청한 영화<br>
+                            ★ 시청한 영화수
                         </div>
                     </a>
                     <a th:href="@{'/member/want_to_see/' + ${user.userId}}">
                         <div class="watched-wanna wanna">
-                            관심 영화
+                            관심 영화<br>
+                            ★ 관심 영화수
                         </div>
                     </a>
                 </div>
             </div>
         </div>
     </div>
-    <script src="/js/profile.js"></script>
 </body>
 </html>

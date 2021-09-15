@@ -44,6 +44,18 @@ public class FollowingServiceImpl implements FollowingService {
         return followingRepository.existsByFromUserAndAndToUser(fromUserId, toUserId);
     }
 
+    // 팔로워 수
+    @Override
+    public int countFollower(User toUserId) {
+        return followingRepository.countFromUserByToUser(toUserId);
+    }
+
+    // 팔로잉 수
+    @Override
+    public int countFollowee(User fromUserId) {
+        return followingRepository.countToUserByFromUser(fromUserId);
+    }
+
     // 팔로우
     @Override
     @Transactional
