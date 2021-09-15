@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.jws.soap.SOAPBinding;
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -23,6 +23,10 @@ public class FollowingServiceImpl implements FollowingService {
 
     @Autowired
     UserManagementService userManagementService;
+
+    @Autowired
+    EntityManager em;
+
 
 
     // 팔로잉 리스트 출력
@@ -62,12 +66,13 @@ public class FollowingServiceImpl implements FollowingService {
     // 팔로우
     @Override
     @Transactional
-    public Following followUser(User follower, User followee) {
+    public void followUser(User follower, User followee) {
         log.info("follower =========== " + follower);
         log.info("followee =========== " + followee);
-        return followingRepository.save(Following.builder()
-            .follower(follower)
-            .followee(followee)
-            .build());
+        Following following = new Following();
+        following.setFollower(follower);
+        following.setFollowee(followee);
+
+        em.persist(following);
     }
 }

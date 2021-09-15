@@ -23,6 +23,6 @@ public interface FollowingService {
     int countFollowee(User follower);
 
     // 팔로우
-    Following followUser(User follower, User followee);
+    void followUser(User follower, User followee);
 
 }

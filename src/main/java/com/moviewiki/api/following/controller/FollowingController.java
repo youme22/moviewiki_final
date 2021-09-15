@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -29,33 +30,17 @@ public class FollowingController {
     @RequestMapping("/member/followeeList/{userId}")
     public String followeePage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
         User pageUser = userManagementService.getUser(userId);
-        User loginUser = userManagementService.getUser(currentUser.getUsername());
-        List<Following> followeeList = followingService.followeeList(pageUser);
-
-
-
-
-
-
-        model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));
-
-
         model.addAttribute("currentUserId", currentUser.getUsername());
-        model.addAttribute("followeeList", followeeList);
+        model.addAttribute("followeeList", followingService.followeeList(pageUser));
         return "/member/followee";
     }
 
     // 팔로워 리스트 출력, form call
     @RequestMapping("/member/followerList/{userId}")
     public String followerPage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
-        User follower = userManagementService.getUser(currentUser.getUsername());
-        User followee = userManagementService.getUser(userId);
-        List<Following> followerList = followingService.followerList(followee);
-
-
-        model.addAttribute("isFollowing", followingService.isFollowing(follower, followee));
+        User pageUser = userManagementService.getUser(userId);
         model.addAttribute("currentUserId", currentUser.getUsername());
-        model.addAttribute("followerList", followerList);
+        model.addAttribute("followerList", followingService.followerList(pageUser));
         return "/member/follower";
     }
 
@@ -66,14 +51,18 @@ public class FollowingController {
         toUserId : 팔로우 당하는 유저의 id
         return  새로 생성된 follow 객체 리턴
      */
-    @PostMapping("/follow/{userId}")
-    public Following followUser(@PathVariable String userId, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+    @PostMapping("/follow")
+    public String followUser(HttpServletRequest request) {
+        String followerId = request.getParameter("followerId");
+        String followeeId = request.getParameter("followeeId");
 
-        User fromUser = userManagementService.getUser(currentUser.getUsername());
-        User toUser = userManagementService.getUser(userId);
-        log.info("fromUser ======" + fromUser);
-        log.info("userId ======" + toUser);
-        return followingService.followUser(fromUser, toUser);
+        User follower = userManagementService.getUser(followerId);
+        User followee = userManagementService.getUser(followeeId);
+
+        followingService.followUser(follower, followee);
+
+        String url = "/redirect:/member/mypage";
+        return url;
     }
 
 
@@ -81,5 +70,16 @@ public class FollowingController {
         fromuserId를 가진 user가 toUserId를 가진 user를 팔로우 정보를 삭제
         @toUserId : 언팔로우 당하는 유저의 id
      */
+    @RequestMapping("/unfollow")
+    public String unfollowUser(@PathVariable String userId, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
 
+        User follower = userManagementService.getUser(currentUser.getUsername());
+        User followee = userManagementService.getUser(userId);
+        log.info("fromUser ======" + follower);
+        log.info("userId ======" + followee);
+//        followingService.followUser(follower, followee);
+
+        String url = "/redirect:/member/mypage/" + userId;
+        return url;
+    }
 }

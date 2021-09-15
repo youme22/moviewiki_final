@@ -30,10 +30,10 @@ public class Following {
     @JoinColumn(name="FOLLOWEE")
     private User followee;
 
-    @Builder
-    public Following(User follower, User followee) {
-        this.follower = follower;
-        this.followee = followee;
-    }
+//    @Builder
+//    public Following(User follower, User followee) {
+//        this.follower = follower;
+//        this.followee = followee;
+//    }
 
 }

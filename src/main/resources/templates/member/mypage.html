@@ -84,17 +84,17 @@
                     <span th:case="*">
                         <span th:switch="${isFollowing}">
                             <span th:case="true">
-<!--                                <form th:action="@{/unfollow}" name="unfollow" method="post"> &lt;!&ndash; 언팔로우 버튼 &ndash;&gt;-->
-<!--                                    <input type="hidden" name="fromUserId" th:value="${currentUserId}"> &lt;!&ndash; 현재로그인id &ndash;&gt;-->
-<!--                                    <input type="hidden" name="toUserId" th:value="${user.userId}"> &lt;!&ndash; 현재페이지id &ndash;&gt;-->
-                                    <button>언팔로우</button>
-<!--                                </form>-->
+                                <form action="/unfollow" name="form" method="post"> <!-- 언팔로우 버튼 -->
+                                    <input type="hidden" th:value="${currentUserId}" name="followerId"/>
+                                    <input type="hidden" th:value="${user.userId}" name="followeeId"/>
+                                    <button type="submit">언팔로우</button>
+                                </form>
                             </span>
                             <span th:case="false">
-<!--                                <form th:action="@{'/follow/' + ${user.userId}}" method="post">-->
-<!--                                     <input type="hidden" name="_method" value="put"/>-->
-                                     <button type="submit">팔로우</button>
-<!--                                </form>-->
+                                <form action="/follow" name="form" method="post"> <!-- 팔로우 버튼 -->
+                                    <input type="hidden" th:value="${currentUserId}" name="followerId"/>
+                                    <input type="hidden" th:value="${user.userId}" name="followeeId"/>
+                                    <button type="submit">팔로우</button>
                             </span>
                         </span>
                     </span>
