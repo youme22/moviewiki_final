@@ -127,8 +127,6 @@ public class UserManagementController {
         String userName = request.getParameter("userName");
         String userMail = request.getParameter("userMail");
         User user = userManagementService.findId(userName, userMail);
-        log.info("user====" + user);
-
         model.addAttribute("user", user);
         return "find_id_result";
     }
@@ -136,14 +134,33 @@ public class UserManagementController {
     // 아이디 찾기 결과 페이지
     @RequestMapping("/find_id_result")
     public String findIdResult() {
-
         return "/login";
     }
 
     // 비밀번호 찾기 form call
     @GetMapping("/find_pw")
-    public String findPw() {
+    public String findPwPage() {
         return "/find_pw";
     }
+
+    // 비밀번호 찾기 DB 조회
+//    @PostMapping("/find_pw")
+//    public String findPw(HttpServletRequest request, Model model) {
+//        String userId = request.getParameter("userId");
+//        String userName = request.getParameter("userName");
+//        String userMail = request.getParameter("userMail");
+//        log.info("userId====== " + userId);
+//        log.info("userName====== " + userName);
+//        log.info("userMail====== " + userMail);
+//        return "/change_pw";
+//    }
+
+    // 비밀번호 변경 페이지 form call
+//    @GetMapping("/change_pw")
+//    public String changePw() {
+//        return "/";
+//    }
+
+
 
 }
