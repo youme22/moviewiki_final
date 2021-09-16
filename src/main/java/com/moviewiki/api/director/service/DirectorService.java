@@ -9,14 +9,14 @@ import java.util.Optional;
 public interface DirectorService {
 
     // 새로운 감독 등록
-    public void save(Director director);
+    void save(Director director);
 
-    // 특정 감독 찾기 -> 감독코드로
-    public Optional<Director> findById(String directorId);
+    // 특정 감독 조회 -> 감독코드로
+    Optional<Director> findById(String directorId);
 
-    // 특정 감독 찾기 -> 이름으로
-    public List<Director> findByDirectorName(String directorName);
+    // 특정 감독 조회 -> 이름으로
+    List<Director> findByDirectorName(String directorName);
 
-    // 모든 감독
-    public List<Director> findAll();
+    // 모든 감독 조회
+    List<Director> findAll();
 }
