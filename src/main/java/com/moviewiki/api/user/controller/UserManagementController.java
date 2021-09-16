@@ -156,7 +156,7 @@ public class UserManagementController {
             System.out.println("존재하지 않는 아이디입니다.");
             return "redirect:/find_pw";
         }
-        return "/change_pw";
+        return "/member/change_pw";
     }
 
     // 비밀번호 변경 페이지 form call
