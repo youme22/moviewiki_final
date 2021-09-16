@@ -4,11 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <title>관심 영화 페이지</title>
+    <style>
+        .want-to-see-box {
+            width: 161px;
+            height: 222px;
+            text-align: center;
+
+        }
+        .box {
+            border: black 1px solid;
+            width: 145px;
+            height: 168px;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <!-- HEADER -->
     <div th:insert="main_header" id="header"></div>
 
     <h1><span th:text="${userId}"></span>의 관심 영화 페이지</h1>
+
+    <div>
+        <div>
+            <di3v class="want-to-see-box">
+                <div class="movie-image box">
+                    영화 포스터
+                </div>
+                <div>
+                    제목
+                </div>
+                <div>
+                    평점
+                </div>
+            </di3v>
+        </div>
+    </div>
 </body>
 </html>
