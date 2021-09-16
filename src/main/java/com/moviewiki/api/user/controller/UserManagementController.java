@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller
@@ -116,8 +117,27 @@ public class UserManagementController {
 
     // 아이디 찾기 form call
     @GetMapping("/find_id")
-    public String findId() {
+    public String findIdPage() {
         return "/find_id";
+    }
+
+    // 아이디 찾기 DB 조회
+    @PostMapping("/find_id")
+    public String findId(HttpServletRequest request, Model model) {
+        String userName = request.getParameter("userName");
+        String userMail = request.getParameter("userMail");
+        User user = userManagementService.findId(userName, userMail);
+        log.info("user====" + user);
+
+        model.addAttribute("user", user);
+        return "find_id_result";
+    }
+
+    // 아이디 찾기 결과 페이지
+    @RequestMapping("/find_id_result")
+    public String findIdResult() {
+
+        return "/login";
     }
 
     // 비밀번호 찾기 form call

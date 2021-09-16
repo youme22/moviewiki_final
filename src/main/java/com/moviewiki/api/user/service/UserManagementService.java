@@ -9,7 +9,9 @@ public interface UserManagementService {
 
     User getUser(String userId);
 
-    User checkPw(String userId, String userPw);
-
     void updateUser(User user);
+
+    User findId(String userName, String userMail);
+
+    User checkPw(String userId, String userPw);
 }

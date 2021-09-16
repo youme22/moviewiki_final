@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>아이디 찾기 결과 페이지</title>
+</head>
+<body>
+    <h1>아이디 찾기 결과 페이지</h1>
+    <div>
+
+        <span th:switch="${user}">
+            <span th:case="null">
+                없는 유저입니다.
+            </span>
+            <span th:case="*">
+                아이디:
+                <span th:text="${user.userId}"/>
+            </span>
+        </span>
+    </div>
+    <div>
+        <a href="/login">
+            <button>로그인</button>
+        </a>
+        <a href="find_pw">
+            <button>비밀번호 찾기</button>
+        </a>
+    </div>
+</body>
+</html>
