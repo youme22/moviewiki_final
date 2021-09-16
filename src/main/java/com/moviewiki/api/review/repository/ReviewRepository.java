@@ -1,7 +1,6 @@
 package com.moviewiki.api.review.repository;
 
 import com.moviewiki.api.movie.domain.Movie;
-import com.moviewiki.api.movieGenre.domain.MovieGenre;
 import com.moviewiki.api.review.domain.Review;
 import com.moviewiki.api.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
