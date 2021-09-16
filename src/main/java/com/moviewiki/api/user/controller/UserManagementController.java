@@ -146,21 +146,23 @@ public class UserManagementController {
     }
 
     // 비밀번호 찾기 DB 조회
-//    @PostMapping("/find_pw")
-//    public String findPw(HttpServletRequest request, Model model) {
-//        String userId = request.getParameter("userId");
-//        String userName = request.getParameter("userName");
-//        String userMail = request.getParameter("userMail");
-//        log.info("userId====== " + userId);
-//        log.info("userName====== " + userName);
-//        log.info("userMail====== " + userMail);
-//        return "/change_pw";
-//    }
+    @PostMapping("/find_pw")
+    public String findPw(HttpServletRequest request) {
+        String userId = request.getParameter("userId");
+        String userName = request.getParameter("userName");
+        String userMail = request.getParameter("userMail");
+        User user = userManagementService.findPw(userId, userName, userMail);
+        if(user == null) {
+            System.out.println("존재하지 않는 아이디입니다.");
+            return "redirect:/find_pw";
+        }
+        return "/change_pw";
+    }
 
     // 비밀번호 변경 페이지 form call
 //    @GetMapping("/change_pw")
 //    public String changePw() {
-//        return "/";
+//        return "/change_pw";
 //    }
 
     // 비밀번호 확인 페이지 form call
@@ -172,7 +174,7 @@ public class UserManagementController {
         return "/member/check_pw";
     }
 
-    // 비밀번호 확인 DB 조회
+    // 비밀번호 확인 -> DB 조회
     @PostMapping("/member/check_pw")
     public String checkPw(HttpServletRequest request) {
         String userId = request.getParameter("userId");
@@ -184,7 +186,7 @@ public class UserManagementController {
         if(encoder.matches(userPw, DBUser.getUserPw())) {
             return "redirect:/member/modify_info";
         }
-        System.out.println("비밀번호가 올바르지 않습니다."); // 자바스크립트로 구현?
+        System.out.println("비밀번호가 올바르지 않습니다."); // 모달창?
         return "redirect:/member/check_pw";
     }
 
