@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface NationService {
 
-    public Optional<Nation> findById(String nationId);
+    Optional<Nation> findById(String nationId);
 
-    public List<Nation> findAll();
+    List<Nation> findAll();
 }
