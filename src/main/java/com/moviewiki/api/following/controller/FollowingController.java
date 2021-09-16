@@ -48,8 +48,8 @@ public class FollowingController {
         String followerId = request.getParameter("followerId");
         String followeeId = request.getParameter("followeeId");
 
-        User follower = userManagementService.getUser(followerId);
-        User followee = userManagementService.getUser(followeeId);
+        User follower = userManagementService.getUser(followerId); // 아이디값으로 객체 찾기
+        User followee = userManagementService.getUser(followeeId); // getUser = findById
 
         followingService.followUser(follower, followee);
 

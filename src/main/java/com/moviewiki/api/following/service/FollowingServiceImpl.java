@@ -26,7 +26,7 @@ public class FollowingServiceImpl implements FollowingService {
     UserManagementService userManagementService;
 
     @Autowired
-    EntityManager em;
+    EntityManager em; // 복합키 저장, 삭제를 위해 필요
 
 
 
@@ -66,23 +66,23 @@ public class FollowingServiceImpl implements FollowingService {
 
     // 팔로우
     @Override
-    @Transactional
+    @Transactional // 이거 안 붙이면 오류 나더라고요
     public void followUser(User follower, User followee) {
         log.info("follower =========== " + follower);
         log.info("followee =========== " + followee);
-        Following following = new Following();
-        following.setFollower(follower);
+        Following following = new Following(); // 객체 생성
+        following.setFollower(follower);    // 값 세팅
         following.setFollowee(followee);
 
-        em.persist(following);
+        em.persist(following);  // 저장
     }
 
     //언팔로우
     @Override
     @Transactional
     public void unfollowUser(User follower, User followee) {
-        FollowingPK followingPK = new FollowingPK(follower, followee);
-        Following following = em.find(Following.class, followingPK);
-        em.remove(following);
+        FollowingPK followingPK = new FollowingPK(follower, followee); // 기본키에 세팅
+        Following following = em.find(Following.class, followingPK); // 엔티티에 있는지 찾기
+        em.remove(following); // 삭제
     }
 }

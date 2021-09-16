@@ -14,5 +14,4 @@ public class FollowingPK implements Serializable {
 
     private User follower;
     private User followee;
-
 }

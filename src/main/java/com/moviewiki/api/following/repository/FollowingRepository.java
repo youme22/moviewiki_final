@@ -26,6 +26,7 @@ public interface FollowingRepository extends JpaRepository<Following, FollowingP
     // 팔로잉 수
     int countFolloweeByFollower(User follower);
 
+    // 효미님꺼
   // List<User> findFolloweeByFollower(User follower);
 
 }
