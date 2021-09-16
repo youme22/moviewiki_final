@@ -18,7 +18,9 @@
             <a href="/movie/create/director">감독 등록</a>
             <a href="/movie/read/director">감독 목록</a>
             <a href="/want/create">보고픈 영화 등록</a>
-            <a href="/want/read">보고픈 목록</a>
+            <a th:href="'/want/create/' + ${userId}">보고픈 영화 조회</a>
+            <a href="/season/create">계절 등록</a>
+            <a th:href="'/season/read/' + ${seasonName}">계절 조회</a>
         </p>
     </div>
 </div> <!-- /container -->
