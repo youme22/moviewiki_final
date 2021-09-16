@@ -5,7 +5,9 @@ import com.moviewiki.api.user.service.UserManagementService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
@@ -161,6 +163,29 @@ public class UserManagementController {
 //        return "/";
 //    }
 
+    // 비밀번호 확인 페이지 form call
+    @GetMapping("/member/check_pw")
+    public String checkPwPage(Authentication auth, Model model) {
+        String userId = auth.getName();
+        model.addAttribute("userId", userId);
+        log.info("userId===========" + userId);
+        return "/member/check_pw";
+    }
 
+    // 비밀번호 확인 DB 조회
+    @PostMapping("/member/check_pw")
+    public String checkPw(HttpServletRequest request) {
+        String userId = request.getParameter("userId");
+        String userPw = request.getParameter("userPw");
+
+        User DBUser = userManagementService.getUser(userId);
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if(encoder.matches(userPw, DBUser.getUserPw())) {
+            return "redirect:/member/modify_info";
+        }
+        System.out.println("비밀번호가 올바르지 않습니다."); // 자바스크립트로 구현?
+        return "redirect:/member/check_pw";
+    }
 
 }

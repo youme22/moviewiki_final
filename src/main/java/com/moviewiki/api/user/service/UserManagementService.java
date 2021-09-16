@@ -13,5 +13,4 @@ public interface UserManagementService {
 
     User findId(String userName, String userMail);
 
-    User checkPw(String userId, String userPw);
 }

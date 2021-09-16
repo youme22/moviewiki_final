@@ -34,13 +34,8 @@ public class UserManagementServiceImpl implements UserManagementService {
 
     @Override
     public User findId(String userName, String userMail) {
-        User user = userRepository.findUserByUserNameAndAndUserMail(userName, userMail);
+        User user = userRepository.findUserByUserNameAndUserMail(userName, userMail);
         return user;
     }
 
-    @Override
-    public User checkPw(String userId, String userPw) {
-        User user = userRepository.findByUserIdAndAndUserPw(userId, userPw);
-        return user;
-    }
 }
