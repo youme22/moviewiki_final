@@ -114,4 +114,16 @@ public class UserManagementController {
         return "/member/modify_info";
     }
 
+    // 아이디 찾기 form call
+    @GetMapping("/find_id")
+    public String findId() {
+        return "/find_id";
+    }
+
+    // 비밀번호 찾기 form call
+    @GetMapping("/find_pw")
+    public String findPw() {
+        return "/find_pw";
+    }
+
 }
