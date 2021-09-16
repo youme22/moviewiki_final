@@ -147,7 +147,7 @@ public class UserManagementController {
 
     // 비밀번호 찾기 DB 조회
     @PostMapping("/find_pw")
-    public String findPw(HttpServletRequest request) {
+    public String findPw(HttpServletRequest request, Model model) {
         String userId = request.getParameter("userId");
         String userName = request.getParameter("userName");
         String userMail = request.getParameter("userMail");
@@ -156,14 +156,22 @@ public class UserManagementController {
             System.out.println("존재하지 않는 아이디입니다.");
             return "redirect:/find_pw";
         }
+        model.addAttribute("userId", userId);
         return "/member/change_pw";
     }
 
     // 비밀번호 변경 페이지 form call
-//    @GetMapping("/change_pw")
-//    public String changePw() {
-//        return "/change_pw";
-//    }
+    @PostMapping("/change_pw")
+    public String changePw(HttpServletRequest request) {
+        String userId = request.getParameter("userId");
+        String changePw = request.getParameter("userPw");
+        User user = userManagementService.getUser(userId);
+
+        user.setUserPw(passwordEncoder.encode(changePw));
+        userManagementService.updateUser(user);
+
+        return "/login";
+    }
 
     // 비밀번호 확인 페이지 form call
     @GetMapping("/member/check_pw")
