@@ -201,7 +201,7 @@ public class UserManagementController {
 
 
 
-    // 더미 데이터 암호화 메소드
+    // 더미 데이터 암호화 메소드 (시연할때 처음에 실행)
     @GetMapping("/dummy_pw")
     public String dummyPw() {
         List<User> userList = userManagementService.getAllUser();
