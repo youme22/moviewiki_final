@@ -11,10 +11,9 @@ import com.moviewiki.api.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.EntityManager;
 
 @Service
 public class PrefGenreServiceImpl implements PrefGenreService {
@@ -26,16 +25,18 @@ public class PrefGenreServiceImpl implements PrefGenreService {
   
     private final EntityManager em;
 
-    public PrefGenreServiceImpl(EntityManager em){
+    public PrefGenreServiceImpl(EntityManager em) {
         this.em = em;
+    }
 
     @Autowired
-    public PrefGenreServiceImpl(PrefGenreRepository prefGenreRepository, ReviewRepository reviewRepository, MovieGenreRepository movieGenreRepository) {
+    public PrefGenreServiceImpl(PrefGenreRepository prefGenreRepository, ReviewRepository reviewRepository, MovieGenreRepository movieGenreRepository, EntityManager em) {
 
         this.prefGenreRepository = prefGenreRepository;
         this.reviewRepository = reviewRepository;
         this.movieGenreRepository = movieGenreRepository;
 
+        this.em = em;
     }
 
     @Override
@@ -53,11 +54,18 @@ public class PrefGenreServiceImpl implements PrefGenreService {
 
     }
 
+    // 추천 Test2
     @Override
-    public List<PrefGenre> findAll(){
-        List<PrefGenre> prefGenreList =
-                em.createQuery("select pg from PrefGenre pg",PrefGenre.class).getResultList();
-        return prefGenreList;
+    public List<PrefGenre> findByUser(User user){
+//        List<PrefGenre> prefGenreList =
+//                em.createQuery("select pg from PrefGenre pg",PrefGenre.class).getResultList();
+//                em.createQuery("select max(pg.genrePoint) from PrefGenre pg where pg.user = 'test1'",PrefGenre.class).getResultList();
+        return prefGenreRepository.findByUser(user);
     }
 
+//    @Override
+//    public List<MovieGenre> findByGenre(){
+//        List<MovieGenre> movieGenreList =
+//        return movieGenreList;
+//    }
 }
