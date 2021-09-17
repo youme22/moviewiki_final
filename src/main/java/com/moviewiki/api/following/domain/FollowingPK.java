@@ -12,7 +12,6 @@ import com.moviewiki.api.user.domain.User;
 @AllArgsConstructor
 public class FollowingPK implements Serializable {
 
-    private User fromUser;
-    private User toUser;
-
+    private User follower;
+    private User followee;
 }

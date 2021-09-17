@@ -63,9 +63,11 @@ public class PrefGenreServiceImpl implements PrefGenreService {
         return prefGenreRepository.findByUser(user);
     }
 
+
 //    @Override
 //    public List<MovieGenre> findByGenre(){
 //        List<MovieGenre> movieGenreList =
 //        return movieGenreList;
 //    }
+
 }
