@@ -31,6 +31,7 @@ public class PrefGenreServiceImpl implements PrefGenreService {
 
     @Autowired
     public PrefGenreServiceImpl(PrefGenreRepository prefGenreRepository, ReviewRepository reviewRepository, MovieGenreRepository movieGenreRepository, EntityManager em) {
+
         this.prefGenreRepository = prefGenreRepository;
         this.reviewRepository = reviewRepository;
         this.movieGenreRepository = movieGenreRepository;

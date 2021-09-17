@@ -8,14 +8,23 @@ import java.util.List;
 
 public interface FollowingService {
     // 팔로이 리스트 출력
-    List<Following> followeeList(User fromUserId);
+    List<Following> followeeList(User follower);
 
     // 팔로워 리스트 출력
-    List<Following> followerList(User toUserId);
+    List<Following> followerList(User followee);
 
     // 팔로우 상태 확인
-    Boolean isFollowing(User fromUserId, User toUserId);
+    boolean isFollowing(User follower, User followee);
+
+    // 팔로워 수
+    int countFollower(User followee);
+
+    // 팔로잉 수
+    int countFollowee(User follower);
 
     // 팔로우
-    Following followUser(String fromUserId, String toUserId);
+    void followUser(User follower, User followee);
+
+    // 언팔로우
+    void unfollowUser(User follower, User followee);
 }
