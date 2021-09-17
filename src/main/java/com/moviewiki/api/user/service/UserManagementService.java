@@ -2,6 +2,8 @@ package com.moviewiki.api.user.service;
 
 import com.moviewiki.api.user.domain.User;
 
+import java.util.List;
+
 public interface UserManagementService {
     // 회원 등록
     void createUser(User user);
@@ -20,4 +22,8 @@ public interface UserManagementService {
 
     // 비밀번호 찾기 메소드
     User findPw(String userId, String userName, String userMail);
+
+    // 회원 전체 조회
+    List<User> getAllUser();
+
 }
