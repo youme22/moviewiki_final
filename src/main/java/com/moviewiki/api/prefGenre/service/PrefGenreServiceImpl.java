@@ -35,6 +35,7 @@ public class PrefGenreServiceImpl implements PrefGenreService {
         this.prefGenreRepository = prefGenreRepository;
         this.reviewRepository = reviewRepository;
         this.movieGenreRepository = movieGenreRepository;
+
         this.em = em;
     }
 
@@ -53,10 +54,20 @@ public class PrefGenreServiceImpl implements PrefGenreService {
 
     }
 
+    // 추천 Test2
     @Override
-    public List<PrefGenre> findAll(){
-        List<PrefGenre> prefGenreList =
-                em.createQuery("select pg from PrefGenre pg",PrefGenre.class).getResultList();
-        return prefGenreList;
+    public List<PrefGenre> findByUser(User user){
+//        List<PrefGenre> prefGenreList =
+//                em.createQuery("select pg from PrefGenre pg",PrefGenre.class).getResultList();
+//                em.createQuery("select max(pg.genrePoint) from PrefGenre pg where pg.user = 'test1'",PrefGenre.class).getResultList();
+        return prefGenreRepository.findByUser(user);
     }
+
+
+//    @Override
+//    public List<MovieGenre> findByGenre(){
+//        List<MovieGenre> movieGenreList =
+//        return movieGenreList;
+//    }
+
 }
