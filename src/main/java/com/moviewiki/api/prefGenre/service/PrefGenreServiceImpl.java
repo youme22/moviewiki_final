@@ -11,10 +11,9 @@ import com.moviewiki.api.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.EntityManager;
 
 @Service
 public class PrefGenreServiceImpl implements PrefGenreService {
@@ -36,8 +35,6 @@ public class PrefGenreServiceImpl implements PrefGenreService {
         this.prefGenreRepository = prefGenreRepository;
         this.reviewRepository = reviewRepository;
         this.movieGenreRepository = movieGenreRepository;
-
-
         this.em = em;
     }
 
@@ -62,5 +59,4 @@ public class PrefGenreServiceImpl implements PrefGenreService {
                 em.createQuery("select pg from PrefGenre pg",PrefGenre.class).getResultList();
         return prefGenreList;
     }
-
 }

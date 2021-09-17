@@ -5,14 +5,12 @@ import com.moviewiki.api.movie.service.MovieServiceImpl;
 import com.moviewiki.api.user.domain.User;
 import com.moviewiki.api.user.service.UserManagementServiceImpl;
 import com.moviewiki.api.wantToSee.domain.WantToSee;
-import com.moviewiki.api.wantToSee.domain.WantToSeeForm;
 import com.moviewiki.api.wantToSee.service.WantToSeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static java.lang.Long.parseLong;
@@ -34,23 +32,38 @@ public class WantToSeeController {
         return "member/want_add";
     }
 
-    /* [미완성!!!] => 보고 싶은 영화 추가 */
+    /* 보고 싶은 영화 추가 */
     @PostMapping("/want/create")
-    public String createWant(WantToSeeForm wantToSeeForm){
-        WantToSee wantToSee = new WantToSee();
-        Movie movie = movieServiceImpl.findByMovieId(parseLong(wantToSeeForm.getMovieId()));
-        User user = userManagementService.getUser(wantToSeeForm.getUserId());
-        wantToSee.setUser(user);
-        wantToSee.setMovie(movie);
-        wantToSeeServiceImpl.save(wantToSee);
-        return "admin/admin_movie";
+    public String createWant(HttpServletRequest request){
+        String userId = request.getParameter("userId");
+        Long movieId = parseLong(request.getParameter("movieId"));
+
+        Movie movie = movieServiceImpl.findByMovieId(movieId);
+        User user = userManagementService.getUser(userId);
+
+        wantToSeeServiceImpl.save(user, movie);
+        return "admin_movie";
     }
 
-    /* [미완성!!!] => 특정 사용자의 보고픈 영화 조회 */
-    @GetMapping("/want/read")
+    /* 특정 사용자의 보고픈 영화 조회 */
+    @GetMapping("/want/read/{userId}")
     @ResponseBody
-    public List<WantToSee> readWantByUser(WantToSee wantToSee){
-        List<WantToSee> want = wantToSeeServiceImpl.findByUser(wantToSee.getUser().getUserId());
+    public List<WantToSee> readWantByUser(@PathVariable(name = "userId") String userId){
+
+        User user = userManagementService.getUser(userId);
+        List<WantToSee> want = wantToSeeServiceImpl.findByUser(user);
         return want;
+    }
+
+    /* 보고픈 영화 삭제 */
+    @GetMapping("/want/delete")
+    public String deleteWant(@RequestParam("userId") String userId, @RequestParam("movieId") Long movieId) {
+
+        User user = userManagementService.getUser(userId);
+        Movie movie = movieServiceImpl.findByMovieId(movieId);
+
+        wantToSeeServiceImpl.deleteWantToSee(user, movie);
+
+        return "redirect:/want/read/" + userId;
     }
 }

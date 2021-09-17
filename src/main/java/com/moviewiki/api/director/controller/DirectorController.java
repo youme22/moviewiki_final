@@ -27,7 +27,7 @@ public class DirectorController {
     @PostMapping("/movie/create/director")
     public String createDirector(Director director){
         directorServiceImpl.save(director);
-        return "admin/admin_movie";
+        return "admin_movie";
     }
 
     /* 감독 중복체크 페이지 이동 */

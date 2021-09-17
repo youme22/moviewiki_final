@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface ActorRepository extends JpaRepository<Actor, Long> {
 
     // 특정 배우 찾기 -> 이름으로
-    public List<Actor> findByActorName(String actorName);
+    List<Actor> findByActorName(String actorName);
 }
