@@ -10,14 +10,11 @@
 <div>
     <table border="1">
         <tbody>
-        <th>장르</th>
-        <th>유저</th>
 
-<!--        <tr th:each="prefGenre : ${prefGenres}">-->
-<!--            <td th:text="${prefGenre.getGenre().getGenreId()}">장르</td>-->
-<!--            <td th:text="${prefGenre.getUser().getUserId()}">유저</td>-->
-<!--            <td th:="${prefGenre.getGenrePoint()}"></td>-->
+        <th>영화 추천</th>
 
+        <tr th:each="recMovieList : ${recMovieList}">
+            <td th:text="${recMovieList}"></td>
         </tr>
         </tbody>
     </table>

@@ -2,6 +2,7 @@ package com.moviewiki.api.prefGenre.service;
 
 
 import com.moviewiki.api.genre.domain.Genre;
+import com.moviewiki.api.movie.domain.Movie;
 import com.moviewiki.api.movieGenre.repository.MovieGenreRepository;
 import com.moviewiki.api.prefGenre.domain.PrefGenre;
 import com.moviewiki.api.prefGenre.repository.PrefGenreRepository;
@@ -17,7 +18,6 @@ import java.util.List;
 
 @Service
 public class PrefGenreServiceImpl implements PrefGenreService {
-
 
     private PrefGenreRepository prefGenreRepository;
     private ReviewRepository reviewRepository;
@@ -54,20 +54,17 @@ public class PrefGenreServiceImpl implements PrefGenreService {
 
     }
 
-    // 추천 Test2
+    // 선호 장르 영화 추천
     @Override
-    public List<PrefGenre> findByUser(User user){
-//        List<PrefGenre> prefGenreList =
-//                em.createQuery("select pg from PrefGenre pg",PrefGenre.class).getResultList();
-//                em.createQuery("select max(pg.genrePoint) from PrefGenre pg where pg.user = 'test1'",PrefGenre.class).getResultList();
-        return prefGenreRepository.findByUser(user);
+    public List<Movie> findAll(){
+        String sql = "SELECT * FROM MOVIES\n" +
+                "WHERE MOVIE_ID IN(\n" +
+                "SELECT MOVIE_ID FROM MOVIE_GENRE\n" +
+                "WHERE GENRE_ID IN\n" +
+                "    (SELECT GENRE_ID from PREF_GENRES \n" +
+                "    where GENREPOINT =\n" +
+                "        (select max(GENREPOINT) from PREF_GENRES where USER_ID = 'test1')))";
+        List<Movie> recMovieList = em.createNativeQuery(sql, Movie.class).getResultList();
+        return recMovieList;
     }
-
-
-//    @Override
-//    public List<MovieGenre> findByGenre(){
-//        List<MovieGenre> movieGenreList =
-//        return movieGenreList;
-//    }
-
 }
