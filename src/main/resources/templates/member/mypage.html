@@ -11,30 +11,51 @@
         .mypage-top {
             border: black 1px solid;
             width: 600px;
-            height: 141px;
+            height: 159px;
         }
         .mypage-top > div {
             float: left;
         }
+        .grade {
+            margin-left: 93px;
+            text-align: center;
+        }
+        .setting {
+            float: right;
+        }
         .reviews-follow {
-            margin: 16px 60px 0;
+            float: left;
+            margin: 39px 0px 0;
+            text-align: center;
+            width: 100px;
+            height: 66px;
+        }
+        .reviews-follow:first-child {
+            margin-left: 59px;
         }
         .btn_follow {
-            margin: 25px 210px;
+            margin: 10px 178px;
         }
         .mypage-bottom {
             width: 600px;
-            height: 450px;
+            height: 406px;
             border: black 1px solid;
         }
         img {
             float: left;
         }
+        .analysis {
+            width: 100%;
+            margin: 23px;
+        }
         .watched-wanna {
             border: black 1px solid;
-            height:300px;
-            width:250px;
+            height: 300px;
+            width: 250px;
+            text-align: center;
+            line-height: 2;
             float: left;
+            margin: 0 24px;
         }
     </style>
 
@@ -46,51 +67,56 @@
     <h1>마이페이지</h1>
     <div class="wrapper">
         <div>
+            <div class="setting" th:switch="${user.userId}">
+                <span th:case="${currentUserId}">
+                    <a sec:authorize="isAuthenticated()" th:href="@{/member/check_pw}">
+                        <button>설정</button>
+                    </a>
+                </span>
+            </div>
+
             <div class="mypage-top">
 <!--                리뷰수에 따라 등급 바뀌게-->
                 <div class="grade">
                     <p><img th:src="@{/img/grade2.png}"></p>
                     <strong th:text="${user.userId}"/>
                 </div>
-
-                <div class="reviews-follow">
-                    <a th:href="@{'/member/reviews/' + ${user.userId}}">
-                        리뷰수<br>
-                        리뷰
-                    </a>
-                </div>
-                <div class="reviews-follow">
-                    <a th:href="@{'/member/followerList/' + ${user.userId}}">
-<!--                        <span th:text="${countByFollower}"/>-->
-                        팔로워 수
-                        <br>
-                        팔로워
-                    </a>
-                </div>
-                <div class="reviews-follow">
-                    <a th:href="@{'/member/followeeList/' + ${user.userId}}">
-<!--                        <span th:text="${countByFollowee}"/>-->
-                        팔로잉 수
-                        <br>
-                        팔로잉
-                    </a>
+                <div class="reviews-follow-wrapper">
+                    <div class="reviews-follow">
+                        <a th:href="@{'/member/reviews/' + ${user.userId}}">
+                            리뷰<br>
+                            리뷰수
+                        </a>
+                    </div>
+                    <div class="reviews-follow">
+                        <a th:href="@{'/member/followerList/' + ${user.userId}}">
+                            팔로워
+                            <p th:text="${countFollower}"/>
+                        </a>
+                    </div>
+                    <div class="reviews-follow">
+                        <a th:href="@{'/member/followeeList/' + ${user.userId}}">
+                            팔로잉
+                            <p th:text="${countFollowee}"/>
+                        </a>
+                    </div>
                 </div>
                 <div class="btn_follow" th:switch="${user.userId}">
                     <span th:case="${currentUserId}"></span>
                     <span th:case="*">
                         <span th:switch="${isFollowing}">
                             <span th:case="true">
-<!--                                <form th:action="@{/unfollow}" name="unfollow" method="post"> &lt;!&ndash; 언팔로우 버튼 &ndash;&gt;-->
-<!--                                    <input type="hidden" name="fromUserId" th:value="${currentUserId}"> &lt;!&ndash; 현재로그인id &ndash;&gt;-->
-<!--                                    <input type="hidden" name="toUserId" th:value="${user.userId}"> &lt;!&ndash; 현재페이지id &ndash;&gt;-->
-                                    <button>언팔로우</button>
-<!--                                </form>-->
+                                <form action="/unfollow" name="form" method="post"> <!-- 언팔로우 버튼 -->
+                                    <input type="hidden" th:value="${currentUserId}" name="followerId"/>
+                                    <input type="hidden" th:value="${user.userId}" name="followeeId"/>
+                                    <button type="submit">언팔로우</button>
+                                </form>
                             </span>
                             <span th:case="false">
-<!--                                <form th:action="@{'/follow/' + ${user.userId}}" method="post">-->
-<!--                                     <input type="hidden" name="_method" value="put"/>-->
-                                     <button type="submit">팔로우</button>
-<!--                                </form>-->
+                                <form action="/follow" name="form" method="post"> <!-- 팔로우 버튼 -->
+                                    <input type="hidden" th:value="${currentUserId}" name="followerId"/>
+                                    <input type="hidden" th:value="${user.userId}" name="followeeId"/>
+                                    <button type="submit">팔로우</button>
                             </span>
                         </span>
                     </span>
@@ -102,7 +128,7 @@
 
 
             <div class="mypage-bottom">
-                <div>
+                <div class="analysis">
                     <a th:href="@{'/member/pref/' + ${user.userId}}">
                         <div>
                             <span th:text="${user.userId}"/>님의 취향분석
@@ -112,18 +138,19 @@
                 <div>
                     <a th:href="@{'/member/reviews/' + ${user.userId}}">
                         <div class="watched-wanna watched">
-                            시청한 영화
+                            시청한 영화<br>
+                            ★ 시청한 영화수
                         </div>
                     </a>
                     <a th:href="@{'/member/want_to_see/' + ${user.userId}}">
                         <div class="watched-wanna wanna">
-                            관심 영화
+                            관심 영화<br>
+                            ★ 관심 영화수
                         </div>
                     </a>
                 </div>
             </div>
         </div>
     </div>
-    <script src="/js/profile.js"></script>
 </body>
 </html>

@@ -4,12 +4,87 @@
 <head>
     <meta charset="UTF-8">
     <title>취향 분석 페이지</title>
+    <style>
+        .pref-main {
+            margin: 0 auto;
+            width: 578px;
+        }
+        .pref-boxs {
+            width: 100%;
+            height: 300px;
+        }
+        .pref-box {
+            float: left;
+            border: black solid 1px;
+            width:247px;
+            height:100px;
+            margin: 20px;
+        }
+        .user-info {
+            width: 100%;
+            height: 39px;
+        }
+        .user-info > div {
+            border: black solid 1px;
+            width: 143px;
+            height: 27px;
+            float: left;
+            margin-right: 47px;
+        }
+        .time-to-watch {
+            border: black solid 1px;
+            width: 100%;
+            height: 200px;
+        }
+    </style>
 </head>
 <body>
     <!-- HEADER -->
     <div th:insert="main_header" id="header"></div>
 
     <h1><span th:text="${userId}"></span>의 취향분석 페이지</h1>
+
+    <div class="wrapper">
+        <div class="pref-main">
+            <div class="user-info">
+                <div>영화고수</div> <!-- 리뷰수에 따라 등급 다르게 -->
+                <div><span th:text="${userId}"></span>의 취향분석</div>
+                <div>평가한 영화 작품 ?건 </div> <!-- 리뷰수 출력 -->
+            </div>
+            <div class="pref-boxs">
+                <div class="pref-box">
+                    <strong>선호배우</strong><br>
+                    브래드피트 85점 9편<br>
+                    로버트 다우니 주니어 81점 8편<br>
+                    엠마 스톤 80점 9편
+                </div>
+                <div class="pref-box">
+                    <strong>선호감독</strong><br>
+                    크리스토퍼 놀란 85점 9편<br>
+                    쿠엔틴 타란티노 81점 8편<br>
+                    제임스 건 80점 9편
+                </div>
+                <div class="pref-box">
+                    <strong>선호장르</strong><br>
+                    액션 85점 147편<br>
+                    SF 81점 96편<br>
+                    스릴러 80점 89편
+                </div>
+                <div class="pref-box">
+                    <strong>선호 국가</strong><br>
+                    미국 85점 90편<br>
+                    한국 81점 82편<br>
+                    영국 스톤 80점 70편
+                </div>
+            </div>
+            <div class="time-to-watch">
+                <div>영화 감상 시간</div>
+                <div>454시간</div>
+                <div>인생의 3주는 순수하게 영화 본 시간, 대단합니다.</div>
+            </div>
+        </div>
+    </div>
+
 
 </body>
 </html>

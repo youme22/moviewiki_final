@@ -27,7 +27,7 @@ public class User {
     private String userName;
 
     @Column(name = "USER_BIRTH")
-    @DateTimeFormat(pattern = "yyMMdd")
+    @DateTimeFormat(pattern = "yyyyMMdd")
     private Date userBirth;
 
     @Column(name = "USER_GENDER", columnDefinition = "number")
