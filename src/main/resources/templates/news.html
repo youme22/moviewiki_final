@@ -26,6 +26,11 @@
             width: 255px;
             margin: 10px auto;
         }
+        img {
+            width: 260px;
+            height: 200px;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
@@ -38,7 +43,7 @@
             <div class="box">
                 <a sec:authorize="isAnonymous()" th:href="@{'/anonymousReadNews/' + ${news.newsId}}" >
                     <div class="picture">
-                        <img th:src="@{'/img/' + ${news.newsFile}}" width="auto" height="auto">
+                        <img th:src="@{'/img/' + ${news.newsFile}}">
                     </div>
                     <div class="newsTitle">
                         <p th:text="${news.newsTitle}"></p>

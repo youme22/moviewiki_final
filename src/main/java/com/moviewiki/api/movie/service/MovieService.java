@@ -16,7 +16,7 @@ public interface MovieService {
     // 특정 영화 조회
     Movie findByMovieId(Long movieId);
 
-
     // 모든 영화
     List<Movie> findAll();
+
 }

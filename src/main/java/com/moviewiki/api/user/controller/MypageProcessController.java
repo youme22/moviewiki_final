@@ -5,6 +5,8 @@ import com.moviewiki.api.following.service.FollowingService;
 import com.moviewiki.api.news.domain.News;
 import com.moviewiki.api.user.domain.User;
 import com.moviewiki.api.user.service.UserManagementService;
+import com.moviewiki.api.wantToSee.domain.WantToSee;
+import com.moviewiki.api.wantToSee.service.WantToSeeServiceImpl;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +33,9 @@ public class MypageProcessController {
 
     @Autowired
     UserManagementService userManagementService;
+
+    @Autowired
+    WantToSeeServiceImpl wantToSeeServiceImpl;
 
     // 마이페이지 form call
     @GetMapping("/member/mypage/{userId}")
@@ -62,8 +67,16 @@ public class MypageProcessController {
 
     // 관심 영화 페이지 form call
     @RequestMapping("/member/want_to_see/{userId}")
+
     public String wantToSeePage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+
+        User pageUser = userManagementService.getUser(userId);
+        List<WantToSee> wantToSeeList = wantToSeeServiceImpl.findByUser(pageUser);
+
+        log.info("wantToSeeList" + wantToSeeList);
         model.addAttribute("currentUserId", currentUser.getUsername());
+        model.addAttribute("wantToSeeList", wantToSeeList);
+
         return "/member/want_to_see";
     }
 
