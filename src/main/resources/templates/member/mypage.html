@@ -78,7 +78,24 @@
             <div class="mypage-top">
 <!--                리뷰수에 따라 등급 바뀌게-->
                 <div class="grade">
-                    <p><img th:src="@{/img/grade2.png}"></p>
+                    <div>
+                        <p th:if="${countReview} >= 500">
+                            <img th:src="@{/img/grade5.png}">
+                        </p>
+                        <p th:if="${countReview} >= 300 and ${countReview} < 500">
+                            <img th:src="@{/img/grade4.png}">
+                        </p>
+                        <p th:if="${countReview} >= 100 and ${countReview} < 300">
+                            <img th:src="@{/img/grade3.png}">
+                        </p>
+                        <p th:if="${countReview} >= 30 and ${countReview} < 100">
+                            <img th:src="@{/img/grade2.png}">
+                        </p>
+                        <p th:if="${countReview} < 30">
+                            <img th:src="@{/img/grade1.png}">
+                        </p>
+                    </div>
+
                     <strong th:text="${user.userId}"/>
                 </div>
                 <div class="reviews-follow-wrapper">
