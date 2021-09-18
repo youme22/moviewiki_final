@@ -11,7 +11,7 @@
         .reviews-wrapper {
             border: black 1px solid;
             width: 100%;
-            height: 228px;
+            height: 265px;
             margin-bottom: 20px;
         }
         .reviews-box {
@@ -40,7 +40,7 @@
         .stars {
             height: 35%;
         }
-        .comment {
+        .comments {
             border: black 1px solid;
             width: 450px;
             height: 65%;
@@ -76,8 +76,8 @@
                     <img th:src="@{'/img/' + ${review.getMovie().getMovieProfile()}}">
                 </div>
                 <div>
-                    <span th:text="${review.getMovie().getMovieName()}"></span><br>
-                    <span th:text="'평점 ★' + ${review.getMovie().getAvgRating()}"></span>
+                    <p th:text="${review.getMovie().getMovieName()}"></p>
+                    <p th:text="'평점 ★' + ${review.getMovie().getAvgRating()}"></p>
                 </div>
             </div>
             <div class="star-comment box">
