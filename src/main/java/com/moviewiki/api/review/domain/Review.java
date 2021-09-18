@@ -30,7 +30,7 @@ public class Review {
     private User user;
 
     private Date reviewDate;
-    private int ratingPoint;
+    private double ratingPoint; // 0.5단위
     private String comment;
 
 }

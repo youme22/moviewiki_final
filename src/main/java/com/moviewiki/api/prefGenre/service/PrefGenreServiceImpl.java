@@ -1,6 +1,5 @@
 package com.moviewiki.api.prefGenre.service;
 
-
 import com.moviewiki.api.genre.domain.Genre;
 import com.moviewiki.api.movieGenre.repository.MovieGenreRepository;
 import com.moviewiki.api.prefGenre.domain.PrefGenre;
@@ -22,7 +21,7 @@ public class PrefGenreServiceImpl implements PrefGenreService {
     private PrefGenreRepository prefGenreRepository;
     private ReviewRepository reviewRepository;
     private MovieGenreRepository movieGenreRepository;
-  
+
     private final EntityManager em;
 
     public PrefGenreServiceImpl(EntityManager em) {
@@ -62,6 +61,7 @@ public class PrefGenreServiceImpl implements PrefGenreService {
 //                em.createQuery("select max(pg.genrePoint) from PrefGenre pg where pg.user = 'test1'",PrefGenre.class).getResultList();
         return prefGenreRepository.findByUser(user);
     }
+
 
 
 //    @Override
