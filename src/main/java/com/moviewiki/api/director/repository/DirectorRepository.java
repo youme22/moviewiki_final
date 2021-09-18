@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface DirectorRepository extends JpaRepository<Director, String> {
     // 특정 배우 찾기 -> 이름으로
-    public List<Director> findByDirectorName(String actorName);
+    List<Director> findByDirectorName(String actorName);
 }

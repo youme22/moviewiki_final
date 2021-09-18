@@ -52,7 +52,7 @@
       <p th:text="${news.newsTitle}"></p>
     </div>
     <div class = "newsDate">
-      <p th:text="${#temporals.format(news.newsDate, 'yyyy-MM-dd HH:mm')}"></p>
+      <p th:text="${#temporals.format(news.newsDate, '20yy/MM/dd HH:mm')}"></p>
     </div>
   </div>
   <div class="newsContent">

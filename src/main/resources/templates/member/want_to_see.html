@@ -4,11 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <title>관심 영화 페이지</title>
+    <style>
+        .pref {
+            text-align: center;
+            width: 161px;
+            height: 224px;
+        }
+        .want-to-see-box {
+            width: 161px;
+            height: 222px;
+        }
+        .box {
+            border: black 1px solid;
+            width: 145px;
+            height: 168px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <!-- HEADER -->
     <div th:insert="main_header" id="header"></div>
 
     <h1><span th:text="${userId}"></span>의 관심 영화 페이지</h1>
+
+    <div class="wrapper">
+<!--        <div  th:each="wantTosee : ${wantToseeList}>-->
+            <div class="pref">
+                <div class="want-to-see-box box">
+                    영화 포스터 그림
+                </div>
+                <div>
+                    제목<br>
+                    평점 ★4.3
+                </div>
+            </div>
+<!--        </div>-->
+    </div>
 </body>
 </html>

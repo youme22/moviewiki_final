@@ -27,4 +27,5 @@ public class MovieGenreServiceImpl implements MovieGenreService{
         return movieGenreRepository.findMovieGenreByMovie(movie);
     }
 
+
 }

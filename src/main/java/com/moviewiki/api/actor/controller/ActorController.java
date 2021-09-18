@@ -28,7 +28,7 @@ public class ActorController {
     @PostMapping("/movie/create/actor")
     public String createActor(Actor actor){
         actorServiceImpl.save(actor);
-        return "admin/admin_movie";
+        return "admin_movie";
     }
 
     /* 배우 목록 조회 페이지 이동 */

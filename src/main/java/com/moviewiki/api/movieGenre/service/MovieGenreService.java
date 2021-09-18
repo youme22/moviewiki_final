@@ -12,5 +12,4 @@ public interface MovieGenreService {
 
     public List<MovieGenre> findMovieGenreByGenre(Genre genre);
     public List<MovieGenre> findMovieGenreByMovie(Movie movie);
-
 }

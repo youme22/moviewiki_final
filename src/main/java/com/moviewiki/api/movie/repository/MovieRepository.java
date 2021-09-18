@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
-    /* 사용 금지 */
-    public Movie findByMovieId(Long movieId);
+
+    Movie findByMovieId(Long movieId);
 }
 

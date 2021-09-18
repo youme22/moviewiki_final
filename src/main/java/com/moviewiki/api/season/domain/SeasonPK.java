@@ -11,6 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SeasonPK implements Serializable {
+
     private Movie movie;
     private String seasonName;
 }

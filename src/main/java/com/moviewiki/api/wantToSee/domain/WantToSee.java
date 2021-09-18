@@ -17,12 +17,12 @@ import javax.persistence.*;
 public class  WantToSee {
 
     @Id
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="USER_ID")
     private User user;
 
     @Id
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name="MOVIE_ID")
     private Movie movie;
 }
