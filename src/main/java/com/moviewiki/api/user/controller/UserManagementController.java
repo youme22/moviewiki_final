@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -198,4 +199,18 @@ public class UserManagementController {
         return "redirect:/member/check_pw";
     }
 
+
+
+    // 더미 데이터 암호화 메소드 (시연할때 처음에 실행)
+    @GetMapping("/dummy_pw")
+    public String dummyPw() {
+        List<User> userList = userManagementService.getAllUser();
+
+        for(User user : userList) {
+            String userPw = user.getUserPw();
+            user.setUserPw(passwordEncoder.encode(userPw));
+            userManagementService.updateUser(user);
+        }
+        return "redirect:/";
+    }
 }
