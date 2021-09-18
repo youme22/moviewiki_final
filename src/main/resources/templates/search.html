@@ -1,13 +1,28 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>ActorForm</title>
+    <title>검색 결과</title>
 </head>
 <body>
-<h1>검색</h1>
+<h1>검색 결과</h1>
 <hr>
-<form action="/actorfilmography/read/actor" method="post">
-</form>
+<div>
+    <table border="1">
+        <tbody>
+
+        <th>영화 제목</th>
+        <th>영화 포스터</th>
+        <th>개봉일</th>
+        <th>평점</th>
+        <tr th:each="searchList : ${searchList}">
+            <td th:text="${searchList.movieName}"></td>
+            <td th:text="${searchList.movieProfile}"></td>
+            <td th:text="${searchList.releaseDate}"></td>
+            <td th:text="${searchList.avgRating}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
