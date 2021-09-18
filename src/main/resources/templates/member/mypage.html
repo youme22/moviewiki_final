@@ -85,7 +85,7 @@
                     <div class="reviews-follow">
                         <a th:href="@{'/member/reviews/' + ${user.userId}}">
                             리뷰<br>
-                            리뷰수
+                            <p th:text="${countReview}"/>
                         </a>
                     </div>
                     <div class="reviews-follow">

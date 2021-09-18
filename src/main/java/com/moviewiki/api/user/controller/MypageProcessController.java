@@ -3,6 +3,7 @@ package com.moviewiki.api.user.controller;
 import com.moviewiki.api.following.domain.Following;
 import com.moviewiki.api.following.service.FollowingService;
 import com.moviewiki.api.news.domain.News;
+import com.moviewiki.api.review.service.ReviewService;
 import com.moviewiki.api.user.domain.User;
 import com.moviewiki.api.user.service.UserManagementService;
 import com.moviewiki.api.wantToSee.domain.WantToSee;
@@ -37,14 +38,19 @@ public class MypageProcessController {
     @Autowired
     WantToSeeServiceImpl wantToSeeServiceImpl;
 
+    @Autowired
+    ReviewService reviewService;
+
     // 마이페이지 form call
     @GetMapping("/member/mypage/{userId}")
     public String mypageMain(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
-        User follower = userManagementService.getUser(currentUser.getUsername());
-        User followee = userManagementService.getUser(userId);
-        model.addAttribute("countFollower", followingService.countFollower(followee));
-        model.addAttribute("countFollowee", followingService.countFollowee(followee));
-        model.addAttribute("isFollowing", followingService.isFollowing(follower, followee));
+        User loginUser = userManagementService.getUser(currentUser.getUsername());
+        User pageUser = userManagementService.getUser(userId);
+
+        model.addAttribute("countReview", reviewService.countReviews(pageUser));
+        model.addAttribute("countFollower", followingService.countFollower(pageUser));
+        model.addAttribute("countFollowee", followingService.countFollowee(pageUser));
+        model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));
         model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("user", userManagementService.getUser(userId));
         return "member/mypage";
