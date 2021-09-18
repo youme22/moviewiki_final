@@ -1,6 +1,5 @@
 package com.moviewiki.api.prefGenre.service;
 
-
 import com.moviewiki.api.genre.domain.Genre;
 import com.moviewiki.api.movie.domain.Movie;
 import com.moviewiki.api.movieGenre.repository.MovieGenreRepository;
@@ -22,7 +21,7 @@ public class PrefGenreServiceImpl implements PrefGenreService {
     private PrefGenreRepository prefGenreRepository;
     private ReviewRepository reviewRepository;
     private MovieGenreRepository movieGenreRepository;
-  
+
     private final EntityManager em;
 
     public PrefGenreServiceImpl(EntityManager em) {
@@ -67,4 +66,5 @@ public class PrefGenreServiceImpl implements PrefGenreService {
         List<Movie> recMovieList = em.createNativeQuery(sql, Movie.class).getResultList();
         return recMovieList;
     }
+
 }
