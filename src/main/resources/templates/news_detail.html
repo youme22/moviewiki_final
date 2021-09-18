@@ -56,8 +56,8 @@
     </div>
   </div>
   <div class="newsContent">
-    <p th:text="${news.newsContent}"></p>
     <img th:src="@{'/img/' + ${news.newsFile}}">
+    <p th:text="${news.newsContent}"></p>
   </div>
 </body>
 </html>
