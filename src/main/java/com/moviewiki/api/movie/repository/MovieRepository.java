@@ -11,7 +11,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     Movie findByMovieId(Long movieId);
 
-    // 선호 장르 영화 추천
     public List<Movie> findAll();
+
 }
 
