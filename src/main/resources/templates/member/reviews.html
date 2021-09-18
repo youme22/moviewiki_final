@@ -12,7 +12,7 @@
             border: black 1px solid;
             width: 100%;
             height: 228px;
-
+            margin-bottom: 20px;
         }
         .reviews-box {
             width: 161px;
@@ -49,13 +49,18 @@
             width: 90px;
             height: 78px;
             line-height: 2;
-            margin: 106px 0 0 15px;
+            margin: 106px 0 80px 15px;
         }
         .modify-del {
             width: 49px;
             height: 67px;
             line-height: 2;
             margin: 116px 0 0 15px;
+        }
+        img {
+            width: 150px;
+            height: 170px;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -65,25 +70,26 @@
     <h1><span th:text="${userId}"></span>의 시청한 영화 페이지</h1>
 
     <div class="wrapper">
-        <div class="reviews-wrapper">
+        <div class="reviews-wrapper" th:each="review : ${reviewList}">
             <div class="reviews-box box">
                 <div class="movie-image">
-                    영화 포스터 그림
+                    <img th:src="@{'/img/' + ${review.getMovie().getMovieProfile()}}">
                 </div>
-                <div class="">
-                    제목<br>
-                    평점 ★4.3
+                <div>
+                    <span th:text="${review.getMovie().getMovieName()}"></span><br>
+                    <span th:text="'평점 ★' + ${review.getMovie().getAvgRating()}"></span>
                 </div>
             </div>
             <div class="star-comment box">
                 <div class="stars">
-                    ★★★★★
+                    <span th:text="${review.ratingPoint}"></span>
                 </div>
-                <div class="comment">
-                    코멘트 내용
+                <div class="comments">
+                    <span th:text="${review.getComment()}"></span>
                 </div>
             </div>
             <div class="like box">
+
                 좋아요 수<br>
                 좋아요
             </div>

@@ -40,8 +40,8 @@
                     <img th:src="@{'/img/' + ${wantToSee.getMovie().getMovieProfile()}}">
                 </div>
                 <div>
-                    <span th:text="${wantToSee.getMovie().getMovieName()}">제목</span><br>
-                    <span th:text="'★' + ${wantToSee.getMovie().getAvgRating()}">평점 ★4.3</span>
+                    <span th:text="${wantToSee.getMovie().getMovieName()}"></span><br>
+                    <span th:text="'평점 ★' + ${wantToSee.getMovie().getAvgRating()}"></span>
                 </div>
             </div>
         </div>
