@@ -8,7 +8,10 @@ import com.moviewiki.api.prefGenre.service.PrefGenreService;
 import com.moviewiki.api.prefNation.Service.PrefNationService;
 import com.moviewiki.api.review.domain.Review;
 import com.moviewiki.api.review.repository.ReviewRepository;
+import com.moviewiki.api.user.controller.UserManagementController;
 import com.moviewiki.api.user.domain.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -93,7 +96,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     // 민형 - 사용자 기준으로 리뷰 조회
     @Override
-    public List<Review> getReview(User user) {
+    public List<Review> getReviews(User user) {
         return reviewRepository.findByUser(user);
     }
 }

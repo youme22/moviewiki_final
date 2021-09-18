@@ -1,29 +1,23 @@
 package com.moviewiki.api.user.controller;
 
-import com.moviewiki.api.following.domain.Following;
 import com.moviewiki.api.following.service.FollowingService;
-import com.moviewiki.api.news.domain.News;
+import com.moviewiki.api.review.domain.Review;
 import com.moviewiki.api.review.service.ReviewService;
 import com.moviewiki.api.user.domain.User;
 import com.moviewiki.api.user.service.UserManagementService;
 import com.moviewiki.api.wantToSee.domain.WantToSee;
 import com.moviewiki.api.wantToSee.service.WantToSeeServiceImpl;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class MypageProcessController {
@@ -67,7 +61,11 @@ public class MypageProcessController {
     // 시청한 영화 페이지 form call
     @RequestMapping("/member/reviews/{userId}")
     public String reviewsPage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        User pageUser = userManagementService.getUser(userId);
+        List<Review> reviewList = reviewService.getReviews(pageUser);
+
         model.addAttribute("currentUserId", currentUser.getUsername());
+        model.addAttribute("reviewList", reviewList);
         return "/member/reviews";
     }
 
@@ -79,7 +77,6 @@ public class MypageProcessController {
         User pageUser = userManagementService.getUser(userId);
         List<WantToSee> wantToSeeList = wantToSeeServiceImpl.findByUser(pageUser);
 
-        log.info("wantToSeeList" + wantToSeeList);
         model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("wantToSeeList", wantToSeeList);
 

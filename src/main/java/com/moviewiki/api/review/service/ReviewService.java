@@ -19,5 +19,5 @@ public interface ReviewService {
     int countReviews(User user);
 
     // 민형 - 사용자 기준으로 리뷰 조회
-    List<Review> getReview(User user);
+    List<Review> getReviews(User user);
 }

@@ -29,8 +29,13 @@ public class Review {
     @JoinColumn(name ="USER_ID")
     private User user;
 
+    @Column(name= "REVIEW_DATE")    // 민형 - 추가
     private Date reviewDate;
+
+    @Column(name= "RATING_POINT")   // 민형 - 추가
     private double ratingPoint; // 0.5단위
+
+    @Column(name= "COMMENTS") // 예약어라서 못쓴대서 s 붙였습니다
     private String comment;
 
 }
