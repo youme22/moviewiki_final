@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -110,5 +111,12 @@ public class ReviewServiceImpl implements ReviewService {
             runningTime += runningTimeOfMovie;
         }
         return runningTime;
+    }
+
+    // 민형 - 리뷰 삭제
+    @Transactional
+    @Override
+    public void removeReview(Long reviewId) {
+        reviewRepository.deleteByReviewId(reviewId);
     }
 }

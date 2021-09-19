@@ -10,6 +10,7 @@ import com.moviewiki.api.wantToSee.service.WantToSeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -90,6 +91,13 @@ public class MypageProcessController {
         return "/member/want_to_see";
     }
 
+    // 리뷰 삭제
+    @RequestMapping("/deleteReview/{reviewId}")
+    public String deleteReview(@PathVariable Long reviewId, Authentication auth) {
+        String currentUserId = auth.getName();
+        reviewService.removeReview(reviewId);
 
+        return "redirect:/member/reviews/" + currentUserId;
+    }
 
 }

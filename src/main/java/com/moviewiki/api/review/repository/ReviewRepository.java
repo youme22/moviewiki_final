@@ -40,5 +40,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
      // 민형 - 사용자 기준으로 리뷰 조회
      List<Review> findByUser(User user);
 
+     // 민형 리뷰 삭제
+     void deleteByReviewId(Long reviewId);
 
 }
