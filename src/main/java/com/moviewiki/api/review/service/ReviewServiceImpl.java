@@ -90,10 +90,25 @@ public class ReviewServiceImpl implements ReviewService {
 
     }
 
-    // 민형 - 리뷰 수
+    // 민형 - 리뷰(코멘트) 수
     @Override
     public int countReviews(User user) {
         return reviewRepository.countReviewByUser(user);
+    }
+
+    // 민형 - 리뷰(평점) 수
+    @Override
+    public int countStars(User user) {
+
+        int countReview = reviewRepository.countReviewByUser(user);
+
+        List<Review> reviewList = reviewRepository.findByUser(user);
+        for(Review review : reviewList) {
+            if(review.getComment() == null) {
+              countReview -= 1;
+            }
+        }
+        return countReview;
     }
 
     // 민형 - 사용자 기준으로 리뷰 조회

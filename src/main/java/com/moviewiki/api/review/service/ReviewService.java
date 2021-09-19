@@ -16,8 +16,11 @@ public interface ReviewService {
     void unlikeReview(Like like);
 
 
-    // 민형 - 리뷰 수
+    // 민형 - 리뷰(코멘트) 수
     int countReviews(User user);
+
+    // 민형 - 리뷰(평점) 수
+    int countStars(User user);
 
     // 민형 - 사용자 기준으로 리뷰 조회
     List<Review> getReviewListByUser(User user);
@@ -30,4 +33,5 @@ public interface ReviewService {
 
     // 리뷰 조회
     Review getReview(Long reviewId);
+
 }

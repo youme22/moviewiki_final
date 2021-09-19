@@ -44,6 +44,7 @@ public class MypageProcessController {
         User loginUser = userManagementService.getUser(currentUser.getUsername());
         User pageUser = userManagementService.getUser(userId);
 
+        model.addAttribute("countStar", reviewService.countStars(pageUser));
         model.addAttribute("countReview", reviewService.countReviews(pageUser));
         model.addAttribute("countWantToSee", wantToSeeService.countWantToSee(pageUser));
         model.addAttribute("countFollower", followingService.countFollower(pageUser));
@@ -71,11 +72,9 @@ public class MypageProcessController {
     @RequestMapping("/member/reviews/{userId}")
     public String reviewsPage(@PathVariable String userId, Model model, Authentication auth) {
         User pageUser = userManagementService.getUser(userId);
-        List<Review> reviewList = reviewService.getReviewListByUser(pageUser);
 
-//        model.addAttribute("countLike", likeService.countLikes()
         model.addAttribute("currentUserId", auth.getName());
-        model.addAttribute("reviewList", reviewList);
+        model.addAttribute("reviewList",  reviewService.getReviewListByUser(pageUser));
         return "/member/reviews";
     }
 
