@@ -99,4 +99,16 @@ public class ReviewServiceImpl implements ReviewService {
     public List<Review> getReviews(User user) {
         return reviewRepository.findByUser(user);
     }
+
+
+    // 민형 - 내가 리뷰한 영화 감상 시간
+    @Override
+    public int myRunningtime(List<Review> reviewList) {
+        int runningTime = 0;
+        for(Review review : reviewList) {
+            int runningTimeOfMovie = review.getMovie().getRunningTime();
+            runningTime += runningTimeOfMovie;
+        }
+        return runningTime;
+    }
 }

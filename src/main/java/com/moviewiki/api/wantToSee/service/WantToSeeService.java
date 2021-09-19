@@ -16,4 +16,7 @@ public interface WantToSeeService {
 
     /* 보고싶은 영화 삭제 -> 사용자아이디, 영화아이디 */
     public void deleteWantToSee(User user, Movie movie);
+
+    // 민형 - 보고싶은 영화 수
+    int countWantToSee(User user);
 }

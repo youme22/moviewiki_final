@@ -6,7 +6,7 @@ import com.moviewiki.api.review.service.ReviewService;
 import com.moviewiki.api.user.domain.User;
 import com.moviewiki.api.user.service.UserManagementService;
 import com.moviewiki.api.wantToSee.domain.WantToSee;
-import com.moviewiki.api.wantToSee.service.WantToSeeServiceImpl;
+import com.moviewiki.api.wantToSee.service.WantToSeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class MypageProcessController {
     UserManagementService userManagementService;
 
     @Autowired
-    WantToSeeServiceImpl wantToSeeServiceImpl;
+    WantToSeeService wantToSeeService;
 
     @Autowired
     ReviewService reviewService;
@@ -42,6 +42,7 @@ public class MypageProcessController {
         User pageUser = userManagementService.getUser(userId);
 
         model.addAttribute("countReview", reviewService.countReviews(pageUser));
+        model.addAttribute("countWantToSee", wantToSeeService.countWantToSee(pageUser));
         model.addAttribute("countFollower", followingService.countFollower(pageUser));
         model.addAttribute("countFollowee", followingService.countFollowee(pageUser));
         model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));
@@ -54,6 +55,11 @@ public class MypageProcessController {
     // 취향분석 페이지 form call
     @RequestMapping("/member/pref/{userId}")
     public String prefPage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        User pageUser = userManagementService.getUser(userId);
+        List<Review> reviewList = reviewService.getReviews(pageUser);
+
+        model.addAttribute("myRunningTime", reviewService.myRunningtime(reviewList));
+        model.addAttribute("countReview", reviewService.countReviews(pageUser));
         model.addAttribute("currentUserId", currentUser.getUsername());
         return "/member/pref";
     }
@@ -64,6 +70,7 @@ public class MypageProcessController {
         User pageUser = userManagementService.getUser(userId);
         List<Review> reviewList = reviewService.getReviews(pageUser);
 
+//        model.addAttribute("countLike", likeService.countLikes()
         model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("reviewList", reviewList);
         return "/member/reviews";
@@ -75,7 +82,7 @@ public class MypageProcessController {
     public String wantToSeePage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
 
         User pageUser = userManagementService.getUser(userId);
-        List<WantToSee> wantToSeeList = wantToSeeServiceImpl.findByUser(pageUser);
+        List<WantToSee> wantToSeeList = wantToSeeService.findByUser(pageUser);
 
         model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("wantToSeeList", wantToSeeList);

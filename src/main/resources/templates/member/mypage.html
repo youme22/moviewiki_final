@@ -101,7 +101,7 @@
                 <div class="reviews-follow-wrapper">
                     <div class="reviews-follow">
                         <a th:href="@{'/member/reviews/' + ${user.userId}}">
-                            리뷰<br>
+                            리뷰
                             <p th:text="${countReview}"/>
                         </a>
                     </div>
@@ -134,6 +134,7 @@
                                     <input type="hidden" th:value="${currentUserId}" name="followerId"/>
                                     <input type="hidden" th:value="${user.userId}" name="followeeId"/>
                                     <button type="submit">팔로우</button>
+                                </form>
                             </span>
                         </span>
                     </span>
@@ -156,13 +157,13 @@
                     <a th:href="@{'/member/reviews/' + ${user.userId}}">
                         <div class="watched-wanna watched">
                             시청한 영화<br>
-                            ★ 시청한 영화수
+                            <p th:text="'★ ' + ${countReview}"/>
                         </div>
                     </a>
                     <a th:href="@{'/member/want_to_see/' + ${user.userId}}">
                         <div class="watched-wanna wanna">
                             관심 영화<br>
-                            ★ 관심 영화수
+                            <p th:text="'★ ' + ${countWantToSee}"/>
                         </div>
                     </a>
                 </div>
