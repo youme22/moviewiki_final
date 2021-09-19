@@ -10,7 +10,7 @@ import java.util.List;
 public interface ReviewService {
 
     void doReview(Review review);
-    void modifyReview(Review review);
+    void modifyReview(Review review); // 민형 - 사용
     void deleteReview(Review review);
     void likeReview(Like like);
     void unlikeReview(Like like);

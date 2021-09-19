@@ -92,27 +92,4 @@ public class MypageProcessController {
         return "/member/want_to_see";
     }
 
-    // 리뷰 삭제
-    @RequestMapping("/deleteReview/{reviewId}")
-    public String deleteReview(@PathVariable Long reviewId, HttpServletRequest request) {
-        String pageId = request.getParameter("userId");
-        reviewService.removeReview(reviewId);
-
-        return "redirect:/member/reviews/" + pageId;
-    }
-
-    // 리뷰 수정
-    @PostMapping("/updateReview/{reviewId}")
-    public String updateUser(@PathVariable Long reviewId, Review updateReview, Authentication auth) {
-        String loginId = auth.getName();
-        // 리뷰 가져오기
-        Review review = reviewService.getReview(reviewId);
-
-        // 원래 있던 유저값에 세팅
-        review.setComment(updateReview.getComment());
-        review.setRatingPoint(updateReview.getRatingPoint());
-
-        reviewService.modifyReview(review);
-        return "redirect:/member/reviews/" + loginId;
-    }
 }
