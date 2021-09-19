@@ -53,10 +53,11 @@ public class ReviewServiceImpl implements ReviewService {
 
 // doReview()랑 modifyReview() 합쳐도 되는지 고민
 
+    @Transactional
     @Override
     public void modifyReview(Review review) {
 
-//        reviewRepository.saveReview(review); // 리뷰 수정
+        reviewRepository.save(review); // 리뷰 수정
         prefGenreService.updatePrefGenre(review); // 장르 선호도 업데이트
         prefNationService.updatePrefNation(review); // 국가 선호도 업데이트
         prefDirectorService.updatePrefDirector(review); // 감독 선호도 업데이트
@@ -97,7 +98,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     // 민형 - 사용자 기준으로 리뷰 조회
     @Override
-    public List<Review> getReviews(User user) {
+    public List<Review> getReviewListByUser(User user) {
         return reviewRepository.findByUser(user);
     }
 
@@ -119,4 +120,10 @@ public class ReviewServiceImpl implements ReviewService {
     public void removeReview(Long reviewId) {
         reviewRepository.deleteByReviewId(reviewId);
     }
+
+    // 민형 - 리뷰 조회
+    public Review getReview(Long reviewId) {
+        return reviewRepository.findByReviewId(reviewId);
+    }
+
 }

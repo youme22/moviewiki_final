@@ -43,4 +43,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
      // 민형 리뷰 삭제
      void deleteByReviewId(Long reviewId);
 
+     // 민형 - 리뷰 조회
+     Review findByReviewId(Long reviewId);
 }
