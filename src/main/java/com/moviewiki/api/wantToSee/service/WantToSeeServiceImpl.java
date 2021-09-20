@@ -46,4 +46,10 @@ public class WantToSeeServiceImpl implements WantToSeeService{
         WantToSee wantToSee = em.find(WantToSee.class, wantToSeePK);
         em.remove(wantToSee);   // 삭제
     }
+
+    // 보고싶은 영화 수
+    @Override
+    public int countWantToSee(User user) {
+        return wantToSeeRepository.countMovieByUser(user);
+    }
 }

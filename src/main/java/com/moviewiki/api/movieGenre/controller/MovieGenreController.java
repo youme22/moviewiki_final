@@ -1,7 +1,9 @@
 package com.moviewiki.api.movieGenre.controller;
 
+import com.moviewiki.api.movie.domain.Movie;
+import com.moviewiki.api.movie.repository.MovieRepository;
 import com.moviewiki.api.movieGenre.domain.MovieGenre;
-import com.moviewiki.api.movieGenre.service.MovieGenreServiceImpl;
+import com.moviewiki.api.movieGenre.service.MovieGenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +18,9 @@ import java.util.List;
 public class MovieGenreController {
 
     @Autowired
-    private MovieGenreServiceImpl movieGenreServiceImpl ;
+    MovieGenreService movieGenreServiceImpl ;
+    @Autowired
+    MovieRepository movieRepository;
 
     // Genre
     @GetMapping("/movieGenre/read/genre")
@@ -45,6 +49,15 @@ public class MovieGenreController {
 //        model.addAttribute("genres2",genreList2);
         return "readMovieGenre";
 
+    }
+
+
+    // 검색
+    @GetMapping("/searchResult")
+    public String searchList(Model model){
+        List<Movie> searchList = movieGenreServiceImpl.findAll();
+        model.addAttribute("searchList2", searchList);
+        return "searchResult";
     }
 
 }

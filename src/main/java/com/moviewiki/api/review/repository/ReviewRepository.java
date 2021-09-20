@@ -1,9 +1,9 @@
 package com.moviewiki.api.review.repository;
 
 import com.moviewiki.api.movie.domain.Movie;
-import com.moviewiki.api.movieGenre.domain.MovieGenre;
 import com.moviewiki.api.review.domain.Review;
 import com.moviewiki.api.user.domain.User;
+import com.moviewiki.api.wantToSee.domain.WantToSee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -33,4 +33,16 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
      // 리뷰 등록, 수정, 삭제
 //     void saveReview(Review review);
 //     void deleteReview(Review review);
+
+     // 민형 - 리뷰 수
+     int countReviewByUser(User user);
+
+     // 민형 - 사용자 기준으로 리뷰 조회
+     List<Review> findByUser(User user);
+
+     // 민형 리뷰 삭제
+     void deleteByReviewId(Long reviewId);
+
+     // 민형 - 리뷰 조회
+     Review findByReviewId(Long reviewId);
 }

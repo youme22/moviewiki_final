@@ -5,6 +5,8 @@ import com.moviewiki.api.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserManagementServiceImpl implements UserManagementService {
     @Autowired
@@ -47,5 +49,12 @@ public class UserManagementServiceImpl implements UserManagementService {
     public User findPw(String userId, String userName, String userMail) {
         User user = userRepository.findUserByUserIdAndUserNameAndUserMail(userId, userName, userMail);
         return user;
+    }
+
+    // 회원 전체 조회 메소드
+    @Override
+    public List<User> getAllUser() {
+        List<User> userList = userRepository.findAll();
+        return userList;
     }
 }

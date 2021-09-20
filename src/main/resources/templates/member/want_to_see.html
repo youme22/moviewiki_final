@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>관심 영화 페이지</title>
@@ -20,6 +20,11 @@
             height: 168px;
             text-align: center;
         }
+        img {
+            width: 150px;
+            height: 170px;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
@@ -29,17 +34,17 @@
     <h1><span th:text="${userId}"></span>의 관심 영화 페이지</h1>
 
     <div class="wrapper">
-<!--        <div  th:each="wantTosee : ${wantToseeList}>-->
+        <div  th:each="wantToSee : ${wantToSeeList}">
             <div class="pref">
                 <div class="want-to-see-box box">
-                    영화 포스터 그림
+                    <img th:src="@{'/img/' + ${wantToSee.getMovie().getMovieProfile()}}">
                 </div>
                 <div>
-                    제목<br>
-                    평점 ★4.3
+                    <p th:text="${wantToSee.getMovie().getMovieName()}"></p>
+                    <p th:text="'평점 ★' + ${wantToSee.getMovie().getAvgRating()}"></p>
                 </div>
             </div>
-<!--        </div>-->
+        </div>
     </div>
 </body>
 </html>
