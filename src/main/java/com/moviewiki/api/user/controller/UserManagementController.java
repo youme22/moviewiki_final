@@ -217,6 +217,6 @@ public class UserManagementController {
             user.setUserPw(passwordEncoder.encode(userPw));
             userManagementService.updateUser(user);
         }
-        return "redirect:/";
+        return "redirect:/admin/admin_index";
     }
 }
