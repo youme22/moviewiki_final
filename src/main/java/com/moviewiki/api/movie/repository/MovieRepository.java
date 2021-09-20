@@ -11,7 +11,12 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     Movie findByMovieId(Long movieId);
 
+
     public List<Movie> findAll();
 
+
+    // 입력받는 검색 test
+    List<Movie> findByMovieNameContaining(String movieName);
+//    public List<Movie> getListSearchMovie(String searchName);
 }
 

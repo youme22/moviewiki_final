@@ -6,10 +6,8 @@ import com.moviewiki.api.movie.domain.MovieForm;
 import com.moviewiki.api.movie.service.MovieServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.util.List;
@@ -60,5 +58,15 @@ public class MovieController {
     public List<Movie> readAllMovie(Actor actor){
         List<Movie> movieList = movieServiceImpl.findAll();
         return movieList;
+    }
+
+
+    // 입력받는 검색 test
+    @GetMapping("/search")
+    public String search(@RequestParam(value = "keyword") String keyword, Model model) {
+        List<MovieForm> searchList = movieServiceImpl.searchMovies(keyword);
+        model.addAttribute("searchList", searchList);
+        return "search";
+        //http://localhost:8081/search?keyword로 들어가야됨
     }
 }

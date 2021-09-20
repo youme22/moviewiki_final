@@ -56,4 +56,5 @@ public class MovieGenreServiceImpl implements MovieGenreService{
         List<Movie> searchList = em.createNativeQuery(sql, Movie.class).getResultList();
         return searchList;
     }
+
 }
