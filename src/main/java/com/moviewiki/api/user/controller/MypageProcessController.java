@@ -7,8 +7,6 @@ import com.moviewiki.api.user.domain.User;
 import com.moviewiki.api.user.service.UserManagementService;
 import com.moviewiki.api.wantToSee.domain.WantToSee;
 import com.moviewiki.api.wantToSee.service.WantToSeeService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,7 +20,6 @@ import java.util.List;
 
 @Controller
 public class MypageProcessController {
-    private static final Logger log = LoggerFactory.getLogger(UserManagementController.class);
 
     @Autowired
     FollowingService followingService;
