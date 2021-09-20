@@ -11,15 +11,13 @@
         .reviews-wrapper {
             border: black 1px solid;
             width: 100%;
-            height: 228px;
-
+            height: 265px;
+            margin-bottom: 20px;
         }
         .reviews-box {
             width: 161px;
             height: 222px;
-            margin: 15px 15px
-        }
-        .reviews-box > div{
+            margin: 15px 15px;
             text-align: center;
         }
         .movie-image {
@@ -29,34 +27,45 @@
         .box {
             width: 145px;
             height: 212px;
-            text-align: center;
             float:left;
         }
         .star-comment {
-            width: 450px;
-            height: 185px;
+            border: black 1px solid;
+            width: 607px;
+            height: 230px;
             margin: 24px 0 0 15px;
         }
-        .stars {
-            height: 35%;
-        }
         .comment {
-            border: black 1px solid;
-            width: 450px;
-            height: 65%;
+            width: 420px;
+            height: 160px;
+            float: left;
+        }
+        .stars {
+            margin: 10px 0;
+        }
+        textarea {
+            height: 135px;
+            width: 415px;
         }
         .like {
             width: 90px;
             height: 78px;
-            line-height: 2;
-            margin: 106px 0 0 15px;
+            margin: 106px 0 80px 15px;
+            float: right;
         }
         .modify-del {
             width: 49px;
             height: 67px;
-            line-height: 2;
-            margin: 116px 0 0 15px;
+            /*margin: 116px 0 0 15px;*/
+            float:right;
+
         }
+        img {
+            width: 150px;
+            height: 170px;
+            object-fit: cover;
+        }
+
     </style>
 </head>
 <body>
@@ -65,31 +74,60 @@
     <h1><span th:text="${userId}"></span>의 시청한 영화 페이지</h1>
 
     <div class="wrapper">
-        <div class="reviews-wrapper">
+        <div class="reviews-wrapper" th:each="review : ${reviewList}">
             <div class="reviews-box box">
                 <div class="movie-image">
-                    영화 포스터 그림
+                    <img th:src="@{'/img/' + ${review.getMovie().getMovieProfile()}}">
                 </div>
-                <div class="">
-                    제목<br>
-                    평점 ★4.3
-                </div>
-            </div>
-            <div class="star-comment box">
-                <div class="stars">
-                    ★★★★★
-                </div>
-                <div class="comment">
-                    코멘트 내용
+                <div>
+                    <p th:text="${review.getMovie().getMovieName()}"></p>
+                    <p th:text="'평점 ★' + ${review.getMovie().getAvgRating()}"></p>
                 </div>
             </div>
-            <div class="like box">
-                좋아요 수<br>
-                좋아요
-            </div>
-            <div class="modify-del box">
-                <button>수정</button><br>
-                <button>삭제</button>
+
+            <div class="star-comment box" th:switch="${userId}">
+
+                <form th:case="${currentUserId}" th:action="@{'/updateReview/' + ${review.reviewId}}" method="post">
+                    <input type="hidden" name="_method" value="put"/>
+                    <input type="hidden" name="reviewId" th:value="${review.reviewId}"/>
+
+                    <div class="stars">
+                        <input type="text" name="ratingPoint" th:value="${review.ratingPoint}">
+                    </div>
+                    <div class="comment">
+                        <textarea name="comment" th:text="${review.comment}"></textarea>
+                    </div>
+
+                    <div class="like">
+                        좋아요 수<br>
+                        좋아요
+                    </div>
+
+                    <div class="modify-del box" >
+                        <span >
+                            <input type="submit" value="수정">
+                        </span>
+                    </div>
+                </form>
+                <div th:case="*">
+                    <div class="stars" >
+                        <p th:text="${review.ratingPoint}"/>
+                    </div>
+                    <div class="comment" >
+                        <p th:text="${review.getComment()}"></p>
+                    </div>
+                    <div class="like">
+                        좋아요 수<br>
+                        좋아요
+                    </div>
+                </div>
+
+                <div class="modify-del box" th:switch="${userId}">
+                    <form th:case="${currentUserId}" th:action="@{'/deleteReview/' + ${review.reviewId}}" method="post">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <input type="submit" value="삭제">
+                    </form>
+                </div>
             </div>
         </div>
     </div>

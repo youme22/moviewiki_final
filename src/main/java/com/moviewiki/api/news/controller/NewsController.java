@@ -86,7 +86,7 @@ public class NewsController {
     // 글수정 -> DB 저장 메소드
     @PostMapping("/updateNews/{newsId}")
     public String updateNews(News news) {
-        log.info("createNews");
+        log.info("news========" + news);
         newsService.updateNews(news);
         return "redirect:/admin/admin_news";
     }

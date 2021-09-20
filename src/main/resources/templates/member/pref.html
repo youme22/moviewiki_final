@@ -11,7 +11,7 @@
         }
         .pref-boxs {
             width: 100%;
-            height: 300px;
+            height: 355px;
         }
         .pref-box {
             float: left;
@@ -27,7 +27,7 @@
         .user-info > div {
             border: black solid 1px;
             width: 143px;
-            height: 27px;
+            height: 112px;
             float: left;
             margin-right: 47px;
         }
@@ -47,9 +47,27 @@
     <div class="wrapper">
         <div class="pref-main">
             <div class="user-info">
-                <div>영화고수</div> <!-- 리뷰수에 따라 등급 다르게 -->
+                <div><!-- 리뷰수에 따라 등급 다르게 -->
+                    <p th:if="${countReview} >= 500">
+                        <img th:src="@{/img/grade5.png}">
+                    </p>
+                    <p th:if="${countReview} >= 300 and ${countReview} < 500">
+                        <img th:src="@{/img/grade4.png}">
+                    </p>
+                    <p th:if="${countReview} >= 100 and ${countReview} < 300">
+                        <img th:src="@{/img/grade3.png}">
+                    </p>
+                    <p th:if="${countReview} >= 30 and ${countReview} < 100">
+                        <img th:src="@{/img/grade2.png}">
+                    </p>
+                    <p th:if="${countReview} < 30">
+                        <img th:src="@{/img/grade1.png}">
+                    </p>
+                </div>
                 <div><span th:text="${userId}"></span>의 취향분석</div>
-                <div>평가한 영화 작품 ?건 </div> <!-- 리뷰수 출력 -->
+                <div><!-- 리뷰수 출력 -->
+                    <p th:text="'평가한 영화 작품 ' + ${countReview} + '건'"/>
+                </div>
             </div>
             <div class="pref-boxs">
                 <div class="pref-box">
@@ -79,8 +97,15 @@
             </div>
             <div class="time-to-watch">
                 <div>영화 감상 시간</div>
-                <div>454시간</div>
-                <div>인생의 3주는 순수하게 영화 본 시간, 대단합니다.</div>
+                <p th:text="${myRunningTime} + '시간'"/>
+                <p th:if="${myRunningTime} >= 240000" th:text="'국내에 몇 안되는 영화전문가'"/>
+                <p th:if="${myRunningTime} >= 180000 and ${countReview} < 240000"
+                   th:text="'상위 0.01%에 꼽히는 베테랑 영화인'"/>
+                <p th:if="${myRunningTime} >= 120000 and ${countReview} < 180000"
+                   th:text="'상위 0.1%의 영화인'"/>
+                <p th:if="${myRunningTime} >= 50000 and ${countReview} < 120000"
+                   th:text="'영화 1000작을 넘게 본 아마추어 영화인"/>
+                <p th:if="${myRunningTime} < 50000" th:text="'당신은 영화 꿈나무!'"/>
             </div>
         </div>
     </div>

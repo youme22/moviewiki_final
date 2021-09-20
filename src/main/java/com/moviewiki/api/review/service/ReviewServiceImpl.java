@@ -8,8 +8,15 @@ import com.moviewiki.api.prefGenre.service.PrefGenreService;
 import com.moviewiki.api.prefNation.Service.PrefNationService;
 import com.moviewiki.api.review.domain.Review;
 import com.moviewiki.api.review.repository.ReviewRepository;
+import com.moviewiki.api.user.controller.UserManagementController;
+import com.moviewiki.api.user.domain.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -46,10 +53,11 @@ public class ReviewServiceImpl implements ReviewService {
 
 // doReview()랑 modifyReview() 합쳐도 되는지 고민
 
+    @Transactional
     @Override
     public void modifyReview(Review review) {
 
-//        reviewRepository.saveReview(review); // 리뷰 수정
+        reviewRepository.save(review); // 리뷰 수정
         prefGenreService.updatePrefGenre(review); // 장르 선호도 업데이트
         prefNationService.updatePrefNation(review); // 국가 선호도 업데이트
         prefDirectorService.updatePrefDirector(review); // 감독 선호도 업데이트
@@ -80,6 +88,57 @@ public class ReviewServiceImpl implements ReviewService {
 
 //        likeRepository.deleteLike(like);
 
+    }
+
+    // 민형 - 리뷰(코멘트) 수
+    @Override
+    public int countReviews(User user) {
+        return reviewRepository.countReviewByUser(user);
+    }
+
+    // 민형 - 리뷰(평점) 수
+    @Override
+    public int countStars(User user) {
+
+        int countReview = reviewRepository.countReviewByUser(user);
+
+        List<Review> reviewList = reviewRepository.findByUser(user);
+        for(Review review : reviewList) {
+            if(review.getComment() == null) {
+              countReview -= 1;
+            }
+        }
+        return countReview;
+    }
+
+    // 민형 - 사용자 기준으로 리뷰 조회
+    @Override
+    public List<Review> getReviewListByUser(User user) {
+        return reviewRepository.findByUser(user);
+    }
+
+
+    // 민형 - 내가 리뷰한 영화 감상 시간
+    @Override
+    public int myRunningtime(List<Review> reviewList) {
+        int runningTime = 0;
+        for(Review review : reviewList) {
+            int runningTimeOfMovie = review.getMovie().getRunningTime();
+            runningTime += runningTimeOfMovie;
+        }
+        return runningTime;
+    }
+
+    // 민형 - 리뷰 삭제
+    @Transactional
+    @Override
+    public void removeReview(Long reviewId) {
+        reviewRepository.deleteByReviewId(reviewId);
+    }
+
+    // 민형 - 리뷰 조회
+    public Review getReview(Long reviewId) {
+        return reviewRepository.findByReviewId(reviewId);
     }
 
 }

@@ -26,7 +26,7 @@ public class News {
     @Column(name = "news_date", updatable = false)
     private LocalDateTime newsDate;
 
-    @Column(name = "news_content", length=2000)
+    @Column(name = "news_content", length=4000)
     private String newsContent;
 
     @Column(name = "news_file", length=200)

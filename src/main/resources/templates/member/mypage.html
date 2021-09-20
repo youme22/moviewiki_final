@@ -78,14 +78,31 @@
             <div class="mypage-top">
 <!--                리뷰수에 따라 등급 바뀌게-->
                 <div class="grade">
-                    <p><img th:src="@{/img/grade2.png}"></p>
+                    <div>
+                        <p th:if="${countReview} >= 500">
+                            <img th:src="@{/img/grade5.png}">
+                        </p>
+                        <p th:if="${countReview} >= 300 and ${countReview} < 500">
+                            <img th:src="@{/img/grade4.png}">
+                        </p>
+                        <p th:if="${countReview} >= 100 and ${countReview} < 300">
+                            <img th:src="@{/img/grade3.png}">
+                        </p>
+                        <p th:if="${countReview} >= 30 and ${countReview} < 100">
+                            <img th:src="@{/img/grade2.png}">
+                        </p>
+                        <p th:if="${countReview} < 30">
+                            <img th:src="@{/img/grade1.png}">
+                        </p>
+                    </div>
+
                     <strong th:text="${user.userId}"/>
                 </div>
                 <div class="reviews-follow-wrapper">
                     <div class="reviews-follow">
                         <a th:href="@{'/member/reviews/' + ${user.userId}}">
-                            리뷰<br>
-                            리뷰수
+                            리뷰
+                            <p th:text="${countReview}"/>
                         </a>
                     </div>
                     <div class="reviews-follow">
@@ -117,6 +134,7 @@
                                     <input type="hidden" th:value="${currentUserId}" name="followerId"/>
                                     <input type="hidden" th:value="${user.userId}" name="followeeId"/>
                                     <button type="submit">팔로우</button>
+                                </form>
                             </span>
                         </span>
                     </span>
@@ -139,13 +157,13 @@
                     <a th:href="@{'/member/reviews/' + ${user.userId}}">
                         <div class="watched-wanna watched">
                             시청한 영화<br>
-                            ★ 시청한 영화수
+                            <p th:text="'★ ' + ${countStar}"/>
                         </div>
                     </a>
                     <a th:href="@{'/member/want_to_see/' + ${user.userId}}">
                         <div class="watched-wanna wanna">
                             관심 영화<br>
-                            ★ 관심 영화수
+                            <p th:text="'★ ' + ${countWantToSee}"/>
                         </div>
                     </a>
                 </div>

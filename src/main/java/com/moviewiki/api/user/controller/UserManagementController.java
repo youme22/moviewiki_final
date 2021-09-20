@@ -2,6 +2,7 @@ package com.moviewiki.api.user.controller;
 
 import com.moviewiki.api.user.domain.User;
 import com.moviewiki.api.user.service.UserManagementService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,7 @@ public class UserManagementController {
             nextPage = "redirect:/denied";
         } else {
             if (requestWrapper.isUserInRole("ADMIN")) {
-                nextPage = "redirect:/admin/admin_news";
+                nextPage = "redirect:/admin/admin_index";
             } else {
                 model.put("currentUserId", currentUser.getUsername());
                 nextPage = "redirect:/main";
@@ -71,6 +72,15 @@ public class UserManagementController {
         }
         return nextPage;
     }
+
+    // 관리자 페이지 이동
+    @RequestMapping("/admin/admin_index")
+    public String adminIndexPage(Authentication auth, Model model) {
+        User admin = userManagementService.getUser(auth.getName());
+        model.addAttribute("adminName", admin.getUserName());
+        return "/admin/admin_index";
+    }
+
 
     // 비정상 접속시 접근 불가 페이지
     @GetMapping("/denied")
