@@ -32,7 +32,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/img/**", "/js/**", "/css/**");
+        web.ignoring().antMatchers("/resources/**", "/img/**", "/js/**", "/css/**", "/images/**", "/fonts/**");
     }
 
     @Override
