@@ -1,33 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
     <title>관리자 뉴스게시판</title>
-    <style>
-        table {
-            border-collapse: collapse;
-        }
-        .btn_registerNews {
-            width:716px;
-            text-align: right;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        .title {
-            width: 400px;
-        }
-        .createDate {
-            width: 150px;
-        }
-        th {
-            width: 50px;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link href="../css/admin_styles.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- HEADER -->
-    <div th:insert="admin/admin_header" id="header"></div>
+    <div th:insert="/admin/admin_header" id="header"></div>
+
 
     <h1>관리자 뉴스게시판</h1>
     <div class="btn_registerNews">
