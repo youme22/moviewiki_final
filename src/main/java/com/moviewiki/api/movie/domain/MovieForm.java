@@ -1,6 +1,7 @@
 package com.moviewiki.api.movie.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,4 +22,23 @@ public class MovieForm {
     private String genreId;
     private String summary;
 
+
+    // 검색 TEST
+    public Movie toEntity(){
+        Movie movie = Movie.builder()
+                .movieName(movieName)
+                .movieOgName(movieOgName)
+                .movieProfile(movieProfile)
+                .filmRating(filmRating)
+                .build();
+        return movie;
+    }
+
+    @Builder
+    public MovieForm(String movieName, String movieOgName, String movieProfile, String filmRating) {
+        this.movieName = movieName;
+        this.movieOgName = movieOgName;
+        this.movieProfile = movieProfile;
+        this.filmRating = filmRating;
+    }
 }

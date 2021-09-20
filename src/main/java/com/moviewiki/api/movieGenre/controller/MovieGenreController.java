@@ -53,10 +53,11 @@ public class MovieGenreController {
 
 
     // 검색
-    @GetMapping("/search")
+    @GetMapping("/searchResult")
     public String searchList(Model model){
         List<Movie> searchList = movieGenreServiceImpl.findAll();
-        model.addAttribute("searchList", searchList);
-        return "search";
+        model.addAttribute("searchList2", searchList);
+        return "searchResult";
     }
+
 }
