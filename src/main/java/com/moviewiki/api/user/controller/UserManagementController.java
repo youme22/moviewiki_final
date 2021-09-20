@@ -75,10 +75,7 @@ public class UserManagementController {
 
     // 관리자 페이지 이동
     @RequestMapping("/admin/admin_index")
-    public String adminIndexPage(Authentication auth, Model model) {
-        User admin = userManagementService.getUser(auth.getName());
-        model.addAttribute("adminName", admin.getUserName());
-        return "/admin/admin_index";
+    public void adminIndexPage() {
     }
 
 
@@ -208,7 +205,6 @@ public class UserManagementController {
         System.out.println("비밀번호가 올바르지 않습니다."); // 모달창?
         return "redirect:/member/check_pw";
     }
-
 
 
     // 더미 데이터 암호화 메소드 (시연할때 처음에 실행)
