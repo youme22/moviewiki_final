@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en">
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
@@ -14,11 +15,13 @@
             crossorigin="anonymous"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript">
+        var directorNo=0;
         $(document).ready(function () {
             $('.btnAdd1').click(function () {
                 $('#directors').append(
-                    '<input type="text" name="directorName" required>\
-                    <input type="button" value="중복"> <input type="button" class="btnRemove1" value="삭제"><br>'
+                    '<input type="text" id="directorId'+(++directorNo)+'" name="directorId" required>\
+                    <input type="button" value="중복" onclick="popup_dc_director();"> \
+                    <input type="button" class="btnRemove1" value="삭제"><br>'
                 )
                 $('.btnRemove1').on('click', function () {
                     $(this).prev().remove();
@@ -29,11 +32,13 @@
             });
         });
 
+        var actorNo=0;
         $(document).ready(function () {
             $('.btnAdd2').click(function () {
                 $('#actors').append(
-                    '<input type="text" name="actorName" required>\
-                    <input type="button" value="중복"> <input type="button" class="btnRemove2" value="삭제"><br>'
+                    '<input type="text" id="actorId'+(++actorNo)+'" name="actorId" required>\
+                    <input type="button" value="중복" onclick="popup_dc_actor();"> \
+                    <input type="button" class="btnRemove2" value="삭제"><br>'
                 )
                 $('.btnRemove2').on('click', function () {
                     $(this).prev().remove();
@@ -47,7 +52,7 @@
         $(document).ready(function () {
             $('.btnAdd3').click(function () {
                 $('#nations').append(
-                    '<select id="nationId" name="nationId" required>\
+                    '<select name="nationId" required>\
                         <option value="">선택</option>\
                         <option value="KR">한국</option>\
                         <option value="JP">일본</option>\
@@ -69,7 +74,7 @@
         $(document).ready(function () {
             $('.btnAdd4').click(function () {
                 $('#genres').append(
-                    '<select id="genreId" name="genreId" required>\
+                    '<select name="genreId" required>\
                         <option value="">선택</option>\
                         <option value="DR">드라마</option>\
                         <option value="FN">판타지</option>\
@@ -110,14 +115,11 @@
         });
 
         function popup_dc_director(){
-            window.open("popup_dc_director.html", "감독 중복 확인", "width=400, height=300, left=100, top=50");
+            window.open("/movie/read/director", "감독 중복 확인", "width=600, height=300, left=100, top=50");
         }
-
         function popup_dc_actor(){
-            window.open("popup_dc_actor.html", "배우 중복 확인", "width=400, height=300, left=100, top=50");
+            window.open("/movie/read/actor", "배우 중복 확인", "width=600, height=300, left=100, top=50");
         }
-
-
     </script>
 </head>
 <body class="sb-nav-fixed">
@@ -183,6 +185,10 @@
                                 <div class="form-style-1 user-pro" action="">
                                     <form action="/movie/create" class="user" method="post">
                                         <div class="row">
+                                            <div class="col-md-6 form-it"><label>영화 이름</label><input type="text"
+                                                                                                     name="movieName"
+                                                                                                     required>
+                                            </div>
                                             <div class="col-md-6 form-it"><label>영화 원제</label><input type="text"
                                                                                                      name="movieOgName"
                                                                                                      required>
@@ -190,12 +196,13 @@
                                         </div>
                                         <div class="row">
                                             <div id="directors" class="col-md-6 form-it"><label>감독 이름</label>
-                                                <input type="text" name="directorName" required>
+                                                <input type="text" id ="directorId" name="directorId" required>
                                                 <input type="button" value="중복" onclick="popup_dc_director();">
                                                 <input type="button" class="btnAdd1" value="추가"><br>
                                             </div>
                                             <div id="actors" class="col-md-6 form-it"><label>배우 이름</label>
-                                                <input type="text" name="actorName" required>
+
+                                                <input type="text" id="actorId" name="actorId" required>
                                                 <input type="button" value="중복" onclick="popup_dc_actor();">
                                                 <input type="button" class="btnAdd2" value="추가"><br>
                                             </div>
@@ -215,7 +222,8 @@
                                                 <input type="button" class="btnAdd3" value="추가"><br>
                                             </div>
                                             <div id="genres" class="col-md-6 form-it"><label>장르</label>
-                                                <select id="genreId" name="genreId" required>
+
+                                                <select name="genreId" required>
                                                     <option value="">선택</option>
                                                     <option value="DR">드라마</option>
                                                     <option value="FN">판타지</option>

@@ -44,7 +44,7 @@
             <a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{'/member/mypage/' + ${currentUserId}}">
               <button>마이페이지</button>
             </a>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/admin_index}">어드민 메인</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/templates/admin_ex/admin_index}">어드민 메인</a>
         </span>
         <span>
             <a sec:authorize="isAuthenticated()" th:href="@{/logout}">

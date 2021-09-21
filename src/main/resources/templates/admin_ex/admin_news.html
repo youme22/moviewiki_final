@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>관리자 뉴스게시판</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link href="../css/admin_styles.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- HEADER -->
+    <div th:insert="/admin_ex/admin_header" id="header"></div>
+
+
+    <h1>관리자 뉴스게시판</h1>
+    <div class="btn_registerNews">
+        <button type="button" onclick="location.href='/createNews'">뉴스 등록</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th class="title">제목</th>
+                <th class="createDate">작성일</th>
+                <th>수정</th>
+                <th>삭제</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="article : ${newsList}">
+                <td th:text="${article.getNewsId}"></td>
+                <td>
+                    <a th:href="@{'/readNews/' + ${article.newsId}}">
+                        <span th:text="${article.newsTitle}"></span>
+                    </a>
+                </td>
+                <td>
+                    <span th:text="${#temporals.format(article.newsDate, '20yy-MM-dd')}"></span>
+                </td>
+
+                <td>
+                    <a th:href="@{'/updateNews/' + ${article.newsId}}">
+                        <button>수정</button>
+                    </a>
+                </td>
+                <td>
+                    <form th:action="@{'/deleteNews/' + ${article.newsId}}" method="post">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <input type="submit" value="삭제">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
