@@ -77,10 +77,13 @@ public class MypageProcessController {
     @RequestMapping("/member/want_to_see/{userId}")
 
     public String wantToSeePage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
-
+        User loginUser = userManagementService.getUser(currentUser.getUsername());
         User pageUser = userManagementService.getUser(userId);
         List<WantToSee> wantToSeeList = wantToSeeService.findByUser(pageUser);
 
+        model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));
+        model.addAttribute("countReview", reviewService.countReviews(pageUser));
+        model.addAttribute("user", pageUser);
         model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("wantToSeeList", wantToSeeList);
 
