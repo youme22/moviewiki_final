@@ -28,13 +28,13 @@ public class ActorController {
     @PostMapping("/movie/create/actor")
     public String createActor(Actor actor){
         actorServiceImpl.save(actor);
-        return "admin_movie";
+        return "admin/popup_dc_actor";
     }
 
     /* 배우 목록 조회 페이지 이동 */
     @GetMapping("/movie/read/actor")
     public String readActor(){
-        return "admin/admin_actor_dc";
+        return "admin/popup_dc_actor";
     }
 
 
@@ -43,6 +43,6 @@ public class ActorController {
     public String readActor(Actor actor, Model model){
         List<Actor> actorList = actorServiceImpl.findByActorName(actor.getActorName());
         model.addAttribute("actors", actorList);
-        return "admin/admin_actor_dc";
+        return "admin/popup_dc_actor";
     }
 }

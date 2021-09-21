@@ -21,12 +21,6 @@ public class MovieController {
     @Autowired
     private MovieServiceImpl movieServiceImpl;
 
-    /* 영화 메인 페이지 이동 (임시) */
-    @GetMapping("/movie")
-    public String Main(){
-        return "admin_movie";
-    }
-
     /* 영화 등록 페이지 이동 */
     @GetMapping("/movie/create")
     public String movieForm(){
@@ -40,7 +34,7 @@ public class MovieController {
                                 , parseInt(form.getRunningTime()), form.getSummary(), 0, 0, 0);
 
         movieServiceImpl.save(movie);
-        return "admin/admin_movie";
+        return "admin/admin_movie_add";
     }
 
     /* 특정 영화 조회 */
@@ -59,7 +53,6 @@ public class MovieController {
         List<Movie> movieList = movieServiceImpl.findAll();
         return movieList;
     }
-
 
     // 입력받는 검색 test
     @GetMapping("/search")
