@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -35,14 +35,14 @@
                                         <label for="inputUserEmail">이메일</label>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                        <a class="small" th:href="@{/login}">로그인으로 돌아가기</a>
+                                        <a class="small" th:href="@{login}">로그인으로 돌아가기</a>
                                         <input class="btn btn-primary" type="submit" value="확인">
                                     </div>
                                 </form>
                             </div>
-<!--                            <div class="card-footer text-center py-3">-->
-<!--                                <div class="small"><a href="/join">계정이 없으신가요? 회원가입</a></div>-->
-<!--                            </div>-->
+                            <div class="card-footer text-center py-3">
+                                <div class="small"><a href="/join">계정이 없으신가요? 회원가입</a></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -68,3 +68,29 @@
 <script src="js/scripts.js"></script>
 </body>
 </html>
+
+
+
+<body>
+<h1>비밀번호 변경 페이지</h1>
+
+<div>
+    <span>로고</span>
+    <span>비밀번호 변경</span>
+</div>
+<div>
+    <form th:action="@{/change_pw}" method="post">
+        <div>
+            <input type="text" name="userId" th:value="${userId}" placeholder="아이디" readonly>
+        </div>
+        <div>
+            <input type="password" name="userPw" placeholder="새 비밀번호">
+        </div>
+        <div>
+            <input type="password" placeholder="새 비밀번호 확인">
+        </div>
+        <input type="submit" value="비밀번호 변경">
+    </form>
+</div>
+
+</body>

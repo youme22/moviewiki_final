@@ -6,6 +6,7 @@
     <title>메인 헤더</title>
 </head>
 <body>
+
     <span>
         <a sec:authorize="isAnonymous()" th:href="@{/}">
             <h1>로고</h1>
@@ -30,6 +31,7 @@
             </a>
         </span>
     </div>
+
     <span>
         <a sec:authorize="isAuthenticated()" th:href="@{/main}">
             <h1>로고</h1>
