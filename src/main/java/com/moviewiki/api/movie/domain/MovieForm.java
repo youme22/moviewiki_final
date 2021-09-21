@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,14 +14,14 @@ public class MovieForm {
 
     private String movieName;
     private String movieOgName;
-    private String directorName;
-    private String actorName;
-    private String nationId;
+    private List<Long> directorId;
+    private List<Long> actorId;
+    private List<String> nationId;
     private String movieProfile;
     private String runningTime;
     private String releaseDate;
     private String filmRating;
-    private String genreId;
+    private List<String> genreId;
     private String summary;
 
 
