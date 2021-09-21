@@ -83,6 +83,7 @@ public class MypageProcessController {
 
         model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));
         model.addAttribute("countReview", reviewService.countReviews(pageUser));
+        model.addAttribute("countWantToSee", wantToSeeService.countWantToSee(pageUser));
         model.addAttribute("user", pageUser);
         model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("wantToSeeList", wantToSeeList);
