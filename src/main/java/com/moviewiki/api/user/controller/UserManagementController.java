@@ -1,8 +1,9 @@
 package com.moviewiki.api.user.controller;
 
+import com.moviewiki.api.season.controller.SeasonController;
 import com.moviewiki.api.user.domain.User;
 import com.moviewiki.api.user.service.UserManagementService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
+import com.moviewiki.api.weather.service.WeatherServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -28,18 +32,23 @@ public class UserManagementController {
 
     @Autowired
     private UserManagementService userManagementService;
+    @Autowired
+    private WeatherServiceImpl weatherServiceImpl;
+    @Autowired
+    private SeasonController seasonController;
 
-    // 초기 메인페이지 call
+    // 로그인 전 메인페이지
     @GetMapping("/")
     public String initMainPage() {
-        return "/main";
+        return "member_template/main_before";
     }
 
     // 로그인 후 메인페이지
     @GetMapping("/main")
     public String MainPage(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
         model.addAttribute("currentUserId", currentUser.getUsername());
-        return "/main";
+        model.addAttribute("seasons", seasonController.readSeason());
+        return "member_template/main";
     }
 
     // 로그인 form call
