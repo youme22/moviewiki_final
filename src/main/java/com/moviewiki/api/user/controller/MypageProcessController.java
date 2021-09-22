@@ -55,8 +55,12 @@ public class MypageProcessController {
     @RequestMapping("/member/pref/{userId}")
     public String prefPage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
         User pageUser = userManagementService.getUser(userId);
+        User loginUser = userManagementService.getUser(currentUser.getUsername());
         List<Review> reviewList = reviewService.getReviewListByUser(pageUser);
 
+        model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));
+        model.addAttribute("countReview", reviewService.countReviews(pageUser));
+        model.addAttribute("user", pageUser);
         model.addAttribute("myRunningTime", reviewService.myRunningtime(reviewList));
         model.addAttribute("countReview", reviewService.countReviews(pageUser));
         model.addAttribute("currentUserId", currentUser.getUsername());
