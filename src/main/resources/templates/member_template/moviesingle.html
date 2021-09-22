@@ -115,7 +115,8 @@
                 <div class="col-md-8 col-sm-12 col-xs-12">
                     <div class="movie-single-ct main-content">
                         <h1 class="bd-hd" th:text="${movie.movieName}">
-                            <span th:text="${movie.releaseDate}">2015</span>
+                            <span th:text="${movie.movieOgName}"></span>
+                            <div th:text="${movie.releaseDate.getYear()}"></div>
                         </h1>
 
                         <!-- 관심영화 버튼 -->
@@ -147,11 +148,14 @@
                         </div>
                         <div class="movie-rate">
                             <div class="rate"><i class="ion-android-star"></i>
-                                <p><span th:text="${movie.filmRating}"></span></p></div>
-                            <div class="rate-star"><p>Rate This Movie:</p><i class="ion-ios-star"></i><i
-                                    class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i><i
-                                    class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i><i
-                                    class="ion-ios-star"></i><i class="ion-ios-star-outline"></i></div>
+                                <!-- 우선 평점이 null값이므로 몇세 관람가인지 넣어봄-->
+                                <!-- 평점-->
+                                <p><span th:text="${movie.filmRating}"></span></p>
+                            </div>
+<!--                            <div class="rate-star"><p>Rate This Movie:</p><i class="ion-ios-star"></i><i-->
+<!--                                    class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i><i-->
+<!--                                    class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i><i-->
+<!--                                    class="ion-ios-star"></i><i class="ion-ios-star-outline"></i></div>-->
                         </div>
                         <div class="movie-tabs">
                             <div class="tabs">
@@ -159,8 +163,6 @@
                                     <li class="active"><a href="#overview">Overview</a></li>
                                     <li><a href="#reviews">Reviews</a></li>
                                     <li><a href="#cast"> Cast & Crew </a></li>
-                                    <li><a href="#media">Media</a></li>
-                                    <li><a href="#moviesrelated">Related Movies</a></li>
                                 </ul>
                                 <div class="tab-content">
                                     <div id="overview" class="tab active">
@@ -250,22 +252,19 @@
                                                     <p><a href="#">Robert Downey Jr,</a><a href="#">Chris Evans,</a><a
                                                             href="#">Mark Ruffalo,</a><a href="#">Scarlett Johansson</a>
                                                     </p></div>
+                                                <!-- 장르 -->
                                                 <div class="sb-it"><h6>Genres:</h6>
                                                     <p><a href="#">Action,</a><a href="#">Sci-Fi,</a><a href="#">Adventure</a>
                                                     </p></div>
+                                                <!-- 개봉일 -->
                                                 <div class="sb-it"><h6>Release Date:</h6>
-                                                    <p>May 1, 2015 (U.S.A)</p></div>
+                                                    <p th:text="${movie.releaseDate}"></p></div>
+                                                <!-- 상영시간 -->
                                                 <div class="sb-it"><h6>Run Time:</h6>
-                                                    <p>141 min</p></div>
+                                                    <p th:text="${movie.runningTime}"></p></div>
+                                                <!-- 관람등급 -->
                                                 <div class="sb-it"><h6>MMPA Rating:</h6>
-                                                    <p>PG-13</p></div>
-                                                <div class="sb-it"><h6>Plot Keywords:</h6>
-                                                    <p class="tags"><span class="time"><a
-                                                            href="#">superhero</a></span><span class="time"><a href="#">marvel universe</a></span><span
-                                                            class="time"><a href="#">comic</a></span><span class="time"><a
-                                                            href="#">blockbuster</a></span><span class="time"><a
-                                                            href="#">final battle</a></span></p></div>
-                                                <div class="ads"><img src="../../images/uploads/ads1.png" alt=""></div>
+                                                    <p th:text="${movie.filmRating}">PG-13</p></div>
                                             </div>
                                         </div>
                                     </div>
@@ -561,255 +560,6 @@
                                                 <div class="cast-it">
                                                     <div class="cast-left"><h4>JF</h4><a href="#">Jeffrey Ford</a></div>
                                                     <p>... associate producer</p></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="media" class="tab">
-                                        <div class="row">
-                                            <div class="rv-hd">
-                                                <div><h3>Videos & Photos of</h3>
-                                                    <h2>Skyfall: Quantum of Spectre</h2></div>
-                                            </div>
-                                            <div class="title-hd-sm"><h4>Videos <span>(8)</span></h4></div>
-                                            <div class="mvsingle-item media-item">
-                                                <div class="vd-item">
-                                                    <div class="vd-it"><img class="vd-img"
-                                                                            src="../../images/uploads/vd-item1.jpg" alt=""><a
-                                                            class="fancybox-media hvr-grow"
-                                                            href="https://www.youtube.com/embed/o-0hcF97wy0"><img
-                                                            src="../../images/uploads/play-vd.png" alt=""></a></div>
-                                                    <div class="vd-infor"><h6><a href="#">Trailer: Watch New Scenes</a>
-                                                    </h6>
-                                                        <p class="time">1: 31</p></div>
-                                                </div>
-                                                <div class="vd-item">
-                                                    <div class="vd-it"><img class="vd-img"
-                                                                            src="../../images/uploads/vd-item2.jpg" alt=""><a
-                                                            class="fancybox-media hvr-grow"
-                                                            href="https://www.youtube.com/embed/o-0hcF97wy0"><img
-                                                            src="../../images/uploads/play-vd.png" alt=""></a></div>
-                                                    <div class="vd-infor"><h6><a href="#">Featurette: “Avengers
-                                                        Re-Assembled</a></h6>
-                                                        <p class="time">1: 03</p></div>
-                                                </div>
-                                                <div class="vd-item">
-                                                    <div class="vd-it"><img class="vd-img"
-                                                                            src="../../images/uploads/vd-item3.jpg" alt=""><a
-                                                            class="fancybox-media hvr-grow"
-                                                            href="https://www.youtube.com/embed/o-0hcF97wy0"><img
-                                                            src="../../images/uploads/play-vd.png" alt=""></a></div>
-                                                    <div class="vd-infor"><h6><a href="#">Interview: Robert Downey
-                                                        Jr</a></h6>
-                                                        <p class="time">3:27</p></div>
-                                                </div>
-                                                <div class="vd-item">
-                                                    <div class="vd-it"><img class="vd-img"
-                                                                            src="../../images/uploads/vd-item4.jpg" alt=""><a
-                                                            class="fancybox-media hvr-grow"
-                                                            href="https://www.youtube.com/embed/o-0hcF97wy0"><img
-                                                            src="../../images/uploads/play-vd.png" alt=""></a></div>
-                                                    <div class="vd-infor"><h6><a href="#">Interview: Scarlett
-                                                        Johansson</a></h6>
-                                                        <p class="time">3:27</p></div>
-                                                </div>
-                                                <div class="vd-item">
-                                                    <div class="vd-it"><img class="vd-img"
-                                                                            src="../../images/uploads/vd-item1.jpg" alt=""><a
-                                                            class="fancybox-media hvr-grow"
-                                                            href="https://www.youtube.com/embed/o-0hcF97wy0"><img
-                                                            src="../../images/uploads/play-vd.png" alt=""></a></div>
-                                                    <div class="vd-infor"><h6><a href="#">Featurette: Meet Quicksilver &
-                                                        The Scarlet Witch</a></h6>
-                                                        <p class="time">1: 31</p></div>
-                                                </div>
-                                                <div class="vd-item">
-                                                    <div class="vd-it"><img class="vd-img"
-                                                                            src="../../images/uploads/vd-item2.jpg" alt=""><a
-                                                            class="fancybox-media hvr-grow"
-                                                            href="https://www.youtube.com/embed/o-0hcF97wy0"><img
-                                                            src="../../images/uploads/play-vd.png" alt=""></a></div>
-                                                    <div class="vd-infor"><h6><a href="#">Interview: Director Joss
-                                                        Whedon</a></h6>
-                                                        <p class="time">1: 03</p></div>
-                                                </div>
-                                                <div class="vd-item">
-                                                    <div class="vd-it"><img class="vd-img"
-                                                                            src="../../images/uploads/vd-item3.jpg" alt=""><a
-                                                            class="fancybox-media hvr-grow"
-                                                            href="https://www.youtube.com/embed/o-0hcF97wy0"><img
-                                                            src="../../images/uploads/play-vd.png" alt=""></a></div>
-                                                    <div class="vd-infor"><h6><a href="#">Interview: Mark Ruffalo</a>
-                                                    </h6>
-                                                        <p class="time">3:27</p></div>
-                                                </div>
-                                                <div class="vd-item">
-                                                    <div class="vd-it"><img class="vd-img"
-                                                                            src="../../images/uploads/vd-item4.jpg" alt=""><a
-                                                            class="fancybox-media hvr-grow"
-                                                            href="https://www.youtube.com/embed/o-0hcF97wy0"><img
-                                                            src="../../images/uploads/play-vd.png" alt=""></a></div>
-                                                    <div class="vd-infor"><h6><a href="#">Official Trailer #2</a></h6>
-                                                        <p class="time">3:27</p></div>
-                                                </div>
-                                            </div>
-                                            <div class="title-hd-sm"><h4>Photos <span>(21)</span></h4></div>
-                                            <div class="mvsingle-item"><a class="img-lightbox"
-                                                                          data-fancybox-group="gallery"
-                                                                          href="images/uploads/image11.jpg"><img
-                                                    src="../../images/uploads/image1.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                  data-fancybox-group="gallery"
-                                                                                                  href="images/uploads/image21.jpg"><img
-                                                    src="../../images/uploads/image2.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                  data-fancybox-group="gallery"
-                                                                                                  href="images/uploads/image31.jpg"><img
-                                                    src="../../images/uploads/image3.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                  data-fancybox-group="gallery"
-                                                                                                  href="images/uploads/image41.jpg"><img
-                                                    src="../../images/uploads/image4.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                  data-fancybox-group="gallery"
-                                                                                                  href="images/uploads/image51.jpg"><img
-                                                    src="../../images/uploads/image5.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                  data-fancybox-group="gallery"
-                                                                                                  href="images/uploads/image61.jpg"><img
-                                                    src="../../images/uploads/image6.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                  data-fancybox-group="gallery"
-                                                                                                  href="images/uploads/image71.jpg"><img
-                                                    src="../../images/uploads/image7.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                  data-fancybox-group="gallery"
-                                                                                                  href="images/uploads/image81.jpg"><img
-                                                    src="../../images/uploads/image8.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                  data-fancybox-group="gallery"
-                                                                                                  href="images/uploads/image91.jpg"><img
-                                                    src="../../images/uploads/image9.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                  data-fancybox-group="gallery"
-                                                                                                  href="images/uploads/image101.jpg"><img
-                                                    src="../../images/uploads/image10.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                   data-fancybox-group="gallery"
-                                                                                                   href="images/uploads/image111.jpg"><img
-                                                    src="../../images/uploads/image1-1.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                    data-fancybox-group="gallery"
-                                                                                                    href="images/uploads/image121.jpg"><img
-                                                    src="../../images/uploads/image12.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                   data-fancybox-group="gallery"
-                                                                                                   href="images/uploads/image131.jpg"><img
-                                                    src="../../images/uploads/image13.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                   data-fancybox-group="gallery"
-                                                                                                   href="images/uploads/image141.jpg"><img
-                                                    src="../../images/uploads/image14.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                   data-fancybox-group="gallery"
-                                                                                                   href="images/uploads/image151.jpg"><img
-                                                    src="../../images/uploads/image15.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                   data-fancybox-group="gallery"
-                                                                                                   href="images/uploads/image161.jpg"><img
-                                                    src="../../images/uploads/image16.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                   data-fancybox-group="gallery"
-                                                                                                   href="images/uploads/image171.jpg"><img
-                                                    src="../../images/uploads/image17.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                   data-fancybox-group="gallery"
-                                                                                                   href="images/uploads/image181.jpg"><img
-                                                    src="../../images/uploads/image18.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                   data-fancybox-group="gallery"
-                                                                                                   href="images/uploads/image191.jpg"><img
-                                                    src="../../images/uploads/image19.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                   data-fancybox-group="gallery"
-                                                                                                   href="images/uploads/image201.jpg"><img
-                                                    src="../mages/uploads/image20.jpg" alt=""></a><a class="img-lightbox"
-                                                                                                   data-fancybox-group="gallery"
-                                                                                                   href="images/uploads/image211.jpg"><img
-                                                    src="../../images/uploads/image2-1.jpg" alt=""></a></div>
-                                        </div>
-                                    </div>
-                                    <div id="moviesrelated" class="tab">
-                                        <div class="row"><h3>Related Movies To</h3>
-                                            <h2>Skyfall: Quantum of Spectre</h2>
-                                            <div class="topbar-filter"><p>Found <span>12 movies</span>in total</p>
-                                                <label>Sort by:</label><select>
-                                                    <option value="popularity">Popularity Descending</option>
-                                                    <option value="popularity">Popularity Ascending</option>
-                                                    <option value="rating">Rating Descending</option>
-                                                    <option value="rating">Rating Ascending</option>
-                                                    <option value="date">Release date Descending</option>
-                                                    <option value="date">Release date Ascending</option>
-                                                </select></div>
-                                            <div class="movie-item-style-2"><img src="../../images/uploads/mv1.jpg" alt="">
-                                                <div class="mv-item-infor"><h6><a href="#">oblivion <span>(2012)</span></a>
-                                                </h6>
-                                                    <p class="rate"><i class="ion-android-star"></i><span>8.1</span>/10
-                                                    </p>
-                                                    <p class="describe">Earth's mightiest heroes must come together and
-                                                        learn to fight as a team if they are to stop the mischievous
-                                                        Loki and his alien army from enslaving humanity...</p>
-                                                    <p class="run-time">Run Time: 2h21’ . <span>MMPA: PG-13 </span> .
-                                                        <span>Release: 1 May 2015</span></p>
-                                                    <p>Director: <a href="#">Joss Whedon</a></p>
-                                                    <p>Stars: <a href="#">Robert Downey Jr.,</a><a href="#">Chris
-                                                        Evans,</a><a href="#">Chris Hemsworth</a></p></div>
-                                            </div>
-                                            <div class="movie-item-style-2"><img src="../../images/uploads/mv2.jpg" alt="">
-                                                <div class="mv-item-infor"><h6><a href="#">into the wild
-                                                    <span>(2014)</span></a></h6>
-                                                    <p class="rate"><i class="ion-android-star"></i><span>7.8</span>/10
-                                                    </p>
-                                                    <p class="describe">As Steve Rogers struggles to embrace his role in
-                                                        the modern world, he teams up with a fellow Avenger and
-                                                        S.H.I.E.L.D agent, Black Widow, to battle a new threat...</p>
-                                                    <p class="run-time">Run Time: 2h21’ . <span>MMPA: PG-13 </span> .
-                                                        <span>Release: 1 May 2015</span></p>
-                                                    <p>Director: <a href="#">Anthony Russo,</a><a href="#">Joe Russo</a>
-                                                    </p>
-                                                    <p>Stars: <a href="#">Chris Evans,</a><a href="#">Samuel L.
-                                                        Jackson,</a><a href="#">Scarlett Johansson</a></p></div>
-                                            </div>
-                                            <div class="movie-item-style-2"><img src="../../images/uploads/mv3.jpg" alt="">
-                                                <div class="mv-item-infor"><h6><a href="#">blade runner
-                                                    <span>(2015)</span></a></h6>
-                                                    <p class="rate"><i class="ion-android-star"></i><span>7.3</span>/10
-                                                    </p>
-                                                    <p class="describe">Armed with a super-suit with the astonishing
-                                                        ability to shrink in scale but increase in strength, cat burglar
-                                                        Scott Lang must embrace his inner hero and help...</p>
-                                                    <p class="run-time">Run Time: 2h21’ . <span>MMPA: PG-13 </span> .
-                                                        <span>Release: 1 May 2015</span></p>
-                                                    <p>Director: <a href="#">Peyton Reed</a></p>
-                                                    <p>Stars: <a href="#">Paul Rudd,</a><a href="#">Michael Douglas</a>
-                                                    </p></div>
-                                            </div>
-                                            <div class="movie-item-style-2"><img src="../../images/uploads/mv4.jpg" alt="">
-                                                <div class="mv-item-infor"><h6><a href="#">Mulholland
-                                                    pride<span>(2013)  </span></a></h6>
-                                                    <p class="rate"><i class="ion-android-star"></i><span>7.2</span>/10
-                                                    </p>
-                                                    <p class="describe">When Tony Stark's world is torn apart by a
-                                                        formidable terrorist called the Mandarin, he starts an odyssey
-                                                        of rebuilding and retribution.</p>
-                                                    <p class="run-time">Run Time: 2h21’ . <span>MMPA: PG-13 </span> .
-                                                        <span>Release: 1 May 2015</span></p>
-                                                    <p>Director: <a href="#">Shane Black</a></p>
-                                                    <p>Stars: <a href="#">Robert Downey Jr.,</a><a href="#">Guy
-                                                        Pearce,</a><a href="#">Don Cheadle</a></p></div>
-                                            </div>
-                                            <div class="movie-item-style-2"><img src="../../images/uploads/mv5.jpg" alt="">
-                                                <div class="mv-item-infor"><h6><a href="#">skyfall: evil of boss<span>(2013)  </span></a>
-                                                </h6>
-                                                    <p class="rate"><i class="ion-android-star"></i><span>7.0</span>/10
-                                                    </p>
-                                                    <p class="describe">When Tony Stark's world is torn apart by a
-                                                        formidable terrorist called the Mandarin, he starts an odyssey
-                                                        of rebuilding and retribution.</p>
-                                                    <p class="run-time">Run Time: 2h21’ . <span>MMPA: PG-13 </span> .
-                                                        <span>Release: 1 May 2015</span></p>
-                                                    <p>Director: <a href="#">Alan Taylor</a></p>
-                                                    <p>Stars: <a href="#">Chris Hemsworth,</a><a href="#">Natalie
-                                                        Portman,</a><a href="#">Tom Hiddleston</a></p></div>
-                                            </div>
-                                            <div class="topbar-filter"><label>Movies per page:</label><select>
-                                                <option value="range">5 Movies</option>
-                                                <option value="saab">10 Movies</option>
-                                            </select>
-                                                <div class="pagination2"><span>Page 1 of 2:</span><a class="active"
-                                                                                                     href="#">1</a><a
-                                                        href="#">2</a><a href="#"><i class="ion-arrow-right-b"></i></a>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
