@@ -69,7 +69,7 @@ public class MypageProcessController {
         User pageUser = userManagementService.getUser(userId);
 
         model.addAttribute("currentUserId", auth.getName());
-        model.addAttribute("reviewList",  reviewService.getReviewListByUser(pageUser));
+        model.addAttribute("reviewList", reviewService.getReviewListByUser(pageUser));
         return "/member/reviews";
     }
 
