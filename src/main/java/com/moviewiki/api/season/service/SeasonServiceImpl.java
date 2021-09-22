@@ -30,9 +30,4 @@ public class SeasonServiceImpl implements SeasonService{
 
         em.persist(season);
     }
-
-    @Override
-    public List<Season> findBySeasonNameOrderBySeasonPointDesc(String seasonName) {
-        return seasonRepository.findBySeasonNameOrderBySeasonPointDesc(seasonName);
-    }
 }
