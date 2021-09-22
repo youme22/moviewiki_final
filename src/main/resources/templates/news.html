@@ -107,7 +107,7 @@
                                 <span th:text="${news.newsTitle}"/>
                             </a></h3>
                             <!--                            <span class="time" th:text="${news.newsDate}"/>-->
-                            <span class="time" th:text="${#temporals.format(news.newsDate, '20yy년 MM월 dd일')}"></span>
+                            <span class="time" th:text="${#temporals.format(news.newsDate, 'yy/MM/dd')}"></span>
                             <p th:text="${#strings.substring(news.newsContent, 0, 140) + '...'}"/>
                         </div>
                     </div>
