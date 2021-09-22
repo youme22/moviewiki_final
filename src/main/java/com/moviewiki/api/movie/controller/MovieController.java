@@ -104,4 +104,5 @@ public class MovieController {
         return "search";
         //http://localhost:8081/search?keyword로 들어가야됨
     }
+
 }

@@ -19,4 +19,7 @@ public interface DirectorService {
 
     // 모든 감독 조회
     List<Director> findAll();
+
+    // 감독 상세 페이지 조회
+    Director findByDirectorId(Long directorId);
 }
