@@ -55,8 +55,12 @@ public class MypageProcessController {
     @RequestMapping("/member/pref/{userId}")
     public String prefPage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
         User pageUser = userManagementService.getUser(userId);
+        User loginUser = userManagementService.getUser(currentUser.getUsername());
         List<Review> reviewList = reviewService.getReviewListByUser(pageUser);
 
+        model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));
+        model.addAttribute("countReview", reviewService.countReviews(pageUser));
+        model.addAttribute("user", pageUser);
         model.addAttribute("myRunningTime", reviewService.myRunningtime(reviewList));
         model.addAttribute("countReview", reviewService.countReviews(pageUser));
         model.addAttribute("currentUserId", currentUser.getUsername());
@@ -67,9 +71,13 @@ public class MypageProcessController {
     @RequestMapping("/member/reviews/{userId}")
     public String reviewsPage(@PathVariable String userId, Model model, Authentication auth) {
         User pageUser = userManagementService.getUser(userId);
+        User loginUser = userManagementService.getUser(auth.getName());
 
+        model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));
+        model.addAttribute("countReview", reviewService.countReviews(pageUser));
+        model.addAttribute("user", pageUser);
         model.addAttribute("currentUserId", auth.getName());
-        model.addAttribute("reviewList",  reviewService.getReviewListByUser(pageUser));
+        model.addAttribute("reviewList", reviewService.getReviewListByUser(pageUser));
         return "/member/reviews";
     }
 
@@ -77,14 +85,45 @@ public class MypageProcessController {
     @RequestMapping("/member/want_to_see/{userId}")
 
     public String wantToSeePage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
-
+        User loginUser = userManagementService.getUser(currentUser.getUsername());
         User pageUser = userManagementService.getUser(userId);
         List<WantToSee> wantToSeeList = wantToSeeService.findByUser(pageUser);
 
+        model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));
+        model.addAttribute("countReview", reviewService.countReviews(pageUser));
+        model.addAttribute("countWantToSee", wantToSeeService.countWantToSee(pageUser));
+        model.addAttribute("user", pageUser);
         model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("wantToSeeList", wantToSeeList);
 
         return "/member/want_to_see";
     }
 
+    // 팔로잉 리스트 출력, form call
+    @RequestMapping("/member/followeeList/{userId}")
+    public String followeePage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        User loginUser = userManagementService.getUser(currentUser.getUsername());
+        User pageUser = userManagementService.getUser(userId);
+
+        model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));
+        model.addAttribute("countReview", reviewService.countReviews(pageUser));
+        model.addAttribute("user", pageUser);
+        model.addAttribute("currentUserId", currentUser.getUsername());
+        model.addAttribute("followeeList", followingService.followeeList(pageUser));
+        return "/member/followee";
+    }
+
+    // 팔로워 리스트 출력, form call
+    @RequestMapping("/member/followerList/{userId}")
+    public String followerPage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        User pageUser = userManagementService.getUser(userId);
+        User loginUser = userManagementService.getUser(currentUser.getUsername());
+
+        model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));
+        model.addAttribute("countReview", reviewService.countReviews(pageUser));
+        model.addAttribute("user", pageUser);
+        model.addAttribute("currentUserId", currentUser.getUsername());
+        model.addAttribute("followerList", followingService.followerList(pageUser));
+        return "/member/follower";
+    }
 }

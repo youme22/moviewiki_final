@@ -1,9 +1,6 @@
-<!DOCTYPE html><!--[if IE 7]>
-<html class="ie ie7 no-js" lang="en-US"><![endif]--><!--[if IE 8]>
-<html class="ie ie8 no-js" lang="en-US"><![endif]--><!--[if !(IE 7) | !(IE 8)  ]><!-->
-<html lang="en" class="no-js">
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" class="no-js">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head><!-- Basic need --><title>Open Pediatrics</title>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -27,38 +24,16 @@
                 </div>
                 <!--        <a href="index_light.html"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>-->
                 <a sec:authorize="isAnonymous()" th:href="@{/}"><img class="logo" th:src="@{/images/logo.png}" alt=""
-                                                                     width="119" height="58"></a>
+                                                                     width="200" height="100"></a>
                 <a sec:authorize="isAuthenticated()" th:href="@{/main}"><img class="logo" th:src="@{/images/logo.png}"
-                                                                             alt="" width="119" height="58"></a>
+                                                                             alt="" width="200" height="100"></a>
             </div><!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav flex-child-menu menu-left">
                     <li class="hidden"><a href="#page-top"></a></li>
-                    <li class="dropdown first"><a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown"
-                                                  data-hover="dropdown"> movies<i class="fa fa-angle-down"
-                                                                                  aria-hidden="true"></i></a>
-                        <ul class="dropdown-menu level1">
-                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Movie grid<i
-                                    class="ion-ios-arrow-forward"></i></a>
-                                <ul class="dropdown-menu level2">
-                                    <li><a href="moviegrid_light.html">Movie grid</a></li>
-                                    <li><a href="moviegridfw_light.html">movie grid full width</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="movielist_light.html">Movie list</a></li>
-                            <li><a href="moviesingle_light.html">Movie single</a></li>
-                            <li class="it-last"><a href="seriessingle_light.html">Series single</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown first"><a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown"
-                                                  data-hover="dropdown"> celebrities <i class="fa fa-angle-down"
-                                                                                        aria-hidden="true"></i></a>
-                        <ul class="dropdown-menu level1">
-                            <li><a href="celebritygrid01_light.html">celebrity grid 01</a></li>
-                            <li><a href="celebritygrid02_light.html">celebrity grid 02 </a></li>
-                            <li><a href="celebritylist_light.html">celebrity list</a></li>
-                            <li class="it-last"><a href="celebritysingle_light.html">celebrity single</a></li>
-                        </ul>
+                    <li>
+                        <a sec:authorize="isAnonymous()" th:href="@{/}">HOME</a>
+                        <a sec:authorize="isAuthenticated()" th:href="@{/main}">HOME</a>
                     </li>
                     <li>
                         <a sec:authorize="isAnonymous()" th:href="@{/anonymousNews}">뉴스게시판</a>
@@ -66,6 +41,15 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav flex-child-menu menu-right">
+                    <li>
+                        <div class="top-search">
+<!--                            <select>-->
+<!--                            <option value="united">TV show</option>-->
+<!--                            <option value="saab">Others</option>-->
+<!--                            </select>-->
+                            <input type="text" placeholder="Search">
+                        </div>
+                    </li>
                     <li>
                         <a sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
                     </li>
@@ -82,13 +66,9 @@
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse --></nav><!-- top search form -->
-        <div class="top-search"><select>
-            <option value="united">TV show</option>
-            <option value="saab">Others</option>
-        </select><input type="text" placeholder="Search for a movie, TV Show or celebrity that you are looking for">
-        </div>
+
     </div>
-</header><!-- END | Header -->>
+</header><!-- END | Header -->
 <div class="hero common-hero">
     <div class="container">
         <div class="row">
@@ -159,7 +139,7 @@
         </div>
     </div>
     <div class="ft-copyright">
-        <div class="ft-left"><p>© 2017 Blockbuster. All Rights <a href="http://www.bootstrapmb.com/"
+        <div class="ft-left"><p>© 2021 MVWK. All Rights <a href="http://www.bootstrapmb.com/"
                                                                   title="bootstrapmb">Reserved</a>. Designed by leehari.
         </p></div>
         <div class="backtotop"><p><a href="#" id="back-to-top">Back to top <i class="ion-ios-arrow-thin-up"></i></a></p>
