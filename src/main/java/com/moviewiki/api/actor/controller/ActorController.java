@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -44,5 +45,13 @@ public class ActorController {
         List<Actor> actorList = actorServiceImpl.findByActorName(actor.getActorName());
         model.addAttribute("actors", actorList);
         return "admin/popup_dc_actor";
+    }
+
+    // 배우 상세 페이지 조회
+    @GetMapping("/movie/actor/{actorId}")
+    public String movieActor(@PathVariable Long actorId, Model model) {
+
+        model.addAttribute("actor", actorServiceImpl.findByActorId(actorId));
+        return "member_template/actorPage";
     }
 }

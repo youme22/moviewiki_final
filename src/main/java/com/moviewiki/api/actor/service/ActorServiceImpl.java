@@ -34,4 +34,10 @@ public class ActorServiceImpl implements ActorService{
     public List<Actor> findAll() {
         return actorRepository.findAll();
     }
+
+    // 배우 상세 페이지 조회
+    @Override
+    public Actor findByActorId(Long actorId){
+        return actorRepository.findByActorId(actorId);
+    }
 }

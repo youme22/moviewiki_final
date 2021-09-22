@@ -23,7 +23,8 @@ public class PrefGenreController {
     public String recMovieList(Model model){
         List<Movie> recMovieList = prefGenreServiceImpl.findAll();
         model.addAttribute("recMovieList", recMovieList);
-        return "readPrefGenre";
+//        return "readPrefGenre";
+        return "member_template/homev2";
     }
 
 }
