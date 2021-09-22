@@ -95,4 +95,31 @@ public class MypageProcessController {
         return "/member/want_to_see";
     }
 
+    // 팔로잉 리스트 출력, form call
+    @RequestMapping("/member/followeeList/{userId}")
+    public String followeePage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        User loginUser = userManagementService.getUser(currentUser.getUsername());
+        User pageUser = userManagementService.getUser(userId);
+
+        model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));
+        model.addAttribute("countReview", reviewService.countReviews(pageUser));
+        model.addAttribute("user", pageUser);
+        model.addAttribute("currentUserId", currentUser.getUsername());
+        model.addAttribute("followeeList", followingService.followeeList(pageUser));
+        return "/member/followee";
+    }
+
+    // 팔로워 리스트 출력, form call
+    @RequestMapping("/member/followerList/{userId}")
+    public String followerPage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        User pageUser = userManagementService.getUser(userId);
+        User loginUser = userManagementService.getUser(currentUser.getUsername());
+
+        model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));
+        model.addAttribute("countReview", reviewService.countReviews(pageUser));
+        model.addAttribute("user", pageUser);
+        model.addAttribute("currentUserId", currentUser.getUsername());
+        model.addAttribute("followerList", followingService.followerList(pageUser));
+        return "/member/follower";
+    }
 }
