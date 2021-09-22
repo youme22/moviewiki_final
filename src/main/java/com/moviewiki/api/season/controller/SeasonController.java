@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;
@@ -27,30 +28,31 @@ public class SeasonController {
     @Autowired
     MovieServiceImpl movieServiceImpl;
 
-    // 계절점수 등록 페이지 이동
-    @GetMapping("/season/create")
-    public String createSeason(){
-        return "member/season_add";
-    }
-
-    // 영화에 대한 계절점수 등록
-    @PostMapping("/season/create")
-    public String createSeason(HttpServletRequest request){
-        Long movieId = parseLong(request.getParameter("movieId"));
-        String seasonName = request.getParameter("seasonName");
-        int seasonPoint = parseInt(request.getParameter("seasonPoint"));
-
-        Movie movie = movieServiceImpl.findByMovieId(movieId);
-
-        seasonServiceImpl.save(movie, seasonName, seasonPoint);
-
-        return "admin_movie";
-    }
-
     // 특정 영화의 계절점수 조회
-    @GetMapping("/season/read/{seasonName}")
+    @GetMapping("/season/read")
     @ResponseBody
-    public List<Season> readSeason(@PathVariable String seasonName){
+    public List<Season> readSeason(){
+
+        String seasonName;
+        LocalDate now = LocalDate.now();
+        int month = now.getMonthValue();
+
+        // 3·4·5월을 봄, 6·7·8월을 여름, 9·10·11월을 가을, 12·1·2월을 겨울
+        switch(month){
+            case 3: case 4: case 5:
+                seasonName = "봄";
+                break;
+            case 6: case 7: case 8:
+                seasonName = "여름";
+                break;
+            case 9: case 10: case 11:
+                seasonName = "가을";
+                break;
+            default:
+                seasonName = "겨울";
+                break;
+        }
+
         return seasonServiceImpl.findBySeasonNameOrderBySeasonPointDesc(seasonName);
     }
 
