@@ -20,7 +20,7 @@ public class ActorController {
     /* 배우 등록 페이지 이동*/
     @GetMapping("/movie/create/actor")
     public String actorForm(){
-        return "admin/admin_actor_add";
+        return "admin/popup_add_actor";
     }
 
 
