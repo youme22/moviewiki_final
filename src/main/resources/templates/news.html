@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" class="no-js">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head><!-- Basic need --><title>뉴스게시판</title>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -30,38 +30,16 @@
                     <div id="nav-icon1"><span></span><span></span><span></span></div>
                 </div>
                 <a sec:authorize="isAnonymous()" th:href="@{/}"><img class="logo" th:src="@{/images/logo.png}" alt=""
-                                                                     width="119" height="58"></a>
+                                                                     width="200" height="100"></a>
                 <a sec:authorize="isAuthenticated()" th:href="@{/main}"><img class="logo" th:src="@{/images/logo.png}"
-                                                                             alt="" width="119" height="58"></a>
+                                                                             alt="" width="200" height="100"></a>
             </div><!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav flex-child-menu menu-left">
                     <li class="hidden"><a href="#page-top"></a></li>
-                    <li class="dropdown first"><a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown"
-                                                  data-hover="dropdown"> movies<i class="fa fa-angle-down"
-                                                                                  aria-hidden="true"></i></a>
-                        <ul class="dropdown-menu level1">
-                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Movie grid<i
-                                    class="ion-ios-arrow-forward"></i></a>
-                                <ul class="dropdown-menu level2">
-                                    <li><a href="moviegrid_light.html">Movie grid</a></li>
-                                    <li><a href="moviegridfw_light.html">movie grid full width</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="movielist_light.html">Movie list</a></li>
-                            <li><a href="moviesingle_light.html">Movie single</a></li>
-                            <li class="it-last"><a href="seriessingle_light.html">Series single</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown first"><a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown"
-                                                  data-hover="dropdown"> celebrities <i class="fa fa-angle-down"
-                                                                                        aria-hidden="true"></i></a>
-                        <ul class="dropdown-menu level1">
-                            <li><a href="celebritygrid01_light.html">celebrity grid 01</a></li>
-                            <li><a href="celebritygrid02_light.html">celebrity grid 02 </a></li>
-                            <li><a href="celebritylist_light.html">celebrity list</a></li>
-                            <li class="it-last"><a href="celebritysingle_light.html">celebrity single</a></li>
-                        </ul>
+                    <li>
+                        <a sec:authorize="isAnonymous()" th:href="@{/}">HOME</a>
+                        <a sec:authorize="isAuthenticated()" th:href="@{/main}">HOME</a>
                     </li>
                     <li>
                         <a sec:authorize="isAnonymous()" th:href="@{/anonymousNews}">뉴스게시판</a>
@@ -69,6 +47,15 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav flex-child-menu menu-right">
+                    <li>
+                        <div class="top-search">
+<!--                            <select>-->
+<!--                                <option value="united"></option>-->
+<!--&lt;!&ndash;                                <option value="saab">Others</option>&ndash;&gt;-->
+<!--                            </select>-->
+                            <input type="text" placeholder="Search">
+                        </div>
+                    </li>
                     <li>
                         <a sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
                     </li>
@@ -85,11 +72,7 @@
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse --></nav><!-- top search form -->
-        <div class="top-search"><select>
-            <option value="united">TV show</option>
-            <option value="saab">Others</option>
-        </select><input type="text" placeholder="Search for a movie, TV Show or celebrity that you are looking for">
-        </div>
+
     </div>
 </header><!-- END | Header -->
 <div class="hero common-hero">
@@ -124,7 +107,7 @@
                                 <span th:text="${news.newsTitle}"/>
                             </a></h3>
                             <!--                            <span class="time" th:text="${news.newsDate}"/>-->
-                            <span class="time" th:text="${#temporals.format(news.newsDate, '20yy년 MM월 dd일')}"></span>
+                            <span class="time" th:text="${#temporals.format(news.newsDate, 'yy/MM/dd')}"></span>
                             <p th:text="${#strings.substring(news.newsContent, 0, 140) + '...'}"/>
                         </div>
                     </div>

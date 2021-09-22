@@ -75,7 +75,7 @@ public class MovieController {
 //               , 0, 0, 0
        );
 
-        movieServiceImpl.save(movie);
+       movieServiceImpl.save(movie);
         return "admin/admin_movie_add";
     }
 

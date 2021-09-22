@@ -41,6 +41,7 @@ public class Movie {
     private int runningTime;
     @Column(columnDefinition = "LONG")
     private String summary;
+
 //    @Column(name = "AVG_RATING")
 //    private double avgRating;
 //    @Column(name = "REVIEW_COUNT")

@@ -12,4 +12,7 @@ public interface WeatherService {
 
     // 특정날씨의 점수에 따른 정렬
     List<Weather> findByWeatherNameOrderByWeatherPointDesc(String weatherName);
+
+    // 오늘 날씨 받기
+    String todayWeather();
 }
