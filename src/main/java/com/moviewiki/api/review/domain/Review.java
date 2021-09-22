@@ -29,13 +29,13 @@ public class Review {
     @JoinColumn(name ="USER_ID")
     private User user;
 
-    @Column(name= "REVIEW_DATE")    // 민형 - 추가
+    @Column(name= "REVIEW_DATE", columnDefinition = "DATE")    // 민형 - 추가
     private Date reviewDate;
 
     @Column(name= "REVIEW_RATING")   // 민형 - 추가
     private double ratingPoint; // 0.5단위
 
-    @Column(name= "REVIEW_COMMENT") 
+    @Column(name= "REVIEW_COMMENT", columnDefinition = "CLOB") // 민형 추가
     private String comment;
 
 }

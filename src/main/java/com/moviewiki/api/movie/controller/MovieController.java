@@ -30,10 +30,10 @@ public class MovieController {
     /* 영화 정보 저장 */
     @PostMapping("/movie/create")
     public String createMovie(MovieForm form){
-       Movie movie = new Movie(form.getFilmRating(), form.getMovieName(), form.getMovieOgName(), form.getMovieProfile(), Date.valueOf(form.getReleaseDate())
-                                , parseInt(form.getRunningTime()), form.getSummary(), 0, 0, 0);
+//       Movie movie = new Movie(form.getFilmRating(), form.getMovieName(), form.getMovieOgName(), form.getMovieProfile(), Date.valueOf(form.getReleaseDate())
+//                                , parseInt(form.getRunningTime()), form.getSummary(), 0, 0, 0);
 
-        movieServiceImpl.save(movie);
+//        movieServiceImpl.save(movie);
         return "admin/admin_movie_add";
     }
 

@@ -26,15 +26,15 @@ public class MovieForm {
 
 
     // 검색 TEST
-    public Movie toEntity(){
-        Movie movie = Movie.builder()
-                .movieName(movieName)
-                .movieOgName(movieOgName)
-                .movieProfile(movieProfile)
-                .filmRating(filmRating)
-                .build();
-        return movie;
-    }
+//    public Movie toEntity(){
+//        Movie movie = Movie.builder()
+//                .movieName(movieName)
+//                .movieOgName(movieOgName)
+//                .movieProfile(movieProfile)
+//                .filmRating(filmRating)
+//                .build();
+//        return movie;
+//    }
 
     @Builder
     public MovieForm(String movieName, String movieOgName, String movieProfile, String filmRating) {
