@@ -4,7 +4,11 @@ import com.moviewiki.api.actor.domain.Actor;
 import com.moviewiki.api.movie.domain.Movie;
 import com.moviewiki.api.movie.domain.MovieForm;
 import com.moviewiki.api.movie.service.MovieServiceImpl;
+import com.moviewiki.api.user.domain.User;
+import com.moviewiki.api.user.service.UserManagementServiceImpl;
+import com.moviewiki.api.wantToSee.service.WantToSeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +24,42 @@ public class MovieController {
 
     @Autowired
     private MovieServiceImpl movieServiceImpl;
+    @Autowired
+    private UserManagementServiceImpl userManagementService;
+    @Autowired
+    private WantToSeeServiceImpl wantToSeeServiceImpl;
+
+    /* 영화 메인 페이지 */
+    @GetMapping("/movie/main")
+    public String movieMain(){
+        return "member_template/homev2";
+    }
+
+    /* 영화 상세 페이지 이동 */
+    @GetMapping("/movie/detail2/{movieId}")
+    public String movieDetail2(@PathVariable Long movieId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        User user = userManagementService.getUser(currentUser.getUsername());
+        Movie movie = movieServiceImpl.findByMovieId(movieId);
+
+        model.addAttribute("isWant", wantToSeeServiceImpl.isWant(user, movie));
+        model.addAttribute("currentUserId", currentUser.getUsername());
+        model.addAttribute("movie", movieServiceImpl.findByMovieId(movieId));
+
+        return "member_template/moviesingle";
+    }
+
+    // 영화 상세 페이지 form 이동
+    @GetMapping("/movie/detail/{movieId}")
+    public String movieDetail(@PathVariable Long movieId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        User user = userManagementService.getUser(currentUser.getUsername());
+        Movie movie = movieServiceImpl.findByMovieId(movieId);
+
+        model.addAttribute("isWant", wantToSeeServiceImpl.isWant(user, movie));
+        model.addAttribute("currentUserId", currentUser.getUsername());
+        model.addAttribute("movie", movieServiceImpl.findByMovieId(movieId));
+
+        return "member/movieDetail";
+    }
 
     /* 영화 등록 페이지 이동 */
     @GetMapping("/movie/create")

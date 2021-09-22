@@ -7,7 +7,9 @@ import com.moviewiki.api.user.service.UserManagementServiceImpl;
 import com.moviewiki.api.wantToSee.domain.WantToSee;
 import com.moviewiki.api.wantToSee.service.WantToSeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,15 +28,15 @@ public class WantToSeeController {
     private UserManagementServiceImpl userManagementService;
 
 
-    /* 보고 싶은 영화 등록 */
+    /* 사용x : 보고 싶은 영화 등록 */
     @GetMapping("/want/create")
     public String wantForm(){
         return "member/want_add";
     }
 
-    /* 보고 싶은 영화 추가 */
-    @PostMapping("/want/create")
-    public String createWant(HttpServletRequest request){
+    /* 관심 영화 추가 */
+    @PostMapping("/addWant")
+    public String addWant(HttpServletRequest request){
         String userId = request.getParameter("userId");
         Long movieId = parseLong(request.getParameter("movieId"));
 
@@ -42,7 +44,22 @@ public class WantToSeeController {
         User user = userManagementService.getUser(userId);
 
         wantToSeeServiceImpl.save(user, movie);
-        return "admin_movie";
+        return "redirect:/movie/detail2/" + movieId;
+    }
+
+    /* 관심영화 삭제 */
+    @PostMapping("/deleteWant")
+    public String deleteWant(HttpServletRequest request) {
+
+        String userId = request.getParameter("userId");
+        Long movieId = parseLong(request.getParameter("movieId"));
+
+        User user = userManagementService.getUser(userId);
+        Movie movie = movieServiceImpl.findByMovieId(movieId);
+
+        wantToSeeServiceImpl.deleteWantToSee(user, movie);
+
+        return "redirect:/movie/detail2/" + movieId;
     }
 
     /* 특정 사용자의 보고픈 영화 조회 */
@@ -55,15 +72,4 @@ public class WantToSeeController {
         return want;
     }
 
-    /* 보고픈 영화 삭제 */
-    @GetMapping("/want/delete")
-    public String deleteWant(@RequestParam("userId") String userId, @RequestParam("movieId") Long movieId) {
-
-        User user = userManagementService.getUser(userId);
-        Movie movie = movieServiceImpl.findByMovieId(movieId);
-
-        wantToSeeServiceImpl.deleteWantToSee(user, movie);
-
-        return "redirect:/want/read/" + userId;
-    }
 }
