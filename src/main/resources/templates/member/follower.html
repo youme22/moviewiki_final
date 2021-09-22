@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <style>
         .btn_followList {
-            margin: 0 0 20px 307px;
+            margin: 0 0 61px 288px;
         }
 
     </style>
@@ -95,7 +95,7 @@
 <div class="buster-light">
     <div class="page-single">
         <div class="container">
-            <div class="row ipad-width">
+            <div class="row ipad-width2">
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="user-information">
                         <div class="user-img">
@@ -165,22 +165,14 @@
                         <button>팔로잉 목록</button>
                     </a>
                 </div>
-                <div class="col-md-9 col-sm-12 col-xs-12">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="ceb-item-style-2">
-                                <div class="ceb-infor">
-                                    <h2>팔로워 목록</h2>
-                                    <hr>
-                                    <table>
-                                        <tr th:each="followers : ${followerList}">
-                                            <td>
-                                                <a th:text="${followers.follower.userId}" th:href="'/member/mypage/' + ${followers.follower.userId}"></a>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
+                <div class="movie-item-style-2 userrate">
+                    <div class="mv-item-infor">
+                        <h2>팔로워 목록</h2>
+                        <hr>
+                        <div th:each="followers : ${followerList}">
+                            <h6><a th:href="'/member/mypage/' + ${followers.follower.userId}">
+                                <th:block th:text="${followers.follower.userId}"/>
+                            </a></h6>
                         </div>
                     </div>
                 </div>
