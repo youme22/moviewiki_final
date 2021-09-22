@@ -167,13 +167,13 @@
                 </div>
                 <div class="movie-item-style-2 userrate">
                     <div class="mv-item-infor">
-                        <h2>팔로워 목록</h2>
+                        <h2>팔로워 <span th:text="${countFollower}"></span></h2>
                         <hr>
-                        <div th:each="followers : ${followerList}">
-                            <h6><a th:href="'/member/mypage/' + ${followers.follower.userId}">
-                                <th:block th:text="${followers.follower.userId}"/>
+                        <th:block th:each="followers : ${followerList}">
+                            <h6><a th:href="@{'/member/mypage/' + ${followers.follower.userId}}">
+                                <p th:text="${followers.follower.userId}"/>
                             </a></h6>
-                        </div>
+                        </th:block>
                     </div>
                 </div>
             </div>

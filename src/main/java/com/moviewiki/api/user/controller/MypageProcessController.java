@@ -83,9 +83,8 @@ public class MypageProcessController {
 
     // 관심 영화 페이지 form call
     @RequestMapping("/member/want_to_see/{userId}")
-
-    public String wantToSeePage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
-        User loginUser = userManagementService.getUser(currentUser.getUsername());
+    public String wantToSeePage(@PathVariable String userId, Model model, Authentication auth) {
+        User loginUser = userManagementService.getUser(auth.getName());
         User pageUser = userManagementService.getUser(userId);
         List<WantToSee> wantToSeeList = wantToSeeService.findByUser(pageUser);
 
@@ -93,7 +92,7 @@ public class MypageProcessController {
         model.addAttribute("countReview", reviewService.countReviews(pageUser));
         model.addAttribute("countWantToSee", wantToSeeService.countWantToSee(pageUser));
         model.addAttribute("user", pageUser);
-        model.addAttribute("currentUserId", currentUser.getUsername());
+        model.addAttribute("currentUserId", loginUser.getUserId());
         model.addAttribute("wantToSeeList", wantToSeeList);
 
         return "/member/want_to_see";
@@ -105,6 +104,7 @@ public class MypageProcessController {
         User loginUser = userManagementService.getUser(currentUser.getUsername());
         User pageUser = userManagementService.getUser(userId);
 
+        model.addAttribute("countFollowee", followingService.countFollowee(pageUser));
         model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));
         model.addAttribute("countReview", reviewService.countReviews(pageUser));
         model.addAttribute("user", pageUser);
@@ -119,6 +119,7 @@ public class MypageProcessController {
         User pageUser = userManagementService.getUser(userId);
         User loginUser = userManagementService.getUser(currentUser.getUsername());
 
+        model.addAttribute("countFollower", followingService.countFollower(pageUser));
         model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));
         model.addAttribute("countReview", reviewService.countReviews(pageUser));
         model.addAttribute("user", pageUser);

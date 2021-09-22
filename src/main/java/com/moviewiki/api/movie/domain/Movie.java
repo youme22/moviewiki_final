@@ -41,13 +41,13 @@ public class Movie {
     private int runningTime;
     @Column(columnDefinition = "LONG")
     private String summary;
-   /* @Column(name = "AVG_RATING")
+    @Column(name = "AVG_RATING")
     private double avgRating;
     @Column(name = "REVIEW_COUNT")
     private int reviewCount;
     @Column(name = "WTS_COUNT")
     private int wtsCount;
-*/
+
     @Builder
     public Movie(String filmRating, String movieName, String movieOgName, String movieProfile, Date releaseDate, int runningTime, String summary
 //            , double avgRating, int reviewCount, int wtsCount
