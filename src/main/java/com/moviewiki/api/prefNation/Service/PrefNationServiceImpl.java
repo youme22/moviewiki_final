@@ -44,4 +44,9 @@ public class PrefNationServiceImpl implements PrefNationService {
 
     }
 
+    // 민형 - 유저로 선호 국가 리스트
+    @Override
+    public List<PrefNation> prefNationList(User user) {
+        return prefNationRepository.findByUser(user);
+    }
 }

@@ -1,6 +1,14 @@
 package com.moviewiki.api.user.controller;
 
 import com.moviewiki.api.following.service.FollowingService;
+import com.moviewiki.api.prefActor.Service.PrefActorService;
+import com.moviewiki.api.prefActor.domain.PrefActor;
+import com.moviewiki.api.prefDirector.domain.PrefDirector;
+import com.moviewiki.api.prefDirector.service.PrefDirectorService;
+import com.moviewiki.api.prefGenre.domain.PrefGenre;
+import com.moviewiki.api.prefGenre.service.PrefGenreService;
+import com.moviewiki.api.prefNation.Service.PrefNationService;
+import com.moviewiki.api.prefNation.domain.PrefNation;
 import com.moviewiki.api.review.domain.Review;
 import com.moviewiki.api.review.service.ReviewService;
 import com.moviewiki.api.user.domain.User;
@@ -33,6 +41,18 @@ public class MypageProcessController {
     @Autowired
     ReviewService reviewService;
 
+    @Autowired
+    PrefActorService prefActorService;
+
+    @Autowired
+    PrefDirectorService prefDirectorService;
+
+    @Autowired
+    PrefGenreService prefGenreService;
+
+    @Autowired
+    PrefNationService prefNationService;
+
     // 마이페이지 form call
     @GetMapping("/member/mypage/{userId}")
     public String mypageMain(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
@@ -57,6 +77,17 @@ public class MypageProcessController {
         User pageUser = userManagementService.getUser(userId);
         User loginUser = userManagementService.getUser(currentUser.getUsername());
         List<Review> reviewList = reviewService.getReviewListByUser(pageUser);
+
+        List<PrefActor> prefActorList = prefActorService.prefActorList(pageUser);
+        List<PrefDirector> prefDirectorList = prefDirectorService.prefDirectorList(pageUser);
+        List<PrefGenre> prefGenreList = prefGenreService.prefGenreList(pageUser);
+        List<PrefNation> prefNationList = prefNationService.prefNationList(pageUser);
+
+        model.addAttribute("prefActorList", prefActorService.prefActorList(pageUser));
+        model.addAttribute("prefDirectorList", prefDirectorService.prefDirectorList(pageUser));
+        model.addAttribute("prefGenreList", prefGenreService.prefGenreList(pageUser));
+        model.addAttribute("prefNationList", prefNationService.prefNationList(pageUser));
+
 
         model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));
         model.addAttribute("countReview", reviewService.countReviews(pageUser));

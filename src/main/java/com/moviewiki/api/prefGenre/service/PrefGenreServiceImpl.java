@@ -67,4 +67,9 @@ public class PrefGenreServiceImpl implements PrefGenreService {
         return recMovieList;
     }
 
+    // 민형 - 유저로 선호 장르 리스트
+    @Override
+    public List<PrefGenre> prefGenreList(User user) {
+        return prefGenreRepository.findByUser(user);
+    }
 }
