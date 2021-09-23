@@ -13,6 +13,11 @@
     <meta name="format-detection" content="telephone-no"><!-- CSS files -->
     <link rel="stylesheet" href="/css/plugins.css">
     <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .grade-img > p > img {
+            width: 34%;
+        }
+    </style>
 </head>
 <body>
 <header class="ht-header">
@@ -92,7 +97,7 @@
             <div class="row ipad-width2">
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="user-information">
-                        <div class="user-img">
+                        <div class="user-img grade-img">
                             <!--                            <a href="#">-->
                             <p th:if="${countReview} >= 500">
                                 <img th:src="@{/img/grade5.png}">

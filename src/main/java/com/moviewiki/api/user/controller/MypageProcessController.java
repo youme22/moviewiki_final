@@ -80,17 +80,10 @@ public class MypageProcessController {
         User loginUser = userManagementService.getUser(currentUser.getUsername());
         List<Review> reviewList = reviewService.getReviewListByUser(pageUser);
 
-//        List<PrefActor> prefActorList = prefActorService.prefActorList(pageUser);
-//        log.info("prefActorList =========" + prefActorList);
-//        List<PrefDirector> prefDirectorList = prefDirectorService.prefDirectorList(pageUser);
-//        List<PrefGenre> prefGenreList = prefGenreService.prefGenreList(pageUser);
-//        List<PrefNation> prefNationList = prefNationService.prefNationList(pageUser);
-
-//        model.addAttribute("prefActorList", prefActorService.prefActorList(pageUser));
-//        model.addAttribute("prefDirectorList", prefDirectorService.prefDirectorList(pageUser));
-//        model.addAttribute("prefGenreList", prefGenreService.prefGenreList(pageUser));
-//        model.addAttribute("prefNationList", prefNationService.prefNationList(pageUser));
-
+        model.addAttribute("prefActorList", prefActorService.prefActorList(pageUser));
+        model.addAttribute("prefDirectorList", prefDirectorService.prefDirectorList(pageUser));
+        model.addAttribute("prefGenreList", prefGenreService.prefGenreList(pageUser));
+        model.addAttribute("prefNationList", prefNationService.prefNationList(pageUser));
 
         model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));
         model.addAttribute("countReview", reviewService.countReviews(pageUser));

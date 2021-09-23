@@ -29,6 +29,9 @@
         .btn_delete {
             margin-top: 10px;
         }
+        .grade-img > p > img {
+            width: 34%;
+        }
     </style>
 </head>
 <body>
@@ -109,7 +112,7 @@
             <div class="row ipad-width2">
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="user-information">
-                        <div class="user-img">
+                        <div class="user-img grade-img">
                             <p th:if="${countReview} >= 500">
                                 <img th:src="@{/img/grade5.png}">
                             </p>

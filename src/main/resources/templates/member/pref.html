@@ -13,6 +13,15 @@
     <meta name="format-detection" content="telephone-no"><!-- CSS files -->
     <link rel="stylesheet" href="/css/plugins.css">
     <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .pref > span {
+            color: black !important;
+            font-size: 18px !important;
+        }
+        .grade-img > p > img {
+            width: 34%;
+        }
+    </style>
 </head>
 <body>
 <header class="ht-header">
@@ -92,7 +101,7 @@
             <div class="row ipad-width">
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="user-information">
-                        <div class="user-img">
+                        <div class="user-img grade-img">
                             <!--                            <a href="#">-->
                             <p th:if="${countReview} >= 500">
                                 <img th:src="@{/img/grade5.png}">
@@ -156,8 +165,8 @@
                         <div class="col-md-3">
                             <div class="ceb-item-style-2">
                                 <div class="ceb-infor">
-                                    <h2><a th:href="@{'/member/reviews/' + ${user.userId}}">평가한 영화 작품</a></h2>
-                                    <p th:text="${countReview} + '건'"></p>
+                                    <h2 class="pref"><a th:href="@{'/member/reviews/' + ${user.userId}}">평가한 영화 작품</a>
+                                    <span th:text="${countReview} + '건'"></span></h2>
                                 </div>
                             </div>
                         </div>
@@ -168,14 +177,12 @@
                                 <div class="ceb-item-style-2">
                                     <div class="ceb-infor">
                                         <h2><a href="#">
-                                            선호배우</a></h2>
-<!--                                        <div th:each="prefActor : ${prefActorList}">-->
-<!--                                            <p th:text="${prefActor.getActor().getActorName()}"></p>-->
-
-<!--                                        </div>-->
-                                        브래드피트 85점 9편<br>
-                                        로버트 다우니 주니어 81점 8편<br>
-                                        엠마 스톤 80점 9편
+                                            선호배우</a></h2><hr>
+                                        <div class="pref" th:each="prefActor : ${prefActorList}">
+                                            <span th:text="${prefActor.getActor().getActorName()}"/>
+                                            <span th:text="${prefActor.getActorPoint()  + '점'}"/>
+                                            <span th:text="${prefActor.getActorReviewCount() + '편'} "/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -183,10 +190,12 @@
                                 <div class="ceb-item-style-2">
                                     <div class="ceb-infor">
                                         <h2><a href="#">
-                                            선호감독</a></h2>
-                                        크리스토퍼 놀란 85점 9편<br>
-                                        쿠엔틴 타란티노 81점 8편<br>
-                                        제임스 건 80점 9편
+                                            선호감독</a></h2><hr>
+                                        <div class="pref" th:each="prefDirector : ${prefDirectorList}">
+                                            <span th:text="${prefDirector.getDirector().getDirectorName()}"/>
+                                            <span th:text="${prefDirector.getDirectorPoint() + '점'}"/>
+                                            <span th:text="${prefDirector.getDirectorReviewCount() + '편'}"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -198,10 +207,12 @@
                                 <div class="ceb-item-style-2">
                                     <div class="ceb-infor">
                                         <h2><a href="#">
-                                            선호장르</a></h2>
-                                        액션 85점 147편<br>
-                                        SF 81점 96편<br>
-                                        스릴러 80점 89편
+                                            선호장르</a></h2><hr>
+                                        <div class="pref" th:each="prefGenre : ${prefGenreList}">
+                                            <span th:text="${prefGenre.getGenre().getGenreName()}"></span>
+                                            <span th:text="${prefGenre.getGenrePoint() + '점' }"/>
+                                            <span th:text="${prefGenre.getGenreReviewCount() + '편' }"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -209,10 +220,12 @@
                                 <div class="ceb-item-style-2">
                                     <div class="ceb-infor">
                                         <h2><a href="#">
-                                            선호국가</a></h2>
-                                        미국 85점 90편<br>
-                                        한국 81점 82편<br>
-                                        영국 스톤 80점 70편
+                                            선호국가</a></h2><hr>
+                                        <div class="pref" th:each="prefNation : ${prefNationList}">
+                                            <span th:text="${prefNation.getNation().getNationName()}"></span>
+                                            <span th:text="${prefNation.getNationPoint() + '점' }"/>
+                                            <span th:text="${prefNation.getNationReviewCount() + '편' }"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -223,17 +236,19 @@
                             <div class="col-md-push-4">
                                 <div class="ceb-item-style-2">
                                     <div class="ceb-infor">
-                                        <h2><a href="#">영화 감상 시간
-                                            <p th:text="${myRunningTime} + '시간'"/>
-                                            <p th:if="${myRunningTime} >= 240000" th:text="'국내에 몇 안되는 영화전문가'"/>
-                                            <p th:if="${myRunningTime} >= 180000 and ${countReview} < 240000"
+                                        <h2 ><a href="#">
+                                            영화 감상 시간</a></h2><hr>
+                                        <div class="pref">
+                                            <span th:text="${myRunningTime} + '시간'"/><br>
+                                            <span th:if="${myRunningTime} >= 240000" th:text="'국내에 몇 안되는 영화전문가'"/>
+                                            <span th:if="${myRunningTime} >= 180000 and ${countReview} < 240000"
                                                th:text="'상위 0.01%에 꼽히는 베테랑 영화인'"/>
-                                            <p th:if="${myRunningTime} >= 120000 and ${countReview} < 180000"
+                                            <span th:if="${myRunningTime} >= 120000 and ${countReview} < 180000"
                                                th:text="'상위 0.1%의 영화인'"/>
-                                            <p th:if="${myRunningTime} >= 50000 and ${countReview} < 120000"
+                                            <span th:if="${myRunningTime} >= 50000 and ${countReview} < 120000"
                                                th:text="'영화 1000작을 넘게 본 아마추어 영화인"/>
-                                            <p th:if="${myRunningTime} < 50000" th:text="'당신은 영화 꿈나무!'"/>
-                                        </a></h2>
+                                            <span th:if="${myRunningTime} < 50000" th:text="'당신은 영화 꿈나무!'"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

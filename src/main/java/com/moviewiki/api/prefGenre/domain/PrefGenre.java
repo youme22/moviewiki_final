@@ -27,8 +27,13 @@ public class PrefGenre {
     @Id
     private Genre genre;
 
+    @Column(name = "GENRE_POINT")
     private double genrePoint;
+
+    @Column(name = "GENRE_REVIEW_COUNT")
     private int genreReviewCount;
+
+    @Column(name = "GENRE_REVIEW_DATE")
     private Date genreReviewDate;
 
 }

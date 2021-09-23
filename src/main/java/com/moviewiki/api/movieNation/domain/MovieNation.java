@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "MOVIE_NATION")
+@Table(name = "MOVIE_NATIONS")
 @IdClass(MovieNationPK.class)
 public class MovieNation {
 

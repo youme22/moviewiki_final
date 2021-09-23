@@ -48,6 +48,7 @@ public class PrefActorServiceImpl implements PrefActorService {
     // 민형 - 유저로 선호 배우 리스트
     @Override
     public List<PrefActor> prefActorList(User user) {
-        return prefActorRepository.findByUser(user);
+        List<PrefActor> prefActorList = prefActorRepository.findByUserOrderByActorPointDesc(user);
+        return prefActorList.subList(0,3);
     }
 }

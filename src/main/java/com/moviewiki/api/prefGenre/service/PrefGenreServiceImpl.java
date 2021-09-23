@@ -5,6 +5,7 @@ import com.moviewiki.api.movie.domain.Movie;
 import com.moviewiki.api.movieGenre.repository.MovieGenreRepository;
 import com.moviewiki.api.prefGenre.domain.PrefGenre;
 import com.moviewiki.api.prefGenre.repository.PrefGenreRepository;
+import com.moviewiki.api.prefNation.domain.PrefNation;
 import com.moviewiki.api.review.domain.Review;
 import com.moviewiki.api.review.repository.ReviewRepository;
 import com.moviewiki.api.user.domain.User;
@@ -58,7 +59,7 @@ public class PrefGenreServiceImpl implements PrefGenreService {
     public List<Movie> findAll(){
         String sql = "SELECT * FROM MOVIES\n" +
                 "WHERE MOVIE_ID IN(\n" +
-                "SELECT MOVIE_ID FROM MOVIE_GENRE\n" +
+                "SELECT MOVIE_ID FROM MOVIE_GENRES\n" +
                 "WHERE GENRE_ID IN\n" +
                 "    (SELECT GENRE_ID from PREF_GENRES \n" +
                 "    where GENRE_POINT =\n" +
@@ -68,10 +69,11 @@ public class PrefGenreServiceImpl implements PrefGenreService {
     }
 
 
-    // 민형 - 유저로 선호 장르 리스트
+    // 민형 - 유저로 선호 장르 리스트(선호 점수순)
     @Override
     public List<PrefGenre> prefGenreList(User user) {
-        return prefGenreRepository.findByUser(user);
+        List<PrefGenre> prefGenreList = prefGenreRepository.findByUserOrderByGenrePointDesc(user);
+        return prefGenreList.subList(0,3);
     }
 
 }

@@ -14,13 +14,8 @@
     <link rel="stylesheet" href="/css/plugins.css">
     <link rel="stylesheet" href="/css/style.css">
     <style>
-        .mypage-box {
-            border: black 1px solid;
-            width: 200px;
-            height: 300px;
-        }
-        .a {
-            float: left;
+        .grade-img > p > img {
+            width: 34%;
         }
     </style>
 </head>
@@ -102,7 +97,7 @@
             <div class="row ipad-width">
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="user-information">
-                        <div class="user-img">
+                        <div class="user-img grade-img">
                             <!--                            <a href="#">-->
                             <p th:if="${countReview} >= 500">
                                 <img th:src="@{/img/grade5.png}">
