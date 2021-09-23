@@ -15,6 +15,8 @@ import com.moviewiki.api.user.domain.User;
 import com.moviewiki.api.user.service.UserManagementService;
 import com.moviewiki.api.wantToSee.domain.WantToSee;
 import com.moviewiki.api.wantToSee.service.WantToSeeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -69,7 +71,7 @@ public class MypageProcessController {
         model.addAttribute("user", userManagementService.getUser(userId));
         return "member/mypage";
     }
-
+    private static final Logger log = LoggerFactory.getLogger(UserManagementController.class);
 
     // 취향분석 페이지 form call
     @RequestMapping("/member/pref/{userId}")
@@ -78,15 +80,16 @@ public class MypageProcessController {
         User loginUser = userManagementService.getUser(currentUser.getUsername());
         List<Review> reviewList = reviewService.getReviewListByUser(pageUser);
 
-        List<PrefActor> prefActorList = prefActorService.prefActorList(pageUser);
-        List<PrefDirector> prefDirectorList = prefDirectorService.prefDirectorList(pageUser);
-        List<PrefGenre> prefGenreList = prefGenreService.prefGenreList(pageUser);
-        List<PrefNation> prefNationList = prefNationService.prefNationList(pageUser);
+//        List<PrefActor> prefActorList = prefActorService.prefActorList(pageUser);
+//        log.info("prefActorList =========" + prefActorList);
+//        List<PrefDirector> prefDirectorList = prefDirectorService.prefDirectorList(pageUser);
+//        List<PrefGenre> prefGenreList = prefGenreService.prefGenreList(pageUser);
+//        List<PrefNation> prefNationList = prefNationService.prefNationList(pageUser);
 
-        model.addAttribute("prefActorList", prefActorService.prefActorList(pageUser));
-        model.addAttribute("prefDirectorList", prefDirectorService.prefDirectorList(pageUser));
-        model.addAttribute("prefGenreList", prefGenreService.prefGenreList(pageUser));
-        model.addAttribute("prefNationList", prefNationService.prefNationList(pageUser));
+//        model.addAttribute("prefActorList", prefActorService.prefActorList(pageUser));
+//        model.addAttribute("prefDirectorList", prefDirectorService.prefDirectorList(pageUser));
+//        model.addAttribute("prefGenreList", prefGenreService.prefGenreList(pageUser));
+//        model.addAttribute("prefNationList", prefNationService.prefNationList(pageUser));
 
 
         model.addAttribute("isFollowing", followingService.isFollowing(loginUser, pageUser));

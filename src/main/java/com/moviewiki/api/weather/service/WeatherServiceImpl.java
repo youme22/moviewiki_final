@@ -3,7 +3,6 @@ package com.moviewiki.api.weather.service;
 import com.moviewiki.api.movie.domain.Movie;
 import com.moviewiki.api.weather.domain.Weather;
 import com.moviewiki.api.weather.repository.WeatherRepository;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +12,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
-//import org.json.simple.JSONObject;
-//import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 @Service
 public class WeatherServiceImpl implements WeatherService {
@@ -47,28 +46,27 @@ public class WeatherServiceImpl implements WeatherService {
     // 오늘 날씨 받기
     @Override
     public String todayWeather(){
-//        // 파싱한 데이터를 저장할 변수
-//        String result = "";
-//
-//        try {
-//
-//            URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=3c9eb9ffb7fe11436738555f2ccaea2a");
-//
-//            BufferedReader bf;
-//            bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
-//            result = bf.readLine();
-//
-//            JSONParser jsonParser = new JSONParser();
-//            JSONObject jsonObject = (JSONObject)jsonParser.parse(result);
-//            JSONObject weather = (JSONObject)jsonObject.get("weather");
-//
-//            System.out.println("weather = " + weather.get("main").toString());
-//            return weather.get("main").toString();
-//
-//        }catch(Exception e) {
-//           e.printStackTrace();
-//            return "error";
-//        }
-        return null;
+        // 파싱한 데이터를 저장할 변수
+        String result = "";
+
+        try {
+
+            URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=3c9eb9ffb7fe11436738555f2ccaea2a");
+
+            BufferedReader bf;
+            bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+            result = bf.readLine();
+
+            JSONParser jsonParser = new JSONParser();
+            JSONObject jsonObject = (JSONObject)jsonParser.parse(result);
+            JSONObject weather = (JSONObject)jsonObject.get("weather");
+
+            System.out.println("weather = " + weather.get("main").toString());
+            return weather.get("main").toString();
+
+        }catch(Exception e) {
+           e.printStackTrace();
+            return "error";
+        }
     }
 }
