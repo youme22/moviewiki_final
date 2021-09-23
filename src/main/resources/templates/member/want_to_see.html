@@ -165,7 +165,7 @@
                         <div class="movie-item-style-2 movie-item-style-1 style-3"
                              th:each="wantToSee : ${wantToSeeList}">
                             <img th:src="@{${wantToSee.getMovie().getMovieProfile()}}">
-                            <div class="hvr-inner"><a href="#">Read more <i
+                            <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${wantToSee.getMovie().getMovieId()}}">Read more <i
                                     class="ion-android-arrow-dropright"></i></a></div>
                             <div class="mv-item-infor">
                                 <h6 th:text="${wantToSee.getMovie().getMovieName()}"><a href="#">into the wild</a></h6>

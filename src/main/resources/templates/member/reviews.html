@@ -175,9 +175,9 @@
 
 
                     <div class="movie-item-style-2 userrate" th:each="review : ${reviewList}">
-                        <img th:src="@{${review.getMovie().getMovieProfile()}}">
+                            <img th:src="@{${review.getMovie().getMovieProfile()}}">
                         <div class="mv-item-infor">
-                            <h6><a href="#">
+                            <h6><a th:href="@{'/main/movie/' + ${review.getMovie().getMovieId()}}">
                                     <th:block th:text="${review.getMovie().getMovieName()}"/>
                                     <span th:text="${#dates.format(review.getMovie().getReleaseDate(), '(yyyy)')}"/>
                                 </a></h6>

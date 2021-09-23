@@ -117,9 +117,12 @@
                             <!--                            </a>-->
                             <span th:switch="${user.userId}">
                                 <span th:case="${currentUserId}">
-                                    <a class="redbtn" sec:authorize="isAuthenticated()" th:href="@{/member/check_pw}">
-                                        회원정보 수정
-                                    </a>
+                                    <span sec:authorize="isAuthenticated()">
+                                        <a class="redbtn"  th:href="@{/member/modify_info_get}">
+                                            회원정보 수정
+                                        </a>
+
+                                    </span>
                                 </span>
                                 <span th:case="*">
                                     <span th:switch="${isFollowing}">
