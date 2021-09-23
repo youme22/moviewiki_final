@@ -132,29 +132,29 @@
 <!-- 로그인 후 main START -->
 <sec:authorize access="isAuthenticated()">
     <div class="buster-light">
-        <div class="movie-items  full-width">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="title-hd"><h2>in theater</h2><a href="#" class="viewall">View all <i
-                            class="ion-ios-arrow-right"></i></a></div>
-                    <div class="tabs">
-                        <ul class="tab-links">
-                            <li class="active"><a href="#tab1-h2">#Popular</a></li>
-                            <li><a href="#tab2-h2">#Coming soon</a></li>
-                            <li><a href="#tab3-h2"> #Top rated </a></li>
-                            <li><a href="#tab4-h2">#Most reviewed</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div id="tab1-h2" class="tab active">
-                                <div class="row">
-                                    <div class="slick-multiItem2">
-                                        <div th:each="season : ${seasons}" class="slide-it">
+    <div class="movie-items  full-width">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- 추천 1-->
+                <div class="title-hd">
+                    <h2>선호하는 장르의 영화</h2>
+                </div>
+                <div class="tabs">
+                    <ul class="tab-links-2">
+                        <li class="active"><a href="#tab21-h2">#Popular</a></li>
+                        <li><a href="#tab22-h2"></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="tab1-h2" class="tab active">
+                            <div class="row">
+                                <div class="slick-multiItem2">
+                                        <div th:each="recGenreList : ${recGenreList}" class="slide-it">
                                             <div class="movie-item">
-                                                <div class="mv-img"><img th:src="${season.getMovie().movieProfile}" alt="" style="height: 250px;">
+                                                <div class="mv-img"><img th:src="${recGenreList.movieProfile}" alt="" style="height: 250px;">
                                                 </div>
-                                                <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${season.getMovie().movieId}}">Read more <i
+                                                <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${recGenreList.movieId}}">Read more <i
                                                         class="ion-android-arrow-dropright"></i></a></div>
-                                                <div class="title-in"><h6><a href="#" th:text="${season.getMovie().movieName}"></a></h6>
+                                                <div class="title-in"><h6><a href="#" th:text="${recGenreList.movieName}"></a></h6>
                                                     <p><i class="ion-android-star"></i><span>7.4</span>/10</p></div>
                                             </div>
                                         </div>
@@ -163,8 +163,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="title-hd"><h2>on tv</h2><a href="#" class="viewall">View all <i
-                            class="ion-ios-arrow-right"></i></a></div>
+                    <br>
+                <!-- 추천 2-->
+                    <div class="title-hd"><h2 th:text="${seasons[0].seasonName} + '에 봐야할 영화'"></h2></div>
                     <div class="tabs">
                         <ul class="tab-links-2">
                             <li class="active"><a href="#tab21-h2">#Popular</a></li>
@@ -173,7 +174,7 @@
                             <li><a href="#tab24-h2">#Most reviewed</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div id="tab21-h2" class="tab active">
+                            <div id="tab2-h2" class="tab active">
                                 <div class="row">
                                     <div class="slick-multiItem2">
                                         <div th:each="season : ${seasons}" class="slide-it">
@@ -189,12 +190,72 @@
                                     </div>
                                 </div>
                             </div>
+                        <br>
+                        <br>
+                    <!-- 추천 3-->
+                    <div class="title-hd">
+                        <h2>선호하는 국가의 영화</h2>
+                    </div>
+                    <div class="tabs">
+                        <ul class="tab-links-2">
+                            <li class="active"><a href="#tab21-h2">#Popular</a></li>
+                            <li><a href="#tab3-h2"></a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="tab3-h2" class="tab active">
+                                <div class="row">
+                                    <div class="slick-multiItem2">
+                                        <div th:each="recNationList : ${recNationList}" class="slide-it">
+                                            <div class="movie-item">
+                                                <div class="mv-img"><img th:src="${recNationList.movieProfile}" alt="" style="height: 250px;">
+                                                </div>
+                                                <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${recNationList.movieId}}">Read more <i
+                                                        class="ion-android-arrow-dropright"></i></a></div>
+                                                <div class="title-in"><h6><a href="#" th:text="${recNationList.movieName}"></a></h6>
+                                                    <p><i class="ion-android-star"></i><span>7.4</span>/10</p></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <!-- 추천 4-->
+                            <div class="title-hd">
+                                <h2>선호하는 국가의 영화</h2>
+                            </div>
+                            <div class="tabs">
+                                <ul class="tab-links-2">
+                                    <li class="active"><a href="#tab21-h2">#Popular</a></li>
+                                    <li><a href="#tab22-h2"></a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="tab4-h2" class="tab active">
+                                        <div class="row">
+                                            <div class="slick-multiItem2">
+                                                <div th:each="recNationList : ${recNationList}" class="slide-it">
+                                                    <div class="movie-item">
+                                                        <div class="mv-img"><img th:src="${recNationList.movieProfile}" alt="" style="height: 250px;">
+                                                        </div>
+                                                        <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${recNationList.movieId}}">Read more <i
+                                                                class="ion-android-arrow-dropright"></i></a></div>
+                                                        <div class="title-in"><h6><a href="#" th:text="${recNationList.movieName}"></a></h6>
+                                                            <p><i class="ion-android-star"></i><span>7.4</span>/10</p></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <br>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+        </div></div></div>
 </sec:authorize> <!-- 로그인 후 main END-->
 
 <!-- footer section START -->
