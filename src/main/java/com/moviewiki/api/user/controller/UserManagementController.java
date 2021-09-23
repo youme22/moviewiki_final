@@ -1,5 +1,7 @@
 package com.moviewiki.api.user.controller;
 
+import com.moviewiki.api.prefGenre.service.PrefGenreServiceImpl;
+import com.moviewiki.api.prefNation.Service.PrefNationServiceImpl;
 import com.moviewiki.api.season.controller.SeasonController;
 import com.moviewiki.api.user.domain.User;
 import com.moviewiki.api.user.service.UserManagementService;
@@ -36,6 +38,10 @@ public class UserManagementController {
     private WeatherServiceImpl weatherServiceImpl;
     @Autowired
     private SeasonController seasonController;
+    @Autowired
+    private PrefGenreServiceImpl prefGenreServiceImpl;
+    @Autowired
+    private PrefNationServiceImpl prefNationServiceImpl;
 
     // 로그인 전 메인페이지
     @GetMapping("/")
@@ -48,6 +54,8 @@ public class UserManagementController {
     public String MainPage(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
         model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("seasons", seasonController.readSeason());
+        model.addAttribute("recGenreList", prefGenreServiceImpl.findAll());
+        model.addAttribute("recNationList", prefNationServiceImpl.findAll());
         return "member_template/main";
     }
 
