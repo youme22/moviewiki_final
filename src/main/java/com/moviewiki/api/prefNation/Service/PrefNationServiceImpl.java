@@ -66,8 +66,8 @@ public class PrefNationServiceImpl implements PrefNationService {
                 "WHERE MOVIE_ID IN(\n" +
                 "                SELECT MOVIE_ID FROM MOVIE_NATION\n" +
                 "                WHERE NATION_ID IN\n" +
-                "                (SELECT NATION_ID from PREF_NATIONS where NATIONPOINT =\n" +
-                "                (select max(NATIONPOINT) from PREF_NATIONS where USER_ID = 'veddy0')))";
+                "                (SELECT NATION_ID from PREF_NATIONS where NATION_POINT =\n" +
+                "                (select max(NATION_POINT) from PREF_NATIONS where USER_ID = 'veddy0')))";
         List<Movie> recNationList = em.createNativeQuery(sql, Movie.class).getResultList();
         return recNationList.subList(0, 12);
 
