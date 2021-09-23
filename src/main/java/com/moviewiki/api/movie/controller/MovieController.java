@@ -52,9 +52,7 @@ public class MovieController {
     @PostMapping("/movie/create")
     public String createMovie(MovieForm form){
        Movie movie = new Movie(form.getFilmRating(), form.getMovieName(), form.getMovieOgName(), form.getMovieProfile(), Date.valueOf(form.getReleaseDate())
-                                , parseInt(form.getRunningTime()), form.getSummary()
-//               , 0, 0, 0
-       );
+                                , parseInt(form.getRunningTime()), form.getSummary(), 0, 0, 0);
 
        movieServiceImpl.save(movie);
         return "admin/admin_movie_add";

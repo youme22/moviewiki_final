@@ -110,6 +110,10 @@
     <div class="page-single movie-single movie_single">
         <div class="container">
             <div class="row ipad-width2">
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="movie-img sticky-sb"><img th:src="${movie.movieProfile}" alt="">
+                    </div>
+                </div>
                 <div class="col-md-8 col-sm-12 col-xs-12">
                     <div class="movie-single-ct main-content">
                         <h1 class="bd-hd" th:text="${movie.movieName}">
@@ -148,7 +152,7 @@
                             <div class="rate"><i class="ion-android-star"></i>
                                 <!-- 우선 평점이 null값이므로 몇세 관람가인지 넣어봄-->
                                 <!-- 평점-->
-                                <p><span th:text="${movie.filmRating}"></span></p>
+                                <p><span th:text="${movie.avgRating}"></span></p>
                             </div>
 <!--                            <div class="rate-star"><p>Rate This Movie:</p><i class="ion-ios-star"></i><i-->
 <!--                                    class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i><i-->

@@ -41,17 +41,17 @@ public class Movie {
     private int runningTime;
     @Column(columnDefinition = "LONG")
     private String summary;
-//    @Column(name = "AVG_RATING")
-//    private double avgRating;
-//    @Column(name = "REVIEW_COUNT")
-//    private int reviewCount;
-//    @Column(name = "WTS_COUNT")
-//    private int wtsCount;
+
+    @Column(name = "AVG_RATING")
+    private double avgRating;
+    @Column(name = "REVIEW_COUNT")
+    private int reviewCount;
+    @Column(name = "WTS_COUNT")
+    private int wtsCount;
 
     @Builder
     public Movie(String filmRating, String movieName, String movieOgName, String movieProfile, Date releaseDate, int runningTime, String summary
-//            , double avgRating, int reviewCount, int wtsCount
-    ) {
+            , double avgRating, int reviewCount, int wtsCount) {
         this.filmRating = filmRating;
         this.movieName = movieName;
         this.movieOgName = movieOgName;
@@ -59,9 +59,9 @@ public class Movie {
         this.releaseDate = releaseDate;
         this.runningTime = runningTime;
         this.summary = summary;
-//        this.avgRating = avgRating;
-//        this.reviewCount = reviewCount;
-//        this.wtsCount = wtsCount;
+        this.avgRating = avgRating;
+        this.reviewCount = reviewCount;
+        this.wtsCount = wtsCount;
     }
 }
 
