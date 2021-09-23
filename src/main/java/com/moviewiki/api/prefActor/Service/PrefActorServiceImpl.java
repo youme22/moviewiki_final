@@ -16,32 +16,35 @@ import java.util.List;
 @Service
 public class PrefActorServiceImpl implements PrefActorService {
 
+    @Autowired
     private ReviewRepository reviewRepository;
+    @Autowired
     private PrefActorRepository prefActorRepository;
+    @Autowired
     private ActorFilmographyRepository actorFilmographyRepository;
 
-    @Autowired
-    public PrefActorServiceImpl(ReviewRepository reviewRepository, PrefActorRepository prefActorRepository, ActorFilmographyRepository actorFilmographyRepository) {
+//    @Autowired
+//    public PrefActorServiceImpl(ReviewRepository reviewRepository, PrefActorRepository prefActorRepository, ActorFilmographyRepository actorFilmographyRepository) {
+//        this.reviewRepository = reviewRepository;
+//        this.prefActorRepository = prefActorRepository;
+//        this.actorFilmographyRepository = actorFilmographyRepository;
+//    }
 
-        this.reviewRepository = reviewRepository;
-        this.prefActorRepository = prefActorRepository;
-        this.actorFilmographyRepository = actorFilmographyRepository;
-
-    }
-
+    // 효미 - 배우 선호도 업데이트
     @Override
     public void updatePrefActor(Review review) {
-
         User user = review.getUser();
-        Date actorReviewDate = null; // updatePrefActor메소드가 호출되는 날짜
+        Date actorReviewDate = new Date();
         Actor actor = actorFilmographyRepository.findActorByMovie(review.getMovie());
-//        List<Review> actorReviewList = reviewRepository.findActorReviewListByUserIdAndActorId(user.getUserId(), actor.getActorId());
-        List<Review> actorReviewList = reviewRepository.findGenreReviewListByUser(user); //임시코드 삭제예정
-        int actorReviewCount = actorReviewList.size(); // 메소드 아무거나 고름 -> 리뷰 카운트 메소드로 변경 예정
-        double actorPoint = actorReviewList.hashCode(); // 메소드 아무거나 고름 -> 선호도 계산 메소드로 변경 예정, 평점(-3)의 총합을 actorReviewCount로 나눈 값
+        List<Review> actorReviewList = reviewRepository.findActorReviewListByUserAndActor(user, actor);
+        int actorReviewCount = actorReviewList.size();
+        double sum = 0;
+        for (Review reviewInList : actorReviewList) {
+            sum += reviewInList.getReviewRating();
+        }
+        double actorPoint = sum/actorReviewCount;
         PrefActor prefActor = new PrefActor(user, actor, actorPoint, actorReviewCount, actorReviewDate); // PrefActor 생성
-//        prefActorRepository.savePrefActor(prefActor); //PrefActor 테이블에 저장
-
+        prefActorRepository.save(prefActor); //PrefActors 테이블에 저장
     }
 
 

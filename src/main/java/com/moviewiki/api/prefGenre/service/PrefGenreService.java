@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 public interface PrefGenreService {
 
+    // 효미 - 장르 선호도 업데이트
     void updatePrefGenre(Review review);
 
     // 선호 장르 영화 추천

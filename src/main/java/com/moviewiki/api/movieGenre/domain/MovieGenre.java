@@ -7,13 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "MOVIE_GENRE")
+@Table(name = "MOVIE_GENRES")
 @IdClass(MovieGenrePK.class)
 public class MovieGenre {
 

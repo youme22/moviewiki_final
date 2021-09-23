@@ -1,5 +1,6 @@
 package com.moviewiki.api.recommend.service;
 
+
 import com.moviewiki.api.movie.domain.Movie;
 import com.moviewiki.api.user.domain.User;
 

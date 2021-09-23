@@ -18,41 +18,45 @@ import java.util.List;
 @Service
 public class PrefGenreServiceImpl implements PrefGenreService {
 
-
+    @Autowired
     private PrefGenreRepository prefGenreRepository;
+    @Autowired
     private ReviewRepository reviewRepository;
+    @Autowired
     private MovieGenreRepository movieGenreRepository;
-
+    @Autowired
     private final EntityManager em;
 
     public PrefGenreServiceImpl(EntityManager em) {
         this.em = em;
     }
 
-    @Autowired
-    public PrefGenreServiceImpl(PrefGenreRepository prefGenreRepository, ReviewRepository reviewRepository, MovieGenreRepository movieGenreRepository, EntityManager em) {
 
-        this.prefGenreRepository = prefGenreRepository;
-        this.reviewRepository = reviewRepository;
-        this.movieGenreRepository = movieGenreRepository;
+//    public PrefGenreServiceImpl(PrefGenreRepository prefGenreRepository, ReviewRepository reviewRepository, MovieGenreRepository movieGenreRepository, EntityManager em) {
+//        this.prefGenreRepository = prefGenreRepository;
+//        this.reviewRepository = reviewRepository;
+//        this.movieGenreRepository = movieGenreRepository;
+//        this.em = em;
+//    }
 
-        this.em = em;
-    }
 
+    // 효미 - 장르 선호도 업데이트
     @Override
     public void updatePrefGenre(Review review) {
-
         User user = review.getUser();
-        Date genreReviewDate = null; // updatePrefGenre메소드가 호출되는 날짜
+        Date genreReviewDate = new Date();
         Genre genre = movieGenreRepository.findGenreByMovie(review.getMovie());
-//        List<Review> genreReviewList = reviewRepository.findGenreReviewListByUserIdAndGenreId(user.getUserId(), genre.getGenreId());
-        List<Review> genreReviewList = reviewRepository.findDirectorReviewListByUser(user); //임시코드 삭제예정
-        int genreReviewCount = genreReviewList.size(); // 메소드 아무거나 고름 -> 리뷰 카운트 메소드로 변경 예정
-        double genrePoint = genreReviewList.hashCode(); // 메소드 아무거나 고름 -> 선호도 계산 메소드로 변경 예정, 평점(-3)의 총합을 genreReviewCount로 나눈 값
+        List<Review> genreReviewList = reviewRepository.findGenreReviewListByUserAndGenre(user, genre);
+        int genreReviewCount = genreReviewList.size();
+        double sum = 0;
+        for (Review reviewInList : genreReviewList) {
+            sum += reviewInList.getReviewRating();
+        }
+        double genrePoint = sum/genreReviewCount;
         PrefGenre prefGenre = new PrefGenre(user, genre, genrePoint, genreReviewCount, genreReviewDate); // PrefGenre 생성
-//        prefGenreRepository.savePrefGenre(prefGenre); //PrefGenre 테이블에 저장
-
+        prefGenreRepository.save(prefGenre); //PrefGenres 테이블에 저장
     }
+
 
     // 선호 장르 영화 추천
     @Override

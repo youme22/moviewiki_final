@@ -9,11 +9,11 @@ import java.util.List;
 
 public interface ReviewService {
 
-    void doReview(Review review);
-    void modifyReview(Review review); // 민형 - 사용
-    void deleteReview(Review review);
-    void likeReview(Like like);
-    void unlikeReview(Like like);
+    void doReview(Review review); // 효미 - 리뷰 등록
+    void modifyReview(Review review); // 민형 - 리뷰 수정
+    void deleteReview(Long reviewId); // 민형 - 리뷰 삭제
+    void likeReview(Review review, User user);
+    void unlikeReview(Review review, User user);
 
 
     // 민형 - 리뷰(코멘트) 수
@@ -27,9 +27,6 @@ public interface ReviewService {
 
     // 민형 - 내가 리뷰한 영화 감상 시간
     int myRunningtime(List<Review> reviewList);
-
-    // 민형 - 리뷰 삭제
-    void removeReview(Long reviewId);
 
     // 리뷰 조회
     Review getReview(Long reviewId);

@@ -18,38 +18,42 @@ import java.util.List;
 @Service
 public class PrefNationServiceImpl implements PrefNationService {
 
+    @Autowired
     private ReviewRepository reviewRepository;
+    @Autowired
     private PrefNationRepository prefNationRepository;
+    @Autowired
     private MovieNationRepository movieNationRepository;
-
+    @Autowired
     private final EntityManager em;
 
     public PrefNationServiceImpl(EntityManager em) {
         this.em = em;
     }
 
-    @Autowired
-    public PrefNationServiceImpl(ReviewRepository reviewRepository, PrefNationRepository prefNationRepository, MovieNationRepository movieNationRepository,EntityManager em) {
+//    @Autowired
+//    public PrefNationServiceImpl(ReviewRepository reviewRepository, PrefNationRepository prefNationRepository, MovieNationRepository movieNationRepository,EntityManager em) {
+//        this.reviewRepository = reviewRepository;
+//        this.prefNationRepository = prefNationRepository;
+//        this.movieNationRepository = movieNationRepository;
+//        this.em = em;
+//    }
 
-        this.reviewRepository = reviewRepository;
-        this.prefNationRepository = prefNationRepository;
-        this.movieNationRepository = movieNationRepository;
-        this.em = em;
-    }
-
+    // 효미 - 국가 선호도 업데이트
     @Override
     public void updatePrefNation(Review review) {
-
         User user = review.getUser();
-        Date nationReviewDate = null; // updatePrefNation메소드가 호출되는 날짜
+        Date nationReviewDate = new Date();
         Nation nation = movieNationRepository.findNationByMovie(review.getMovie());
-//        List<Review> nationReviewList = reviewRepository.findNationReviewListByUserIdAndNationId(user.getUserId(), nation.getNationId());
-        List<Review> nationReviewList = reviewRepository.findActorReviewListByUser(user); //임시코드삭제예정
-        int nationReviewCount = nationReviewList.size(); // 메소드 아무거나 고름 -> 리뷰 카운트 메소드로 변경 예정
-        double nationPoint = nationReviewList.hashCode(); // 메소드 아무거나 고름 -> 선호도 계산 메소드로 변경 예정, 평점(-3)의 총합을 nationReviewCount로 나눈 값
+        List<Review> nationReviewList = reviewRepository.findNationReviewListByUserAndNation(user, nation);
+        int nationReviewCount = nationReviewList.size();
+        double sum = 0;
+        for (Review reviewInList : nationReviewList) {
+            sum += reviewInList.getReviewRating();
+        }
+        double nationPoint = sum/nationReviewCount;
         PrefNation prefNation = new PrefNation(user, nation, nationPoint, nationReviewCount, nationReviewDate); // PrefNation 생성
-//        prefNationRepository.savePrefNation(prefNation); //PrefNation 테이블에 저장
-
+        prefNationRepository.save(prefNation); //PrefNations 테이블에 저장
     }
 
 
@@ -57,11 +61,12 @@ public class PrefNationServiceImpl implements PrefNationService {
     @Override
     public List<PrefNation> prefNationList(User user) {
         return prefNationRepository.findByUser(user);
+    }
 
 
     // 선호 국가 영화 추천
     @Override
-    public List<Movie> findAll(){
+    public List<Movie> findAll() {
         String sql = "SELECT * FROM MOVIES\n" +
                 "WHERE MOVIE_ID IN(\n" +
                 "                SELECT MOVIE_ID FROM MOVIE_NATION\n" +

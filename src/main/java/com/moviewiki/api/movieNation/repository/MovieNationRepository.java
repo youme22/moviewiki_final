@@ -4,7 +4,6 @@ import com.moviewiki.api.movie.domain.Movie;
 import com.moviewiki.api.movieNation.domain.MovieNation;
 import com.moviewiki.api.movieNation.domain.MovieNationPK;
 import com.moviewiki.api.nation.domain.Nation;
-import com.moviewiki.api.review.domain.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
