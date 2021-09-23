@@ -2,6 +2,7 @@ package com.moviewiki.api.prefDirector.service;
 
 import com.moviewiki.api.director.domain.Director;
 import com.moviewiki.api.directorFilmography.repository.DirectorFilmographyRepository;
+import com.moviewiki.api.prefActor.domain.PrefActor;
 import com.moviewiki.api.prefDirector.domain.PrefDirector;
 import com.moviewiki.api.prefDirector.repository.PrefDirectorRepository;
 import com.moviewiki.api.review.domain.Review;
@@ -44,4 +45,9 @@ public class PrefDirectorServiceImpl implements PrefDirectorService {
 
     }
 
+    // 민형 - 유저로 선호 액터 리스트
+    @Override
+    public List<PrefDirector> prefDirectorList(User user) {
+        return prefDirectorRepository.findByUser(user);
+    }
 }

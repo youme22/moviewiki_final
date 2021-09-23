@@ -5,7 +5,6 @@ import com.moviewiki.api.weather.domain.Weather;
 import com.moviewiki.api.weather.repository.WeatherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;

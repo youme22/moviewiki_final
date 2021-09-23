@@ -31,6 +31,7 @@ public class PrefActor {
     private double actorPoint;
     @Column(name = "ACTOR_REVIEW_COUNT")
     private int actorReviewCount;
+
     @Column(name = "ACTOR_REVIEW_DATE")
     private Date actorReviewDate;
 
