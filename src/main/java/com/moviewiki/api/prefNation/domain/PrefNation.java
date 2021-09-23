@@ -29,8 +29,10 @@ public class PrefNation {
 
     @Column(name = "NATION_POINT")
     private double nationPoint;
+
     @Column(name = "NATION_REVIEW_COUNT")
     private int nationReviewCount;
+
     @Column(name = "NATION_REVIEW_DATE")
     private Date nationReviewDate;
 

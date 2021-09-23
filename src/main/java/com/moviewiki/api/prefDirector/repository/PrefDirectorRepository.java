@@ -15,5 +15,5 @@ public interface PrefDirectorRepository extends JpaRepository<PrefDirector, Pref
 //     void savePrefDirector(PrefDirector prefDirector);
 
     // 민형 - 유저로 선호 감독 리스트
-    List<PrefDirector> findByUser(User user);
+    List<PrefDirector> findByUserOrderByDirectorPointDesc(User user);
 }

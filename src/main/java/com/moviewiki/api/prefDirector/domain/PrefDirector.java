@@ -29,8 +29,10 @@ public class PrefDirector {
 
     @Column(name = "DIRECTOR_POINT")
     private double directorPoint;
+
     @Column(name = "DIRECTOR_REVIEW_COUNT")
     private int directorReviewCount;
+
     @Column(name = "DIRECTOR_REVIEW_DATE")
     private Date directorReviewDate;
 

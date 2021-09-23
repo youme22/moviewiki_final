@@ -11,8 +11,8 @@
     <!-- Mobile specific meta -->
     <meta name=viewport content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone-no"><!-- CSS files -->
-    <link rel="stylesheet" href="../css/plugins.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../css/plugins.css">
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
 
@@ -80,7 +80,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12">
-                            <div class="mv-img-2"><a href="#"><img src="/img/news6.jpeg" alt=""></a></div>
+                            <div class="mv-img-2"><a href="#"><img src="../img/news6.jpeg" alt=""></a></div>
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12">
-                            <div class="mv-img-2"><a href="#"><img src="../../static/images/uploads/poster1.jpg" alt=""></a>
+                            <div class="mv-img-2"><a href="#"><img src="../images/uploads/poster1.jpg" alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
 </div>
 
 <!-- 로그인 전 main START -->
-<sec:authorize access="isAnonymous()">
+<div sec:authorize="isAnonymous()">
     <div class="buster-light">
         <div class="movie-items  full-width">
             <div class="row">
@@ -147,7 +147,7 @@
                                             <div class="movie-item">
                                                 <div class="mv-img"><img th:src="${movie.movieProfile}" alt="" style="height: 250px;">
                                                 </div>
-                                                <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${movie.movieId}}">Read more <i
+                                                <div class="hvr-inner"><a th:href="@{'/main/nonMember_movie/' + ${movie.movieId}}">Read more <i
                                                         class="ion-android-arrow-dropright"></i></a></div>
                                                 <div class="title-in"><h6><a href="#" th:text="${movie.movieName}"></a></h6>
                                                     <p><i class="ion-android-star"></i><span th:text="${movie.avgRating}"></span>/5</p></div>
@@ -171,7 +171,7 @@
                                             <div class="movie-item">
                                                 <div class="mv-img"><img th:src="${movie.movieProfile}" alt="" style="height: 250px;">
                                                 </div>
-                                                <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${movie.movieId}}">Read more <i
+                                                <div class="hvr-inner"><a th:href="@{'/main/nonMember_movie/' + ${movie.movieId}}">Read more <i
                                                         class="ion-android-arrow-dropright"></i></a></div>
                                                 <div class="title-in"><h6><a href="#" th:text="${movie.movieName}"></a></h6>
                                                     <p><i class="ion-android-star"></i><span th:text="${movie.avgRating}"></span>/5</p></div>
@@ -195,7 +195,7 @@
                                             <div class="movie-item">
                                                 <div class="mv-img"><img th:src="${movie.movieProfile}" alt="" style="height: 250px;">
                                                 </div>
-                                                <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${movie.movieId}}">Read more <i
+                                                <div class="hvr-inner"><a th:href="@{'/main/nonMember_movie/' + ${movie.movieId}}">Read more <i
                                                         class="ion-android-arrow-dropright"></i></a></div>
                                                 <div class="title-in"><h6><a href="#" th:text="${movie.movieName}"></a></h6>
                                                     <p><i class="ion-android-star"></i><span th:text="${movie.avgRating}"></span>/5</p></div>
@@ -210,7 +210,7 @@
             </div>
         </div>
     </div>
-</sec:authorize> <!-- 로그인 전 main  END -->
+</div> <!-- 로그인 전 main  END -->
 
 <!-- footer section START -->
 <footer class="ht-footer full-width-ft">
@@ -258,9 +258,9 @@
         </div>
     </div>
 </footer><!-- end of footer v2 section-->
-<script src="../js/jquery.js"></script>
-<script src="../js/plugins.js"></script>
-<script src="../js/plugins2.js"></script>
-<script src="../js/custom.js"></script>
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/plugins.js}"></script>
+<script th:src="@{/js/plugins2.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
 </body>
 </html>

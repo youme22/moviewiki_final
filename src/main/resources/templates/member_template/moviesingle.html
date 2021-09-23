@@ -26,48 +26,25 @@
     </style>
 </head>
 <body>
-<header class="ht-header">
-    <div class="container">
-        <nav class="navbar navbar-default navbar-custom"><!-- Brand and toggle get grouped for better mobile display -->
+<!-- 헤더(메뉴바) -->
+<header class="ht-header full-width-hd" id="header-light">
+    <div class="row">
+        <nav id="mainNav" class="navbar navbar-default navbar-custom">
+            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header logo">
                 <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span
                         class="sr-only">Toggle navigation</span>
                     <div id="nav-icon1"><span></span><span></span><span></span></div>
                 </div>
-                <a sec:authorize="isAnonymous()" th:href="@{/}"><img class="logo" th:src="@{/images/logo.png}" alt=""
-                                                                     width="200" height="100"></a>
-                <a sec:authorize="isAuthenticated()" th:href="@{/main}"><img class="logo" th:src="@{/images/logo.png}"
-                                                                             alt="" width="200" height="100"></a>
+                <a href="index_light.html"><img class="logo" src="/images/logo.png" alt="" width="200" height="100"></a>
             </div><!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav flex-child-menu menu-left">
                     <li class="hidden"><a href="#page-top"></a></li>
                     <li class="dropdown first"><a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown"
-                                                  data-hover="dropdown"> movies<i class="fa fa-angle-down"
-                                                                                  aria-hidden="true"></i></a>
-                        <ul class="dropdown-menu level1">
-                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Movie grid<i
-                                    class="ion-ios-arrow-forward"></i></a>
-                                <ul class="dropdown-menu level2">
-                                    <li><a href="moviegrid_light.html">Movie grid</a></li>
-                                    <li><a href="moviegridfw_light.html">movie grid full width</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="movielist_light.html">Movie list</a></li>
-                            <li><a href="moviesingle_light.html">Movie single</a></li>
-                            <li class="it-last"><a href="seriessingle_light.html">Series single</a></li>
-                        </ul>
+                                                  data-hover="dropdown">홈 </a>
                     </li>
-                    <li class="dropdown first"><a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown"
-                                                  data-hover="dropdown"> celebrities <i class="fa fa-angle-down"
-                                                                                        aria-hidden="true"></i></a>
-                        <ul class="dropdown-menu level1">
-                            <li><a href="celebritygrid01_light.html">celebrity grid 01</a></li>
-                            <li><a href="celebritygrid02_light.html">celebrity grid 02 </a></li>
-                            <li><a href="celebritylist_light.html">celebrity list</a></li>
-                            <li class="it-last"><a href="celebritysingle_light.html">celebrity single</a></li>
-                        </ul>
-                    </li>
+
                     <li>
                         <a sec:authorize="isAnonymous()" th:href="@{/anonymousNews}">뉴스게시판</a>
                         <a sec:authorize="isAuthenticated()" th:href="@{/news}">뉴스게시판</a>
@@ -89,14 +66,11 @@
                             마이페이지</a>
                     </li>
                 </ul>
-            </div><!-- /.navbar-collapse --></nav><!-- top search form -->
-        <div class="top-search"><select>
-            <option value="united">TV show</option>
-            <option value="saab">Others</option>
-        </select><input type="text" placeholder="Search for a movie, TV Show or celebrity that you are looking for">
-        </div>
+            </div><!-- /.navbar-collapse -->
+        </nav><!-- search form -->
     </div>
 </header><!-- END | Header -->
+
 
 <div class="buster-light">
     <div class="hero mv-single-hero">
@@ -122,7 +96,7 @@
                         </h1>
 
                         <!-- 관심영화 버튼 -->
-                        <div class="social-btn" th:switch="${movie.movieId}">
+                        <div sec:authorize="hasRole('ROLE_MEMBER')" class="social-btn" th:switch="${movie.movieId}">
                             <span th:case="${currentUserId}"></span>
                             <span th:case="*">
                                 <span th:switch="${isWant}">
@@ -148,16 +122,16 @@
                                 </span>
                             </span>
                         </div>
+                        <div sec:authorize="isAnonymous" class="social-btn" th:switch="${movie.movieId}" style="visibility:hidden;">
+                            <button class="btns" type="submit">
+                                <br>
+                            </button>
+                        </div>
                         <div class="movie-rate">
                             <div class="rate"><i class="ion-android-star"></i>
-                                <!-- 우선 평점이 null값이므로 몇세 관람가인지 넣어봄-->
                                 <!-- 평점-->
                                 <p><span th:text="${movie.avgRating}"></span></p>
                             </div>
-<!--                            <div class="rate-star"><p>Rate This Movie:</p><i class="ion-ios-star"></i><i-->
-<!--                                    class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i><i-->
-<!--                                    class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i><i-->
-<!--                                    class="ion-ios-star"></i><i class="ion-ios-star-outline"></i></div>-->
                         </div>
                         <div class="movie-tabs">
                             <div class="tabs">
@@ -179,7 +153,7 @@
                                                         <div class="cast-left"><img src="../../images/uploads/cast1.jpg"
                                                                                     alt=""><a href="#">Robert Downey
                                                             Jr.</a>
-                                                        <p>... Robert Downey Jr.</p></div></div>
+                                                            <p>... Robert Downey Jr.</p></div></div>
                                                     <div class="cast-it">
                                                         <div class="cast-left"><img src="../../images/uploads/cast2.jpg"
                                                                                     alt=""><a href="#">Chris
