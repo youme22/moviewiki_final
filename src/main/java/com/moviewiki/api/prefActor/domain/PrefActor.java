@@ -29,7 +29,6 @@ public class PrefActor {
 
     @Column(name = "ACTOR_POINT")
     private double actorPoint;
-
     @Column(name = "ACTOR_REVIEW_COUNT")
     private int actorReviewCount;
 
