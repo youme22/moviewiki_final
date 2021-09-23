@@ -53,6 +53,12 @@ public class PrefNationServiceImpl implements PrefNationService {
     }
 
 
+    // 민형 - 유저로 선호 국가 리스트
+    @Override
+    public List<PrefNation> prefNationList(User user) {
+        return prefNationRepository.findByUser(user);
+
+
     // 선호 국가 영화 추천
     @Override
     public List<Movie> findAll(){
@@ -64,5 +70,6 @@ public class PrefNationServiceImpl implements PrefNationService {
                 "                (select max(NATIONPOINT) from PREF_NATIONS where USER_ID = 'veddy0')))";
         List<Movie> recNationList = em.createNativeQuery(sql, Movie.class).getResultList();
         return recNationList.subList(0, 12);
+
     }
 }

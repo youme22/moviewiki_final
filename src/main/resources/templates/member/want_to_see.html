@@ -152,25 +152,13 @@
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-12 col-xs-12">
-                    <div class="topbar-filter user"><p>총 <span th:text="${countWantToSee}"></span>개의 영화</p><label>Sort
-                        by:</label><select>
-                        <option value="range">-- Choose option --</option>
-                        <option value="saab">-- Choose option 2--</option>
-                    </select><a href="userfavoritelist.html" class="list"><i class="ion-ios-list-outline "></i></a><a
-                            href="userfavoritegrid.html" class="grid"><i class="ion-grid active"></i></a></div>
+                    <div class="topbar-filter user"><p>총 <span th:text="${countWantToSee}"></span>개의 영화</p>
+                        <a href="#" class="grid"><i class="ion-grid active"></i></a></div>
 
 
                     <div class="flex-wrap-movielist grid-fav">
-                        <div class="movie-item-style-2 movie-item-style-1 style-3">
-                            <img src="/images/uploads/mv1.jpg" alt="">
-                            <div class="hvr-inner"><a href="moviesingle.html">Read more
-                                <i class="ion-android-arrow-dropright"></i></a></div>
-                            <div class="mv-item-infor"><h6><a href="moviesingle.html">oblivion</a></h6>
-                                <p class="rate"><i class="ion-android-star"></i><span>8.1</span>/5</p></div>
-                        </div>
-
-
-                        <div class="movie-item-style-2 movie-item-style-1 style-3" th:each="wantToSee : ${wantToSeeList}">
+                        <div class="movie-item-style-2 movie-item-style-1 style-3"
+                             th:each="wantToSee : ${wantToSeeList}">
                             <img th:src="@{${wantToSee.getMovie().getMovieProfile()}}">
                             <div class="hvr-inner"><a href="#">Read more <i
                                     class="ion-android-arrow-dropright"></i></a></div>
@@ -181,15 +169,7 @@
                         </div>
                     </div>
 
-
-                    <div class="topbar-filter"><label>Movies per page:</label><select>
-                        <option value="range">20 Movies</option>
-                        <option value="saab">10 Movies</option>
-                    </select>
-                        <div class="pagination2"><span>Page 1 of 2:</span><a class="active" href="#">1</a><a
-                                href="#">2</a><a href="#">3</a><a href="#">...</a><a href="#">78</a><a href="#">79</a><a
-                                href="#"><i class="ion-arrow-right-b"></i></a></div>
-                    </div>
+                    <hr>
                 </div>
             </div>
         </div>
@@ -198,7 +178,7 @@
 <footer class="ht-footer">
     <div class="container">
         <div class="flex-parent-ft">
-            <div class="flex-child-ft item1"><a href="index.html"><img class="logo" src="../../static/images/logo1.png"
+            <div class="flex-child-ft item1"><a href="index.html"><img class="logo" src="/images/logo.png"
                                                                        alt=""></a>
                 <p>5th Avenue st, manhattan<br> New York, NY 10001</p>
                 <p>Call us: <a href="#">(+01) 202 342 6789</a></p></div>

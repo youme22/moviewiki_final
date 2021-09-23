@@ -66,4 +66,12 @@ public class PrefGenreServiceImpl implements PrefGenreService {
         List<Movie> recGenreList = em.createNativeQuery(sql, Movie.class).getResultList();
         return recGenreList.subList(0, 12);
     }
+
+
+    // 민형 - 유저로 선호 장르 리스트
+    @Override
+    public List<PrefGenre> prefGenreList(User user) {
+        return prefGenreRepository.findByUser(user);
+    }
+
 }
