@@ -57,7 +57,7 @@ public class PrefNationServiceImpl implements PrefNationService {
     @Override
     public List<PrefNation> prefNationList(User user) {
         return prefNationRepository.findByUser(user);
-
+    }
 
     // 선호 국가 영화 추천
     @Override

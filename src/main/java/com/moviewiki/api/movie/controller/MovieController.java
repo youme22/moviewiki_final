@@ -48,7 +48,7 @@ public class MovieController {
         Movie movie = movieServiceImpl.findByMovieId(movieId);
         model.addAttribute("movie", movieServiceImpl.findByMovieId(movieId));
 
-        return "member_template/moviesingle";
+        return "member_template/moviesingle_before";
     }
 
     /* 영화 등록 페이지 이동 */
