@@ -9,5 +9,5 @@ import java.util.List;
 @Service
 public interface DirectorFilmographyService {
 
-    public List<DirectorFilmography> findDirectorFilmographyByDirector(Director director);
+    public List<DirectorFilmography> findDirectorFilmographyListByDirector(Director director);
 }

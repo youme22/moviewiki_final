@@ -1,7 +1,9 @@
 package com.moviewiki.api.prefActor.Service;
 
 import com.moviewiki.api.actor.domain.Actor;
+import com.moviewiki.api.actorFilmography.domain.ActorFilmography;
 import com.moviewiki.api.actorFilmography.repository.ActorFilmographyRepository;
+import com.moviewiki.api.movie.domain.Movie;
 import com.moviewiki.api.prefActor.domain.PrefActor;
 import com.moviewiki.api.prefActor.repository.PrefActorRepository;
 import com.moviewiki.api.review.domain.Review;
@@ -10,6 +12,7 @@ import com.moviewiki.api.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,15 +37,23 @@ public class PrefActorServiceImpl implements PrefActorService {
     @Override
     public void updatePrefActor(Review review) {
         User user = review.getUser();
-        Date actorReviewDate = new Date();
-        Actor actor = actorFilmographyRepository.findActorByMovie(review.getMovie());
-        List<Review> actorReviewList = reviewRepository.findActorReviewListByUserAndActor(user, actor);
-        int actorReviewCount = actorReviewList.size();
+        ActorFilmography actorFilmographyByMovie = actorFilmographyRepository.findActorFilmographyByMovie(review.getMovie());
+        Actor actor = actorFilmographyByMovie.getActor();
+
+        // 무비배우테이블에 가서 이 배우에 해당하는 무비 리스트 가져오기
+        List<Review> reviewListByUserAndActor = new ArrayList<>();
+        List<ActorFilmography> actorFilmographyListByActor = actorFilmographyRepository.findActorFilmographyListByActor(actor);
         double sum = 0;
-        for (Review reviewInList : actorReviewList) {
-            sum += reviewInList.getReviewRating();
+        for (ActorFilmography actorFilmographyByActor : actorFilmographyListByActor) {
+            Movie tempMovieByActor = actorFilmographyByActor.getMovie();
+            // 각 무비에 대해 리뷰테이블에 가서 이 무비와 이 유저에 해당하는 리뷰 가져오기
+            Review reviewByUserAndMovie = reviewRepository.findReviewByUserAndMovie(user, tempMovieByActor);
+            sum += reviewByUserAndMovie.getReviewRating();
+            reviewListByUserAndActor.add(reviewByUserAndMovie);
         }
+        int actorReviewCount = reviewListByUserAndActor.size();
         double actorPoint = sum/actorReviewCount;
+        Date actorReviewDate = new Date();
         PrefActor prefActor = new PrefActor(user, actor, actorPoint, actorReviewCount, actorReviewDate); // PrefActor 생성
         prefActorRepository.save(prefActor); //PrefActors 테이블에 저장
     }

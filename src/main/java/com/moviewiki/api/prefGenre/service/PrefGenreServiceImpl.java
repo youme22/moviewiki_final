@@ -2,6 +2,7 @@ package com.moviewiki.api.prefGenre.service;
 
 import com.moviewiki.api.genre.domain.Genre;
 import com.moviewiki.api.movie.domain.Movie;
+import com.moviewiki.api.movieGenre.domain.MovieGenre;
 import com.moviewiki.api.movieGenre.repository.MovieGenreRepository;
 import com.moviewiki.api.prefGenre.domain.PrefGenre;
 import com.moviewiki.api.prefGenre.repository.PrefGenreRepository;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,15 +46,23 @@ public class PrefGenreServiceImpl implements PrefGenreService {
     @Override
     public void updatePrefGenre(Review review) {
         User user = review.getUser();
-        Date genreReviewDate = new Date();
-        Genre genre = movieGenreRepository.findGenreByMovie(review.getMovie());
-        List<Review> genreReviewList = reviewRepository.findGenreReviewListByUserAndGenre(user, genre);
-        int genreReviewCount = genreReviewList.size();
+        MovieGenre movieGenreByMovie = movieGenreRepository.findMovieGenreByMovie(review.getMovie());
+        Genre genre = movieGenreByMovie.getGenre();
+
+        // 무비장르테이블에 가서 이 장르에 해당하는 무비 리스트 가져오기
+        List<Review> reviewListByUserAndGenre = new ArrayList<>();
+        List<MovieGenre> movieGenreListByGenre = movieGenreRepository.findMovieGenreListByGenre(genre);
         double sum = 0;
-        for (Review reviewInList : genreReviewList) {
-            sum += reviewInList.getReviewRating();
+        for (MovieGenre movieGenreByGenre : movieGenreListByGenre) {
+            Movie tempMovieByGenre = movieGenreByGenre.getMovie();
+            // 각 무비에 대해 리뷰테이블에 가서 이 무비와 이 유저에 해당하는 리뷰 가져오기
+            Review reviewByUserAndMovie = reviewRepository.findReviewByUserAndMovie(user, tempMovieByGenre);
+            sum += reviewByUserAndMovie.getReviewRating();
+            reviewListByUserAndGenre.add(reviewByUserAndMovie);
         }
+        int genreReviewCount = reviewListByUserAndGenre.size();
         double genrePoint = sum/genreReviewCount;
+        Date genreReviewDate = new Date();
         PrefGenre prefGenre = new PrefGenre(user, genre, genrePoint, genreReviewCount, genreReviewDate); // PrefGenre 생성
         prefGenreRepository.save(prefGenre); //PrefGenres 테이블에 저장
     }

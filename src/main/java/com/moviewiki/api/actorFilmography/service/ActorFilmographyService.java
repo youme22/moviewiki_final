@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public interface ActorFilmographyService {
 
-    public List<ActorFilmography> findActorFilmographyByActor(Actor actor);
+    public List<ActorFilmography> findActorFilmographyListByActor(Actor actor);
 
 
 }

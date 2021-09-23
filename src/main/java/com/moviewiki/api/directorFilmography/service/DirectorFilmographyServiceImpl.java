@@ -15,7 +15,7 @@ public class DirectorFilmographyServiceImpl implements DirectorFilmographyServic
     private DirectorFilmographyRepository directorFilmographyRepository;
 
     @Override
-    public List<DirectorFilmography> findDirectorFilmographyByDirector(Director director){
-        return directorFilmographyRepository.findDirectorFilmographyByDirector(director);
+    public List<DirectorFilmography> findDirectorFilmographyListByDirector(Director director){
+        return directorFilmographyRepository.findDirectorFilmographyListByDirector(director);
     }
 }

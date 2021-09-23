@@ -22,7 +22,7 @@ public class ActorFilmographyController {
 
     @PostMapping("/actorfilmography/read/actor")
     public String readActorId(ActorFilmography actorFilmography, Model model) {
-        List<ActorFilmography> actorList2 = actorFilmographyServiceImpl.findActorFilmographyByActor(actorFilmography.getActor());
+        List<ActorFilmography> actorList2 = actorFilmographyServiceImpl.findActorFilmographyListByActor(actorFilmography.getActor());
         model.addAttribute("actors2",actorList2);
         return "readActor";
     }

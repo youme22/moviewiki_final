@@ -1,8 +1,11 @@
 package com.moviewiki.api.prefNation.Service;
 
+import com.moviewiki.api.nation.domain.Nation;
 import com.moviewiki.api.movie.domain.Movie;
+import com.moviewiki.api.movieNation.domain.MovieNation;
 import com.moviewiki.api.movieNation.repository.MovieNationRepository;
 import com.moviewiki.api.nation.domain.Nation;
+import com.moviewiki.api.prefNation.domain.PrefNation;
 import com.moviewiki.api.prefNation.domain.PrefNation;
 import com.moviewiki.api.prefNation.repository.PrefNationRepository;
 import com.moviewiki.api.review.domain.Review;
@@ -12,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -43,15 +47,23 @@ public class PrefNationServiceImpl implements PrefNationService {
     @Override
     public void updatePrefNation(Review review) {
         User user = review.getUser();
-        Date nationReviewDate = new Date();
-        Nation nation = movieNationRepository.findNationByMovie(review.getMovie());
-        List<Review> nationReviewList = reviewRepository.findNationReviewListByUserAndNation(user, nation);
-        int nationReviewCount = nationReviewList.size();
+        MovieNation movieNationByMovie = movieNationRepository.findMovieNationByMovie(review.getMovie());
+        Nation nation = movieNationByMovie.getNation();
+
+        // 무비국가 테이블에 가서 이 국가에 해당하는 무비 리스트 가져오기
+        List<Review> reviewListByUserAndNation = new ArrayList<>();
+        List<MovieNation> movieNationListByNation = movieNationRepository.findMovieNationListByNation(nation);
         double sum = 0;
-        for (Review reviewInList : nationReviewList) {
-            sum += reviewInList.getReviewRating();
+        for (MovieNation movieNationByNation : movieNationListByNation) {
+            Movie tempMovieByNation = movieNationByNation.getMovie();
+            // 각 무비에 대해 리뷰테이블에 가서 이 무비와 이 유저에 해당하는 리뷰 가져오기
+            Review reviewByUserAndMovie = reviewRepository.findReviewByUserAndMovie(user, tempMovieByNation);
+            sum += reviewByUserAndMovie.getReviewRating();
+            reviewListByUserAndNation.add(reviewByUserAndMovie);
         }
+        int nationReviewCount = reviewListByUserAndNation.size();
         double nationPoint = sum/nationReviewCount;
+        Date nationReviewDate = new Date();
         PrefNation prefNation = new PrefNation(user, nation, nationPoint, nationReviewCount, nationReviewDate); // PrefNation 생성
         prefNationRepository.save(prefNation); //PrefNations 테이블에 저장
     }
