@@ -1,6 +1,7 @@
 package com.moviewiki.api.prefGenre.service;
 
 import com.moviewiki.api.genre.domain.Genre;
+import com.moviewiki.api.movie.domain.Movie;
 import com.moviewiki.api.movieGenre.repository.MovieGenreRepository;
 import com.moviewiki.api.prefGenre.domain.PrefGenre;
 import com.moviewiki.api.prefGenre.repository.PrefGenreRepository;
