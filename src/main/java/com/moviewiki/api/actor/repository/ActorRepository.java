@@ -11,4 +11,7 @@ public interface ActorRepository extends JpaRepository<Actor, Long> {
 
     // 특정 배우 찾기 -> 이름으로
     List<Actor> findByActorName(String actorName);
+
+    // 배우 상세 페이지 조회
+    Actor findByActorId(Long actorId);
 }

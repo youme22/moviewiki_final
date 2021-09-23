@@ -24,24 +24,6 @@ public class FollowingController {
     @Autowired
     FollowingService followingService;
 
-    // 팔로잉 리스트 출력, form call
-    @RequestMapping("/member/followeeList/{userId}")
-    public String followeePage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
-        User pageUser = userManagementService.getUser(userId);
-        model.addAttribute("currentUserId", currentUser.getUsername());
-        model.addAttribute("followeeList", followingService.followeeList(pageUser));
-        return "/member/followee";
-    }
-
-    // 팔로워 리스트 출력, form call
-    @RequestMapping("/member/followerList/{userId}")
-    public String followerPage(@PathVariable String userId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
-        User pageUser = userManagementService.getUser(userId);
-        model.addAttribute("currentUserId", currentUser.getUsername());
-        model.addAttribute("followerList", followingService.followerList(pageUser));
-        return "/member/follower";
-    }
-
     // 팔로우 기능
     @PostMapping("/follow")
     public String followUser(HttpServletRequest request) {

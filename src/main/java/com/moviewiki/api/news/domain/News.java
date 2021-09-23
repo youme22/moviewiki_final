@@ -26,9 +26,9 @@ public class News {
     @Column(name = "news_date", updatable = false)
     private LocalDateTime newsDate;
 
-    @Column(name = "news_content", length=2000)
+    @Column(name = "news_content", columnDefinition = "CLOB")
     private String newsContent;
 
-    @Column(name = "news_file", length=200)
+    @Column(name = "news_file", length=1000)
     private String newsFile;
 }

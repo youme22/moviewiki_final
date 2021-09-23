@@ -15,4 +15,9 @@ public interface WantToSeeRepository extends JpaRepository<WantToSee, WantToSeeP
     /* 특정 사용자의 보고 싶은 영화 조회 -> 사용자 아이디로 기준 */
     List<WantToSee> findByUser(User user);
 
+    // 관심영화 여부 확인
+    boolean existsByUserAndMovie(User user, Movie movie);
+
+    // 보고 싶은 영화 수
+    int countMovieByUser(User user);
 }

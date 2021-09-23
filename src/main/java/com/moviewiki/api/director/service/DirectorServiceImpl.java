@@ -33,4 +33,10 @@ public class DirectorServiceImpl implements DirectorService{
     public List<Director> findAll() {
         return directorRepository.findAll();
     }
+
+    // 감독 상세 페이지 조회
+    @Override
+    public Director findByDirectorId(Long directorId){
+        return directorRepository.findByDirectorId(directorId);
+    }
 }

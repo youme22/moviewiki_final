@@ -62,10 +62,17 @@ public class PrefGenreServiceImpl implements PrefGenreService {
                 "SELECT MOVIE_ID FROM MOVIE_GENRE\n" +
                 "WHERE GENRE_ID IN\n" +
                 "    (SELECT GENRE_ID from PREF_GENRES \n" +
-                "    where GENREPOINT =\n" +
-                "        (select max(GENREPOINT) from PREF_GENRES where USER_ID = 'test1')))";
-        List<Movie> recMovieList = em.createNativeQuery(sql, Movie.class).getResultList();
-        return recMovieList;
+                "    where GENRE_POINT =\n" +
+                "        (select max(GENRE_POINT) from PREF_GENRES where USER_ID = 'veddy0')))";
+        List<Movie> recGenreList = em.createNativeQuery(sql, Movie.class).getResultList();
+        return recGenreList.subList(0, 12);
+    }
+
+
+    // 민형 - 유저로 선호 장르 리스트
+    @Override
+    public List<PrefGenre> prefGenreList(User user) {
+        return prefGenreRepository.findByUser(user);
     }
 
 }

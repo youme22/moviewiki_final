@@ -1,90 +1,297 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
+<head><!-- Basic need --><title>취향분석 페이지</title>
     <meta charset="UTF-8">
-    <title>취향 분석 페이지</title>
-    <style>
-        .pref-main {
-            margin: 0 auto;
-            width: 578px;
-        }
-        .pref-boxs {
-            width: 100%;
-            height: 300px;
-        }
-        .pref-box {
-            float: left;
-            border: black solid 1px;
-            width:247px;
-            height:100px;
-            margin: 20px;
-        }
-        .user-info {
-            width: 100%;
-            height: 39px;
-        }
-        .user-info > div {
-            border: black solid 1px;
-            width: 143px;
-            height: 27px;
-            float: left;
-            margin-right: 47px;
-        }
-        .time-to-watch {
-            border: black solid 1px;
-            width: 100%;
-            height: 200px;
-        }
-    </style>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <link rel="profile" href="#"><!--Google Font-->
+    <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600'/>
+    <!-- Mobile specific meta -->
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone-no"><!-- CSS files -->
+    <link rel="stylesheet" href="/css/plugins.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <!-- HEADER -->
-    <div th:insert="main_header" id="header"></div>
+<header class="ht-header">
+    <div class="container">
+        <nav class="navbar navbar-default navbar-custom"><!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header logo">
+                <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span
+                        class="sr-only">Toggle navigation</span>
+                    <div id="nav-icon1"><span></span><span></span><span></span></div>
+                </div>
+                <a sec:authorize="isAnonymous()" th:href="@{/}"><img class="logo" th:src="@{/images/logo.png}" alt=""
+                                                                     width="200" height="100"></a>
+                <a sec:authorize="isAuthenticated()" th:href="@{/main}"><img class="logo" th:src="@{/images/logo.png}"
+                                                                             alt="" width="200" height="100"></a>
+            </div><!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav flex-child-menu menu-left">
+                    <li class="hidden"><a href="#page-top"></a></li>
+                    <li>
+                        <a sec:authorize="isAnonymous()" th:href="@{/}">HOME</a>
+                        <a sec:authorize="isAuthenticated()" th:href="@{/main}">HOME</a>
+                    </li>
+                    <li>
+                        <a sec:authorize="isAnonymous()" th:href="@{/anonymousNews}">뉴스게시판</a>
+                        <a sec:authorize="isAuthenticated()" th:href="@{/news}">뉴스게시판</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav flex-child-menu menu-right">
+                    <li>
+                        <div class="top-search">
+                            <!--                            <select>-->
+                            <!--                                <option value="united"></option>-->
+                            <!--&lt;!&ndash;                                <option value="saab">Others</option>&ndash;&gt;-->
+                            <!--                            </select>-->
+                            <input type="text" placeholder="Search">
+                        </div>
+                    </li>
+                    <li>
+                        <a sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
+                    </li>
+                    <li class="btn">
+                        <a sec:authorize="isAnonymous()" th:href="@{/join}">회원가입</a>
+                    </li>
 
-    <h1><span th:text="${userId}"></span>의 취향분석 페이지</h1>
+                    <li>
+                        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+                    </li>
+                    <li class="btn">
+                        <a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{'/member/mypage/' + ${currentUserId}}">
+                            마이페이지</a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse --></nav><!-- top search form -->
 
-    <div class="wrapper">
-        <div class="pref-main">
-            <div class="user-info">
-                <div>영화고수</div> <!-- 리뷰수에 따라 등급 다르게 -->
-                <div><span th:text="${userId}"></span>의 취향분석</div>
-                <div>평가한 영화 작품 ?건 </div> <!-- 리뷰수 출력 -->
-            </div>
-            <div class="pref-boxs">
-                <div class="pref-box">
-                    <strong>선호배우</strong><br>
-                    브래드피트 85점 9편<br>
-                    로버트 다우니 주니어 81점 8편<br>
-                    엠마 스톤 80점 9편
+    </div>
+</header><!-- END | Header -->
+<div class="hero user-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="hero-ct"><h1><span th:text="${user.userId}"/> 님의 취향분석 페이지</h1>
+                    <ul class="breadcumb">
+                        <li class="active">
+                            <a sec:authorize="isAnonymous()" th:href="@{/}">Home</a>
+                            <a sec:authorize="isAuthenticated()" th:href="@{/main}">Home</a>
+                        </li>
+                        <li><span class="ion-ios-arrow-right"></span>취향분석 페이지</li>
+                    </ul>
                 </div>
-                <div class="pref-box">
-                    <strong>선호감독</strong><br>
-                    크리스토퍼 놀란 85점 9편<br>
-                    쿠엔틴 타란티노 81점 8편<br>
-                    제임스 건 80점 9편
-                </div>
-                <div class="pref-box">
-                    <strong>선호장르</strong><br>
-                    액션 85점 147편<br>
-                    SF 81점 96편<br>
-                    스릴러 80점 89편
-                </div>
-                <div class="pref-box">
-                    <strong>선호 국가</strong><br>
-                    미국 85점 90편<br>
-                    한국 81점 82편<br>
-                    영국 스톤 80점 70편
-                </div>
-            </div>
-            <div class="time-to-watch">
-                <div>영화 감상 시간</div>
-                <div>454시간</div>
-                <div>인생의 3주는 순수하게 영화 본 시간, 대단합니다.</div>
             </div>
         </div>
     </div>
+</div>
+<div class="buster-light">
+    <div class="page-single">
+        <div class="container">
+            <div class="row ipad-width">
+                <div class="col-md-3 col-sm-12 col-xs-12">
+                    <div class="user-information">
+                        <div class="user-img">
+                            <!--                            <a href="#">-->
+                            <p th:if="${countReview} >= 500">
+                                <img th:src="@{/img/grade5.png}">
+                            </p>
+                            <p th:if="${countReview} >= 300 and ${countReview} < 500">
+                                <img th:src="@{/img/grade4.png}">
+                            </p>
+                            <p th:if="${countReview} >= 100 and ${countReview} < 300">
+                                <img th:src="@{/img/grade3.png}">
+                            </p>
+                            <p th:if="${countReview} >= 30 and ${countReview} < 100">
+                                <img th:src="@{/img/grade2.png}">
+                            </p>
+                            <p th:if="${countReview} < 30">
+                                <img th:src="@{/img/grade1.png}">
+                            </p>
+                            <!--                            </a>-->
+                            <span th:switch="${user.userId}">
+                                <span th:case="${currentUserId}">
+                                    <a class="redbtn" sec:authorize="isAuthenticated()" th:href="@{/member/check_pw}">
+                                        회원정보 수정
+                                    </a>
+                                </span>
+                                <span th:case="*">
+                                    <span th:switch="${isFollowing}">
+                                        <span th:case="true">
+                                            <form action="/unfollow" name="form" method="post"> <!-- 언팔로우 버튼 -->
+                                                <input type="hidden" th:value="${currentUserId}" name="followerId"/>
+                                                <input type="hidden" th:value="${user.userId}" name="followeeId"/>
+                                                <button class="redbtn" type="submit">언팔로우</button>
+                                            </form>
+                                        </span>
+                                        <span th:case="false">
+                                            <form action="/follow" name="form" method="post"> <!-- 팔로우 버튼 -->
+                                                <input type="hidden" th:value="${currentUserId}" name="followerId"/>
+                                                <input type="hidden" th:value="${user.userId}" name="followeeId"/>
+                                                <button class="redbtn" type="submit">팔로우</button>
+                                            </form>
+                                        </span>
+                                    </span>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="user-fav"><p></p>
+                            <ul>
+                                <li class="active"><a th:href="@{'/member/mypage/' + ${user.userId}}">Profile</a></li>
+                                <li><a th:href="@{'/member/pref/' + ${user.userId}}">취향 분석</a></li>
+                                <li><a th:href="@{'/member/want_to_see/' + ${user.userId}}">관심 영화</a></li>
+                                <li><a th:href="@{'/member/reviews/' + ${user.userId}}">시청한 영화</a></li>
+                            </ul>
+                        </div>
+                        <div class="user-fav">
+                            <ul>
+                                <li><a href="#"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="ceb-item-style-2">
+                                <div class="ceb-infor">
+                                    <h2><a th:href="@{'/member/reviews/' + ${user.userId}}">평가한 영화 작품</a></h2>
+                                    <p th:text="${countReview} + '건'"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="ceb-item-style-2">
+                                    <div class="ceb-infor">
+                                        <h2><a href="#">
+                                            선호배우</a></h2>
+<!--                                        <div th:each="prefActor : ${prefActorList}">-->
+<!--                                            <p th:text="${prefActor.getActor().getActorName()}"></p>-->
 
-
+<!--                                        </div>-->
+                                        브래드피트 85점 9편<br>
+                                        로버트 다우니 주니어 81점 8편<br>
+                                        엠마 스톤 80점 9편
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ceb-item-style-2">
+                                    <div class="ceb-infor">
+                                        <h2><a href="#">
+                                            선호감독</a></h2>
+                                        크리스토퍼 놀란 85점 9편<br>
+                                        쿠엔틴 타란티노 81점 8편<br>
+                                        제임스 건 80점 9편
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="ceb-item-style-2">
+                                    <div class="ceb-infor">
+                                        <h2><a href="#">
+                                            선호장르</a></h2>
+                                        액션 85점 147편<br>
+                                        SF 81점 96편<br>
+                                        스릴러 80점 89편
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ceb-item-style-2">
+                                    <div class="ceb-infor">
+                                        <h2><a href="#">
+                                            선호국가</a></h2>
+                                        미국 85점 90편<br>
+                                        한국 81점 82편<br>
+                                        영국 스톤 80점 70편
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-md-push-4">
+                                <div class="ceb-item-style-2">
+                                    <div class="ceb-infor">
+                                        <h2><a href="#">영화 감상 시간
+                                            <p th:text="${myRunningTime} + '시간'"/>
+                                            <p th:if="${myRunningTime} >= 240000" th:text="'국내에 몇 안되는 영화전문가'"/>
+                                            <p th:if="${myRunningTime} >= 180000 and ${countReview} < 240000"
+                                               th:text="'상위 0.01%에 꼽히는 베테랑 영화인'"/>
+                                            <p th:if="${myRunningTime} >= 120000 and ${countReview} < 180000"
+                                               th:text="'상위 0.1%의 영화인'"/>
+                                            <p th:if="${myRunningTime} >= 50000 and ${countReview} < 120000"
+                                               th:text="'영화 1000작을 넘게 본 아마추어 영화인"/>
+                                            <p th:if="${myRunningTime} < 50000" th:text="'당신은 영화 꿈나무!'"/>
+                                        </a></h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- footer section-->
+<footer class="ht-footer">
+    <div class="container">
+        <div class="flex-parent-ft">
+            <div class="flex-child-ft item1"><a href="index.html"><img class="logo" src="images/logo1.png" alt=""></a>
+                <p>5th Avenue st, manhattan<br> New York, NY 10001</p>
+                <p>Call us: <a href="#">(+01) 202 342 6789</a></p></div>
+            <div class="flex-child-ft item2"><h4>Resources</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Blockbuster</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Forums</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Help Center</a></li>
+                </ul>
+            </div>
+            <div class="flex-child-ft item3"><h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms of Use</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Security</a></li>
+                </ul>
+            </div>
+            <div class="flex-child-ft item4"><h4>Account</h4>
+                <ul>
+                    <li><a href="#">My Account</a></li>
+                    <li><a href="#">Watchlist</a></li>
+                    <li><a href="#">Collections</a></li>
+                    <li><a href="#">User Guide</a></li>
+                </ul>
+            </div>
+            <div class="flex-child-ft item5"><h4>Newsletter</h4>
+                <p>Subscribe to our newsletter system now <br>to get latest news from us.</p>
+                <form action="#"><input type="text" placeholder="Enter your email..."></form>
+                <a href="#" class="btn">Subscribe now <i class="ion-ios-arrow-forward"></i></a></div>
+        </div>
+    </div>
+    <div class="ft-copyright">
+        <div class="ft-left"><p>© 2017 Blockbuster. All Rights <a href="http://www.bootstrapmb.com/"
+                                                                  title="bootstrapmb">Reserved</a>. Designed by leehari.
+        </p></div>
+        <div class="backtotop"><p><a href="#" id="back-to-top">Back to top <i class="ion-ios-arrow-thin-up"></i></a></p>
+        </div>
+    </div>
+</footer><!-- end of footer section-->
+<script src="js/jquery.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/plugins2.js"></script>
+<script src="js/custom.js"></script>
 </body>
 </html>

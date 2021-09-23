@@ -3,26 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>선호 장르</title>
+    <style>
+        .wrapper {
+            width:1000px;
+        }
+        .box {
+            width: 290px;
+            height:300px;
+            border: 1px solid black;
+            float: left;
+            margin: 20px;
+        }
+        .picture {
+            width: 255px;
+            height:200px;
+            border: 1px solid black;
+            text-align: center;
+            margin: 10px auto;
+        }
+        .movieName {
+            width: 255px;
+            margin: 10px auto;
+        }
+
+    </style>
 </head>
 <body>
 <h1>선호 장르</h1>
 <hr>
 <div>
-    <table border="1">
-        <tbody>
-
-        <th>영화 제목</th>
-        <th>영화 포스터</th>
-        <th>개봉일</th>
-        <th>평점</th>
-        <tr th:each="recMovieList : ${recMovieList}">
-            <td th:text="${recMovieList.movieName}"></td>
-            <td th:text="${recMovieList.movieProfile}"></td>
-            <td th:text="${recMovieList.releaseDate}"></td>
-            <td th:text="${recMovieList.avgRating}"></td>
-        </tr>
-        </tbody>
-    </table>
+    <div th:each="recMovieList : ${recMovieList}">
+        <div class="box">
+                <div class="picture">
+                    <img th:src="@{'/img/' + ${recMovieList.movieProfile}}">
+                </div>
+                <div class="movieName">
+                    <p th:text="${recMovieList.movieName}"></p>
+                    <p th:text="${recMovieList.releaseDate}"></p>
+                </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

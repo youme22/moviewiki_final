@@ -2,6 +2,7 @@ package com.moviewiki.api.movie.domain;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -33,13 +34,14 @@ public class Movie {
     private String movieName;
     @Column(name = "MOVIE_OG_NAME")
     private String movieOgName;
-    @Column(name = "MOVIE_PROFILE")
+    @Column(name = "MOVIE_PROFILE", length=200)
     private String movieProfile;
     @Column(name = "RELEASE_DATE", columnDefinition = "DATE")
     private Date releaseDate;
     private int runningTime;
     @Column(columnDefinition = "LONG")
     private String summary;
+
     @Column(name = "AVG_RATING")
     private double avgRating;
     @Column(name = "REVIEW_COUNT")
@@ -47,7 +49,9 @@ public class Movie {
     @Column(name = "WTS_COUNT")
     private int wtsCount;
 
-    public Movie(String filmRating, String movieName, String movieOgName, String movieProfile, Date releaseDate, int runningTime, String summary, double avgRating, int reviewCount, int wtsCount) {
+    @Builder
+    public Movie(String filmRating, String movieName, String movieOgName, String movieProfile, Date releaseDate, int runningTime, String summary
+            , double avgRating, int reviewCount, int wtsCount) {
         this.filmRating = filmRating;
         this.movieName = movieName;
         this.movieOgName = movieOgName;

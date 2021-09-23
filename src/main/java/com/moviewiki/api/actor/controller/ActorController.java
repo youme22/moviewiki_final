@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class ActorController {
     /* 배우 등록 페이지 이동*/
     @GetMapping("/movie/create/actor")
     public String actorForm(){
-        return "admin/admin_actor_add";
+        return "admin/popup_add_actor";
     }
 
 
@@ -28,13 +29,13 @@ public class ActorController {
     @PostMapping("/movie/create/actor")
     public String createActor(Actor actor){
         actorServiceImpl.save(actor);
-        return "admin_movie";
+        return "admin/popup_dc_actor";
     }
 
     /* 배우 목록 조회 페이지 이동 */
     @GetMapping("/movie/read/actor")
     public String readActor(){
-        return "admin/admin_actor_dc";
+        return "admin/popup_dc_actor";
     }
 
 
@@ -43,6 +44,14 @@ public class ActorController {
     public String readActor(Actor actor, Model model){
         List<Actor> actorList = actorServiceImpl.findByActorName(actor.getActorName());
         model.addAttribute("actors", actorList);
-        return "admin/admin_actor_dc";
+        return "admin/popup_dc_actor";
+    }
+
+    // 배우 상세 페이지 조회
+    @GetMapping("/movie/actor/{actorId}")
+    public String movieActor(@PathVariable Long actorId, Model model) {
+
+        model.addAttribute("actor", actorServiceImpl.findByActorId(actorId));
+        return "member_template/actorPage";
     }
 }

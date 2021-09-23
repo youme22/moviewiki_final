@@ -34,7 +34,8 @@ public class WeatherController {
 
     // 영화에 대한 날씨점수 등록
     @PostMapping("/weather/create")
-    public String createSeason(HttpServletRequest request){
+    @ResponseBody
+    public void createSeason(HttpServletRequest request){
         Long movieId = parseLong(request.getParameter("movieId"));
         String weatherName = request.getParameter("weatherName");
         int weatherPoint = parseInt(request.getParameter("weatherPoint"));
@@ -43,14 +44,23 @@ public class WeatherController {
 
         weatherServiceImpl.save(movie, weatherName, weatherPoint);
 
-        return "admin_movie";
     }
 
-    // 특정 영화의 계절점수 조회
-    @GetMapping("/weather/read/{weatherName}")
+
+
+    //  특정 영화의 날씨점수 조회
+    @GetMapping("/weather/read")
     @ResponseBody
-    public List<Weather> readWeather(@PathVariable String weatherName){
+    public List<Weather> readWeather(){
+
+        String weatherName ="";
+
+        String weather = weatherServiceImpl.todayWeather();
+        if (weather == "Rain"){
+            weatherName = "비";
+        } else if (weather == "Snow"){
+            weatherName = "눈";
+        }
         return weatherServiceImpl.findByWeatherNameOrderByWeatherPointDesc(weatherName);
     }
-
 }
