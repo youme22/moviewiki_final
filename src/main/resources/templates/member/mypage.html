@@ -118,7 +118,7 @@
                             <span th:switch="${user.userId}">
                                 <span th:case="${currentUserId}">
                                     <span sec:authorize="isAuthenticated()">
-                                        <a class="redbtn"  th:href="@{/member/modify_info_get}">
+                                        <a class="redbtn"  th:href="@{/member/check_pw}">
                                             회원정보 수정
                                         </a>
 

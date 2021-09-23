@@ -50,6 +50,7 @@ public class UserManagementController {
         model.addAttribute("movieDate", movieServiceImpl.findAllOrderByDate());
         model.addAttribute("movieReviewCount", movieServiceImpl.findAllOrderByReviewCount());
         model.addAttribute("movieRating", movieServiceImpl.findAllOrderByRating());
+
         return "member_template/main_before";
     }
 
@@ -226,7 +227,7 @@ public class UserManagementController {
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         if(encoder.matches(userPw, DBUser.getUserPw())) {
-            return "redirect:/member/modify_info_get";
+            return "redirect:/member/modify_info";
         }
         System.out.println("비밀번호가 올바르지 않습니다."); // 모달창?
         return "redirect:/member/check_pw_get";
