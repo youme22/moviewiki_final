@@ -1,5 +1,6 @@
 package com.moviewiki.api.user.controller;
 
+import com.moviewiki.api.movie.service.MovieServiceImpl;
 import com.moviewiki.api.season.controller.SeasonController;
 import com.moviewiki.api.user.domain.User;
 import com.moviewiki.api.user.service.UserManagementService;
@@ -33,13 +34,16 @@ public class UserManagementController {
     @Autowired
     private UserManagementService userManagementService;
     @Autowired
-    private WeatherServiceImpl weatherServiceImpl;
+    private MovieServiceImpl movieServiceImpl;
     @Autowired
     private SeasonController seasonController;
 
     // 로그인 전 메인페이지
     @GetMapping("/")
-    public String initMainPage() {
+    public String initMainPage(Model model) {
+        model.addAttribute("movieDate", movieServiceImpl.findAllOrderByDate());
+        model.addAttribute("movieReviewCount", movieServiceImpl.findAllOrderByReviewCount());
+        model.addAttribute("movieRating", movieServiceImpl.findAllOrderByRating());
         return "member_template/main_before";
     }
 
