@@ -9,5 +9,5 @@ import java.util.List;
 @Service
 public interface MovieNationService {
 
-    public List<MovieNation> findMovieNationByNation(Nation nation);
+    public List<MovieNation> findMovieNationListByNation(Nation nation);
 }

@@ -21,14 +21,14 @@ public class MovieGenreServiceImpl implements MovieGenreService{
 
     // Genre
     @Override
-    public List<MovieGenre> findMovieGenreByGenre(Genre genre){
-        return movieGenreRepository.findMovieGenreByGenre(genre);
+    public List<MovieGenre> findMovieGenreListByGenre(Genre genre){
+        return movieGenreRepository.findMovieGenreListByGenre(genre);
     }
 
     // Movie
     @Override
-    public List<MovieGenre> findMovieGenreByMovie(Movie movie){
-        return movieGenreRepository.findMovieGenreByMovie(movie);
+    public List<MovieGenre> findMovieGenreListByMovie(Movie movie){
+        return movieGenreRepository.findMovieGenreListByMovie(movie);
     }
 
     // 검색

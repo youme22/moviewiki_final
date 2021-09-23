@@ -30,7 +30,7 @@ public class MovieGenreController {
 
     @PostMapping("/movieGenre/read/genre")
     public String readGenreId(MovieGenre movieGenre, Model model) {
-        List<MovieGenre> genreList2 = movieGenreServiceImpl.findMovieGenreByGenre(movieGenre.getGenre());
+        List<MovieGenre> genreList2 = movieGenreServiceImpl.findMovieGenreListByGenre(movieGenre.getGenre());
         model.addAttribute("genres2",genreList2);
         return "readMovieGenre";
     }
@@ -43,7 +43,7 @@ public class MovieGenreController {
 
     @PostMapping("/movieGenre/read/movie")
     public String readMovieGenre(MovieGenre movieGenre, Model model) {
-        List<MovieGenre> movieList2 = movieGenreServiceImpl.findMovieGenreByMovie(movieGenre.getMovie());
+        List<MovieGenre> movieList2 = movieGenreServiceImpl.findMovieGenreListByMovie(movieGenre.getMovie());
 //        List<MovieGenre> genreList2 = movieGenreServiceimpl.findMovieGenreById(movieGenre.getMovieId());
         model.addAttribute("movies2",movieList2);
 //        model.addAttribute("genres2",genreList2);

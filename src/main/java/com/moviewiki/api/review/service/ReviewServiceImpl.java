@@ -18,29 +18,36 @@ import java.util.List;
 @Service
 public class ReviewServiceImpl implements ReviewService {
 
+    @Autowired
     private ReviewRepository reviewRepository;
+    @Autowired
     private LikeRepository likeRepository;
+    @Autowired
     private PrefGenreService prefGenreService;
+    @Autowired
     private PrefNationService prefNationService;
+    @Autowired
     private PrefDirectorService prefDirectorService;
+    @Autowired
     private PrefActorService prefActorService;
 
-    @Autowired
-    public ReviewServiceImpl(ReviewRepository reviewRepository, LikeRepository likeRepository, PrefGenreService prefGenreService, PrefNationService prefNationService, PrefDirectorService prefDirectorService, PrefActorService prefActorService) {
 
-        this.reviewRepository = reviewRepository;
-        this.likeRepository = likeRepository;
-        this.prefGenreService = prefGenreService;
-        this.prefNationService = prefNationService;
-        this.prefDirectorService = prefDirectorService;
-        this.prefActorService = prefActorService;
+//    public ReviewServiceImpl(ReviewRepository reviewRepository, LikeRepository likeRepository, PrefGenreService prefGenreService, PrefNationService prefNationService, PrefDirectorService prefDirectorService, PrefActorService prefActorService) {
+//
+//        this.reviewRepository = reviewRepository;
+//        this.likeRepository = likeRepository;
+//        this.prefGenreService = prefGenreService;
+//        this.prefNationService = prefNationService;
+//        this.prefDirectorService = prefDirectorService;
+//        this.prefActorService = prefActorService;
+//
+//    }
 
-    }
-
+    // 효미 - 리뷰 등록 & 선호도 업데이트
     @Override
     public void doReview(Review review) {
 
-//        reviewRepository.saveReview(review); // 리뷰 등록
+        reviewRepository.save(review); // 리뷰 등록
         prefGenreService.updatePrefGenre(review); // 장르 선호도 업데이트
         prefNationService.updatePrefNation(review); // 국가 선호도 업데이트
         prefDirectorService.updatePrefDirector(review); // 감독 선호도 업데이트
@@ -48,8 +55,8 @@ public class ReviewServiceImpl implements ReviewService {
 
     }
 
-// doReview()랑 modifyReview() 합쳐도 되는지 고민
 
+    // 민형 - 리뷰 수정 & 선호도 업데이트
     @Transactional
     @Override
     public void modifyReview(Review review) {
@@ -62,10 +69,13 @@ public class ReviewServiceImpl implements ReviewService {
 
     }
 
+    // 민형 - 리뷰 삭제 & 선호도 업데이트
+    @Transactional
     @Override
-    public void deleteReview(Review review) {
+    public void deleteReview(Long reviewId) {
 
-//        reviewRepository.deleteReview(review); // 리뷰 삭제
+        reviewRepository.deleteByReviewId(reviewId); // 리뷰 삭제
+        Review review = reviewRepository.findByReviewId(reviewId);
         prefGenreService.updatePrefGenre(review); // 장르 선호도 업데이트
         prefNationService.updatePrefNation(review); // 국가 선호도 업데이트
         prefDirectorService.updatePrefDirector(review); // 감독 선호도 업데이트
@@ -74,16 +84,16 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public void likeReview(Like like) {
-
-//        likeRepository.saveLike(like);
+    public void likeReview (Review review, User user) {
+        Like like = new Like(review, user);
+        likeRepository.save(like);
 
     }
 
     @Override
-    public void unlikeReview(Like like) {
-
-//        likeRepository.deleteLike(like);
+    public void unlikeReview(Review review, User user) {
+        Like like = new Like(review, user);
+        likeRepository.delete(like);
 
     }
 
@@ -101,7 +111,7 @@ public class ReviewServiceImpl implements ReviewService {
 
         List<Review> reviewList = reviewRepository.findByUser(user);
         for(Review review : reviewList) {
-            if(review.getComment() == null) {
+            if(review.getReviewComment() == null) {
               countReview -= 1;
             }
         }
@@ -127,11 +137,11 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     // 민형 - 리뷰 삭제
-    @Transactional
-    @Override
-    public void removeReview(Long reviewId) {
-        reviewRepository.deleteByReviewId(reviewId);
-    }
+//    @Transactional
+//    @Override
+//    public void removeReview(Long reviewId) {
+//        reviewRepository.deleteByReviewId(reviewId);
+//    }
 
     // 민형 - 리뷰 조회
     public Review getReview(Long reviewId) {

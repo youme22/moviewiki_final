@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface PrefDirectorService {
 
+    // 효미 - 감독 선호도 업데이트
     void updatePrefDirector(Review review);
 
     // 민형 - 유저로 선호 감독 리스트

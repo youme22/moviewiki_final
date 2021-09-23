@@ -33,9 +33,9 @@ public class Review {
     private Date reviewDate;
 
     @Column(name= "REVIEW_RATING")   // 민형 - 추가
-    private double ratingPoint; // 0.5단위
+    private double reviewRating; // 0.5단위
 
     @Column(name= "REVIEW_COMMENT", columnDefinition = "CLOB") // 민형 추가
-    private String comment;
+    private String reviewComment;
 
 }

@@ -22,7 +22,7 @@ public class DirectorFilmographyController {
 
     @PostMapping("/directorfilmography/read/director")
     public String readDirectorId(DirectorFilmography directorfilmography, Model model) {
-        List<DirectorFilmography> directorList2 = directFilmographyServiceImpl.findDirectorFilmographyByDirector(directorfilmography.getDirector());
+        List<DirectorFilmography> directorList2 = directFilmographyServiceImpl.findDirectorFilmographyListByDirector(directorfilmography.getDirector());
         model.addAttribute("directors2",directorList2);
         return "readDirector";
     }

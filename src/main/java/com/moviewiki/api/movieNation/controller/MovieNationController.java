@@ -23,7 +23,7 @@ public class MovieNationController {
 
     @PostMapping("/movieNation/read/nation")
     public String readNationId(MovieNation movieNation, Model model) {
-        List<MovieNation> nationrList2 = movieNationServiceimpl.findMovieNationByNation(movieNation.getNation());
+        List<MovieNation> nationrList2 = movieNationServiceimpl.findMovieNationListByNation(movieNation.getNation());
         model.addAttribute("nations2",nationrList2);
         return "readMovieNation";
     }

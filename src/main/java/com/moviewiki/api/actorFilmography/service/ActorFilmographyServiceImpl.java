@@ -15,7 +15,7 @@ public class ActorFilmographyServiceImpl implements ActorFilmographyService {
     private ActorFilmographyRepository actorFilmographyRepository;
 
     @Override
-    public List<ActorFilmography> findActorFilmographyByActor(Actor actor){
-        return actorFilmographyRepository.findActorFilmographyByActor(actor);
+    public List<ActorFilmography> findActorFilmographyListByActor(Actor actor){
+        return actorFilmographyRepository.findActorFilmographyListByActor(actor);
     }
 }

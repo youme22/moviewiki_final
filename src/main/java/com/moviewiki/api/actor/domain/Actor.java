@@ -24,7 +24,7 @@ public class Actor {
 	@Column(name = "ACTOR_ID")
 	private Long actorId;
 
-	private @Column(name = "ACTOR_NAME")String actorName;
+	private @Column(name = "ACTOR_NAME") String actorName;
 	private @Column(name = "ACTOR_PROFILE") String actorProfile;
 
 }

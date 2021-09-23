@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface PrefNationService {
 
+    // 효미 - 국가 선호도 업데이트
     void updatePrefNation(Review review);
 
 

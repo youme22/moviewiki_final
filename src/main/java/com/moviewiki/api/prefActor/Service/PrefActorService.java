@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface PrefActorService {
 
+    // 효미 - 배우 선호도 업데이트
     void updatePrefActor(Review review);
 
 

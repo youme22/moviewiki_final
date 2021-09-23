@@ -15,7 +15,7 @@ public class MovieNationServiceImpl implements MovieNationService{
     private MovieNationRepository movieNationRepository;
 
     @Override
-    public List<MovieNation> findMovieNationByNation(Nation nation){
-        return movieNationRepository.findMovieNationByNation(nation);
+    public List<MovieNation> findMovieNationListByNation(Nation nation){
+        return movieNationRepository.findMovieNationListByNation(nation);
     }
 }
