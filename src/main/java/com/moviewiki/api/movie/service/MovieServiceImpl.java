@@ -4,6 +4,7 @@ import com.moviewiki.api.movie.domain.Movie;
 import com.moviewiki.api.movie.domain.MovieForm;
 import com.moviewiki.api.movie.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +38,24 @@ public class MovieServiceImpl implements MovieService{
         return movieRepository.findAll();
     }
 
-
+    // 평점 높은 순으로 영화 조회
+    @Override
+    public List<Movie> findAllOrderByRating(){
+        List<Movie> movie = movieRepository.findAll(Sort.by(Sort.Direction.DESC, "avgRating"));
+        return movie.subList(0, 12);
+    }
+    // 리뷰 많은 순으로 영화 조회
+    @Override
+    public List<Movie> findAllOrderByReviewCount(){
+        List<Movie> movie = movieRepository.findAll(Sort.by(Sort.Direction.DESC, "reviewCount"));
+        return movie.subList(0, 12);
+    }
+    // 최신 순으로 영화 조회
+    @Override
+    public List<Movie> findAllOrderByDate(){
+        List<Movie> movie = movieRepository.findAll(Sort.by(Sort.Direction.DESC, "releaseDate"));
+        return movie.subList(0, 12);
+    }
 
     // 입력받는 검색 test
     @Transactional
