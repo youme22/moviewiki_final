@@ -1,9 +1,6 @@
-<!DOCTYPE html><!--[if IE 7]>
-<html class="ie ie7 no-js" lang="en-US"><![endif]--><!--[if IE 8]>
-<html class="ie ie8 no-js" lang="en-US"><![endif]--><!--[if !(IE 7) | !(IE 8)  ]><!-->
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" class="no-js">
-<html lang="en" class="no-js">
 <head><!-- Basic need --><title>Open Pediatrics</title>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -28,6 +25,7 @@
         }
     </style>
 </head>
+<body>
 <header class="ht-header">
     <div class="container">
         <nav class="navbar navbar-default navbar-custom"><!-- Brand and toggle get grouped for better mobile display -->
@@ -112,6 +110,10 @@
     <div class="page-single movie-single movie_single">
         <div class="container">
             <div class="row ipad-width2">
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="movie-img sticky-sb"><img th:src="${movie.movieProfile}" alt="">
+                    </div>
+                </div>
                 <div class="col-md-8 col-sm-12 col-xs-12">
                     <div class="movie-single-ct main-content">
                         <h1 class="bd-hd" th:text="${movie.movieName}">
@@ -150,7 +152,7 @@
                             <div class="rate"><i class="ion-android-star"></i>
                                 <!-- 우선 평점이 null값이므로 몇세 관람가인지 넣어봄-->
                                 <!-- 평점-->
-                                <p><span th:text="${movie.filmRating}"></span></p>
+                                <p><span th:text="${movie.avgRating}"></span></p>
                             </div>
 <!--                            <div class="rate-star"><p>Rate This Movie:</p><i class="ion-ios-star"></i><i-->
 <!--                                    class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i><i-->
@@ -176,8 +178,8 @@
                                                     <div class="cast-it">
                                                         <div class="cast-left"><img src="../../images/uploads/cast1.jpg"
                                                                                     alt=""><a href="#">Robert Downey
-                                                            Jr.</a></div>
-                                                        <p>... Robert Downey Jr.</p></div>
+                                                            Jr.</a>
+                                                        <p>... Robert Downey Jr.</p></div></div>
                                                     <div class="cast-it">
                                                         <div class="cast-left"><img src="../../images/uploads/cast2.jpg"
                                                                                     alt=""><a href="#">Chris

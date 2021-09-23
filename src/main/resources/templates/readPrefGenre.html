@@ -25,32 +25,13 @@
             width: 255px;
             margin: 10px auto;
         }
-        img {
-            width: 260px;
-            height: 200px;
-            object-fit: cover;
-        }
+
     </style>
 </head>
 <body>
 <h1>선호 장르</h1>
 <hr>
 <div>
-    <table border="1">
-        <tbody>
-
-        <th>영화 제목</th>
-        <th>영화 포스터</th>
-        <th>개봉일</th>
-        <th>평점</th>
-        <tr th:each="recMovieList : ${recMovieList}">
-            <td th:text="${recMovieList.movieName}"></td>
-            <td th:text="${recMovieList.movieProfile}"></td>
-            <td th:text="${recMovieList.releaseDate}"></td>
-            <td th:text="${recMovieList.avgRating}"></td>
-        </tr>
-        </tbody>
-    </table>
     <div th:each="recMovieList : ${recMovieList}">
         <div class="box">
                 <div class="picture">
@@ -59,10 +40,9 @@
                 <div class="movieName">
                     <p th:text="${recMovieList.movieName}"></p>
                     <p th:text="${recMovieList.releaseDate}"></p>
-                    <p th:text="${recMovieList.avgRating}"></p>
                 </div>
-            </a>
         </div>
+    </div>
 </div>
 </body>
 </html>

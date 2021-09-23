@@ -19,4 +19,6 @@ public interface ActorService {
     // 모든 배우
     List<Actor> findAll();
 
+    // 배우 상세 페이지 조회
+    Actor findByActorId(Long actorId);
 }
