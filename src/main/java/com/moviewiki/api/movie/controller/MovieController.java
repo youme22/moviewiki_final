@@ -29,9 +29,9 @@ public class MovieController {
     @Autowired
     private WantToSeeServiceImpl wantToSeeServiceImpl;
 
-    /* 영화 상세 페이지 이동 */
+    /* 영화 상세 페이지 이동(회원용) */
     @GetMapping("/main/movie/{movieId}")
-    public String movieDetail(@PathVariable Long movieId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+    public String movieDetail_member(@PathVariable Long movieId, Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
         User user = userManagementService.getUser(currentUser.getUsername());
         Movie movie = movieServiceImpl.findByMovieId(movieId);
 
@@ -40,6 +40,15 @@ public class MovieController {
         model.addAttribute("movie", movieServiceImpl.findByMovieId(movieId));
 
         return "member_template/moviesingle";
+    }
+
+    /* 영화 상세 페이지 이동(비회원용) */
+    @GetMapping("/main/nonMember/movie/{movieId}")
+    public String movieDetail_nonMember(@PathVariable Long movieId, Model model) {
+        Movie movie = movieServiceImpl.findByMovieId(movieId);
+        model.addAttribute("movie", movieServiceImpl.findByMovieId(movieId));
+
+        return "member_template/moviesingle_before";
     }
 
     /* 영화 등록 페이지 이동 */
