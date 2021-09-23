@@ -43,12 +43,12 @@ public class MovieController {
     }
 
     /* 영화 상세 페이지 이동(비회원용) */
-    @GetMapping("/main/nonMember/movie/{movieId}")
+    @GetMapping("/main/nonMember_movie/{movieId}")
     public String movieDetail_nonMember(@PathVariable Long movieId, Model model) {
         Movie movie = movieServiceImpl.findByMovieId(movieId);
         model.addAttribute("movie", movieServiceImpl.findByMovieId(movieId));
 
-        return "member_template/moviesingle_before";
+        return "member_template/moviesingle";
     }
 
     /* 영화 등록 페이지 이동 */

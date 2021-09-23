@@ -122,15 +122,16 @@
                                 </span>
                             </span>
                         </div>
+                        <div sec:authorize="isAnonymous" class="social-btn" th:switch="${movie.movieId}" style="visibility:hidden;">
+                            <button class="btns" type="submit">
+                                <br>
+                            </button>
+                        </div>
                         <div class="movie-rate">
                             <div class="rate"><i class="ion-android-star"></i>
                                 <!-- 평점-->
                                 <p><span th:text="${movie.avgRating}"></span></p>
                             </div>
-                            <!--                            <div class="rate-star"><p>Rate This Movie:</p><i class="ion-ios-star"></i><i-->
-                            <!--                                    class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i><i-->
-                            <!--                                    class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i><i-->
-                            <!--                                    class="ion-ios-star"></i><i class="ion-ios-star-outline"></i></div>-->
                         </div>
                         <div class="movie-tabs">
                             <div class="tabs">
