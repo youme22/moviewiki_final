@@ -15,5 +15,5 @@ public interface PrefNationRepository extends JpaRepository<PrefNation, PrefNati
 //     void savePrefNation(PrefNation prefNation);
 
     // 민형 - 유저로 선호 국가 리스트
-    List<PrefNation> findByUser(User user);
+    List<PrefNation> findByUserOrderByNationPointDesc(User user);
 }

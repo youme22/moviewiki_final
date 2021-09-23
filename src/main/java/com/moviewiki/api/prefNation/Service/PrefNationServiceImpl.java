@@ -9,6 +9,7 @@ import com.moviewiki.api.review.domain.Review;
 import com.moviewiki.api.review.repository.ReviewRepository;
 import com.moviewiki.api.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -53,18 +54,20 @@ public class PrefNationServiceImpl implements PrefNationService {
     }
 
 
-    // 민형 - 유저로 선호 국가 리스트
+    // 민형 - 유저로 선호 국가 리스트(선호 점수순)
     @Override
     public List<PrefNation> prefNationList(User user) {
-        return prefNationRepository.findByUser(user);
+        List<PrefNation> prefNationList = prefNationRepository.findByUserOrderByNationPointDesc(user);
+        return prefNationList.subList(0,3);
     }
+
 
     // 선호 국가 영화 추천
     @Override
     public List<Movie> findAll(){
         String sql = "SELECT * FROM MOVIES\n" +
                 "WHERE MOVIE_ID IN(\n" +
-                "                SELECT MOVIE_ID FROM MOVIE_NATION\n" +
+                "                SELECT MOVIE_ID FROM MOVIE_NATIONS\n" +
                 "                WHERE NATION_ID IN\n" +
                 "                (SELECT NATION_ID from PREF_NATIONS where NATION_POINT =\n" +
                 "                (select max(NATION_POINT) from PREF_NATIONS where USER_ID = 'veddy0')))";

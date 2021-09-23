@@ -14,5 +14,5 @@ public interface PrefActorRepository extends JpaRepository<PrefActor, PrefActorP
 //     void savePrefActor(PrefActor prefActor);
 
     // 민형 - 유저로 선호 배우 리스트
-    List<PrefActor> findByUser(User user);
+    List<PrefActor> findByUserOrderByActorPointDesc(User user);
 }

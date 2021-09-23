@@ -45,9 +45,10 @@ public class PrefDirectorServiceImpl implements PrefDirectorService {
 
     }
 
-    // 민형 - 유저로 선호 액터 리스트
+    // 민형 - 유저로 선호 감독 리스트(선호 점수순)
     @Override
     public List<PrefDirector> prefDirectorList(User user) {
-        return prefDirectorRepository.findByUser(user);
+        List<PrefDirector> prefDirectorList = prefDirectorRepository.findByUserOrderByDirectorPointDesc(user);
+        return prefDirectorList.subList(0,3);
     }
 }

@@ -129,7 +129,7 @@
 </div>
 
 <!-- 로그인 전 main START -->
-<sec:authorize access="isAnonymous()">
+<div sec:authorize="isAnonymous()">
     <div class="buster-light">
         <div class="movie-items  full-width">
             <div class="row">
@@ -210,7 +210,7 @@
             </div>
         </div>
     </div>
-</sec:authorize> <!-- 로그인 전 main  END -->
+</div> <!-- 로그인 전 main  END -->
 
 <!-- footer section START -->
 <footer class="ht-footer full-width-ft">
