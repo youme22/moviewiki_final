@@ -32,8 +32,8 @@
                 <ul class="nav navbar-nav flex-child-menu menu-left">
                     <li class="hidden"><a href="#page-top"></a></li>
                     <li>
-                        <a sec:authorize="isAnonymous()" th:href="@{/}">HOME</a>
-                        <a sec:authorize="isAuthenticated()" th:href="@{/main}">HOME</a>
+                        <a sec:authorize="isAnonymous()" th:href="@{/}">홈</a>
+                        <a sec:authorize="isAuthenticated()" th:href="@{/main}">홈</a>
                     </li>
                     <li>
                         <a sec:authorize="isAnonymous()" th:href="@{/anonymousNews}">뉴스게시판</a>
@@ -76,8 +76,8 @@
                 <div class="hero-ct"><h1>뉴스 기사 페이지</h1>
                     <ul class="breadcumb">
                         <li class="active">
-                            <a sec:authorize="isAnonymous()" th:href="@{/}">Home</a>
-                            <a sec:authorize="isAuthenticated()" th:href="@{/main}">Home</a>
+                            <a sec:authorize="isAnonymous()" th:href="@{/}">홈</a>
+                            <a sec:authorize="isAuthenticated()" th:href="@{/main}">홈</a>
                         </li>
                         <li><span class="ion-ios-arrow-right"></span>뉴스 기사 페이지</li>
                     </ul>
