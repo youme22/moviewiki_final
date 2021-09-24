@@ -3,6 +3,7 @@ package com.moviewiki.api.weather.controller;
 import com.moviewiki.api.movie.domain.Movie;
 import com.moviewiki.api.movie.service.MovieServiceImpl;
 import com.moviewiki.api.weather.domain.Weather;
+import com.moviewiki.api.weather.repository.WeatherRepository;
 import com.moviewiki.api.weather.service.WeatherServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,8 @@ public class WeatherController {
 
     @Autowired
     WeatherServiceImpl weatherServiceImpl;
-
+    @Autowired
+    WeatherRepository weatherRepository;
     @Autowired
     MovieServiceImpl movieServiceImpl;
 
@@ -61,6 +63,6 @@ public class WeatherController {
         } else if (weather == "Snow"){
             weatherName = "눈";
         }
-        return weatherServiceImpl.findByWeatherNameOrderByWeatherPointDesc(weatherName);
+        return weatherRepository.findByWeatherNameOrderByWeatherPointDesc(weatherName);
     }
 }
