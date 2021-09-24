@@ -25,7 +25,8 @@
                         class="sr-only">Toggle navigation</span>
                     <div id="nav-icon1"><span></span><span></span><span></span></div>
                 </div>
-                <a href="index_light.html"><img class="logo" src="/images/logo.png" alt="" width="200" height="100"></a>
+                <a sec:authorize="isAnonymous()" th:href="@{/}"><img class="logo" src="/images/logo.png" alt="" width="200" height="100"></a>
+                <a sec:authorize="isAuthenticated()" th:href="@{/main}"><img class="logo" src="/images/logo.png" alt="" width="200" height="100"></a>
             </div><!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav flex-child-menu menu-left">
@@ -216,7 +217,9 @@
 <footer class="ht-footer full-width-ft">
     <div class="row">
         <div class="flex-parent-ft">
-            <div class="flex-child-ft item1"><a href="index.html"><img class="logo" src="/images/logo.png" alt="" ></a>
+            <div class="flex-child-ft item1">
+                <a sec:authorize="isAnonymous()" th:href="@{/}"><img class="logo" src="/images/logo.png" alt=""></a>
+                <a sec:authorize="isAuthenticated()" th:href="@{/main}"><img class="logo" src="/images/logo.png" alt=""></a>
                 <p>5th Avenue st, manhattan<br> New York, NY 10001</p>
                 <p>Call us: <a href="#">(+01) 202 342 6789</a></p></div>
             <div class="flex-child-ft item2"><h4>Resources</h4>
