@@ -56,7 +56,7 @@ public class ReviewController {
         return "redirect:/see_review/";
     }
 
-    @RequestMapping("/like_review")
+    @RequestMapping("/like_review/{reviewId}")
     public String likeReview(Long reviewId, String userId, HttpServletRequest request) {
         Review review = reviewService.getReview(reviewId);
         User user = userManagementService.getUser(userId);
@@ -64,7 +64,7 @@ public class ReviewController {
         return "redirect:/see_review/";
     }
 
-    @RequestMapping("/unlike_review")
+    @RequestMapping("/unlike_review/{reviewId}")
     public String unlikeReview(Long reviewId, String userId, HttpServletRequest request) {
         Review review = reviewService.getReview(reviewId);
         User user = userManagementService.getUser(userId);

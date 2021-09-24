@@ -14,12 +14,8 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
      // 리뷰 기반, 팔로우 기반 추천에서 쓰이는 메소드
-     // 이 유저가 5점 준 Review 리스트
-//     @Query("select Review from Review where user = :user and reviewRating = 5")
-     List<Review> findHighRatingReviewListByUser(User user);
-     // 이 영화에 5점 준 Review 리스트
-//     @Query("select Review from Review where movie = :movie and reviewRating = 5")
-     List<Review> findHighRatingReviewListByMovie(Movie movie);
+     List<Review> findReviewListByUser(User user);
+     List<Review> findReviewListByMovie(Movie movie);
 
 
      // 효미 - 선호도 업데이트에 쓰는 메소드

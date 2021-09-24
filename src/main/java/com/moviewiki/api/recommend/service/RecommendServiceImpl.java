@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RecommendServiceImpl implements RecommendService {
@@ -30,7 +30,9 @@ public class RecommendServiceImpl implements RecommendService {
     @Override
     public List<Movie> recommendByReview(User user) {
         // 이 회원이 5점 준 리뷰들 List에 담기
-        List<Review> highRatingReviewListByUser = reviewRepository.findHighRatingReviewListByUser(user);
+//        List<Review> highRatingReviewListByUser = reviewRepository.findHighRatingReviewListByUser(user);
+        List<Review> reviewListByUser = reviewRepository.findReviewListByUser(user);
+        List<Review> highRatingReviewListByUser = reviewListByUser.stream().filter(t->t.getReviewRating()==5).collect(Collectors.toList());
 
         // highRatingReviewListByUser 의 각각의 Review에 대해 Movie 리턴
         List<Review> highRatingReviewListByMovie = new ArrayList<>();
@@ -38,8 +40,8 @@ public class RecommendServiceImpl implements RecommendService {
             Movie tempHighRatingMovieByUser = highRatingReviewByUser.getMovie();
 
             // 그 Movie에 대해 5점 준 리뷰들 List에 담아서
-            List<Review> tempHighRatingReviewListByMovie = reviewRepository.findHighRatingReviewListByMovie(tempHighRatingMovieByUser);
-
+            List<Review> tempReviewListByMovie = reviewRepository.findReviewListByMovie(tempHighRatingMovieByUser);
+            List<Review> tempHighRatingReviewListByMovie = tempReviewListByMovie.stream().filter(t->t.getReviewRating()==5).collect(Collectors.toList());
             // 합치기
             highRatingReviewListByMovie.addAll(tempHighRatingReviewListByMovie);
         }
@@ -50,8 +52,8 @@ public class RecommendServiceImpl implements RecommendService {
             User tempHighRatingUserByMovie = highRatingReviewByMovie.getUser();
 
             // 그 User가 5점 준 리뷰들 List에 담아서
-            List<Review> tempHighRatingReviewListByUser = reviewRepository.findHighRatingReviewListByUser(tempHighRatingUserByMovie);
-
+            List<Review> tempReviewListByUser = reviewRepository.findReviewListByUser(tempHighRatingUserByMovie);
+            List<Review> tempHighRatingReviewListByUser = tempReviewListByUser.stream().filter(t->t.getReviewRating()==5).collect(Collectors.toList());
             // 합치기
             HighRatingReviewListByUser.addAll(tempHighRatingReviewListByUser);
         }
@@ -87,7 +89,9 @@ public class RecommendServiceImpl implements RecommendService {
         // followeeList의 각 유저가 5점 준 Review들 리스트에 담기
         List<Review> highRatingReviewListByUser = new ArrayList<>();
         for (User followee : followeeList) {
-            List<Review> tempHighRatingReviewListByUser = reviewRepository.findHighRatingReviewListByUser(followee);
+//            List<Review> tempHighRatingReviewListByUser = reviewRepository.findHighRatingReviewListByUser(followee);
+            List<Review> tempReviewListByUser = reviewRepository.findReviewListByUser(followee);
+            List<Review> tempHighRatingReviewListByUser = tempReviewListByUser.stream().filter(t->t.getReviewRating()==5).collect(Collectors.toList());
             highRatingReviewListByUser.addAll(tempHighRatingReviewListByUser);
         }
 
