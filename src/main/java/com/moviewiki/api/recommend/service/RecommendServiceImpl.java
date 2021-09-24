@@ -34,14 +34,12 @@ public class RecommendServiceImpl implements RecommendService {
         List<Review> reviewListByUser = reviewRepository.findReviewListByUser(user);
         List<Review> highRatingReviewListByUser = reviewListByUser.stream().filter(t->t.getReviewRating()==5).collect(Collectors.toList());
 
-
         // highRatingReviewListByUser 의 각각의 Review에 대해 Movie 리턴
         List<Review> highRatingReviewListByMovie = new ArrayList<>();
         for (Review highRatingReviewByUser : highRatingReviewListByUser) {
             Movie tempHighRatingMovieByUser = highRatingReviewByUser.getMovie();
 
             // 그 Movie에 대해 5점 준 리뷰들 List에 담아서
-//            List<Review> tempHighRatingReviewListByMovie = reviewRepository.findHighRatingReviewListByMovie(tempHighRatingMovieByUser);
             List<Review> tempReviewListByMovie = reviewRepository.findReviewListByMovie(tempHighRatingMovieByUser);
             List<Review> tempHighRatingReviewListByMovie = tempReviewListByMovie.stream().filter(t->t.getReviewRating()==5).collect(Collectors.toList());
             // 합치기
@@ -54,7 +52,6 @@ public class RecommendServiceImpl implements RecommendService {
             User tempHighRatingUserByMovie = highRatingReviewByMovie.getUser();
 
             // 그 User가 5점 준 리뷰들 List에 담아서
-//            List<Review> tempHighRatingReviewListByUser = reviewRepository.findHighRatingReviewListByUser(tempHighRatingUserByMovie);
             List<Review> tempReviewListByUser = reviewRepository.findReviewListByUser(tempHighRatingUserByMovie);
             List<Review> tempHighRatingReviewListByUser = tempReviewListByUser.stream().filter(t->t.getReviewRating()==5).collect(Collectors.toList());
             // 합치기

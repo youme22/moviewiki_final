@@ -250,7 +250,7 @@
                             </div>
                         </div>
                         <!-- 효미언니 추천 4-->
-                        <div class="title-hd"><h2>선호하는 배우의 영화</h2><</div>
+                        <div class="title-hd"><h2 th:text="${currentUserId} + ' 님과 비슷한 취향의 사람들이 좋아하는 영화'"></h2></div>
                         <div class="tabs">
                             <ul class="tab-links-2">
                                 <li class="active"><a href="#tab21-h2">#Popular</a></li>
@@ -259,14 +259,14 @@
                                 <div id="tab5-h2" class="tab active">
                                     <div class="row">
                                         <div class="slick-multiItem2">
-                                            <div th:each="recActorList : ${recActorList}" class="slide-it">
+                                            <div th:each="movieListByReviewRecommend : ${movieListByReviewRecommend}" class="slide-it">
                                                 <div class="movie-item">
-                                                    <div class="mv-img"><img th:src="${recActorList.movieProfile}" alt="" style="height: 250px;">
+                                                    <div class="mv-img"><img th:src="${movieListByReviewRecommend.movieProfile}" alt="" style="height: 250px;">
                                                     </div>
-                                                    <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${recActorList.movieId}}">Read more <i
+                                                    <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${movieListByReviewRecommend.movieId}}">Read more <i
                                                             class="ion-android-arrow-dropright"></i></a></div>
-                                                    <div class="title-in"><h6><a href="#" th:text="${recActorList.movieName}"></a></h6>
-                                                        <p><i class="ion-android-star"></i><span th:text="${recActorList.avgRating}"></span>/5</p></div>
+                                                    <div class="title-in"><h6><a href="#" th:text="${movieListByReviewRecommend.movieName}"></a></h6>
+                                                        <p><i class="ion-android-star"></i><span th:text="${movieListByReviewRecommend.avgRating}"></span>/5</p></div>
                                                 </div>
                                             </div>
                                         </div>

@@ -5,6 +5,7 @@ import com.moviewiki.api.prefActor.Service.PrefActorServiceImpl;
 import com.moviewiki.api.prefDirector.service.PrefDirectorServiceImpl;
 import com.moviewiki.api.prefGenre.service.PrefGenreServiceImpl;
 import com.moviewiki.api.prefNation.Service.PrefNationServiceImpl;
+import com.moviewiki.api.recommend.service.RecommendService;
 import com.moviewiki.api.season.controller.SeasonController;
 import com.moviewiki.api.user.domain.User;
 import com.moviewiki.api.user.service.UserManagementService;
@@ -49,6 +50,8 @@ public class UserManagementController {
     private PrefActorServiceImpl prefActorServiceImpl;
     @Autowired
     private PrefDirectorServiceImpl prefDirectorServiceImpl;
+    @Autowired
+    private RecommendService recommendService;
 
     // 로그인 전 메인페이지
     @GetMapping("/")
@@ -69,6 +72,8 @@ public class UserManagementController {
         model.addAttribute("recNationList", prefNationServiceImpl.findAll(currentUser.getUsername()));
         model.addAttribute("recActorList", prefActorServiceImpl.findAll(currentUser.getUsername()));
         model.addAttribute("recDirectorList", prefDirectorServiceImpl.findAll(currentUser.getUsername()));
+        model.addAttribute("movieListByReviewRecommend",recommendService.recommendByReview(userManagementService.getUser(currentUser.getUsername())));
+        model.addAttribute("movieListByFollowingRecommend",recommendService.recommendByFollowing(userManagementService.getUser(currentUser.getUsername())));
         return "member_template/main";
     }
 
