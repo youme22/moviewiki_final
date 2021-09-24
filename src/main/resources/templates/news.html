@@ -38,8 +38,8 @@
                 <ul class="nav navbar-nav flex-child-menu menu-left">
                     <li class="hidden"><a href="#page-top"></a></li>
                     <li>
-                        <a sec:authorize="isAnonymous()" th:href="@{/}">HOME</a>
-                        <a sec:authorize="isAuthenticated()" th:href="@{/main}">HOME</a>
+                        <a sec:authorize="isAnonymous()" th:href="@{/}">홈</a>
+                        <a sec:authorize="isAuthenticated()" th:href="@{/main}">홈</a>
                     </li>
                     <li>
                         <a sec:authorize="isAnonymous()" th:href="@{/anonymousNews}">뉴스게시판</a>
@@ -49,10 +49,10 @@
                 <ul class="nav navbar-nav flex-child-menu menu-right">
                     <li>
                         <div class="top-search">
-<!--                            <select>-->
-<!--                                <option value="united"></option>-->
-<!--&lt;!&ndash;                                <option value="saab">Others</option>&ndash;&gt;-->
-<!--                            </select>-->
+                            <!--                            <select>-->
+                            <!--                                <option value="united"></option>-->
+                            <!--&lt;!&ndash;                                <option value="saab">Others</option>&ndash;&gt;-->
+                            <!--                            </select>-->
                             <input type="text" placeholder="Search">
                         </div>
                     </li>

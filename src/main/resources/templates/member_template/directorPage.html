@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" class="no-js">
 <head><!-- Basic need --><title>Open Pediatrics</title>
@@ -126,7 +125,7 @@
         <div class="container">
             <div class="row ipad-width">
                 <div class="col-md-4 col-sm-12 col-xs-12">
-                    <div class="mv-ceb"><img src="/images/uploads/cebsingle2.png" alt=""></div>
+                    <div class="mv-ceb"><img th:src="${director.directorProfile}" alt=""></div>
                 </div>
                 <div class="col-md-8 col-sm-12 col-xs-12">
                     <div class="movie-single-ct">

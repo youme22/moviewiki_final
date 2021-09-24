@@ -19,6 +19,6 @@ public interface PrefNationService {
     List<PrefNation> prefNationList(User user);
 
     // 선호 국가 영화 추천
-    public List<Movie> findAll();
+    public List<Movie> findAll(String userName);
 
 }
