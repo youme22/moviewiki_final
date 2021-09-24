@@ -1,6 +1,4 @@
-<!DOCTYPE html><!--[if IE 7]>
-<html class="ie ie7 no-js" lang="en-US"><![endif]--><!--[if IE 8]>
-<html class="ie ie8 no-js" lang="en-US"><![endif]--><!--[if !(IE 7) | !(IE 8)  ]><!-->
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" class="no-js">
@@ -14,11 +12,11 @@
     <!-- Mobile specific meta -->
     <meta name=viewport content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone-no"><!-- CSS files -->
-    <link rel="stylesheet" href="../../static/css/plugins.css">
-    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" href="/css/plugins.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body><!--preloading-->
-<div id="preloader"><img class="logo" src="../../static/images/logo1.png" alt="" width="119" height="58">
+<div id="preloader"><img class="logo" src="/images/logo1.png" alt="" width="119" height="58">
     <div id="status"><span></span><span></span></div>
 </div><!--end of preloading--><!--login form popup-->
 <div class="login-wrapper" id="login-content">
@@ -83,7 +81,7 @@
                         class="sr-only">Toggle navigation</span>
                     <div id="nav-icon1"><span></span><span></span><span></span></div>
                 </div>
-                <a href="index_light.html"><img class="logo" src="../../static/images/logo.png" alt="" width="200" height="100"></a>
+                <a href="index_light.html"><img class="logo" src="/images/logo.png" alt="" width="200" height="100"></a>
             </div><!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav flex-child-menu menu-left">
@@ -128,7 +126,7 @@
         <div class="container">
             <div class="row ipad-width">
                 <div class="col-md-4 col-sm-12 col-xs-12">
-                    <div class="mv-ceb"><img src="../../static/images/uploads/cebsingle2.png" alt=""></div>
+                    <div class="mv-ceb"><img src="/images/uploads/cebsingle2.png" alt=""></div>
                 </div>
                 <div class="col-md-8 col-sm-12 col-xs-12">
                     <div class="movie-single-ct"><h1 class="bd-hd" th:text="${actor.actorName}"></h1>
@@ -148,56 +146,56 @@
                                             <div class="mvcast-item">
                                                 <div class="cast-it">
                                                     <div class="cast-left cebleb-film"><img
-                                                            src="../../static/images/uploads/film1.jpg" alt="">
+                                                            src="/images/uploads/film1.jpg" alt="">
                                                         <div><a href="#">X-Men: Apocalypse</a>
                                                             <p class="time">Logan</p></div>
                                                     </div>
                                                     <p>... 2016</p></div>
                                                 <div class="cast-it">
                                                     <div class="cast-left cebleb-film"><img
-                                                            src="../../static/images/uploads/film2.jpg" alt="">
+                                                            src="/images/uploads/film2.jpg" alt="">
                                                         <div><a href="#">Eddie the Eagle</a>
                                                             <p class="time">Bronson Peary</p></div>
                                                     </div>
                                                     <p>... 2015</p></div>
                                                 <div class="cast-it">
                                                     <div class="cast-left cebleb-film"><img
-                                                            src="../../static/images/uploads/film3.jpg" alt="">
+                                                            src="/images/uploads/film3.jpg" alt="">
                                                         <div><a href="#">Me and Earl and the Dying Girl</a>
                                                             <p class="time">Hugh Jackman</p></div>
                                                     </div>
                                                     <p>... 2015</p></div>
                                                 <div class="cast-it">
                                                     <div class="cast-left cebleb-film"><img
-                                                            src="../../static/images/uploads/film4.jpg" alt="">
+                                                            src="/images/uploads/film4.jpg" alt="">
                                                         <div><a href="#">Night at the Museum 3</a>
                                                             <p class="time">Blackbeard</p></div>
                                                     </div>
                                                     <p>... 2014</p></div>
                                                 <div class="cast-it">
                                                     <div class="cast-left cebleb-film"><img
-                                                            src="../../static/images/uploads/film5.jpg" alt="">
+                                                            src="/images/uploads/film5.jpg" alt="">
                                                         <div><a href="#">X-Men: Days of Future Past</a>
                                                             <p class="time">Wolverine</p></div>
                                                     </div>
                                                     <p>... 2012</p></div>
                                                 <div class="cast-it">
                                                     <div class="cast-left cebleb-film"><img
-                                                            src="../../static/images/uploads/film6.jpg" alt="">
+                                                            src="/images/uploads/film6.jpg" alt="">
                                                         <div><a href="#">The Wolverine</a>
                                                             <p class="time">Logan</p></div>
                                                     </div>
                                                     <p>... 2011</p></div>
                                                 <div class="cast-it">
                                                     <div class="cast-left cebleb-film"><img
-                                                            src="../../static/images/uploads/film7.jpg" alt="">
+                                                            src="/images/uploads/film7.jpg" alt="">
                                                         <div><a href="#">Rise of the Guardians</a>
                                                             <p class="time">Bunny</p></div>
                                                     </div>
                                                     <p>... 2011</p></div>
                                                 <div class="cast-it">
                                                     <div class="cast-left cebleb-film"><img
-                                                            src="../../static/images/uploads/film8.jpg" alt="">
+                                                            src="/images/uploads/film8.jpg" alt="">
                                                         <div><a href="#">The Prestige</a>
                                                             <p class="time">Robert Angier</p></div>
                                                     </div>
@@ -217,7 +215,7 @@
 <footer class="ht-footer">
     <div class="container">
         <div class="flex-parent-ft">
-            <div class="flex-child-ft item1"><a href="index.html"><img class="logo" src="../../static/images/logo1.png" alt=""></a>
+            <div class="flex-child-ft item1"><a href="index.html"><img class="logo" src="/images/logo1.png" alt=""></a>
                 <p>5th Avenue st, manhattan<br> New York, NY 10001</p>
                 <p>Call us: <a href="#">(+01) 202 342 6789</a></p></div>
             <div class="flex-child-ft item2"><h4>Resources</h4>
@@ -259,9 +257,9 @@
         </div>
     </div>
 </footer><!-- end of footer section-->
-<script src="../../static/js/jquery.js"></script>
-<script src="../../static/js/plugins.js"></script>
-<script src="../../static/js/plugins2.js"></script>
-<script src="../../static/js/custom.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/plugins.js"></script>
+<script src="/js/plugins2.js"></script>
+<script src="/js/custom.js"></script>
 </body>
 </html>

@@ -1,6 +1,8 @@
 package com.moviewiki.api.user.controller;
 
 import com.moviewiki.api.movie.service.MovieServiceImpl;
+import com.moviewiki.api.prefActor.Service.PrefActorServiceImpl;
+import com.moviewiki.api.prefDirector.service.PrefDirectorServiceImpl;
 import com.moviewiki.api.prefGenre.service.PrefGenreServiceImpl;
 import com.moviewiki.api.prefNation.Service.PrefNationServiceImpl;
 import com.moviewiki.api.season.controller.SeasonController;
@@ -43,6 +45,10 @@ public class UserManagementController {
     private PrefGenreServiceImpl prefGenreServiceImpl;
     @Autowired
     private PrefNationServiceImpl prefNationServiceImpl;
+    @Autowired
+    private PrefActorServiceImpl prefActorServiceImpl;
+    @Autowired
+    private PrefDirectorServiceImpl prefDirectorServiceImpl;
 
     // 로그인 전 메인페이지
     @GetMapping("/")
@@ -59,8 +65,10 @@ public class UserManagementController {
     public String MainPage(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
         model.addAttribute("currentUserId", currentUser.getUsername());
         model.addAttribute("seasons", seasonController.readSeason());
-        model.addAttribute("recGenreList", prefGenreServiceImpl.findAll());
-        model.addAttribute("recNationList", prefNationServiceImpl.findAll());
+        model.addAttribute("recGenreList", prefGenreServiceImpl.findAll(currentUser.getUsername()));
+        model.addAttribute("recNationList", prefNationServiceImpl.findAll(currentUser.getUsername()));
+        model.addAttribute("recActorList", prefActorServiceImpl.findAll(currentUser.getUsername()));
+        model.addAttribute("recDirectorList", prefDirectorServiceImpl.findAll(currentUser.getUsername()));
         return "member_template/main";
     }
 

@@ -16,7 +16,7 @@ public interface PrefGenreService {
     void updatePrefGenre(Review review);
 
     // 선호 장르 영화 추천
-    public List<Movie> findAll();
+    public List<Movie> findAll(String userName);
 
     // 민형 - 유저로 선호 장르 리스트
     List<PrefGenre> prefGenreList(User user);

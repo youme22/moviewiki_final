@@ -58,6 +58,6 @@ public class DirectorController {
     public String movieDirector(@PathVariable Long directorId, Model model) {
 
         model.addAttribute("director", directorServiceImpl.findByDirectorId(directorId));
-        return "member_template/moviesingle";
+        return "member_template/directorPage";
     }
 }
