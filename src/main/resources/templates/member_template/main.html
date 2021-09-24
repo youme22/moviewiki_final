@@ -159,7 +159,7 @@
                                     <div class="slick-multiItem2">
                                         <div th:each="recGenreList : ${recGenreList}" class="slide-it">
                                             <div class="movie-item">
-                                                <div class="mv-img"><img th:src="${recGenreList.movieProfile}" alt="" style="height: 250px;">
+                                                <div class="mv-img"><img th:src="${recGenreList.getMovieProfile()}" alt="" style="height: 250px;">
                                                 </div>
                                                 <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${recGenreList.movieId}}">Read more <i
                                                         class="ion-android-arrow-dropright"></i></a></div>

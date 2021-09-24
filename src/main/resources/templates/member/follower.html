@@ -18,6 +18,9 @@
             margin: 0 0 61px 288px;
         }
 
+        .grade-img > p > img {
+            width: 34%;
+        }
     </style>
 </head>
 <body>
@@ -38,8 +41,8 @@
                 <ul class="nav navbar-nav flex-child-menu menu-left">
                     <li class="hidden"><a href="#page-top"></a></li>
                     <li>
-                        <a sec:authorize="isAnonymous()" th:href="@{/}">HOME</a>
-                        <a sec:authorize="isAuthenticated()" th:href="@{/main}">HOME</a>
+                        <a sec:authorize="isAnonymous()" th:href="@{/}">홈</a>
+                        <a sec:authorize="isAuthenticated()" th:href="@{/main}">홈</a>
                     </li>
                     <li>
                         <a sec:authorize="isAnonymous()" th:href="@{/anonymousNews}">뉴스게시판</a>
@@ -82,8 +85,8 @@
                 <div class="hero-ct"><h1><span th:text="${user.userId}"/> 님의 팔로워 목록</h1>
                     <ul class="breadcumb">
                         <li class="active">
-                            <a sec:authorize="isAnonymous()" th:href="@{/}">Home</a>
-                            <a sec:authorize="isAuthenticated()" th:href="@{/main}">Home</a>
+                            <a sec:authorize="isAnonymous()" th:href="@{/}">홈</a>
+                            <a sec:authorize="isAuthenticated()" th:href="@{/main}">홈</a>
                         </li>
                         <li><span class="ion-ios-arrow-right"></span>팔로워 목록</li>
                     </ul>
@@ -98,7 +101,7 @@
             <div class="row ipad-width2">
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="user-information">
-                        <div class="user-img">
+                        <div class="user-img grade-img">
                             <!--                            <a href="#">-->
                             <p th:if="${countReview} >= 500">
                                 <img th:src="@{/img/grade5.png}">
