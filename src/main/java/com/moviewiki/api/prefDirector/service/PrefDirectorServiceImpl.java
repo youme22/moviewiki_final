@@ -12,6 +12,7 @@ import com.moviewiki.api.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +27,11 @@ public class PrefDirectorServiceImpl implements PrefDirectorService {
     @Autowired
     private DirectorFilmographyRepository directorFilmographyRepository;
 
+    private final EntityManager em;
+    @Autowired
+    public PrefDirectorServiceImpl(EntityManager em) {
+        this.em = em;
+    }
 //    @Autowired
 //    public PrefDirectorServiceImpl(ReviewRepository reviewRepository, PrefDirectorRepository prefDirectorRepository, DirectorFilmographyRepository directorFilmographyRepository) {
 //
@@ -65,5 +71,19 @@ public class PrefDirectorServiceImpl implements PrefDirectorService {
     public List<PrefDirector> prefDirectorList(User user) {
         List<PrefDirector> prefDirectorList = prefDirectorRepository.findByUserOrderByDirectorPointDesc(user);
         return prefDirectorList.subList(0,3);
+    }
+
+    // 선호 감독 영화 추천
+    @Override
+    public List<Movie> findAll(String userName){
+        String sql = "SELECT * FROM MOVIES\n" +
+                "WHERE MOVIE_ID IN(\n" +
+                "SELECT MOVIE_ID FROM DIRECTOR_FILMOGRAPHY\n" +
+                "WHERE DIRECTOR_ID IN\n" +
+                "    (SELECT DIRECTOR_ID from PREF_DIRECTORS \n" +
+                "    where DIRECTOR_POINT =\n" +
+                "        (select max(DIRECTOR_POINT) from PREF_DIRECTORS where USER_ID = '"+userName+"')))";
+        List<Movie> recDirectorList = em.createNativeQuery(sql, Movie.class).getResultList();
+        return recDirectorList.subList(0, 12);
     }
 }

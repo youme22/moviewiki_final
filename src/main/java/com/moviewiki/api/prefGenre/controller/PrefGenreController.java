@@ -21,13 +21,4 @@ public class PrefGenreController {
     @Autowired
     MovieRepository movieRepository;
 
-    // 선호 장르 영화 추천
-//    @GetMapping("/prefGenre")
-//    public String recMovieList(Model model){
-//        List<Movie> recMovieList = prefGenreServiceImpl.findAll();
-//        model.addAttribute("recMovieList", recMovieList);
-//        return "readPrefGenre";
-////        return (prefGenreRepository.findAll()).subList(0, 12);
-//    }
-
 }

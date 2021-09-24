@@ -44,7 +44,7 @@ public class WantToSeeController {
         User user = userManagementService.getUser(userId);
 
         wantToSeeServiceImpl.save(user, movie);
-        return "redirect:/movie/detail2/" + movieId;
+        return "redirect:/main/movie/" + movieId;
     }
 
     /* 관심영화 삭제 */

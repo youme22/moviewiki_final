@@ -12,6 +12,7 @@ import com.moviewiki.api.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +27,11 @@ public class PrefActorServiceImpl implements PrefActorService {
     @Autowired
     private ActorFilmographyRepository actorFilmographyRepository;
 
+    private final EntityManager em;
+    @Autowired
+    public PrefActorServiceImpl(EntityManager em) {
+        this.em = em;
+    }
 //    @Autowired
 //    public PrefActorServiceImpl(ReviewRepository reviewRepository, PrefActorRepository prefActorRepository, ActorFilmographyRepository actorFilmographyRepository) {
 //        this.reviewRepository = reviewRepository;
@@ -64,5 +70,19 @@ public class PrefActorServiceImpl implements PrefActorService {
     public List<PrefActor> prefActorList(User user) {
         List<PrefActor> prefActorList = prefActorRepository.findByUserOrderByActorPointDesc(user);
         return prefActorList.subList(0,3);
+    }
+
+    // 선호 배우 영화 추천
+    @Override
+    public List<Movie> findAll(String userName){
+        String sql = "SELECT * FROM MOVIES\n" +
+                "WHERE MOVIE_ID IN(\n" +
+                "SELECT MOVIE_ID FROM ACTOR_FILMOGRAPHY\n" +
+                "WHERE ACTOR_ID IN\n" +
+                "    (SELECT ACTOR_ID from PREF_ACTORS \n" +
+                "    where ACTOR_POINT =\n" +
+                "        (select max(ACTOR_POINT) from PREF_ACTORS where USER_ID = '"+userName+"')))";
+        List<Movie> recActorList = em.createNativeQuery(sql, Movie.class).getResultList();
+        return recActorList.subList(0, 12);
     }
 }

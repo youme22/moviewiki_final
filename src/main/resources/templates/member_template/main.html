@@ -11,8 +11,8 @@
     <!-- Mobile specific meta -->
     <meta name=viewport content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone-no"><!-- CSS files -->
-    <link rel="stylesheet" href="../../css/plugins.css">
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../css/plugins.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 <!-- 헤더(메뉴바) -->
@@ -40,6 +40,15 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav flex-child-menu menu-right">
+                    <li>
+                        <div class="top-search">
+                            <!--                            <select>-->
+                            <!--                                <option value="united"></option>-->
+                            <!--&lt;!&ndash;                                <option value="saab">Others</option>&ndash;&gt;-->
+                            <!--                            </select>-->
+                            <input type="text" placeholder="Search">
+                        </div>
+                    </li>
                     <li>
                         <a sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
                     </li>
@@ -119,7 +128,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12">
-                            <div class="mv-img-2"><a href="#"><img src="static/images/uploads/poster1.jpg" alt=""></a>
+                            <div class="mv-img-2"><a href="#"><img src="../../static/images/uploads/poster1.jpg" alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -132,22 +141,22 @@
 <!-- 로그인 후 main START -->
 <sec:authorize access="isAuthenticated()">
     <div class="buster-light">
-    <div class="movie-items  full-width">
-        <div class="row">
-            <div class="col-md-12">
-                <!-- 추천 1-->
-                <div class="title-hd">
-                    <h2>선호하는 장르의 영화</h2>
-                </div>
-                <div class="tabs">
-                    <ul class="tab-links-2">
-                        <li class="active"><a href="#tab21-h2">#Popular</a></li>
-                        <li><a href="#tab22-h2"></a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="tab1-h2" class="tab active">
-                            <div class="row">
-                                <div class="slick-multiItem2">
+        <div class="movie-items  full-width">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- 추천 1-->
+                    <div class="title-hd">
+                        <h2 th:text="${currentUserId} + ' 님의 선호 장르 영화'"></h2>
+                    </div>
+                    <div class="tabs">
+                        <ul class="tab-links-2">
+                            <li class="active"><a href="#tab21-h2">#Popular</a></li>
+                            <li><a href="#tab22-h2"></a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="tab1-h2" class="tab active">
+                                <div class="row">
+                                    <div class="slick-multiItem2">
                                         <div th:each="recGenreList : ${recGenreList}" class="slide-it">
                                             <div class="movie-item">
                                                 <div class="mv-img"><img th:src="${recGenreList.movieProfile}" alt="" style="height: 250px;">
@@ -155,7 +164,7 @@
                                                 <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${recGenreList.movieId}}">Read more <i
                                                         class="ion-android-arrow-dropright"></i></a></div>
                                                 <div class="title-in"><h6><a href="#" th:text="${recGenreList.movieName}"></a></h6>
-                                                    <p><i class="ion-android-star"></i><span>7.4</span>/10</p></div>
+                                                    <p><i class="ion-android-star"></i><span th:text="${recGenreList.avgRating}"></span>/5</p></div>
                                             </div>
                                         </div>
                                     </div>
@@ -164,14 +173,11 @@
                         </div>
                     </div>
                     <br>
-                <!-- 추천 2-->
+                    <!-- 추천 2-->
                     <div class="title-hd"><h2 th:text="${seasons[0].seasonName} + '에 봐야할 영화'"></h2></div>
                     <div class="tabs">
                         <ul class="tab-links-2">
                             <li class="active"><a href="#tab21-h2">#Popular</a></li>
-                            <li><a href="#tab22-h2">#Coming soon</a></li>
-                            <li><a href="#tab23-h2"> #Top rated </a></li>
-                            <li><a href="#tab24-h2">#Most reviewed</a></li>
                         </ul>
                         <div class="tab-content">
                             <div id="tab2-h2" class="tab active">
@@ -184,78 +190,119 @@
                                                 <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${season.getMovie().movieId}}">Read more <i
                                                         class="ion-android-arrow-dropright"></i></a></div>
                                                 <div class="title-in"><h6><a href="#" th:text="${season.getMovie().movieName}"></a></h6>
-                                                    <p><i class="ion-android-star"></i><span>7.4</span>/10</p></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <br>
-                        <br>
-                    <!-- 추천 3-->
-                    <div class="title-hd">
-                        <h2>선호하는 국가의 영화</h2>
-                    </div>
-                    <div class="tabs">
-                        <ul class="tab-links-2">
-                            <li class="active"><a href="#tab21-h2">#Popular</a></li>
-                            <li><a href="#tab3-h2"></a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div id="tab3-h2" class="tab active">
-                                <div class="row">
-                                    <div class="slick-multiItem2">
-                                        <div th:each="recNationList : ${recNationList}" class="slide-it">
-                                            <div class="movie-item">
-                                                <div class="mv-img"><img th:src="${recNationList.movieProfile}" alt="" style="height: 250px;">
                                                 </div>
-                                                <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${recNationList.movieId}}">Read more <i
-                                                        class="ion-android-arrow-dropright"></i></a></div>
-                                                <div class="title-in"><h6><a href="#" th:text="${recNationList.movieName}"></a></h6>
-                                                    <p><i class="ion-android-star"></i><span>7.4</span>/10</p></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <br>
-                            <br>
-                            <!-- 추천 4-->
-                            <div class="title-hd">
-                                <h2>선호하는 국가의 영화</h2>
-                            </div>
-                            <div class="tabs">
-                                <ul class="tab-links-2">
-                                    <li class="active"><a href="#tab21-h2">#Popular</a></li>
-                                    <li><a href="#tab22-h2"></a></li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div id="tab4-h2" class="tab active">
-                                        <div class="row">
-                                            <div class="slick-multiItem2">
-                                                <div th:each="recNationList : ${recNationList}" class="slide-it">
-                                                    <div class="movie-item">
-                                                        <div class="mv-img"><img th:src="${recNationList.movieProfile}" alt="" style="height: 250px;">
-                                                        </div>
-                                                        <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${recNationList.movieId}}">Read more <i
-                                                                class="ion-android-arrow-dropright"></i></a></div>
-                                                        <div class="title-in"><h6><a href="#" th:text="${recNationList.movieName}"></a></h6>
-                                                            <p><i class="ion-android-star"></i><span>7.4</span>/10</p></div>
+                        </div><br><br>
+                        <!-- 추천 3-->
+                        <div class="title-hd">
+                            <h2 th:text="${currentUserId} + ' 님의 선호 국가 영화'"></h2>
+                        </div>
+                        <div class="tabs">
+                            <ul class="tab-links-2">
+                                <li class="active"><a href="#tab21-h2">#Popular</a></li>
+                                <li><a href="#tab3-h2"></a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="tab3-h2" class="tab active">
+                                    <div class="row">
+                                        <div class="slick-multiItem2">
+                                            <div th:each="recNationList : ${recNationList}" class="slide-it">
+                                                <div class="movie-item">
+                                                    <div class="mv-img"><img th:src="${recNationList.movieProfile}" alt="" style="height: 250px;">
                                                     </div>
+                                                    <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${recNationList.movieId}}">Read more <i
+                                                            class="ion-android-arrow-dropright"></i></a></div>
+                                                    <div class="title-in"><h6><a href="#" th:text="${recNationList.movieName}"></a></h6>
+                                                        <p><i class="ion-android-star"></i><span th:text="${recNationList.avgRating}"></span>/5</p></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <br>
-                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="title-hd"><h2 th:text="${currentUserId} + ' 님의 선호 배우 영화'"></h2></div>
+                        <div class="tabs">
+                            <ul class="tab-links-2">
+                                <li class="active"><a href="#tab21-h2">#Popular</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="tab4-h2" class="tab active">
+                                    <div class="row">
+                                        <div class="slick-multiItem2">
+                                            <div th:each="recActorList : ${recActorList}" class="slide-it">
+                                                <div class="movie-item">
+                                                    <div class="mv-img"><img th:src="${recActorList.movieProfile}" alt="" style="height: 250px;">
+                                                    </div>
+                                                    <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${recActorList.movieId}}">Read more <i
+                                                            class="ion-android-arrow-dropright"></i></a></div>
+                                                    <div class="title-in"><h6><a href="#" th:text="${recActorList.movieName}"></a></h6>
+                                                        <p><i class="ion-android-star"></i><span th:text="${recActorList.avgRating}"></span>/5</p></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 효미언니 추천 4-->
+                        <div class="title-hd"><h2>선호하는 배우의 영화</h2><</div>
+                        <div class="tabs">
+                            <ul class="tab-links-2">
+                                <li class="active"><a href="#tab21-h2">#Popular</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="tab5-h2" class="tab active">
+                                    <div class="row">
+                                        <div class="slick-multiItem2">
+                                            <div th:each="recActorList : ${recActorList}" class="slide-it">
+                                                <div class="movie-item">
+                                                    <div class="mv-img"><img th:src="${recActorList.movieProfile}" alt="" style="height: 250px;">
+                                                    </div>
+                                                    <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${recActorList.movieId}}">Read more <i
+                                                            class="ion-android-arrow-dropright"></i></a></div>
+                                                    <div class="title-in"><h6><a href="#" th:text="${recActorList.movieName}"></a></h6>
+                                                        <p><i class="ion-android-star"></i><span th:text="${recActorList.avgRating}"></span>/5</p></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="title-hd"><h2 th:text="${currentUserId} + ' 님의 선호 감독 영화'"></h2></div>
+                        <div class="tabs">
+                            <ul class="tab-links-2">
+                                <li class="active"><a href="#tab21-h2">#Popular</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="tab7-h2" class="tab active">
+                                    <div class="row">
+                                        <div class="slick-multiItem2">
+                                            <div th:each="recDirectorList : ${recDirectorList}" class="slide-it">
+                                                <div class="movie-item">
+                                                    <div class="mv-img"><img th:src="${recDirectorList.movieProfile}" alt="" style="height: 250px;">
+                                                    </div>
+                                                    <div class="hvr-inner"><a th:href="@{'/main/movie/' + ${recDirectorList.movieId}}">Read more <i
+                                                            class="ion-android-arrow-dropright"></i></a></div>
+                                                    <div class="title-in"><h6><a href="#" th:text="${recDirectorList.movieName}"></a></h6>
+                                                        <p><i class="ion-android-star"></i><span th:text="${recDirectorList.avgRating}"></span>/5</p></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-        </div></div></div>
 </sec:authorize> <!-- 로그인 후 main END-->
 
 <!-- footer section START -->
@@ -304,9 +351,9 @@
         </div>
     </div>
 </footer><!-- end of footer v2 section-->
-<script src="js/jquery.js"></script>
-<script src="js/plugins.js"></script>
-<script src="js/plugins2.js"></script>
-<script src="js/custom.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/plugins.js"></script>
+<script src="../js/plugins2.js"></script>
+<script src="../js/custom.js"></script>
 </body>
 </html>
