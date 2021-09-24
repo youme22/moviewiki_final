@@ -132,11 +132,12 @@ public class UserManagementController {
 
     // 회원정보 수정 -> DB 저장
     @PostMapping("/updateUser/{userId}")
-    public String updateUser(User user) {
+    public String updateUser(User user, @PathVariable String userId) {
+
         log.info("userId = " + user.getUserId());
         user.setUserPw(passwordEncoder.encode(user.getUserPw()));
         userManagementService.updateUser(user);
-        return "redirect:/member/mypage";
+        return "redirect:/member/mypage/" + userId;
     }
 
     // 회원정보 수정 form call
@@ -230,7 +231,7 @@ public class UserManagementController {
             return "redirect:/member/modify_info";
         }
         System.out.println("비밀번호가 올바르지 않습니다."); // 모달창?
-        return "redirect:/member/check_pw_get";
+        return "redirect:/member/check_pw";
     }
 
 
