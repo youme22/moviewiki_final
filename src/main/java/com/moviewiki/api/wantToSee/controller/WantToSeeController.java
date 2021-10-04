@@ -59,7 +59,7 @@ public class WantToSeeController {
 
         wantToSeeServiceImpl.deleteWantToSee(user, movie);
 
-        return "redirect:/main/movie" + movieId;
+        return "redirect:/main/movie/" + movieId;
     }
 
     /* 특정 사용자의 보고픈 영화 조회 */
